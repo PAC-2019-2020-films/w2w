@@ -1,0 +1,80 @@
+body
+{
+    background-color: antiquewhite;
+}
+
+body .bg_gris
+{
+    background-color: #4D5051;
+}
+/* NAV BAR */
+nav
+{
+        background-color: #4D5051;
+}
+
+nav a
+{
+    color: antiquewhite;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1.5em;
+}
+
+nav .logo
+{
+    max-width: 100%;
+    height: auto;
+}
+
+nav .button_account
+{
+    background-color: orange;
+}
+
+nav .account_img
+{
+    max-width: 100%;
+    height: auto;
+}
+
+/* FOOTER */
+
+footer .bg_gris
+{
+    background-color: #4D5051;
+}
+
+
+footer .fa {
+    font-size: 1.3em;
+}
+
+footer a {
+        color:white;
+}
+
+footer .copyright
+{
+ color: antiquewhite;
+}
+
+footer p{
+    font-size: 1.5em;
+    padding: 5px 10px 0px 25px
+}
+
+footer .fa2 {
+    font-size: 3em;
+    padding-top: 25px;
+}
+
+footer .fa-twitter:hover
+{
+color: yellow;
+}
+
+footer .fa-facebook:hover
+{
+    color:darkblue;
+}
