@@ -37,7 +37,8 @@ Exemple de config (remplacer '/media/data/dev/web/' par le chemin correspondant 
 </VirtualHost>
 ```
 
-Eventuellement remplacer les lignes 
+Eventuellement :
+Soit remplacer les lignes 
 
 ```
         ErrorLog ${APACHE_LOG_DIR}/w2w.error.log
@@ -50,4 +51,6 @@ par :
         ErrorLog ${INSTALL_DIR}/logs/w2w/w2w.error.log
         CustomLog ${INSTALL_DIR}/logs/w2w/w2w.access.log combined
 ```
-ou définir la variable ${APACHE_LOG_DIR} dans le fichier httpd.conf d'Apache, selon l'emplacement souhaité de l'enregistrement des logs.
+et créer le dossier "w2w" dans le dossier d'installation de wamp/logs (par défaut C:\wamp64\logs).
+
+Ou définir la variable ${APACHE_LOG_DIR} dans le fichier httpd.conf d'Apache, selon l'emplacement souhaité de l'enregistrement des logs.
