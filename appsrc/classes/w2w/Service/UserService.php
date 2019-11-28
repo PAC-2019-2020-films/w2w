@@ -1,17 +1,25 @@
 <?php
-namespace w2w\Service;
-
-use \w2w\Model\User;
-
-class UserService extends PublicService
-{
+    /**
+     * Created by PhpStorm.
+     * User: Meh
+     * Date: 14/11/2019
+     * Time: 20:27
+     */
     
-    public function __construct(User $user)
+    namespace w2w\Service;
+    
+    
+    class UserService extends PublicService
     {
-        parent::__construct($user);
-        if (! $user) {
-            throw new \Exception("Can't instantiate service with null User ");
+        /**
+         * UserService constructor.
+         */
+        public function __construct()
+        {
+            parent::__construct();
+            /*
+            * TODO : CHECK FOR USER STATUS (ISUSER?(TRUE))
+            */
         }
-    }
         
-}
+    }

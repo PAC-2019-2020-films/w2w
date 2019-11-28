@@ -1,17 +1,21 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: Meh
+ * Date: 14/11/2019
+ * Time: 20:19
+ */
 
 namespace w2w\Model;
 
-
-class Role
+class Category
 {
     private $id;
     private $name;
     private $description;
 
     /**
-     * Role constructor.
+     * Category constructor.
      * @param int $id
      * @param string $name
      */
@@ -69,6 +73,5 @@ class Role
     {
         $this->description = $description;
     }
-
 
 }

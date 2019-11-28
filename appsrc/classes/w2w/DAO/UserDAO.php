@@ -1,192 +1,480 @@
 <?php
-namespace w2w\DAO;
-
-use \w2w\Model\Role;
-use \w2w\Model\User;
-
-class UserDAO extends BaseDAO
-{
     
-    const SQL_SELECT = "SELECT us.id, user_name, email, email_verified, password_hash, first_name, last_name, created_at, updated_at, last_login_at, banned, number_reviews, ro.id AS role_id, ro.name AS role_name, ro.description as role_description FROM users AS us 
-        INNER JOIN roles AS ro ON us.fk_role_id=ro.id";
-
-
-    public function __construct()
-    {
-        parent::__construct("\\w2w\\Model\\User", "users");
-    }
-
-
-    public function fetchFromRow($row)
-    {
-        $item = new $this->className();
-        if (isset($row["id"])) {
-            $item->setId($row["id"]);
-        }
-        if (isset($row["user_name"])) {
-            $item->setUserName($row["user_name"]);
-        }
-        if (isset($row["email"])) {
-            $item->setEmail($row["email"]);
-        }
-        if (isset($row["email_verified"])) {
-            $item->setEmailVerified($row["email_verified"]);
-        }
-        if (isset($row["password_hash"])) {
-            $item->setPasswordHash($row["password_hash"]);
-        }
-        if (isset($row["first_name"])) {
-            $item->setFirstName($row["first_name"]);
-        }
-        if (isset($row["last_name"])) {
-            $item->setLastName($row["last_name"]);
-        }
-        if (isset($row["created_at"])) {
-            $item->setCreatedAt(strtotime($row["created_at"]));
-        }
-        if (isset($row["updated_at"])) {
-            $item->setUpdatedAt(strtotime($row["updated_at"]));
-        }
-        if (isset($row["last_login_at"])) {
-            $item->setLastLoginAt(strtotime($row["last_login_at"]));
-        }
-        if (isset($row["banned"])) {
-            $item->setBanned($row["banned"]);
-        }
-        if (isset($row["number_reviews"])) {
-            $item->setNumberReviews($row["number_reviews"]);
-        }
-        if (isset($row["role_id"])) {
-            $role = new Role();
-            $role->setId($row["role_id"]);
-            if (isset($row["role_name"])) {
-                $role->setName($row["role_name"]);
-            }
-            if (isset($row["role_description"])) {
-                $role->setDescription($row["role_description"]);
-            }
-            $item->setRole($role);
-        }
-        return $item;
-    }
-
-    public function selectAll()
-    {
-        $items = [];
-        if ($pdo = $this->getPDO()) {
-            $sql = self::SQL_SELECT;
-            if ($stmt = $pdo->query($sql)) {
-                while ($row = $stmt->fetch()) {
-                    if ($item = $this->fetchFromRow($row)) {
-                        $items[] = $item;
-                    }
-                }
-                $stmt->closeCursor();
-            }
-        }
-        return $items;
-    }
     
-    public function select($id)
-    {
-        if ($pdo = $this->getPDO()) {
-            $sql = self::SQL_SELECT . " WHERE us.id=:id";
-            if ($stmt = $pdo->prepare($sql)) {
-                $stmt->bindValue(":id", $id);
-                if ($stmt->execute()) {
-                    if ($row = $stmt->fetch()) {
-                        if ($item = $this->fetchFromRow($row)) {
-                            return $item;
-                        }
-                    }
-                }
-                $stmt->closeCursor();
-            }
-        }
-    }
+    namespace w2w\DAO;
     
-    public function selectByEmail($email)
-    {
-        if ($pdo = $this->getPDO()) {
-            $sql = self::SQL_SELECT . " WHERE email=:email";
-            if ($stmt = $pdo->prepare($sql)) {
-                $stmt->bindValue(":email", $email);
-                if ($stmt->execute()) {
-                    if ($row = $stmt->fetch()) {
-                        if ($item = $this->fetchFromRow($row)) {
-                            return $item;
-                        }
-                    }
-                }
-                $stmt->closeCursor();
-            }
-        }
-    }
-
-    public function insert(User $user)
-    {
-        if ($pdo = $this->getPDO()) {
-            $sql = "INSERT INTO users (user_name, email, email_verified, password_hash, first_name, last_name, created_at, updated_at, last_login_at, banned, number_reviews, fk_role_id) 
-                VALUES (:user_name, :email, :email_verified, :password_hash, :first_name, :last_name, :created_at, :updated_at, :last_login_at, :banned, :number_reviews, :fk_role_id)";
-            if ($stmt = $pdo->prepare($sql)) {
-                $stmt->bindValue(":user_name", $user->getUserName());
-                $stmt->bindValue(":email", $user->getEmail());
-                $stmt->bindValue(":email_verified", $user->getEmailVerified() ? true : false, \PDO::PARAM_BOOL);
-                $stmt->bindValue(":password_hash", $user->getPasswordHash());
-                $stmt->bindValue(":first_name", $user->getFirstName());
-                $stmt->bindValue(":last_name", $user->getLastName());
-                $this->bindTimestampToDatetime($stmt, ":created_at", $user->getCreatedAt());
-                $this->bindTimestampToDatetime($stmt, ":updated_at", $user->getUpdatedAt());
-                $this->bindTimestampToDatetime($stmt, ":last_login_at", $user->getLastLoginAt());
-                $stmt->bindValue(":banned", $user->isBanned() ? true : false, \PDO::PARAM_BOOL);
-                $stmt->bindValue(":number_reviews", $user->getNumberReviews());
-                if ($role = $user->getRole()) {
-                    $roleId = $role->getId();
-                } else {
-                    $roleId = null;
-                }
-                $stmt->bindValue(":fk_role_id", $roleId);
-                $rs = $stmt->execute();
-                $id = $pdo->lastInsertId();
-                if ($id > 0) {
-                    $user->setId($id);
-                    return $id;
-                }
-            }
-        }
-        return false;
-    }
     
-    public function update(User $user)
+    use w2w\Model\Role;
+    use w2w\Model\User;
+    use w2w\Model\AuthenticationToken;
+    
+    class UserDAO extends BaseDAO
     {
-        $items = [];
-        if ($pdo = $this->getPDO()) {
-            $sql = "UPDATE users SET user_name = :user_name, email = :email, email_verified = :email_verified, password_hash = :password_hash, first_name = :first_name, last_name = :last_name, created_at = :created_at, updated_at = :updated_at, last_login_at = :last_login_at, banned = :banned, number_reviews = :number_reviews, fk_role_id = :fk_role_id WHERE id = :id";
-            if ($stmt = $pdo->prepare($sql)) {
-                $stmt->bindValue(":user_name", $user->getUserName());
-                $stmt->bindValue(":email", $user->getEmail());
-                $stmt->bindValue(":email_verified", $user->getEmailVerified() ? true : false, \PDO::PARAM_BOOL);
-                $stmt->bindValue(":password_hash", $user->getPasswordHash());
-                $stmt->bindValue(":first_name", $user->getFirstName());
-                $stmt->bindValue(":last_name", $user->getLastName());
-                $this->bindTimestampToDatetime($stmt, ":created_at", $user->getCreatedAt());
-                $this->bindTimestampToDatetime($stmt, ":updated_at", $user->getUpdatedAt());
-                $this->bindTimestampToDatetime($stmt, ":last_login_at", $user->getLastLoginAt());
-                $stmt->bindValue(":banned", $user->isBanned() ? true : false, \PDO::PARAM_BOOL);
-                $stmt->bindValue(":number_reviews", $user->getNumberReviews());
-                if ($role = $user->getRole()) {
-                    $roleId = $role->getId();
-                } else {
-                    $roleId = null;
+        private $table = 'users';
+        private $tableRole = 'roles';
+        private $tableToken = 'authentication_tokens';
+        
+        private $roleDAO;
+        
+        /**
+         * UserDAO constructor.
+         */
+        public function __construct()
+        {
+            parent::__construct();
+            $this->roleDAO = new RoleDAO();
+        }
+        
+        /**
+         * userObjectBinder
+         * Binds a PDO::fetchAll result row to a new Category Object
+         * @param array $userArray
+         * @return bool|User
+         */
+        public function userObjectBinder(array $userArray)
+        {
+            if (isset($userArray['id']) && isset($userArray['user_name']) && isset($userArray['email']) && isset($userArray['email_verified']) && isset($userArray['password_hash']) && isset($userArray['created_at']) && isset($userArray['fk_role_id']) && isset($userArray['banned']) && isset($userArray['number_reviews'])) {
+                $user = new User(
+                    $userArray['id'],
+                    $userArray['user_name'],
+                    $userArray['email'],
+                    $userArray['email_verified'],
+                    $userArray['password_hash'],
+                    $userArray['created_at'],
+                    $this->roleDAO->selectRoleById($userArray['fk_role_id']),
+                    $userArray['banned'],
+                    $userArray['number_reviews']
+                );
+                
+                if (isset($userArray['updated_at'])) {
+                    $user->setUpdatedAt($userArray['updated_at']);
                 }
-                $stmt->bindValue(":fk_role_id", $roleId);
-                $stmt->bindValue(":id", $user->getId());
-                $rs = $stmt->execute();
-                $affectedRows = $stmt->rowCount();
-                echo "rs=$rs aff=$affectedRows\n";
-                return $affectedRows;
+                
+                if (isset($userArray['last_login_at'])) {
+                    $user->setLastLoginAt($userArray['last_login_at']);
+                }
+                
+                return $user;
+                
+            } else {
+                return false;
             }
         }
-        return false;
+        
+        
+        /**
+         * @return bool|User[]
+         */
+        public function selectAllUsers(): array
+        {
+            $users = [];
+            
+            $sql = "
+            SELECT  {$this->table}.id, 
+                    {$this->table}.user_name, 
+                    {$this->table}.email, 
+                    {$this->table}.email_verified, 
+                    {$this->table}.password_hash, 
+                    {$this->table}.first_name, 
+                    {$this->table}.last_name, 
+                    {$this->table}.created_at,
+                    {$this->table}.updated_at,
+                    {$this->table}.last_login_at,
+                    {$this->table}.banned,
+                    {$this->table}.number_reviews,
+                    {$this->table}.fk_role_id,
+                    {$this->tableRole}.id,
+                    {$this->tableRole}.name,
+                    {$this->tableRole}.description
+            FROM {$this->table}
+            LEFT JOIN {$this->tableRole} ON {$this->tableRole}.id = {$this->table}.fk_role_id
+            ORDER BY {$this->table}.id;
+        ";
+            
+            $result = $this->select($sql);
+            
+            if (is_array($result)) {
+                foreach ($result as $user) {
+                    array_push($users, $this->userObjectBinder($user));
+                }
+                return $users;
+            }
+            
+            /*
+            * TODO : handle PDOException ?
+            */
+            
+            return false;
+        }
+        
+        /**
+         * @param int $id
+         * @return bool|User
+         */
+        public function selectUserById(int $id)
+        {
+            $sql = "
+            SELECT  {$this->table}.id, 
+                    {$this->table}.user_name, 
+                    {$this->table}.email, 
+                    {$this->table}.email_verified, 
+                    {$this->table}.password_hash, 
+                    {$this->table}.first_name, 
+                    {$this->table}.last_name, 
+                    {$this->table}.created_at,
+                    {$this->table}.updated_at,
+                    {$this->table}.last_login_at,
+                    {$this->table}.banned,
+                    {$this->table}.number_reviews,
+                    {$this->table}.fk_role_id,
+                    {$this->tableRole}.id,
+                    {$this->tableRole}.name,
+                    {$this->tableRole}.description
+            FROM {$this->table}
+            LEFT JOIN {$this->tableRole} ON {$this->tableRole}.id =  {$this->table}.fk_role_id
+            WHERE {$this->table}.id = :id;
+        ";
+            
+            $condition = [':id' => $id];
+            $dataType  = 1;
+            
+            $result = $this->select($sql, $condition, $dataType);
+            
+            if (is_array($result)) {
+                return $this->userObjectBinder($result[0]);
+            }
+            
+            /*
+            * TODO : handle PDOException ?
+            */
+            
+            return false;
+        }
+        
+        /**
+         * @param string $email
+         * @return bool|User
+         */
+        public function selectUserByMail(string $email)
+        {
+            $sql = "
+            SELECT  {$this->table}.id, 
+                    {$this->table}.user_name, 
+                    {$this->table}.email, 
+                    {$this->table}.email_verified, 
+                    {$this->table}.password_hash, 
+                    {$this->table}.first_name, 
+                    {$this->table}.last_name, 
+                    {$this->table}.created_at,
+                    {$this->table}.updated_at,
+                    {$this->table}.last_login_at,
+                    {$this->table}.banned,
+                    {$this->table}.number_reviews,
+                    {$this->table}.fk_role_id,
+                    {$this->tableRole}.id,
+                    {$this->tableRole}.name,
+                    {$this->tableRole}.description
+            FROM {$this->table}
+            LEFT JOIN {$this->tableRole} ON {$this->tableRole}.id =  {$this->table}.fk_role_id
+            WHERE {$this->table}.email = :email;
+        ";
+            
+            $condition = [':email' => $email];
+            $dataType  = 2;
+            
+            $result = $this->select($sql, $condition, $dataType);
+            
+            if (is_array($result)) {
+                return $this->userObjectBinder($result[0]);
+            }
+            
+            /*
+            * TODO : handle PDOException ?
+            */
+            
+            return false;
+        }
+        
+        /**
+         * @param string $userName
+         * @return bool|User
+         */
+        public function selectUserByUserName(string $userName): User
+        {
+            $sql = "
+            SELECT  {$this->table}.id, 
+                    {$this->table}.user_name, 
+                    {$this->table}.email, 
+                    {$this->table}.email_verified, 
+                    {$this->table}.password_hash, 
+                    {$this->table}.first_name, 
+                    {$this->table}.last_name, 
+                    {$this->table}.created_at,
+                    {$this->table}.updated_at,
+                    {$this->table}.last_login_at,
+                    {$this->table}.banned,
+                    {$this->table}.number_reviews,
+                    {$this->table}.fk_role_id,
+                    {$this->tableRole}.id,
+                    {$this->tableRole}.name,
+                    {$this->tableRole}.description
+            FROM {$this->table}
+            WHERE {$this->table}.user_name = :username;
+        ";
+            
+            $condition = [':username' => $userName];
+            $dataType  = 2;
+            
+            $result = $this->select($sql, $condition, $dataType);
+            
+            if (is_array($result)) {
+                return $this->userObjectBinder($result[0]);
+            }
+            
+            /*
+            * TODO : handle PDOException ?
+            */
+            
+            return false;
+        }
+        
+        /**
+         * @param AuthenticationToken $authToken
+         * @return bool|User
+         */
+        public function selectUserByToken(AuthenticationToken $authToken)
+        {
+            $sql = "
+            SELECT  {$this->tableToken}.id, 
+                    {$this->table}.id, 
+                    {$this->table}.user_name, 
+                    {$this->table}.email, 
+                    {$this->table}.email_verified, 
+                    {$this->table}.password_hash, 
+                    {$this->table}.first_name, 
+                    {$this->table}.last_name, 
+                    {$this->table}.created_at,
+                    {$this->table}.updated_at,
+                    {$this->table}.last_login_at,
+                    {$this->table}.banned,
+                    {$this->table}.number_reviews,
+                    {$this->table}.fk_role_id,
+                    {$this->tableRole}.id,
+                    {$this->tableRole}.name,
+                    {$this->tableRole}.description
+            FROM {$this->tableToken}
+              LEFT JOIN {$this->table} 
+                ON {$this->table}.id = {$this->tableToken}.fk_user_id 
+            WHERE {$this->tableToken}.id = :tokenId;
+        ";
+            
+            $condition = [':tokenId' => $authToken->getId()];
+            $dataType  = 1;
+            
+            $result = $this->select($sql, $condition, $dataType);
+            
+            if (is_array($result)) {
+                return $this->userObjectBinder($result[0]);
+            }
+            
+            /*
+            * TODO : handle PDOException ?
+            */
+            
+            return false;
+        }
+        
+        /**
+         * @param Role $role
+         * @return bool|User[]
+         */
+        public function selectUsersByRole(Role $role): array
+        {
+            $users = [];
+            
+            $sql = "
+            SELECT  {$this->tableToken}.id, 
+                    {$this->table}.id, 
+                    {$this->table}.user_name, 
+                    {$this->table}.email, 
+                    {$this->table}.email_verified, 
+                    {$this->table}.password_hash, 
+                    {$this->table}.first_name, 
+                    {$this->table}.last_name, 
+                    {$this->table}.created_at,
+                    {$this->table}.updated_at,
+                    {$this->table}.last_login_at,
+                    {$this->table}.banned,
+                    {$this->table}.number_reviews,
+                    {$this->table}.fk_role_id,
+                    {$this->tableRole}.id,
+                    {$this->tableRole}.name,
+                    {$this->tableRole}.description
+            FROM {$this->table}
+            LEFT JOIN {$this->table} 
+                ON {$this->table}.id = {$this->tableToken}.fk_user_id 
+            WHERE {$this->table}.fk_role_id = :userRole;
+        ";
+            
+            $condition = [':userRole' => $role->getId()];
+            $dataType  = 1;
+            
+            $result = $this->select($sql, $condition, $dataType);
+            
+            if (is_array($result)) {
+                foreach ($result as $user) {
+                    array_push($users, $this->userObjectBinder($user));
+                }
+                return $users;
+            }
+            
+            /*
+            * TODO : handle PDOException ?
+            */
+            
+            return false;
+        }
+        
+        /**
+         * @param bool $banned
+         * @return bool|User[]
+         */
+        public function selectUsersBanned(bool $banned): array
+        {
+            $users = [];
+            
+            $sql = "
+            SELECT  {$this->tableToken}.id, 
+                    {$this->table}.id, 
+                    {$this->table}.user_name, 
+                    {$this->table}.email, 
+                    {$this->table}.email_verified, 
+                    {$this->table}.password_hash, 
+                    {$this->table}.first_name, 
+                    {$this->table}.last_name, 
+                    {$this->table}.created_at,
+                    {$this->table}.updated_at,
+                    {$this->table}.last_login_at,
+                    {$this->table}.banned,
+                    {$this->table}.number_reviews,
+                    {$this->table}.fk_role_id,
+                    {$this->tableRole}.id,
+                    {$this->tableRole}.name,
+                    {$this->tableRole}.description
+            FROM {$this->table}
+            LEFT JOIN {$this->table} 
+                ON {$this->table}.id = {$this->tableToken}.fk_user_id
+            WHERE {$this->table}.banned = :banned;
+        ";
+            
+            $condition = [':banned' => $banned];
+            $dataType  = 5;
+            
+            $result = $this->select($sql, $condition, $dataType);
+            
+            if (is_array($result)) {
+                foreach ($result as $user) {
+                    array_push($users, $this->userObjectBinder($user));
+                }
+                return $users;
+            }
+            
+            /*
+            * TODO : handle PDOException ?
+            */
+            
+            return false;
+        }
+        
+        /**
+         * @param User $user
+         * @return bool|int
+         */
+        public function insertUser(User $user)
+        {
+            $data = [
+                'user_name'      => [$user->getUserName(), 2],
+                'email'          => [$user->getEmail(), 2],
+                'email_verified' => [$user->isEmailVerified(), 5],
+                'password_hash'  => [$user->getPasswordHash(), 2],
+                'first_name'     => [$user->getFirstName(), 2],
+                'last_name'      => [$user->getLastName(), 2],
+                'created_at'     => [$user->getCreatedAt(), 2],
+                'updated_at'     => [$user->getUpdatedAt(), 2],
+                'last_login_at'  => [$user->getLastLoginAt(), 2],
+                'banned'         => [$user->isBanned(), 5],
+                'number_reviews' => [$user->getNumberReviews(), 1],
+                'fk_role_id'     => [$user->getRole()->getId(), 1],
+            ];
+            
+            $result = $this->insert($this->table, $data);
+            
+            if (is_int($result)) {
+                return $result;
+            }
+            
+            /*
+            * TODO : handle PDOException ?
+            */
+            
+            return false;
+        }
+        
+        
+        /**
+         * @param User $user
+         * @return bool|int
+         */
+        public function updateUser(User $user)
+        {
+            $data = [
+                'user_name'      => [$user->getUserName(), 2],
+                'email'          => [$user->getEmail(), 2],
+                'email_verified' => [$user->isEmailVerified(), 5],
+                'password_hash'  => [$user->getPasswordHash(), 2],
+                'first_name'     => [$user->getFirstName(), 2],
+                'last_name'      => [$user->getLastName(), 2],
+                'created_at'     => [$user->getCreatedAt(), 2],
+                'updated_at'     => [$user->getUpdatedAt(), 2],
+                'last_login_at'  => [$user->getLastLoginAt(), 2],
+                'banned'         => [$user->isBanned(), 5],
+                'number_reviews' => [$user->getNumberReviews(), 1],
+                'fk_role_id'     => [$user->getRole()->getId(), 1],
+            ];
+            
+            $condition = "{$this->table}.id = :id";
+            
+            $result = $this->update($this->table, $data, $condition, $user->getId());
+            
+            if (is_int($result)) {
+                return $result;
+            }
+            
+            /*
+            * TODO : handle PDOException ?
+            */
+            return false;
+        }
+        
+        /**
+         * @param User $user
+         * @return bool|int
+         */
+        public function deleteUser(User $user)
+        {
+            $condition = "{$this->table}.id = :id";
+            
+            $result = $this->delete($this->table, $condition, $user->getId());
+            
+            if (is_int($result)) {
+                return $result;
+            }
+            
+            /*
+            * TODO : handle PDOException ?
+            */
+            
+            return false;
+        }
+        
     }
-}

@@ -1,17 +1,47 @@
 <?php
-namespace w2w\Service;
-
-use \w2w\Model\User;
-
-class AdminService extends UserService
-{
+    /**
+     * Created by PhpStorm.
+     * User: Meh
+     * Date: 14/11/2019
+     * Time: 20:28
+     */
     
-    public function __construct(User $user)
+    namespace w2w\Service;
+    
+    
+    use \w2w\Model\Movie;
+
+    class AdminService extends UserService
     {
-        parent::__construct($user);
-        if (! $user->isAdmin()) {
-            throw new \Exception("Can't instantiate service with non admin User ");
+        /**
+        * addMovie
+        * @param $movie
+        * @return bool
+        */
+        public function addMovie(Movie $movie)
+        {
+
+            return false;
         }
+        
+        /**
+        * editMovie
+        * @param $movie
+        * @return bool
+        */
+        public function editMovie(Movie $movie)
+        {
+            return false;
+        }
+        
+        /**
+        * deleteMovie
+        * @param $movie
+        * @return bool
+        */
+        public function deleteMovie(Movie $movie)
+        {
+            return false;
+        }
+        
     }
-    
-}

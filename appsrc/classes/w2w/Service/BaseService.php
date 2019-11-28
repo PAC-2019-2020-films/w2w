@@ -1,47 +1,32 @@
 <?php
-namespace w2w\Service;
-
-use \w2w\DAO\RoleDAO;
-use \w2w\DAO\UserDAO;
-use \w2w\Model\Role;
-use \w2w\Model\User;
-
-class BaseService
-{
+    /**
+     * Created by PhpStorm.
+     * User: Meh
+     * Date: 14/11/2019
+     * Time: 20:26
+     */
     
-    protected $serviceUser;
-    protected $roleDAO;
-    protected $userDAO;
+    namespace w2w\Service;
     
-    public function __construct(User $user = null)
-    {
-        $this->serviceUser = $user;
-    }
     
-    public function hasServiceUser()
-    {
-        return $this->serviceUser != null;
-    }
+    use w2w\DAO\ArtistDAO;
+    use w2w\DAO\CategoryDAO;
+    use w2w\DAO\MessageDAO;
+    use w2w\DAO\MovieDAO;
+    use w2w\DAO\RatingDAO;
+    use w2w\DAO\ReviewDAO;
+    use w2w\DAO\RoleDAO;
+    use w2w\DAO\TagsDAO;
+    use w2w\DAO\UserDAO;
+    use w2w\Model\Review;
 
-    public function getServiceUser()
+    class BaseService
     {
-        return $this->serviceUser;
-    }
-
-    public function getRoleDAO()
-    {
-        if (! $this->roleDAO) {
-            $this->roleDAO = new RoleDAO();
+    
+        /**
+         * BaseService constructor.
+         */
+        public function __construct()
+        {
         }
-        return $this->roleDAO;
     }
-    
-    public function getUserDAO()
-    {
-        if (! $this->userDAO) {
-            $this->userDAO = new UserDAO();
-        }
-        return $this->userDAO;
-    }
-        
-}

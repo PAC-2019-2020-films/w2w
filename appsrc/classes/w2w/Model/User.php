@@ -1,205 +1,263 @@
 <?php
+
+
 namespace w2w\Model;
+
+use DateTime;
+
+use \w2w\Model\Role;
 
 class User
 {
+    private $id;
+    private $userName;
+    private $email;
+    private $emailVerified;
+    private $passwordHash;
+    private $firstName;
+    private $lastName;
+    private $createdAt;
+    private $updatedAt;
+    private $lastLoginAt;
+    private $role;
+    private $banned;
+    private $numberReviews;
 
-    const ROLE_USER = 1;
-    const ROLE_ADMIN = 2;
-    const ROLE_ROOT = 3;
-    
-    protected $id;
-    protected $userName;
-    protected $email;
-    protected $emailVerified;
-    protected $passwordHash;
-    protected $firstName;
-    protected $lastName;
-    protected $createdAt;
-    protected $updatedAt;
-    protected $lastLoginAt;
-    protected $banned;
-    protected $numberReviews;
-    protected $role;
-    
-    
-    public function __construct()
+    /**
+     * User constructor.
+     * @param int $id
+     * @param string $userName
+     * @param string $email
+     * @param bool $emailVerified
+     * @param string $passwordHash
+     * @param DateTime $createdAt
+     * @param Role $role
+     * @param bool $banned
+     * @param int $numberReviews
+     */
+    public function __construct(int $id, string $userName, string $email, bool $emailVerified, string $passwordHash, DateTime $createdAt, Role $role, bool $banned, int $numberReviews)
     {
+        $this->id = $id;
+        $this->userName = $userName;
+        $this->email = $email;
+        $this->emailVerified = $emailVerified;
+        $this->passwordHash = $passwordHash;
+        $this->createdAt = $createdAt;
+        $this->role = $role;
+        $this->banned = $banned;
+        $this->numberReviews = $numberReviews;
     }
 
-    public function __toString()
-    {
-        return sprintf("User#%d (userName='%s', email='%s', role={%s})", 
-            $this->id,
-            $this->userName,
-            $this->email,
-            $this->role
-        );
-    }
 
-    public function isAdmin()
-    {
-        if ($this->role instanceof Role) {
-            $roleId = $this->role->getId();
-            if ($roleId == self::ROLE_ADMIN || $roleId == self::ROLE_ROOT) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public function isRoot()
-    {
-        if ($this->role instanceof Role) {
-            $roleId = $this->role->getId();
-            if ($roleId == self::ROLE_ROOT) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function getId()
+    /**
+     * @return int
+     */
+    public function getId(): int
     {
         return $this->id;
     }
-    
-    public function setId($id)
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
     {
         $this->id = $id;
-        return $this;
     }
-    
-    public function getUserName()
+
+    /**
+     * @return string
+     */
+    public function getUserName(): string
     {
         return $this->userName;
     }
-    
-    public function setUserName($userName)
+
+    /**
+     * @param string $userName
+     */
+    public function setUserName(string $userName): void
     {
         $this->userName = $userName;
-        return $this;
     }
-    
-    public function getEmail()
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
     {
         return $this->email;
     }
-    
-    public function setEmail($email)
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email): void
     {
         $this->email = $email;
-        return $this;
     }
-    
-    public function getEmailVerified()
+
+    /**
+     * @return bool
+     */
+    public function isEmailVerified(): bool
     {
         return $this->emailVerified;
     }
-    
-    public function setEmailVerified($emailVerified)
+
+    /**
+     * @param bool $emailVerified
+     */
+    public function setEmailVerified(bool $emailVerified): void
     {
         $this->emailVerified = $emailVerified;
-        return $this;
     }
-    
-    public function getPasswordHash()
+
+    /**
+     * @return string
+     */
+    public function getPasswordHash(): string
     {
         return $this->passwordHash;
     }
-    
-    public function setPasswordHash($passwordHash)
+
+    /**
+     * @param string $passwordHash
+     */
+    public function setPasswordHash(string $passwordHash): void
     {
         $this->passwordHash = $passwordHash;
-        return $this;
     }
-    
-    public function getFirstName()
+
+    /**
+     * @return string
+     */
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
-    
-    public function setFirstName($firstName)
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
-        return $this;
     }
-    
-    public function getLastName()
+
+    /**
+     * @return string
+     */
+    public function getLastName(): string
     {
         return $this->lastName;
     }
-    
-    public function setLastName($lastName)
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;
-        return $this;
     }
-    
-    public function getCreatedAt()
+
+    /**
+     * @return DateTime
+     */
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
-    
-    public function setCreatedAt($createdAt)
+
+    /**
+     * @param DateTime $createdAt
+     */
+    public function setCreatedAt(DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
-        return $this;
     }
-    
-    public function getUpdatedAt()
+
+    /**
+     * @return DateTime
+     */
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
-    
-    public function setUpdatedAt($updatedAt)
+
+    /**
+     * @param DateTime $updatedAt
+     */
+    public function setUpdatedAt(DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-        return $this;
     }
-    
-    public function getLastLoginAt()
+
+    /**
+     * @return DateTime
+     */
+    public function getLastLoginAt(): DateTime
     {
         return $this->lastLoginAt;
     }
-    
-    public function setLastLoginAt($lastLoginAt)
+
+    /**
+     * @param DateTime $lastLoginAt
+     */
+    public function setLastLoginAt(DateTime $lastLoginAt): void
     {
         $this->lastLoginAt = $lastLoginAt;
-        return $this;
     }
-    
-    public function isBanned()
-    {
-        return $this->banned;
-    }
-    
-    public function setBanned($banned = true)
-    {
-        $this->banned = $banned;
-        return $this;
-    }
-    
-    public function getNumberReviews()
-    {
-        return $this->numberReviews;
-    }
-    
-    public function setNumberReviews($numberReviews)
-    {
-        $this->numberReviews = $numberReviews;
-        return $this;
-    }
-    
-    public function getRole()
+
+    /**
+     * @return Role
+     */
+    public function getRole(): Role
     {
         return $this->role;
     }
-    
-    public function setRole(Role $role)
+
+    /**
+     * @param Role $role
+     */
+    public function setRole(Role $role): void
     {
         $this->role = $role;
-        return $this;
     }
-    
+
+    /**
+     * @return bool
+     */
+    public function isBanned(): bool
+    {
+        return $this->banned;
+    }
+
+    /**
+     * @param bool $banned
+     */
+    public function setBanned(bool $banned): void
+    {
+        $this->banned = $banned;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberReviews(): int
+    {
+        return $this->numberReviews;
+    }
+
+    /**
+     * @param int $numberReviews
+     */
+    public function setNumberReviews(int $numberReviews): void
+    {
+        $this->numberReviews = $numberReviews;
+    }
+
+
+
+
 }
