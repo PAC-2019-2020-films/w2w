@@ -57,11 +57,11 @@
             $scheme   = \Fr\Config::get("db.scheme", "mysql");
             $port     = \Fr\Config::get("db.port");
             $charset  = \Fr\Config::get("db.charset");
-            $errMode  = \Fr\Config::get("db.errmode", \PDO::ERRMODE_EXCEPTION);
+            $errMode  = \Fr\Config::get("db.errmode", PDO::ERRMODE_EXCEPTION);
             $options  = null;
             if ($errMode) {
                 $options = array(
-                    \PDO::ATTR_ERRMODE => $errMode
+                    PDO::ATTR_ERRMODE => $errMode
                 );
             }
             $dsn = sprintf("%s:host=%s", $scheme, $hostname);
@@ -76,15 +76,17 @@
             }
             try {
                 if ($options) {
-                    $pdo = new \PDO($dsn, $username, $password, $options);
+                    $pdo = new PDO($dsn, $username, $password, $options);
                 } else {
-                    $pdo = new \PDO($dsn, $username, $password);
+                    $pdo = new PDO($dsn, $username, $password);
                 }
                 return $pdo;
                 
-            } catch (\PDOEXception $e) {
+            } catch (PDOEXception $e) {
                 #throw new \Exception($e);
                 #trigger_error($e->getMessage());
+//                var_dump($e->getMessage());
+//                die();
                 return $e->getMessage();
             }
         }

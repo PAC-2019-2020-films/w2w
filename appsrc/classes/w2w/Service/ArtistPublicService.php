@@ -10,7 +10,7 @@
     
     class ArtistPublicService extends BaseService
     {
-        private $artistDAO;
+        protected $artistDAO;
         
         /**
          * ArtistPublicService constructor.
@@ -52,38 +52,6 @@
             return $this->artistDAO->selectArtistsByName($name);
         }
         
-        /**
-         * addArtist
-         * @param Artist $artist
-         * @return bool
-         * TODO : move to Admin service (only here for testing purposes)
-         */
-        public function addArtist(Artist $artist)
-        {
-            return $this->artistDAO->insertArtist($artist);
-        }
-        
-        /**
-        * editArtist
-        * @param Artist $artist
-        * @return
-        */    
-        public function editArtist(Artist $artist)
-        {
-            /**
-            * TODO : addartist
-            */
-        }
-        
-        /**
-         * removeArtist
-         * @param Artist $artist
-         * @return bool
-         *  TODO : move to Admin service (only here for testing purposes)
-         */
-        public function removeArtist(Artist $artist)
-        {
-            return $this->artistDAO->deleteArtist($artist);
-        }
+
         
     }

@@ -22,6 +22,30 @@
             parent::__construct();
             $this->artistDAO = new ArtistDAO();
         }
+
+        /**
+         * @param Artist $artist
+         * @return bool
+         */
+        public function isMovieActorrByArtist(Artist $artist)
+        {
+            $sql = "
+                SELECT {$this->table}.fk_movie_id,
+                        {$this->table}.fk_artist_id
+                FROM {$this->table}
+                WHERE {$this->table}.fk_artist_id = :id
+        ";
+
+            $condition = [':id' => $artist->getId()];
+            $dataType = 1;
+            $result = $this->select($sql, $condition, $dataType);
+
+            if (is_array($result) && isset($result[0])) {
+                return true;
+            }
+            return false;
+
+        }
         
         /**
          * @param Movie $movie
@@ -95,7 +119,7 @@
          * @param Movie $movie
          * @return bool|int
          */
-        public function deleteMovieActor(Artist $actor, Movie $movie)
+        public function deleteMovieActorByMovie(Artist $actor, Movie $movie)
         {
             $condition = "{$this->table}.fk_movie_id = :id AND {$this->table}.fk_artist_id = :idBis";
             
@@ -111,5 +135,29 @@
             
             return false;
         }
+
+        /**
+         * @param Artist $actor
+         * @return bool|int
+         */
+        public function deleteMovieActor(Artist $actor)
+        {
+            $condition = "
+            {$this->table}.fk_artist_id = :id
+            ";
+
+            $result = $this->delete($this->table, $condition, $actor->getId());
+
+            if (is_int($result)) {
+                return $result;
+            }
+
+            /*
+            * TODO : handle PDOException ?
+            */
+
+            return false;
+        }
+
         
     }
