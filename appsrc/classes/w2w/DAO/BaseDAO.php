@@ -143,7 +143,7 @@
                 
                 try {
                     $dbh->execute();
-                    return $this->pdo->lastInsertId();
+                    return $pdo->lastInsertId();
                 } catch (PDOException $exception) {
                     return $exception;
                 }
