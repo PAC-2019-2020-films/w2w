@@ -15,10 +15,11 @@ class Artist
      * @param int $id
      * @param string $lastName
      */
-    public function __construct(int $id, string $lastName)
+    public function __construct(int $id, string $lastName, string $firstName = null)
     {
         $this->id = $id;
         $this->lastName = $lastName;
+        $this->firstName = $firstName;
     }
     
 

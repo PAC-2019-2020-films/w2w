@@ -29,7 +29,7 @@ class RatingDAO extends BaseDAO
             $rating = new Rating(
                 $ratingArray['id'],
                 $ratingArray['name'],
-                $ratingArray['value'],
+                $ratingArray['value']
             );
             
             if ($ratingArray['description']) {
