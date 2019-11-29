@@ -4,6 +4,7 @@
 namespace w2w\Service;
 
 
+use w2w\DAO\ReviewDAO;
 use \w2w\Model\Movie;
 use \w2w\Model\Review;
 use \w2w\Model\User;
@@ -11,12 +12,15 @@ use \w2w\Model\User;
 class ReviewPublicService extends PublicService
 {
 
+    private $reviewDAO;
+    
     /**
      * ReviewPublicService constructor.
      */
     public function __construct()
     {
         parent::__construct();
+        $this->reviewDAO = new ReviewDAO();
     }
 
     

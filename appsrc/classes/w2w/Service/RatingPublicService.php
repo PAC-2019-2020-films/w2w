@@ -4,17 +4,19 @@
     namespace w2w\Service;
     
     
+    use w2w\DAO\RatingDAO;
     use \w2w\Model\Rating;
     
     class RatingPublicService extends PublicService
     {
-        
+        private $ratingDAO;
         /**
          * RatingPublicService constructor.
          */
         public function __construct()
         {
             parent::__construct();
+            $this->ratingDAO = new RatingDAO();
         }
         
         

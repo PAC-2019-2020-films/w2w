@@ -4,16 +4,19 @@
     namespace w2w\Service;
     
     
+    use w2w\DAO\CategoryDAO;
     use \w2w\Model\Category;
     
     class CategoryPublicService extends PublicService
     {
+        protected $categoryDAO;
         /**
          * CategoryPublicService constructor.
          */
         public function __construct()
         {
             parent::__construct();
+            $this->categoryDAO = new CategoryDAO();
         }
         
         /**

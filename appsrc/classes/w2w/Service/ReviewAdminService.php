@@ -4,8 +4,12 @@
 namespace w2w\Service;
 
 
+use w2w\DAO\ReviewDAO;
+
 class ReviewAdminService extends ReviewUserService
 {
+    
+    private $reviewDAO;
 
     /**
      * ReviewAdminService constructor.
@@ -13,6 +17,7 @@ class ReviewAdminService extends ReviewUserService
     public function __construct()
     {
         parent::__construct();
+        $this->reviewDAO = new ReviewDAO();
     }
 
     /**

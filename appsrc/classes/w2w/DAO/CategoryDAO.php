@@ -141,7 +141,7 @@ class CategoryDAO extends BaseDAO
 
         $result = $this->insert($this->table, $data);
 
-        if (is_int($result)) {
+        if (is_string($result)) {
             return $result;
         }
 

@@ -15,7 +15,7 @@
     class MoviePublicService extends PublicService
     {
         
-        private $movieDAO;
+        protected $movieDAO;
         /**
          * MoviePublicService constructor.
          */

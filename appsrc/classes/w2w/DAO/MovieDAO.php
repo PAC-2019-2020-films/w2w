@@ -79,8 +79,8 @@
                     $movie->setPoster($movieArray['poster']);
                 }
                 
-                if ($movieArray['fk_admin_review.id']) {
-                    $movie->setReviewAdmin($this->reviewDAO->selectReviewById($movieArray['fk_admin_review.id']));
+                if ($movieArray['fk_admin_review_id']) {
+                    $movie->setReviewAdmin($this->reviewDAO->selectReviewById($movieArray['fk_admin_review_id']));
                 }
                 
                 if ($movieArray['fk_rating_id']) {
@@ -90,7 +90,7 @@
 //            Fetch, instantiate and add tags to the Movie Object
                 $movieTags = $this->movieTagsDAO->selectMovieTagsByMovie($movie);
                 
-                if ($movieTags) {
+                if ($movieTags && $movieTags[0]) {
                     foreach ($movieTags as $movieTag) {
                         $movie->addTag($movieTag);
                     }
@@ -99,7 +99,7 @@
 //            Fetch, instantiate and add directors to the Movie Object
                 $movieDirectors = $this->movieDirectorDAO->selectMovieDirectorsByMovie($movie);
                 
-                if ($movieDirectors) {
+                if ($movieDirectors && $movieDirectors[0]) {
                     foreach ($movieDirectors as $movieDirector) {
                         $movie->addDirector($movieDirector);
                     }
@@ -108,7 +108,7 @@
 //            Fetch, instantiate and add actors to the Movie Object
                 $movieActors = $this->movieActorDAO->selectMovieActorsByMovie($movie);
                 
-                if ($movieActors) {
+                if ($movieActors && $movieActors[0]) {
                     foreach ($movieActors as $movieActor) {
                         $movie->addActor($movieActor);
                     }
@@ -207,7 +207,7 @@
                        {$this->table}.year, 
                        {$this->table}.poster, 
                        {$this->table}.fk_category_id,
-                       {$this->table}.fk_admin_review.id,
+                       {$this->table}.fk_admin_review_id,
                        {$this->table}.fk_rating_id
                 FROM {$this->table}
                     LEFT JOIN {$this->tableCategories} 
@@ -223,6 +223,7 @@
             $dataType  = 1;
             
             $result = $this->select($sql, $condition, $dataType);
+            var_dump($result[0]);
             
             if (is_array($result)) {
                 return $this->movieObjectBinder($result[0]);
@@ -250,7 +251,7 @@
                        {$this->table}.year, 
                        {$this->table}.poster, 
                        {$this->table}.fk_category_id, 
-                       {$this->table}.fk_admin_review.id, 
+                       {$this->table}.fk_admin_review_id,
                        {$this->table}.fk_rating_id
                 FROM {$this->table}
                     LEFT JOIN {$this->tableCategories} 
@@ -301,7 +302,7 @@
                        {$this->table}.year,  
                        {$this->table}.poster, 
                        {$this->table}.fk_category_id, 
-                       {$this->table}.fk_admin_review.id, 
+                       {$this->table}.fk_admin_review_id,
                        {$this->table}.fk_rating_id
                 FROM {$this->tableTags}
                     LEFT JOIN {$this->tableMovieTags} 
@@ -566,22 +567,37 @@
         public function insertMovie(Movie $movie)
         {
             $data = [
-                'title'              => [$movie->getTitle(), 2],
-                'description'        => [$movie->getDescription(), 2],
-                'year'               => [$movie->getYear(), 1], // !!!! WARNING YEAR IS IN INT (wut?) in the DB while $movie->getYear() is DATETIME !!!!
-                /*
-                * TODO : update DB year field type
-                */
-                'poster'             => [$movie->getPoster(), 2],
-                'fk_category_id'     => [$movie->getCategory()->getId(), 1],
-                'fk_admin_review_id' => [$movie->getReviewAdmin()->getId(), 1],
-                'fk_rating_id'       => [$movie->getRating()->getId(), 1]
+                'title'          => [$movie->getTitle(), 2],
+                'fk_category_id' => [$movie->getCategory()->getId(), 1],
             ];
             
+            if ($movie->getYear()) {
+                $data += ['year' => [$movie->getYear(), 1]];
+                // !!!! WARNING YEAR IS IN INT (wut?) in the DB while $movie->getYear() is DATETIME !!!!
+                /*
+                * TODO : update DB year field type OR convert date to int
+                */
+            }
+            
+            if ($movie->getPoster()) {
+                $data += ['poster' => [$movie->getPoster(), 2]];
+            }
+            
+            if ($movie->getDescription()) {
+                $data += ['description' => [$movie->getDescription(), 2],];
+            }
+            
+            if ($movie->getReviewAdmin()) {
+                $data += ['fk_admin_review_id' => [$movie->getReviewAdmin()->getId(), 1]];
+            }
+            
+            if ($movie->getRating()) {
+                $data += ['fk_rating_id' => [$movie->getRating()->getId(), 1]];
+            };
             
             $result = $this->insert($this->table, $data);
             
-            if (is_int($result)) {
+            if (is_string($result)) {
                 return $result;
             }
             
@@ -599,17 +615,33 @@
         public function updateMovie(Movie $movie)
         {
             $data = [
-                'title'              => [$movie->getTitle(), 2],
-                'description'        => [$movie->getDescription(), 2],
-                'year'               => [$movie->getYear(), 1], // !!!! WARNING YEAR IS IN INT (wut?) in the DB while $movie->getYear() is DATETIME !!!!
-                /*
-                * TODO : update DB year field type
-                */
-                'poster'             => [$movie->getPoster(), 2],
-                'fk_category_id'     => [$movie->getCategory()->getId(), 1],
-                'fk_admin_review_id' => [$movie->getReviewAdmin()->getId(), 1],
-                'fk_rating_id'       => [$movie->getRating()->getId(), 1]
+                'title'          => [$movie->getTitle(), 2],
+                'fk_category_id' => [$movie->getCategory()->getId(), 1],
             ];
+    
+            if ($movie->getYear()) {
+                $data += ['year' => [$movie->getYear(), 1]];
+                // !!!! WARNING YEAR IS IN INT (wut?) in the DB while $movie->getYear() is DATETIME !!!!
+                /*
+                * TODO : update DB year field type OR convert date to int
+                */
+            }
+    
+            if ($movie->getPoster()) {
+                $data += ['poster' => [$movie->getPoster(), 2]];
+            }
+    
+            if ($movie->getDescription()) {
+                $data += ['description' => [$movie->getDescription(), 2],];
+            }
+    
+            if ($movie->getReviewAdmin()) {
+                $data += ['fk_admin_review_id' => [$movie->getReviewAdmin()->getId(), 1]];
+            }
+    
+            if ($movie->getRating()) {
+                $data += ['fk_rating_id' => [$movie->getRating()->getId(), 1]];
+            };
             
             $condition = "{$this->table}.id = :id";
             

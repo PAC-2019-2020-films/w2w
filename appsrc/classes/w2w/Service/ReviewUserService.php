@@ -4,6 +4,7 @@
 namespace w2w\Service;
 
 
+use w2w\DAO\ReviewDAO;
 use \w2w\Model\Review;
 
 class ReviewUserService extends ReviewPublicService
@@ -11,6 +12,7 @@ class ReviewUserService extends ReviewPublicService
 
     private $movieService;
     private $ratingService;
+    private $reviewDAO;
 
     /**
      * ReviewUserService constructor.
@@ -20,6 +22,7 @@ class ReviewUserService extends ReviewPublicService
         parent::__construct();
         $this->movieService = new MoviePublicService();
         $this->ratingService = new RatingPublicService();
+        $this->reviewDAO = new ReviewDAO();
     }
 
     /**
@@ -28,7 +31,7 @@ class ReviewUserService extends ReviewPublicService
      */
     public function addReview(array $reviewArray)
     {
-        $review = $this->reviewObjectBinder($reviewArray);
+        $review = $this->reviewDAO->reviewObjectBinder($reviewArray);
 
 //        Ensure that linked movie exists
         if ($this->movieService->getMovieByIdBarebone($review->getMovie()->getId())) {
@@ -53,7 +56,7 @@ class ReviewUserService extends ReviewPublicService
      */
     public function editReview(array $reviewArray)
     {
-        $review = $this->reviewObjectBinder($reviewArray);
+        $review = $this->reviewDAO->reviewObjectBinder($reviewArray);
 
 //        Ensure that linked movie exists
         if ($this->movieService->getMovieByIdBarebone($review->getMovie()->getId())) {

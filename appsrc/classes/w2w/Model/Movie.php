@@ -50,7 +50,7 @@ class Movie
      * @param Tag $tag
      * @return Tag[]
      */
-    public function addTag(Tag $tag): array
+    public function addTag(Tag $tag)
     {
         if (!in_array($tag, $this->tags)) {
             array_push($this->tags, $tag);
@@ -62,7 +62,7 @@ class Movie
      * @param Tag $tag
      * @return Tag[]
      */
-    public function removeTag(Tag $tag): array
+    public function removeTag(Tag $tag)
     {
         if ($key = array_search($tag, $this->tags, true)) {
             array_slice($this->tags, 1, $key);
@@ -74,7 +74,7 @@ class Movie
     /**
      * @return Artist[]
      */
-    public function getDirectors(): array
+    public function getDirectors()
     {
         return $this->directors;
     }
@@ -83,7 +83,7 @@ class Movie
      * @param Artist $director
      * @return Artist[]
      */
-    public function addDirector(Artist $director): array
+    public function addDirector(Artist $director)
     {
         if (!in_array($director, $this->directors)){
             array_push($this->directors, $director);
@@ -95,7 +95,7 @@ class Movie
      * @param Artist $director
      * @return Artist[]
      */
-    public function removeDirector(Artist $director): array
+    public function removeDirector(Artist $director)
     {
         if ($key = array_search($director, $this->directors, true)) {
             array_slice($this->directors, 1, $key);
@@ -106,7 +106,7 @@ class Movie
     /**
      * @return Artist[]
      */
-    public function getActors(): array
+    public function getActors()
     {
         return $this->actors;
     }
@@ -115,7 +115,7 @@ class Movie
      * @param Artist $actor
      * @return Artist[]
      */
-    public function addActor(Artist $actor): array
+    public function addActor(Artist $actor)
     {
         if (!in_array($actor, $this->actors)){
             array_push($this->actors, $actor);
@@ -127,7 +127,7 @@ class Movie
      * @param Artist $actor
      * @return Artist[]
      */
-    public function removeActor(Artist $actor): array
+    public function removeActor(Artist $actor)
     {
         if ($key = array_search($actor, $this->actors, true)) {
             array_slice($this->actors, 1, $key);
@@ -139,7 +139,7 @@ class Movie
     /**
      * @return Category
      */
-    public function getCategory(): Category
+    public function getCategory()
     {
         return $this->category;
     }
@@ -147,7 +147,7 @@ class Movie
     /**
      * @param Category $category
      */
-    public function setCategory(Category $category): void
+    public function setCategory(Category $category)
     {
         $this->category = $category;
     }
@@ -155,7 +155,7 @@ class Movie
     /**
      * @return Review
      */
-    public function getReviewAdmin(): Review
+    public function getReviewAdmin()
     {
         return $this->reviewAdmin;
     }
@@ -163,7 +163,7 @@ class Movie
     /**
      * @param Review $reviewAdmin
      */
-    public function setReviewAdmin(Review $reviewAdmin): void
+    public function setReviewAdmin(Review $reviewAdmin)
     {
         $this->reviewAdmin = $reviewAdmin;
     }
@@ -171,7 +171,7 @@ class Movie
     /**
      * @return Rating
      */
-    public function getRating(): Rating
+    public function getRating()
     {
         return $this->rating;
     }
@@ -179,7 +179,7 @@ class Movie
     /**
      * @param Rating $rating
      */
-    public function setRating(Rating $rating): void
+    public function setRating(Rating $rating)
     {
         $this->rating = $rating;
     }
@@ -187,7 +187,7 @@ class Movie
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -195,7 +195,7 @@ class Movie
     /**
      * @param int $id
      */
-    public function setId(int $id): void
+    public function setId(int $id)
     {
         $this->id = $id;
     }
@@ -203,7 +203,7 @@ class Movie
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle()
     {
         return $this->title;
     }
@@ -221,7 +221,7 @@ class Movie
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
@@ -229,7 +229,7 @@ class Movie
     /**
      * @param string $description
      */
-    public function setDescription(string $description): void
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
@@ -237,7 +237,7 @@ class Movie
     /**
      * @return DateTime
      */
-    public function getYear(): DateTime
+    public function getYear()
     {
         return $this->year;
     }
@@ -245,7 +245,7 @@ class Movie
     /**
      * @param DateTime $year
      */
-    public function setYear(DateTime $year): void
+    public function setYear(DateTime $year)
     {
         $this->year = $year;
     }
@@ -253,7 +253,7 @@ class Movie
     /**
      * @return string
      */
-    public function getPoster(): string
+    public function getPoster()
     {
         return $this->poster;
     }
@@ -261,7 +261,7 @@ class Movie
     /**
      * @param string $poster
      */
-    public function setPoster(string $poster): void
+    public function setPoster(string $poster)
     {
         $this->poster = $poster;
     }

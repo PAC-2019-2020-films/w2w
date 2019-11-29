@@ -3,12 +3,14 @@
     
     namespace w2w\Service;
     
+    use w2w\DAO\UserDAO;
     use \w2w\Model\User;
     
     class UserPublicService extends PublicService
     {
         
         private $roleService;
+        private $userDAO;
         
         /**
          * UserPublicService constructor.
@@ -17,6 +19,7 @@
         {
             parent::__construct();
             $this->roleService = new RolePublicService();
+            $this->userDAO = new UserDAO();
         }
         
         

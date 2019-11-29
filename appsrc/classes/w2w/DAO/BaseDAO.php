@@ -125,25 +125,30 @@
          */
         public function insert(string $table, array $data)
         {
-            $keys   = implode(', ', array_keys($data));
-            $values = ':' . implode(', :', array_keys($data));
-            
-            $sql = "INSERT INTO $table ($keys) VALUES ($values)";
-            $dbh = $this->pdo->prepare($sql);
-            
-            foreach ($data as $key => $value) {
-                if (isset($value[1])) {
-                    $dbh->bindValue($key, $value[0], $value[1]);
-                } else {
-                    $dbh->bindValue($key, $value);
+            if ($pdo = $this->getPDO()) {
+                
+                $keys   = implode(', ', array_keys($data));
+                $values = ':' . implode(', :', array_keys($data));
+                
+                $sql = "INSERT INTO $table ($keys) VALUES ($values)";
+                $dbh = $pdo->prepare($sql);
+                
+                foreach ($data as $key => $value) {
+                    if (isset($value[1])) {
+                        $dbh->bindValue($key, $value[0], $value[1]);
+                    } else {
+                        $dbh->bindValue($key, $value);
+                    }
                 }
-            }
-            
-            try {
-                $dbh->execute();
-                return $this->pdo->lastInsertId();
-            } catch (PDOException $exception) {
-                return $exception;
+                
+                try {
+                    $dbh->execute();
+                    return $this->pdo->lastInsertId();
+                } catch (PDOException $exception) {
+                    return $exception;
+                }
+            } else {
+                return false;
             }
         }
         
@@ -159,34 +164,40 @@
          */
         public function update(string $table, array $data, string $condition, int $updateId)
         {
-            $upkeys = '';
-            
-            foreach ($data as $key => $value) {
-                $upkeys .= "$key =:$key,";
-            }
-            
-            $upkeys = rtrim($upkeys, ',');
-            
-            $sql = "UPDATE $table SET $upkeys WHERE $condition";
-            
-            $dbh = $this->pdo->prepare($sql);
-            
-            foreach ($data as $key => $value) {
-                if (isset($value[1])) {
-                    $dbh->bindValue($key, $value[0], $value[1]);
-                } else {
-                    $dbh->bindValue($key, $value);
+            if ($pdo = $this->getPDO()) {
+                
+                $upkeys = '';
+                
+                foreach ($data as $key => $value) {
+                    $upkeys .= "$key =:$key,";
                 }
+                
+                $upkeys = rtrim($upkeys, ',');
+                
+                $sql = "UPDATE $table SET $upkeys WHERE $condition";
+                
+                $dbh = $pdo->prepare($sql);
+                
+                foreach ($data as $key => $value) {
+                    if (isset($value[1])) {
+                        $dbh->bindValue($key, $value[0], $value[1]);
+                    } else {
+                        $dbh->bindValue($key, $value);
+                    }
+                }
+                
+                $dbh->bindValue(":id", $updateId, PDO::PARAM_INT);
+                
+                try {
+                    $dbh->execute();
+                    return $dbh->rowCount();
+                } catch (PDOException $exception) {
+                    return $exception;
+                }
+            } else {
+                return false;
             }
             
-            $dbh->bindValue(":id", $updateId, PDO::PARAM_INT);
-            
-            try {
-                $dbh->execute();
-                return $dbh->rowCount();
-            } catch (PDOException $exception) {
-                return $exception;
-            }
         }
         
         /**
@@ -203,21 +214,25 @@
         public function delete(string $table, string $condition, int $deleteId, int $deleteIdBis = null
         )
         {
-            $sql = "DELETE FROM $table WHERE $condition";
-            $dbh = $this->pdo->prepare($sql);
-            
-            $dbh->bindValue(":id", $deleteId, PDO::PARAM_INT);
-            
-            if (isset($deleteIdBis)) {
-                $dbh->bindValue(":idBis", $deleteIdBis, PDO::PARAM_INT);
-            }
-            
-            try {
-                $dbh->execute();
-                return $dbh->rowCount();
-            } catch (PDOException $exception) {
-                return $exception;
+            if ($pdo = $this->getPDO()) {
+                
+                $sql = "DELETE FROM $table WHERE $condition";
+                $dbh = $pdo->prepare($sql);
+                
+                $dbh->bindValue(":id", $deleteId, PDO::PARAM_INT);
+                
+                if (isset($deleteIdBis)) {
+                    $dbh->bindValue(":idBis", $deleteIdBis, PDO::PARAM_INT);
+                }
+                
+                try {
+                    $dbh->execute();
+                    return $dbh->rowCount();
+                } catch (PDOException $exception) {
+                    return $exception;
+                }
+            } else {
+                return false;
             }
         }
-        
     }
