@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<project name="w2w" basedir="." default="execphpunit">
+    
+    
+    <!-- un "build.xml" est un fichier de configuration pour l'utilitaire de gestion de projet ("build tool") Phing -->
+    <!-- son usage n'est pas obligatoire mais ça peut rendre service -->
+    <!-- dans le cas de w2w, je l'inclus principalement dans l'idée d'automatiser le lancement des tests unitaires (PHPUnit) -->
+    
+    
+    <!-- (phpdoc templates : responsive-twig | clean | checkstyle |zend) -->
+    <property name="phpdoc.destdir" value="app-apidocs"/>
+    <property name="phpdoc.basedir" value="appsrc"/>
+    <property name="phpdoc.title" value="API-Doc-w2w"/>
+    <property name="phpdoc.template" value="responsive-twig"/>
+
+
+    <property name="phpunit.bootstrap" value="appsrc/bootstrap.php"/>
+    <property name="phpunit.pharlocation" value="vendor/bin/phpunit"/>
+
+    <property name="execphpunit.dir" value="."/>
+    <property name="execphpunit.bootstrap" value="appsrc/bootstrap.php"/>
+    <property name="execphpunit.target" value="appsrc/tests/Test"/>
+
+    
+    <!-- ceci ne fonctionne pas et je me demande bien pourquoi -->
+    <target name="tests">
+        <phpunit bootstrap="${phpunit.bootstrap}" pharlocation="${phpunit.pharlocation}" printsummary="true">
+            <formatter type="plain" usefile="false"/>
+            <batchtest name="MyTestSuit">
+                <fileset dir="appsrc/tests/Test">
+                    <include name="**/*Test*.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+    
+    <!-- ceci fonctionne mais c'est bien moins pratique -->
+    <target name="execphpunit">
+        <exec logoutput="true" checkreturn="true" dir="${execphpunit.dir}" executable="vendor/bin/phpunit">
+            <arg value="--bootstrap"/>
+            <arg value="${execphpunit.bootstrap}"/>
+            <arg value="${execphpunit.target}"/>
+        </exec>
+    </target>    
+
+</project>

@@ -5,6 +5,7 @@ class Autoloader
 {
     
     protected $namespaces = [
+        "Test" => FR_SRCPATH . "/tests",
     ];
     
     public function __construct()

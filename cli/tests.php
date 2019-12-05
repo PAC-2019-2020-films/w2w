@@ -6,9 +6,6 @@ define("FR_ENV", "development");
 require __DIR__ . "/../appsrc/bootstrap.php";
 
 
-
-
-
 ################################################################################
 //40 u,80 a,81 root
 

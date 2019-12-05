@@ -1,11 +1,10 @@
 <?php
 
-
 namespace w2w\Model;
-
 
 class Role
 {
+    const TOSTRING_FORMAT = "Role#%d (name='%s', description='%s')";
     private $id;
     private $name;
     private $description;
@@ -15,12 +14,17 @@ class Role
      * @param int $id
      * @param string $name
      */
-    public function __construct(int $id, string $name)
+    public function __construct(int $id = null, string $name = null, string $description = null)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->description = $description;
     }
 
+    public function __toString()
+    {
+        return sprintf(self::TOSTRING_FORMAT, $this->id, $this->name, $this->description);
+    }
 
     /**
      * @return int
@@ -69,6 +73,5 @@ class Role
     {
         $this->description = $description;
     }
-
 
 }

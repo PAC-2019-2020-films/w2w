@@ -1,14 +1,14 @@
 <?php
 
-
 namespace w2w\Model;
 
 use DateTime;
-
 use \w2w\Model\Role;
 
 class User
 {
+    const TOSTRING_FORMAT = "User#%d (userName='%s', email='%s', emailVerified=%s, passwordHash='%s', 'firstName='%s', lastName='%s', createdAt='%s', updatedAt='%s', lastLoginAt='%s', banned=%s, numberReviews=%d, role=[%s])";
+    const DEFAULT_DATETIME_FORMAT = "Y-m-d H:i:s";
     private $id;
     private $userName;
     private $email;
@@ -19,9 +19,9 @@ class User
     private $createdAt;
     private $updatedAt;
     private $lastLoginAt;
-    private $role;
     private $banned;
     private $numberReviews;
+    private $role;
 
     /**
      * User constructor.
@@ -30,24 +30,64 @@ class User
      * @param string $email
      * @param bool $emailVerified
      * @param string $passwordHash
+     * @param string $firstName
+     * @param string $lastName
      * @param DateTime $createdAt
-     * @param Role $role
+     * @param DateTime $updatedAt
+     * @param DateTime $lastLoginAt
      * @param bool $banned
      * @param int $numberReviews
+     * @param Role $role
      */
-    public function __construct(int $id, string $userName, string $email, bool $emailVerified, string $passwordHash, DateTime $createdAt, Role $role, bool $banned, int $numberReviews)
-    {
+    public function __construct(
+        int $id = null, 
+        string $userName = null, 
+        string $email = null, 
+        bool $emailVerified = null, 
+        string $passwordHash = null, 
+        string $firstName = null, 
+        string $lastName = null, 
+        DateTime $createdAt = null, 
+        DateTime $updatedAt = null, 
+        DateTime $lastLoginAt = null, 
+        bool $banned = null, 
+        int $numberReviews = null,
+        Role $role = null
+    ) {
         $this->id = $id;
         $this->userName = $userName;
         $this->email = $email;
         $this->emailVerified = $emailVerified;
         $this->passwordHash = $passwordHash;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->createdAt = $createdAt;
-        $this->role = $role;
+        $this->updatedAt = $updatedAt;
+        $this->lastLoginAt = $lastLoginAt;
         $this->banned = $banned;
         $this->numberReviews = $numberReviews;
+        $this->role = $role;
     }
 
+    public function __toString()
+    {
+        return sprintf(
+            self::TOSTRING_FORMAT, 
+            $this->id, 
+            $this->userName, 
+            $this->email,
+            $this->emailVerified,
+            $this->passwordHash,
+            $this->firstName,
+            $this->lastName,
+            $this->createdAt ? $this->createdAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->updatedAt ? $this->updatedAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->lastLoginAt ? $this->lastLoginAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->banned,
+            $this->numberReviews,
+            $this->role
+        );
+    }
 
     /**
      * @return int
@@ -210,22 +250,6 @@ class User
     }
 
     /**
-     * @return Role
-     */
-    public function getRole(): Role
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param Role $role
-     */
-    public function setRole(Role $role): void
-    {
-        $this->role = $role;
-    }
-
-    /**
      * @return bool
      */
     public function isBanned(): bool
@@ -257,7 +281,20 @@ class User
         $this->numberReviews = $numberReviews;
     }
 
+    /**
+     * @return Role
+     */
+    public function getRole(): Role
+    {
+        return $this->role;
+    }
 
-
+    /**
+     * @param Role $role
+     */
+    public function setRole(Role $role = null): void
+    {
+        $this->role = $role;
+    }
 
 }

@@ -2,8 +2,7 @@
 
 
 
-
-## Apache virtual hosts configuration :
+##  Apache virtual hosts configuration :
 
 http://www.nicolas-verhoye.com/comment-configurer-virtual-hosts-wamp.html
 
@@ -54,3 +53,15 @@ par :
 et créer le dossier "w2w" dans le dossier d'installation de wamp/logs (par défaut C:\wamp64\logs).
 
 Ou définir la variable ${APACHE_LOG_DIR} dans le fichier httpd.conf d'Apache, selon l'emplacement souhaité de l'enregistrement des logs.
+
+
+
+## PHP technos / standards
+
+- https://phptherightway.com/ (toutes les bonnes pratiques PHP...)
+- https://phptherightway.com/#composer_and_packagist
+- https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
+- https://www.php-fig.org/psr/psr-12/ 
+
+
+
