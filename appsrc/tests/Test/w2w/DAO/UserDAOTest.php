@@ -11,7 +11,7 @@ class UserDAOTest extends BaseTestCase
     
     public function testSelectUserById()
     {
-        $existingUserId = 36;
+        $existingUserId = 3;
         $dao = new UserDAO();
         $user = $dao->selectUserById($existingUserId);
         $this->assertNotNull($user);

@@ -6,6 +6,14 @@ define("FR_ENV", "development");
 require __DIR__ . "/../appsrc/bootstrap.php";
 
 
+$dao = new \w2w\DAO\BaseDAO();
+
+$pdo = $dao->createPDO();
+
+echo $pdo;
+
+
+exit();
 ################################################################################
 //40 u,80 a,81 root
 

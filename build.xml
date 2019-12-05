@@ -43,4 +43,15 @@
         </exec>
     </target>    
 
+    <target name="reset">
+        <exec logoutput="true" checkreturn="true" dir="." executable="mysql">
+            <arg value="-u"/>
+            <arg value="w2w"/>
+            <arg value="-pw2w"/>
+            <arg value="w2w"/>
+            <arg value="&lt;"/>
+            <arg value="sql/setup.sql"/>
+        </exec>
+    </target>    
+
 </project>
