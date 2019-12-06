@@ -6,7 +6,7 @@
  * Time: 20:26
  */
 
-namespace w2w\DAO;
+namespace w2w\DAO\PDO;
 
 use PDO;
 use PDOException;
@@ -21,6 +21,7 @@ class BaseDAO
     const PARAM_BOOL = \PDO::PARAM_BOOL; # = 5
     const PARAM_STR_NATL = \PDO::PARAM_STR_NATL;
     const PARAM_STR_CHAR = \PDO::PARAM_STR_CHAR;
+    const PARAM_DATETIME = 6666; # custom param type for PHP DateTime stored as MySQL DateTime
     
     protected $tableName;
     protected $className;

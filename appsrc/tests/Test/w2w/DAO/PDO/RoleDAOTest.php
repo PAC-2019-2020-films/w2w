@@ -1,13 +1,13 @@
 <?php
-namespace Test\w2w\DAO;
+namespace Test\w2w\DAO\PDO;
 
 use \Test\BaseTestCase;
-use \w2w\DAO\RoleDAO;
+use \w2w\DAO\PDO\RoleDAO;
 use \w2w\Model\Role;
 
 class RoleDAOTest extends BaseTestCase
 {
-    
+
     public function testSelectAllRolesd()
     {
         $dao = new RoleDAO();

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<project name="w2w" basedir="." default="execphpunit">
-    
-    
+<project name="w2w" basedir="." default="tests-current">
+
+
     <!-- un "build.xml" est un fichier de configuration pour l'utilitaire de gestion de projet ("build tool") Phing -->
     <!-- son usage n'est pas obligatoire mais ça peut rendre service -->
     <!-- dans le cas de w2w, je l'inclus principalement dans l'idée d'automatiser le lancement des tests unitaires (PHPUnit) -->
-    
-    
+
+
     <!-- (phpdoc templates : responsive-twig | clean | checkstyle |zend) -->
     <property name="phpdoc.destdir" value="app-apidocs"/>
     <property name="phpdoc.basedir" value="appsrc"/>
@@ -17,13 +17,17 @@
     <property name="phpunit.bootstrap" value="appsrc/bootstrap.php"/>
     <property name="phpunit.pharlocation" value="vendor/bin/phpunit"/>
 
+
     <property name="execphpunit.dir" value="."/>
     <property name="execphpunit.bootstrap" value="appsrc/bootstrap.php"/>
-    <property name="execphpunit.target" value="appsrc/tests/Test"/>
+    <property name="execphpunit.executable" value="vendor/bin/phpunit"/>
+    <property name="execphpunit.target.base" value="appsrc/tests/Test"/>
+    <property name="execphpunit.target.current" value="${execphpunit.target.base}/w2w/DAO"/>
 
-    
-    <!-- ceci ne fonctionne pas et je me demande bien pourquoi -->
-    <target name="tests">
+
+    <!-- exécution tests PHPUnit avec la "task" Phing dédiée à cet usage -->
+    <!-- (ceci ne fonctionne pas et je me demande bien pourquoi) -->
+    <target name="tests-phpunit">
         <phpunit bootstrap="${phpunit.bootstrap}" pharlocation="${phpunit.pharlocation}" printsummary="true">
             <formatter type="plain" usefile="false"/>
             <batchtest name="MyTestSuit">
@@ -33,16 +37,35 @@
             </batchtest>
         </phpunit>
     </target>
-    
-    <!-- ceci fonctionne mais c'est bien moins pratique -->
-    <target name="execphpunit">
-        <exec logoutput="true" checkreturn="true" dir="${execphpunit.dir}" executable="vendor/bin/phpunit">
+
+    <!-- exécution tests PHPUnit avec la "task" Phing ExecTask, non spécialisée -->
+    <!-- (ceci fonctionne mais c'est bien moins pratique) -->
+    <target name="tests-all">
+        <exec logoutput="true" checkreturn="true" dir="${execphpunit.dir}" executable="${execphpunit.executable}">
             <arg value="--bootstrap"/>
             <arg value="${execphpunit.bootstrap}"/>
-            <arg value="${execphpunit.target}"/>
+            <arg value="${execphpunit.target.base}"/>
         </exec>
-    </target>    
+    </target>
 
+    <!-- idem dans un sous-répertoire de tests unitaires -->
+    <target name="tests-current">
+        <exec logoutput="true" checkreturn="true" dir="${execphpunit.dir}" executable="${execphpunit.executable}">
+            <arg value="--bootstrap"/>
+            <arg value="${execphpunit.bootstrap}"/>
+            <arg value="${execphpunit.target.current}"/>
+        </exec>
+    </target>
+
+
+    <target name="cmds">
+        <echo message="${execphpunit.executable} --bootstrap ${execphpunit.bootstrap} ${execphpunit.target.base}"/>
+        <echo message="${execphpunit.executable} --bootstrap ${execphpunit.bootstrap} ${execphpunit.target.current}"/>
+    </target>
+
+
+    <!-- exécute le script pour réinitialiser la db -->
+    <!-- revient à exécuter "mysql -u w2w -pw2w w2w < sql/setup.sql" dans le répertoire courant -->
     <target name="reset">
         <exec logoutput="true" checkreturn="true" dir="." executable="mysql">
             <arg value="-u"/>
@@ -52,6 +75,6 @@
             <arg value="&lt;"/>
             <arg value="sql/setup.sql"/>
         </exec>
-    </target>    
+    </target>
 
 </project>

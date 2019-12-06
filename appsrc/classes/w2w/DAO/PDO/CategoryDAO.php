@@ -6,7 +6,7 @@
  * Time: 20:30
  */
 
-namespace w2w\DAO;
+namespace w2w\DAO\PDO;
 
 
 use w2w\Model\Category;

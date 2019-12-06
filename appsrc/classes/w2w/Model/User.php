@@ -9,6 +9,7 @@ class User
 {
     const TOSTRING_FORMAT = "User#%d (userName='%s', email='%s', emailVerified=%s, passwordHash='%s', 'firstName='%s', lastName='%s', createdAt='%s', updatedAt='%s', lastLoginAt='%s', banned=%s, numberReviews=%d, role=[%s])";
     const DEFAULT_DATETIME_FORMAT = "Y-m-d H:i:s";
+
     private $id;
     private $userName;
     private $email;
