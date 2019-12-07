@@ -2,9 +2,10 @@
 
 namespace w2w\DAO\PDO;
 
+use w2w\DAO\RoleDAO;
 use w2w\Model\Role;
 
-class RoleDAO extends BaseDAO
+class PDORoleDAO extends BaseDAO implements RoleDAO
 {
     private $table = "roles";
     
@@ -163,7 +164,6 @@ class RoleDAO extends BaseDAO
         $result = $this->genericInsert($data);
 
         //$result = $this->insert($this->table, $data);
-var_dump($result);
         if (is_int($result)) {
             return $result;
         }

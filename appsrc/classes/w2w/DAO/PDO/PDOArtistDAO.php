@@ -2,9 +2,10 @@
 
 namespace w2w\DAO\PDO;
 
+use w2w\DAO\ArtistDAO;
 use w2w\Model\Artist;
 
-class ArtistDAO extends BaseDAO
+class PDOArtistDAO extends BaseDAO implements ArtistDAO
 {
     private $table = 'artists';
 

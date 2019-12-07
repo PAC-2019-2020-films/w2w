@@ -2,17 +2,36 @@
 
 namespace w2w\Model;
 
+/**
+ * @Entity
+ * @Table(name="roles")
+ */
 class Role
 {
     const TOSTRING_FORMAT = "Role#%d (name='%s', description='%s')";
+    
+    /**
+     * Cette clé primaire n'est pas auto-incrémentée !
+     * @Id
+	 * @Column(type="integer") 
+     */
     private $id;
+
+    /**
+	 * @Column
+     */
     private $name;
+
+    /**
+	 * @Column
+     */
     private $description;
 
     /**
      * Role constructor.
      * @param int $id
      * @param string $name
+     * @param string $description
      */
     public function __construct(int $id = null, string $name = null, string $description = null)
     {

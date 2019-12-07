@@ -8,9 +8,6 @@
     <php>
         <server name="FR_ENV" value="test"/>
     </php>
-    
-
-
 
     <testsuites>
         <testsuite name="erf">
@@ -20,6 +17,5 @@
             <directory>appsrc/tests/Test/w2w/DAO</directory>
         </testsuite>
     </testsuites>
-
 
 </phpunit>

@@ -2,11 +2,12 @@
 
 namespace w2w\DAO\PDO;
 
+use w2w\DAO\UserDAO;
 use w2w\Model\Role;
 use w2w\Model\User;
 use w2w\Model\AuthenticationToken;
 
-class UserDAO extends BaseDAO
+class PDOUserDAO extends BaseDAO implements UserDAO
 {
     private $table = 'users';
     private $tableRole = 'roles';
@@ -76,7 +77,6 @@ class UserDAO extends BaseDAO
         if (isset($row["role_id"]) && isset($row["role_name"]) && isset($row["role_description"])) {
             $item->setRole(new Role($row["role_id"], $row["role_name"], $row["role_description"]));
         }
-echo "$item\n";        
         return $item;
     }
     

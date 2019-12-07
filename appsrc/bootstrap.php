@@ -81,6 +81,10 @@ ini_set("default_charset", "utf-8");
 
 include FR_SRCPATH . "/classes/Fr/Autoloader.php";
 
+if (file_exists(FR_APPPATH . "/vendor/autoload.php")) {
+    # inclusion du fichier d'autoload de Composer pour les dépendances (Doctrine...)
+    include FR_APPPATH . "/vendor/autoload.php";
+}
 
 if (class_exists("\\Fr\\Autoloader")) {
     $autoloader = new Fr\Autoloader();

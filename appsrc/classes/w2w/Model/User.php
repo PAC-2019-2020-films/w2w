@@ -5,23 +5,82 @@ namespace w2w\Model;
 use DateTime;
 use \w2w\Model\Role;
 
+/**
+ * @Entity
+ * @Table(name="users")
+ */
 class User
 {
     const TOSTRING_FORMAT = "User#%d (userName='%s', email='%s', emailVerified=%s, passwordHash='%s', 'firstName='%s', lastName='%s', createdAt='%s', updatedAt='%s', lastLoginAt='%s', banned=%s, numberReviews=%d, role=[%s])";
     const DEFAULT_DATETIME_FORMAT = "Y-m-d H:i:s";
 
+	/**
+	 * @Id 
+	 * @Column(type="integer") 
+	 * @GeneratedValue
+     * @var int
+     */
     private $id;
+
+    /**
+     * @Column(name="user_name")
+     */
     private $userName;
+
+    /**
+     * @Column
+     */
     private $email;
+
+    /**
+     * @Column(name="email_verified")
+     */
     private $emailVerified;
+
+    /**
+     * @Column(name="password_hash")
+     */
     private $passwordHash;
+
+    /**
+     * @Column(name="first_name");
+     */
     private $firstName;
+
+    /**
+     * @Column(name="last_name")
+     */
     private $lastName;
+
+    /**
+     * @Column(name="created_at", type="datetime")
+     */
     private $createdAt;
+
+    /**
+     * @Column(name="updated_at", type="datetime");
+     */
     private $updatedAt;
+
+    /**
+     * @Column(name="last_login_at", type="datetime");
+     */
     private $lastLoginAt;
+
+    /**
+     * @Column
+     */
     private $banned;
+
+    /**
+     * @Column(name="number_reviews");
+     */
     private $numberReviews;
+
+	/**
+	 * @ManyToOne(targetEntity=\w2w\Model\Role::class) 
+	 * @JoinColumn(name="fk_role_id", referencedColumnName="id")
+	 */
     private $role;
 
     /**
@@ -81,9 +140,9 @@ class User
             $this->passwordHash,
             $this->firstName,
             $this->lastName,
-            $this->createdAt ? $this->createdAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
-            $this->updatedAt ? $this->updatedAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
-            $this->lastLoginAt ? $this->lastLoginAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->createdAt instanceof \DateTime ? $this->createdAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->updatedAt instanceof \DateTime ? $this->updatedAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->lastLoginAt instanceof \DateTime ? $this->lastLoginAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
             $this->banned,
             $this->numberReviews,
             $this->role
