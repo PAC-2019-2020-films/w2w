@@ -7,7 +7,7 @@ namespace w2w\DAO\PDO;
 use w2w\Model\Artist;
 use w2w\Model\Movie;
 
-class MovieDirectorDAO extends BaseDAO
+class MovieDirectorDAO extends PDOGenericDAO
 {
     private $table = 'movies_directors';
     private $tableArtist = 'artists';

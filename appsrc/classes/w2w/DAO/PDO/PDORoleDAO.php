@@ -5,7 +5,7 @@ namespace w2w\DAO\PDO;
 use w2w\DAO\RoleDAO;
 use w2w\Model\Role;
 
-class PDORoleDAO extends BaseDAO implements RoleDAO
+class PDORoleDAO extends PDOGenericDAO implements RoleDAO
 {
     private $table = "roles";
     
@@ -114,6 +114,15 @@ class PDORoleDAO extends BaseDAO implements RoleDAO
         return false;
     }
     
+    
+    /**
+     * @Override
+     */
+    public function findByName($name)
+    {
+        return $this->selectRoleByname($name);
+    }
+    
     /**
      * @param int $id
      * @return bool|Role
@@ -188,7 +197,7 @@ class PDORoleDAO extends BaseDAO implements RoleDAO
         
         $condition = "{$this->table}.id = :id";
         
-        $result = $this->update($this->table, $data, $condition, $role->getId());
+        $result = $this->genericUpdate($this->table, $data, $condition, $role->getId());
         
         if (is_int($result)) {
             return $result;
@@ -208,7 +217,7 @@ class PDORoleDAO extends BaseDAO implements RoleDAO
     {
         $condition = "{$this->table}.id = :id";
         
-        $result = $this->delete($this->table, $condition, $role->getId());
+        $result = $this->genericDelete($this->table, $condition, $role->getId());
         
         if (is_int($result)) {
             return $result;

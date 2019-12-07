@@ -11,7 +11,7 @@ namespace w2w\DAO\PDO;
 use PDO;
 use PDOException;
 
-class BaseDAO
+class PDOGenericDAO
 {
     
     const PARAM_NULL = \PDO::PARAM_NULL; # = 0
@@ -398,7 +398,7 @@ class BaseDAO
      *
      * TODO : Add condition flexibility
      */
-    public function update(string $table, array $data, string $condition, int $updateId)
+    public function genericUpdate(string $table, array $data, string $condition, int $updateId)
     {
         if ($pdo = $this->getPDO()) {
             
@@ -436,6 +436,9 @@ class BaseDAO
         
     }
     
+    
+    
+    
     /**
      * @param string $table : target table where delete will take place in the DB.
      * @param string $condition : SQL condition syntax ie. "someColumn = {$someValue} AND anotherColumn = {$someOtherValue}"
@@ -447,7 +450,7 @@ class BaseDAO
      * TODO : Add condition flexibility
      */
     
-    public function delete(string $table, string $condition, int $deleteId, int $deleteIdBis = null
+    public function genericDelete(string $table, string $condition, int $deleteId, int $deleteIdBis = null
     )
     {
         if ($pdo = $this->getPDO()) {
@@ -471,4 +474,41 @@ class BaseDAO
             return false;
         }
     }
+
+
+    /**
+     * @Override
+     */
+    public function find($key)
+    {
+    }
+    
+    /**
+     * @Override
+     */
+    public function findAll()
+    {
+    }
+    
+    /**
+     * @Override
+     */
+    public function save($object)
+    {
+    }
+    
+    /**
+     * @Override
+     */
+    public function update($object)
+    {
+    }
+    
+    /**
+     * @Override
+     */
+    public function delete($object)
+    {
+    }
+
 }

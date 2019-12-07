@@ -15,10 +15,9 @@ namespace w2w\DAO;
  */
 interface GenericDAO
 {
+
     public function find($key);
 
-    /*public function findBy($keyValue, $keyName);*/
-    
     public function findAll();
 
     public function save($object);
@@ -27,5 +26,4 @@ interface GenericDAO
 
     public function delete($object);
     
-    /*public function deleteAll();*/
 }

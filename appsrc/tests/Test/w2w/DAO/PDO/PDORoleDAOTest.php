@@ -2,15 +2,15 @@
 namespace Test\w2w\DAO\PDO;
 
 use \Test\BaseTestCase;
-use \w2w\DAO\PDO\RoleDAO;
+use \w2w\DAO\PDO\PDORoleDAO;
 use \w2w\Model\Role;
 
-class RoleDAOTest extends BaseTestCase
+class PDORoleDAOTest extends BaseTestCase
 {
 
     public function testSelectAllRolesd()
     {
-        $dao = new RoleDAO();
+        $dao = new PDORoleDAO();
         $items = $dao->selectAllRoles();
         $this->assertNonEmptyArrayOf(Role::class, $items);
     }
@@ -18,7 +18,7 @@ class RoleDAOTest extends BaseTestCase
     public function testSelectRoleById()
     {
         $existingId = 1;
-        $dao = new RoleDAO();
+        $dao = new PDORoleDAO();
         $item = $dao->selectRoleById($existingId);
         $this->assertInstanceOf(Role::class, $item);
         $this->assertEquals($item->getId(), $existingId);
@@ -27,7 +27,7 @@ class RoleDAOTest extends BaseTestCase
     public function testSelectRoleByIdNonExisting()
     {
         $nonExistingId = 111;
-        $dao = new RoleDAO();
+        $dao = new PDORoleDAO();
         $item = $dao->selectRoleById($nonExistingId);
         $this->assertNull($item);
     }
@@ -35,7 +35,7 @@ class RoleDAOTest extends BaseTestCase
     public function testSelectRoleByName()
     {
         $existingName = "admin";
-        $dao = new RoleDAO();
+        $dao = new PDORoleDAO();
         $item = $dao->selectRoleByName($existingName);
         $this->assertInstanceOf(Role::class, $item);
     }
@@ -43,7 +43,7 @@ class RoleDAOTest extends BaseTestCase
     public function testSelectRoleByNameNonExisting()
     {
         $nonExistingName = "dkqsdjl";
-        $dao = new RoleDAO();
+        $dao = new PDORoleDAO();
         $item = $dao->selectRoleByName($nonExistingName);
         $this->assertNull($item);
     }
@@ -55,7 +55,7 @@ class RoleDAOTest extends BaseTestCase
     {
         $id = time(); // must be unique and is not auto-incremented, but time() is dangerous
         $role = new Role($id, "temporaire - $id", "pour test");
-        $dao = new RoleDAO();
+        $dao = new PDORoleDAO();
         $affectedRows = $dao->insertRole($role);
         $this->assertEquals(1, $affectedRows);
         
@@ -70,7 +70,7 @@ class RoleDAOTest extends BaseTestCase
     {
         // récupère enregistremenrt existant :
         $existingId = 3;
-        $dao = new RoleDAO();
+        $dao = new PDORoleDAO();
         $role = $dao->selectRoleById($existingId);
         // le modifie un peu :
         $role->setDescription("modified at " . date("Y-m-d H:i:s"));
@@ -90,7 +90,7 @@ class RoleDAOTest extends BaseTestCase
         // insertion enregistrement temporaire :
         $temporaryNonExisting = 667;
         $role = new Role($temporaryNonExisting, "temporary #$temporaryNonExisting", "tempo... pour test");
-        $dao = new RoleDAO();
+        $dao = new PDORoleDAO();
         $affectedRows = $dao->insertRole($role);
         $this->assertEquals(1, $affectedRows);
         // on le récupère :

@@ -7,7 +7,7 @@
     use w2w\Model\User;
     use w2w\Model\AuthenticationToken;
     
-    class AuthenticationTokenDAO extends BaseDAO
+    class AuthenticationTokenDAO extends PDOGenericDAO
     {
         private $table = 'authentication_tokens';
         private $userDAO;

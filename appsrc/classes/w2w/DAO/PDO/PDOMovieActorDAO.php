@@ -7,7 +7,7 @@
     use w2w\Model\Artist;
     use w2w\Model\Movie;
     
-    class MovieActorDAO extends BaseDAO
+    class MovieActorDAO extends PDOGenericDAO
     {
         private $table = 'movies_actors';
         private $tableArtist = 'artists';

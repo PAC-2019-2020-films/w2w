@@ -65,10 +65,12 @@ class DAOFactoryTest extends BaseTestCase
         }
     }
 
-    public function _testDAOGettersWithPDOImplementation()
+    public function testDAOGettersWithPDOImplementation()
     {
         $tmp = $this->daoNames;
-        $this->daoNames = ["Artist", "Role", "User"];
+        $this->daoNames = [
+            //"Artist", 
+            "Role", "User"];
         
         $daoFactory = DAOFactory::getDAOFactory(DAOFactory::PDO);
         $cpt = 0;

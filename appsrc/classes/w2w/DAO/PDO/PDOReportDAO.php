@@ -9,7 +9,7 @@ use DateTime;
 use w2w\Model\Review;
 use w2w\Model\User;
 
-class ReportDAO extends BaseDAO
+class ReportDAO extends PDOGenericDAO
 {
     private $table = 'reports';
     private $userDAO;

@@ -6,7 +6,7 @@ namespace w2w\DAO\PDO;
 use w2w\Model\Movie;
 use w2w\Model\Tag;
 
-class MovieTagDAO extends BaseDAO
+class MovieTagDAO extends PDOGenericDAO
 {
     private $table = 'movies_tags';
     private $tableTag = 'tags';

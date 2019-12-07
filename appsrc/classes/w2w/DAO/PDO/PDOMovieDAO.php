@@ -16,7 +16,7 @@
     use w2w\Model\Tag;
     use DateTime;
     
-    class MovieDAO extends BaseDAO
+    class MovieDAO extends PDOGenericDAO
     {
         private $table = 'movies';
         private $tableCategories = 'categories';

@@ -7,7 +7,7 @@
     use w2w\Model\Message;
     use DateTime;
     
-    class MessageDAO extends BaseDAO
+    class MessageDAO extends PDOGenericDAO
     {
         private $table = 'messages';
         

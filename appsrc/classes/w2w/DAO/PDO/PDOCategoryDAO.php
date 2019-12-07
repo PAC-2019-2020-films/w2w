@@ -11,7 +11,7 @@ namespace w2w\DAO\PDO;
 
 use w2w\Model\Category;
 
-class CategoryDAO extends BaseDAO
+class CategoryDAO extends PDOGenericDAO
 {
 
     private $table;

@@ -6,7 +6,7 @@ namespace w2w\DAO\PDO;
 
 use w2w\Model\Tag;
 
-class TagDAO extends BaseDAO
+class TagDAO extends PDOGenericDAO
 {
     private $table = 'tags';
 

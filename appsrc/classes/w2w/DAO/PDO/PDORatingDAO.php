@@ -6,7 +6,7 @@ namespace w2w\DAO\PDO;
 
 use w2w\Model\Rating;
 
-class RatingDAO extends BaseDAO
+class RatingDAO extends PDOGenericDAO
 {
     private $table = "ratings";
 

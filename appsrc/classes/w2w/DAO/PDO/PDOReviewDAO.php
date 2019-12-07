@@ -8,7 +8,7 @@
     use w2w\Model\Review;
     use w2w\Model\User;
     
-    class ReviewDAO extends BaseDAO
+    class ReviewDAO extends PDOGenericDAO
     {
         private $table = 'reviews';
         private $movieDAO;
