@@ -13,6 +13,12 @@ interface MovieDAO extends GenericDAO
 {
     
     /**
+     * @param string $title
+     * @return bool|Movie
+     */
+    public function findByTitle(string $title);
+
+    /**
      * @param Category $category
      * @return bool|Movie[]
      */

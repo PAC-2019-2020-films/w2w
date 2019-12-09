@@ -9,6 +9,11 @@ use w2w\Model\Movie;
 class DoctrineMovieActorDAO extends DoctrineGenericDAO implements MovieActorDAO
 {
     
+    public function __construct()
+    {
+        parent::__construct("\\w2w\\Model\\MovieActor");
+    }
+
     /**
      * @param Artist $artist
      * @return bool

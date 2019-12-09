@@ -8,23 +8,49 @@
 
 namespace w2w\Model;
 
+/**
+ * @Entity
+ * @table(name="categories")
+ */
 class Category
 {
+    const TOSTRING_FORMAT = "Category#%d (name='%s', description='%s')";
+
+	/**
+	 * @Id 
+	 * @Column(type="integer") 
+	 * @GeneratedValue
+     * @var int
+     */
     private $id;
+
+    /**
+     * @Column
+     */
     private $name;
+
+    /**
+     * @Column
+     */
     private $description;
 
     /**
      * Category constructor.
      * @param int $id
      * @param string $name
+     * @param string $description
      */
-    public function __construct(int $id, string $name)
+    public function __construct(int $id = null, string $name = null, string $description = null)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->description = $description;
     }
 
+    public function __toString()
+    {
+        return sprintf(self::TOSTRING_FORMAT, $this->id, $this->name, $this->description);
+    }
 
     /**
      * @return int

@@ -33,7 +33,7 @@ class User
     private $email;
 
     /**
-     * @Column(name="email_verified")
+     * @Column(name="email_verified", type="boolean")
      */
     private $emailVerified;
 
@@ -43,7 +43,7 @@ class User
     private $passwordHash;
 
     /**
-     * @Column(name="first_name");
+     * @Column(name="first_name")
      */
     private $firstName;
 
@@ -58,22 +58,22 @@ class User
     private $createdAt;
 
     /**
-     * @Column(name="updated_at", type="datetime");
+     * @Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @Column(name="last_login_at", type="datetime");
+     * @Column(name="last_login_at", type="datetime")
      */
     private $lastLoginAt;
 
     /**
-     * @Column
+     * @Column(type="boolean")
      */
     private $banned;
 
     /**
-     * @Column(name="number_reviews");
+     * @Column(name="number_reviews", type="integer")
      */
     private $numberReviews;
 

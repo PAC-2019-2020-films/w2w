@@ -9,6 +9,11 @@ use w2w\Model\Tag;
 class DoctrineMovieTagDAO extends DoctrineGenericDAO implements MovieTagDAO
 {
 
+    public function __construct()
+    {
+        parent::__construct("\\w2w\\Model\\MovieTag");
+    }
+
     /**
      * @param Movie $movie
      * @return bool|Tag[]

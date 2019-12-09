@@ -13,6 +13,16 @@ use DateTime;
 class DoctrineMovieDAO extends DoctrineGenericDAO implements MovieDAO
 {
     
+    public function __construct()
+    {
+        parent::__construct(Movie::class);
+    }
+
+    public function findByTitle(string $title)
+    {
+        return $this->findOneBy("title", $title);
+    }
+
     /**
      * @param Category $category
      * @return bool|Movie[]

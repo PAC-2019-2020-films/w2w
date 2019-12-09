@@ -1,112 +1,109 @@
 <?php
-namespace Test\w2w\DAO\PDO;
+namespace Test\w2w\DAO\Doctrine;
 
 use \Test\BaseTestCase;
-use \w2w\DAO\PDO\PDORoleDAO;
+use \w2w\DAO\Doctrine\DoctrineRoleDAO;
 use \w2w\Model\Role;
 
 class PDORoleDAOTest extends BaseTestCase
 {
 
-    public function testSelectAllRolesd()
+    public function testFindAll()
     {
-        $dao = new PDORoleDAO();
-        $items = $dao->selectAllRoles();
+        $dao = new DoctrineRoleDAO();
+        $items = $dao->findAll();
         $this->assertNonEmptyArrayOf(Role::class, $items);
     }
 
-    public function testSelectRoleById()
+    public function testFind()
     {
         $existingId = 1;
-        $dao = new PDORoleDAO();
-        $item = $dao->selectRoleById($existingId);
+        $dao = new DoctrineRoleDAO();
+        $item = $dao->find($existingId);
         $this->assertInstanceOf(Role::class, $item);
         $this->assertEquals($item->getId(), $existingId);
     }
 
-    public function testSelectRoleByIdNonExisting()
+    public function testFindWithNonExistingId()
     {
         $nonExistingId = 111;
-        $dao = new PDORoleDAO();
-        $item = $dao->selectRoleById($nonExistingId);
+        $dao = new DoctrineRoleDAO();
+        $item = $dao->find($nonExistingId);
         $this->assertNull($item);
     }
 
-    public function testSelectRoleByName()
+    public function testFindByName()
     {
         $existingName = "admin";
-        $dao = new PDORoleDAO();
-        $item = $dao->selectRoleByName($existingName);
+        $dao = new DoctrineRoleDAO();
+        $item = $dao->findByName($existingName);
         $this->assertInstanceOf(Role::class, $item);
     }
 
-    public function testSelectRoleByNameNonExisting()
+    public function testFindByNameNonExisting()
     {
         $nonExistingName = "dkqsdjl";
-        $dao = new PDORoleDAO();
-        $item = $dao->selectRoleByName($nonExistingName);
+        $dao = new DoctrineRoleDAO();
+        $item = $dao->findByName($nonExistingName);
         $this->assertNull($item);
     }
 
-
-
-
-    public function testInsertRole()
+    public function testSave()
     {
-        $dao = new PDORoleDAO();
+        $dao = new DoctrineRoleDAO();
         $id = $dao->max("id") + 1;
         $role = new Role($id, "temporaire - $id", "pour test");
-        $affectedRows = $dao->insertRole($role);
-        $this->assertEquals(1, $affectedRows);
-        $item = $dao->selectRoleByid($id);
+        $affectedRows = $dao->save($role);
+    #$this->assertEquals(1, $affectedRows);
+        
+        $item = $dao->find($id);
         $this->assertInstanceOf(Role::class, $item);
         $this->assertEquals($item->getId(), $role->getId());
         $this->assertEquals($item->getName(), $role->getName());
         $this->assertEquals($item->getDescription(), $role->getDescription());
     }
 
-    public function testUpdateRole()
+    public function testUpdate()
     {
         // récupère enregistremenrt existant :
         $existingId = 3;
-        $dao = new PDORoleDAO();
-        $role = $dao->selectRoleById($existingId);
+        $dao = new DoctrineRoleDAO();
+        $role = $dao->find($existingId);
         // le modifie un peu :
         $role->setDescription("modified at " . date("Y-m-d H:i:s"));
         // le met à jour :
-        $affectedRows = $dao->updateRole($role);
-        #$this->assertEquals(1, $affectedRows);
+        $affectedRows = $dao->update($role);
+    #$this->assertEquals(1, $affectedRows);
         // le récupère à nouveau sur base de son id et vérifie l'égalité des champs :
-        $item = $dao->selectRoleByid($existingId);
+        $item = $dao->find($existingId);
         $this->assertInstanceOf(Role::class, $item);
         $this->assertEquals($item->getId(), $role->getId());
         $this->assertEquals($item->getName(), $role->getName());
         $this->assertEquals($item->getDescription(), $role->getDescription());
     }
 
-    public function testDeleteRole()
+    public function testDelete()
     {
         // insertion enregistrement temporaire :
         $temporaryNonExisting = 667;
         $role = new Role($temporaryNonExisting, "temporary #$temporaryNonExisting", "tempo... pour test");
-        $dao = new PDORoleDAO();
-        $affectedRows = $dao->insertRole($role);
-        $this->assertEquals(1, $affectedRows);
+        $dao = new DoctrineRoleDAO();
+        $affectedRows = $dao->save($role);
+    #$this->assertEquals(1, $affectedRows);
         // on le récupère :
-        $item = $dao->selectRoleById($temporaryNonExisting);
+        $item = $dao->find($temporaryNonExisting);
         $this->assertInstanceOf(Role::class, $item);
         // on l'efface : 
-        $affectedRows = $dao->deleteRole($item);
-        $this->assertEquals(1, $affectedRows);
+        $affectedRows = $dao->delete($item);
+    #$this->assertEquals(1, $affectedRows);
         // on essaye de le récupérer encore, doit être null :
-        $item = $dao->selectRoleById($temporaryNonExisting);
+        $item = $dao->find($temporaryNonExisting);
         $this->assertNull($item);
     }
-
-
+    
     public function testExtremaIds()
     {
-        $dao = new PDORoleDAO();
+        $dao = new DoctrineRoleDAO();
         $max = $dao->max("id");
         $min = $dao->min("id");
         $this->assertTrue(is_numeric($max));

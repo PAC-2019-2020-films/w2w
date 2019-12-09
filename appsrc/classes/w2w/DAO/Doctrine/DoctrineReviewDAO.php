@@ -10,6 +10,11 @@ use w2w\Model\User;
 class DoctrineReviewDAO extends DoctrineGenericDAO implements ReviewDAO
 {
     
+    public function __construct()
+    {
+        parent::__construct(Review::class);
+    }
+
     /**
      * @param Movie $movie
      * @return bool|Review[]

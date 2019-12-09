@@ -8,8 +8,14 @@ use w2w\Model\Category;
 class DoctrineCategoryDAO extends DoctrineGenericDAO implements CategoryDAO
 {
 
-    public function findByName(string $name)
+    public function __construct()
     {
+        parent::__construct(Category::class);
+    }
+
+    public function findByName(string $name): ?Category
+    {
+        return $this->findOneBy("name", $name);
     }
 
 }

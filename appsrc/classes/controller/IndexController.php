@@ -16,23 +16,6 @@ class IndexController extends BaseController
 
     public function action_index()
     {
-        $artist = new Artist(1, 'Baesel', 'Nathan');
-
-
-        $artistService = new ArtistAdminService();
-//        $result= $artistService->addArtist($artist);
-
-        $artist = $artistService->getArtistById(8);
-        var_dump($artist);
-
-        $result = $artistService->removeArtist($artist);
-
-
-
-
-        var_dump($result);
-
-
         return $this->forgeView("index");
     }
 

@@ -1,17 +1,51 @@
 <?php
 
-
 namespace w2w\Model;
 
 use DateTime;
 
+/**
+ * @Entity
+ * @Table(name="reports")
+ */
 class Report
 {
+    const TOSTRING_FORMAT = "Report#%d (message='%s', createdAt='%s', treated=%s, user=[%s], review=[%s])";
+    const DEFAULT_DATETIME_FORMAT = "Y-m-d H:i:s";
+
+	/**
+	 * @Id 
+	 * @Column(type="integer") 
+	 * @GeneratedValue
+     * @var int
+     */
     private $id;
+
+    /**
+     * @Column
+     */
     private $message;
+
+    /**
+     * @Column(name="created_at", type="datetime")
+     */
     private $createdAt;
+
+    /**
+     * @Column(type="boolean")
+     */
     private $treated;
+
+	/**
+	 * @ManyToOne(targetEntity=\w2w\Model\User::class)
+	 * @JoinColumn(name="fk_user_id", referencedColumnName="id")
+	 */
     private $user;
+
+	/**
+	 * @ManyToOne(targetEntity=\w2w\Model\Review::class)
+	 * @JoinColumn(name="fk_review_id", referencedColumnName="id")
+	 */
     private $review;
 
     /**
@@ -23,7 +57,7 @@ class Report
      * @param User $user
      * @param Review $review
      */
-    public function __construct(int $id, string $message, DateTime $createdAt, bool $treated, User $user, Review $review)
+    public function __construct(int $id = null, string $message = null, DateTime $createdAt = null, bool $treated = null, User $user = null, Review $review = null)
     {
         $this->id = $id;
         $this->message = $message;
@@ -33,6 +67,18 @@ class Report
         $this->review = $review;
     }
 
+    public function __toString()
+    {
+        return sprintf(
+            self::TOSTRING_FORMAT, 
+            $this->id, 
+            $this->message, 
+            $this->createdAt instanceof \DateTime ? $this->createdAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->treated,
+            $this->user,
+            $this->review
+        );
+    }
 
     /**
      * @return int
@@ -129,6 +175,5 @@ class Report
     {
         $this->review = $review;
     }
-
 
 }

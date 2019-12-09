@@ -1,18 +1,57 @@
 <?php
 
-
 namespace w2w\Model;
 
 use DateTime;
 
+/**
+ * @Entity
+ * @table(name="reviews")
+ */
 class Review
 {
+    const TOSTRING_FORMAT = "Review#%d (content='%s', createdAt='%s', updatedAt='%s', movie=[%s], user=[%s], rating=[%s])";
+    const DEFAULT_DATETIME_FORMAT = "Y-m-d H:i:s";
+
+	/**
+	 * @Id 
+	 * @Column(type="integer") 
+	 * @GeneratedValue
+     * @var int
+     */
     private $id;
+
+    /**
+     * @Column
+     */
     private $content;
+
+    /**
+     * @Column(name="created_at", type="datetime")
+     */
     private $createdAt;
+
+    /**
+     * @Column(name="updated_at", type="datetime")
+     */
     private $updatedAt;
+
+	/**
+	 * @ManyToOne(targetEntity=\w2w\Model\Movie::class)
+	 * @JoinColumn(name="fk_movie_id", referencedColumnName="id")
+	 */
     private $movie;
+
+	/**
+	 * @ManyToOne(targetEntity=\w2w\Model\User::class)
+	 * @JoinColumn(name="fk_user_id", referencedColumnName="id")
+	 */
     private $user;
+
+	/**
+	 * @ManyToOne(targetEntity=\w2w\Model\Rating::class)
+	 * @JoinColumn(name="fk_rating_id", referencedColumnName="id")
+	 */
     private $rating;
 
     /**
@@ -24,16 +63,30 @@ class Review
      * @param User $user
      * @param Rating $rating
      */
-    public function __construct(int $id, string $content, DateTime $createdAt, Movie $movie, User $user, Rating $rating)
+    public function __construct(int $id = null, string $content = null, DateTime $createdAt = null, DateTime $updatedAt = null, Movie $movie = null, User $user = null, Rating $rating = null)
     {
         $this->id = $id;
         $this->content = $content;
         $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
         $this->movie = $movie;
         $this->user = $user;
         $this->rating = $rating;
     }
 
+    public function __toString()
+    {
+        return sprintf(
+            self::TOSTRING_FORMAT, 
+            $this->id, 
+            $this->content, 
+            $this->createdAt instanceof \DateTime ? $this->createdAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->updatedAt instanceof \DateTime ? $this->updatedAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->movie,
+            $this->user,
+            $this->rating
+        );
+    }
 
     /**
      * @return int

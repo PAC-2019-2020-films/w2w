@@ -11,6 +11,11 @@ use w2w\Model\User;
 class DoctrineReportDAO extends DoctrineGenericDAO implements ReportDAO
 {
 
+    public function __construct()
+    {
+        parent::__construct(Report::class);
+    }
+
     /**
      * @param DateTime $date
      * @return bool|Report[]

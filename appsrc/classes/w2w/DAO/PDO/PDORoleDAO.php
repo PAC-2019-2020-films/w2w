@@ -118,7 +118,7 @@ class PDORoleDAO extends PDOGenericDAO implements RoleDAO
     /**
      * @Override
      */
-    public function findByName($name)
+    public function findByName($name) : ?Role
     {
         return $this->selectRoleByname($name);
     }

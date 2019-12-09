@@ -511,4 +511,28 @@ class PDOGenericDAO
     {
     }
 
+    public function max(string $property)
+    {
+        $sql = sprintf("SELECT MAX(%s) FROM %s", $property, $this->getTableName());
+        if ($pdo = $this->getPDO()) {
+            if ($stmt = $pdo->query($sql)) {
+                if ($row = $stmt->fetch()) {
+                    return $row[0];
+                }
+            }
+        }
+    }
+    
+    public function min(string $property)
+    {
+        $sql = sprintf("SELECT MIN(%s) FROM %s", $property, $this->getTableName());
+        if ($pdo = $this->getPDO()) {
+            if ($stmt = $pdo->query($sql)) {
+                if ($row = $stmt->fetch()) {
+                    return $row[0];
+                }
+            }
+        }
+    }
+    
 }

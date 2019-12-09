@@ -3,10 +3,16 @@
 namespace w2w\DAO\Doctrine;
 
 use w2w\DAO\MessageDAO;
+use w2w\Model\Message;
 use DateTime;
 
 class DoctrineMessageDAO extends DoctrineGenericDAO implements MessageDAO
 {
+
+    public function __construct()
+    {
+        parent::__construct(Message::class);
+    }
 
     /**
      * @param string $name

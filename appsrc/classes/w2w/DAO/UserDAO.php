@@ -19,7 +19,7 @@ interface UserDAO extends GenericDAO
      * @param string $userName
      * @return bool|User
      */
-    public function findByUserName(string $userName): User;
+    public function findByUserName(string $userName);
     
     /**
      * @param AuthenticationToken $authToken

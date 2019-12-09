@@ -11,6 +11,6 @@ interface RoleDAO extends GenericDAO
      * @param string $name
      * @return bool|Role
      */
-    public function findByName(string $name);
+    public function findByName(string $name) : ?Role;
     
 }

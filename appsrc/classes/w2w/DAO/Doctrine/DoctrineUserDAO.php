@@ -9,21 +9,28 @@ use w2w\Model\AuthenticationToken;
 
 class DoctrineUserDAO extends DoctrineGenericDAO implements UserDAO
 {
+    
+    public function __construct()
+    {
+        parent::__construct(User::class);
+    }
 
     /**
      * @param string $email
      * @return bool|User
      */
-    public function findByEmail(string $email)
+    public function findByEmail(string $email): ?User
     {
+        return $this->findOneBy("email", $email);
     }
 
     /**
      * @param string $userName
      * @return bool|User
      */
-    public function findByUserName(string $userName): User
+    public function findByUserName(string $userName): ?User
     {
+        return $this->findOneBy("userName", $userName);
     }
 
     /**
@@ -48,6 +55,7 @@ class DoctrineUserDAO extends DoctrineGenericDAO implements UserDAO
      */
     public function findByBanned(bool $banned): array
     {
+        return $this->findBy("banned", $email);
     }
 
 }
