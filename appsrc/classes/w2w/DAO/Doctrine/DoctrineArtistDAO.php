@@ -13,9 +13,14 @@ class DoctrineArtistDAO extends DoctrineGenericDAO implements ArtistDAO
         parent::__construct(Artist::class);
     }
 
-    public function findByName(string $name)
+    public function findByFirstNameAndLastName(string $firstName, string $lastName)
     {
-        return $this->findBy($name, "name");
+        if ($em = $this->getEntityManager()) {
+            return $em->getRepository($this->entityClassName)->findOneBy([
+                "firstName" => $firstName,
+                "lastName" => $lastName,
+            ]);
+        }
     }
 
 }

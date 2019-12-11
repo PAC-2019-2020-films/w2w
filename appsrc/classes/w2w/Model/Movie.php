@@ -17,7 +17,7 @@ use \Doctrine\Common\Collections\ArrayCollection;
  */
 class Movie
 {
-    const TOSTRING_FORMAT = "Movie#%d (title='%s', description='%s', year=%d, poster='%s', category=[%s])";
+    const TOSTRING_FORMAT = "Movie#%d (title='%s', description='%s', year=%d, poster='%s', category=[%s], rating=[%s])";
     const DEFAULT_DATETIME_FORMAT = "Y-m-d H:i:s";
 
 	/**
@@ -143,7 +143,8 @@ class Movie
             $this->description, 
             $this->year, 
             $this->poster, 
-            $this->category
+            $this->category,
+            $this->rating
         );
     }
 
@@ -310,6 +311,15 @@ class Movie
      * @param Tag $tag
      * @return Tag[]
      */
+    public function hasTag(Tag $tag)
+    {
+        return $this->tags->contains($tag);
+    }
+
+    /**
+     * @param Tag $tag
+     * @return Tag[]
+     */
     public function addTag(Tag $tag)
     {
         if ($this->tags->contains($tag)) {
@@ -344,6 +354,11 @@ class Movie
     public function getDirectors()
     {
         return $this->directors->toArray();
+    }
+
+    public function hasDirector(Artist $director)
+    {
+        return $this->directors->contains($director);
     }
 
     /**
@@ -384,6 +399,11 @@ class Movie
     public function getActors()
     {
         return $this->actors->toArray();
+    }
+
+    public function hasActor(Artist $actor)
+    {
+        return $this->actors->contains($actor);
     }
 
     /**

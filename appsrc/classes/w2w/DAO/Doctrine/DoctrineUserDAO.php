@@ -47,6 +47,9 @@ class DoctrineUserDAO extends DoctrineGenericDAO implements UserDAO
      */
     public function findByRole(Role $role): array
     {
+		$dql = sprintf("SELECT u FROM %s u JOIN u.role r WHERE r.id=:id ORDER BY u.userName", User::class);
+		$query = $this->getEntityManager()->createQuery($dql)->setParameter("id", $role->getId());
+		return $query->getResult();
     }
 
     /**

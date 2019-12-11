@@ -5,6 +5,6 @@ namespace w2w\DAO;
 interface ArtistDAO extends GenericDAO
 {
 
-    public function findByName(string $name);
+    public function findByFirstNameAndLastName(string $firstName, string $lastName);
 
 }

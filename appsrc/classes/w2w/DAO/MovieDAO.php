@@ -68,6 +68,6 @@ interface MovieDAO extends GenericDAO
      * @param DateTime $date
      * @return bool|array
      */
-    public function findByYear(DateTime $date);
+    public function findByYear(int $year);
     
 }

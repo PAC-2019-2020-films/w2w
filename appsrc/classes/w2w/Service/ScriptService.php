@@ -120,6 +120,10 @@ class ScriptService extends BaseService
         }
     }
     
+    /**
+     * 
+     * @todo compute real final rating of the movie after adding this new review and its rating
+     */
     public function addReview($content, $createdAt, $updatedAt, $movie, $userName, $ratingValue) : ?Review
     {
         $user = $this->getUserDAO()->findByUserName($userName);
@@ -134,6 +138,15 @@ class ScriptService extends BaseService
             $this->info("adding review ($content, $movie, $user, $rating)...");
             $review = new Review(null, $content, $createdAt, $updatedAt, $movie, $user, $rating);
             $this->getReviewDAO()->save($review);
+            
+            /*
+             * !!!!!!!!!!!!!!!!!!
+             * gives the movie the same rating as its last added review :
+             * (temporary solution)
+             */
+            $movie->setRating($rating);
+            $this->getMovieDAO()->update($movie);
+            
             return $review;
         }
         return null;

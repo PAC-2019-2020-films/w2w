@@ -2,6 +2,7 @@
 namespace Test\w2w\DAO\Doctrine;
 
 use \Test\BaseTestCase;
+use \w2w\DAO\DAOFactory;
 use \w2w\DAO\Doctrine\DoctrineUserDAO;
 use \w2w\Model\User;
 
@@ -12,7 +13,7 @@ class DoctrineUserDAOTest extends BaseTestCase
     {
         $dao = new DoctrineUserDAO();
         $items = $dao->findAll();
-        $this->assertNonEmptyArrayOf("\\w2w\\Model\\User", $items);
+        $this->assertNonEmptyArrayOf(User::class, $items);
     }
 
     public function testFind()
@@ -43,6 +44,18 @@ class DoctrineUserDAOTest extends BaseTestCase
         $this->assertNotNull($item);
         $this->assertInstanceOf(User::class, $item);
         $this->assertEquals($existingUserName, $item->getUserName());
+    }
+
+    public function testFindByRole()
+    {
+        $roleName = "user";
+        $role = (DAOFactory::getDAOFactory())->getRoleDAO()->findByname($roleName);
+        $dao = new DoctrineUserDAO();
+        $items = $dao->findByRole($role);
+        $this->assertNonEmptyArrayOf(User::class, $items);
+        foreach ($items as $item) {
+            $this->assertEquals($item->getRole(), $role);
+        }
     }
 
 }

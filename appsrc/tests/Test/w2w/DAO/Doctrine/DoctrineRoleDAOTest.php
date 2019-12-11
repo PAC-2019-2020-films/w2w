@@ -5,7 +5,7 @@ use \Test\BaseTestCase;
 use \w2w\DAO\Doctrine\DoctrineRoleDAO;
 use \w2w\Model\Role;
 
-class PDORoleDAOTest extends BaseTestCase
+class DoctrineRoleDAOTest extends BaseTestCase
 {
 
     public function testFindAll()
@@ -38,6 +38,7 @@ class PDORoleDAOTest extends BaseTestCase
         $dao = new DoctrineRoleDAO();
         $item = $dao->findByName($existingName);
         $this->assertInstanceOf(Role::class, $item);
+        $this->assertEquals($item->getName(), $existingName);
     }
 
     public function testFindByNameNonExisting()

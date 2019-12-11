@@ -21,6 +21,7 @@ class DoctrineReviewDAO extends DoctrineGenericDAO implements ReviewDAO
      */
     public function findByMovie(Movie $movie)
     {
+        return $movie->getReviews();
     }
     
     /**
@@ -29,6 +30,7 @@ class DoctrineReviewDAO extends DoctrineGenericDAO implements ReviewDAO
      */
     public function findByUser(User $user)
     {
+        return $user->getReviews();
     }
     
 }

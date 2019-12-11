@@ -53,19 +53,22 @@ $data= <<<EOH
     <category name="Entre amis" desc="Films à voir entre amis..."/>
     <category name="Nawak" desc="N'importe quoi"/>
 
-    <movie title="Bohemian Rhaposdy" desc="Biopic of F.Mercury" year="2018" poster="" category="Nawak" tags="biopic,drama">
+    <movie title="Bohemian Rhapsody" desc="Biopic of F.Mercury" year="2018" poster="" category="Nawak" tags="biopic,drama">
         <review content="C'est génial." user="Raoul" rating="3"/>
+        <review content="C'est de la merde." user="Lea" rating="-1"/>
         <review content="C'est naze, c'est plein de tarlouzes." user="René" rating="-1">
             <report message="René est un connard homophobe." user="Raoul"/>
         </review>
     </movie>
     <movie title="La Promesse" desc="drame social belgo-belge" year="2005" poster="" category="Nawak" tags="drama,crime,romance">
+        <review content="C'est beau comme la Meuse sous la pluie quand le ciel bas et lourd pèse comme un couvercle de pot de sauce Banzaï." user="Lea" rating="3"/>
     </movie>
-    <movie title="Le silence de Lorna" desc="" year="2008" poster="" category="Nawak" tags="drama">
+    <movie title="Le silence de Lorna" desc="N'ouvre ta bouche que si ce que tu vas dire est plus beau que le silence." year="2008" poster="" category="Nawak" tags="drama">
     </movie>
-    <movie title="Rosetta" desc="" year="1999" poster="" category="Nawak" tags="">
+    <movie title="Rosetta" desc="Ce film social est triste, belge, et palmé d'or à Cannes" year="1999" poster="" category="Nawak" tags="">
+        <review content="C'est déchirant comme un coup de couteau dans un édredon en plume." user="Lea" rating="3"/>
     </movie>
-    <movie title="Million Dollar Baby" desc="" year="2004" poster="" category="Nawak" tags="drama,sport">
+    <movie title="Million Dollar Baby" desc="Boxe, tabouret fatal, paternité problématique" year="2004" poster="" category="Nawak" tags="drama,sport">
     </movie>
     <movie title="Unforgiven" desc="" year="1992" poster="" category="Nawak" tags="drama,western">
     </movie>

@@ -3,6 +3,7 @@
 namespace w2w\Model;
 
 use DateTime;
+use \Doctrine\Common\Collections\ArrayCollection;
 use \w2w\Model\Role;
 
 /**
@@ -84,6 +85,13 @@ class User
     private $role;
 
     /**
+     * @OneToMany(targetEntity="\w2w\Model\Review", mappedBy="user")
+     * 
+     * @Todo ajouter cette propriété au diagramme de classe
+     */
+    protected $reviews = [];
+
+    /**
      * User constructor.
      * @param int $id
      * @param string $userName
@@ -127,6 +135,7 @@ class User
         $this->banned = $banned;
         $this->numberReviews = $numberReviews;
         $this->role = $role;
+		$this->reviews = new ArrayCollection();
     }
 
     public function __toString()
@@ -355,6 +364,27 @@ class User
     public function setRole(Role $role = null): void
     {
         $this->role = $role;
+    }
+
+    public function getReviews()
+    {
+		return $this->reviews->toArray();
+	}
+    	
+    public function addReview(Review $review)
+    {
+        if ($this->reviews->contains($review)) {
+            return;
+        }
+        $this->reviews->add($review);
+    }
+    
+    public function removeReview(Review $review)
+    {
+        if (! $this->reviews->contains($review)) {
+            return;
+        }
+        $this->reviews->removeElement($review);
     }
 
 }
