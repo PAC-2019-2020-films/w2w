@@ -1,0 +1,8 @@
+C'est très pénible, mais les commentaires ne sont pas acceptés dans le 
+composer.json (et en JSON en général - ou c'est selon le parser ? - bref), 
+donc je crée ce fichier pour y remédier.
+
+
+Line supprimée de composer.json, car dépendance à l'extension PHP pcntl, non disponible sous Windows :
+
+        "phpunit/php-invoker": "^2.0",
