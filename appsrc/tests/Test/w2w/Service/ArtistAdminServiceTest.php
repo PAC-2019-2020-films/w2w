@@ -16,15 +16,14 @@ class ArtistAdminServiceTest extends BaseTestCase
         $artistService = new ArtistAdminService();
 //        $result= $artistService->addArtist($artist);
 
-        $artist = $artistService->getArtistById(8);
+        if ($artist = $artistService->getArtistById(8)) {
+            $result = $artistService->removeArtist($artist);
+            var_dump($result);
+        } else {
+        }
         var_dump($artist);
-
-        $result = $artistService->removeArtist($artist);
-
-
-
-
-        var_dump($result);
+        
+        $this->assertTrue(true);
     }
         
 }
