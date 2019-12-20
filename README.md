@@ -5,7 +5,9 @@
 ### Clonage du dépôt
 
 Dans votre répertoire de projets, importer le projet depuis le dépôt :
+```
 git clone https://github.com/PAC-2019-2020-films/w2w.git
+```
 
 ### Installation de Composer
 
