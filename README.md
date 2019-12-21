@@ -96,6 +96,9 @@ Pour lancer des tests unitaires PHPUnit en ligne de commande :
 ```
 vendor/bin/phpunit --bootstrap appsrc/bootstrap.php appsrc/tests/Test/w2w/DAO
 ```
+
+Insert by camol : Sous WINDOWS : vendor\bin\phpunit --bootstrap appsrc/bootstrap.php appsrc/tests/Test/w2w/DAO
+
 Ou avec Phing :
 ```
 vendor/bin/phing tests
