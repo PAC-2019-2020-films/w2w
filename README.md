@@ -24,6 +24,9 @@ composer install
 ```
 composer update
 ```
+
+Insert By CAMOL : certains composant de Composer ne fonctionne pas sous Windows - e.a. ext-pcntl - et donc vous recevez un message d'erreur, continuer la procédure.
+
 Après ça, vous devez avoir plein de code dans un nouveau répertoire "vendor" dans le projet. Celui-ci ne doit pas être versionné (le .gitignore du projet contient déjà une ligne dédiée).
 
 #### Phing
@@ -39,6 +42,8 @@ ou (Windows)
 ```
 vendor\bin\phing.bat
 ```
+
+insert by CAMOL : le phing sous windows renvoie des erreurs - beaucoup - donc, continuer la procédure jusqu'au bout en prenant les commandes proposé sans phing !
 
 #### Doctrine
 
