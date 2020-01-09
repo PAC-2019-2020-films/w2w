@@ -1,0 +1,75 @@
+<data>
+    <rating name="Chef d''oeuvre" desc="Chefs d'oeuvre" value="3"/>
+    <rating name="Bon film" desc="Bons films" value="2"/>
+    <rating name="Moyen" desc="Moyens" value="1"/>
+    <rating name="Navet" desc="Navets" value="-1"/>
+
+    <role id="1" name="user" desc="Simple ordinary user, can review movies."/>
+    <role id="2" name="admin" desc="Admin user, can edit movies and moderate other users."/>
+    <role id="3" name="root" desc="Super admin user, can grant or revoke admin status to other users."/>
+    
+    <user name="user" email="user@gmail.com"/>
+    <user name="admin" email="admin@gmail.com" role="admin"/>
+    <user name="root" email="root@gmail.com" role="root"/>
+    <user name="Lea" email="lea@gmail.com" firstName="Lea" lastName="Nimaux"/>
+    <user name="Luc" email="luc@gmail.com" firstName="Luc" lastName="Ratif"/>
+    <user name="Raoul" email="raoul@gmail.com" firstName="Raoul" lastName="Gauvain"/>
+    <user name="René" email="rene@gmail.com" firstName="René" lastName="Dupont" emailVerified="false"/>
+    
+    <tag name="biopic" desc="biopic movies..."/>
+    <tag name="drama" desc="drama movies..."/>
+    <tag name="crime" desc="crime movies..."/>
+    <tag name="romance" desc="romance movies..."/>
+    <tag name="western" desc="bang, bang"/>
+    <tag name="sport" desc="sport movies..."/>
+    <tag name="S-F" desc="S-F movies..."/>
+    <tag name="Fantastic" desc="Fantastic movies..."/>
+    <tag name="RomCom" desc="RomCom movies..."/>
+    <tag name="History" desc="Histocrical movies..."/>
+    
+    <category name="En couple" desc="Films à voir à deux..."/>
+    <category name="En famille" desc="Films à voir en famille..."/>
+    <category name="Entre amis" desc="Films à voir entre amis..."/>
+    <category name="Nawak" desc="N'importe quoi"/>
+
+    <movie title="Bohemian Rhapsody" desc="Biopic of F.Mercury" year="2018" poster="" category="Nawak" tags="biopic,drama">
+        <review content="C'est génial." user="Raoul" rating="3"/>
+        <review content="C'est de la merde." user="Lea" rating="-1"/>
+        <review content="C'est naze, c'est plein de tarlouzes." user="René" rating="-1">
+            <report message="René est un connard homophobe." user="Raoul"/>
+        </review>
+    </movie>
+    <movie title="La Promesse" desc="drame social belgo-belge" year="2005" poster="" category="Nawak" tags="drama,crime,romance">
+        <review content="C'est beau comme la Meuse sous la pluie quand le ciel bas et lourd pèse comme un couvercle de pot de sauce Banzaï." user="Lea" rating="3"/>
+    </movie>
+    <movie title="Le silence de Lorna" desc="N'ouvre ta bouche que si ce que tu vas dire est plus beau que le silence." year="2008" poster="" category="Nawak" tags="drama">
+    </movie>
+    <movie title="Rosetta" desc="Ce film social est triste, belge, et palmé d'or à Cannes" year="1999" poster="" category="Nawak" tags="">
+        <review content="C'est déchirant comme un coup de couteau dans un édredon en plume." user="Lea" rating="3"/>
+    </movie>
+    <movie title="Million Dollar Baby" desc="Boxe, tabouret fatal, paternité problématique" year="2004" poster="" category="Nawak" tags="drama,sport">
+    </movie>
+    <movie title="Unforgiven" desc="" year="1992" poster="" category="Nawak" tags="drama,western">
+    </movie>
+    <movie title="" desc="" year="" poster="" category="Nawak" tags="">
+    </movie>
+
+    <message firstName="Jules" lastName="Smith" email="jules.smith@gmail.com" content="C'est quoi, ce site de merde ?"/>
+    <message firstName="Adélaïde" lastName="Deltoïde" email="adelaide.deltoide@gmail.com" content="Viens là que je te masse." createdAt="2019-12-06 12:11:10"/>
+    <message firstName="Jacques" lastName="Uze" email="jacques.uze@gmail.com" content="Mon avocat vous contactera." treated="true"/>
+    
+    <authenticationToken email="rene@gmail.com" token="RTYKJHJHHJHKGH" user="René"/>
+    <authenticationToken email="raoul@gmail.com" token="KJJHJHRTJHKGHK" newPassword="true" user="Raoul"/>
+    
+    <artist firstName="Jean-Pierre" lastName="Dardenne" director="La Promesse|Le silence de Lorna|Rosetta"/>
+    <artist firstName="Luc"         lastName="Dardenne" director="La Promesse|Le silence de Lorna|Rosetta" />
+    <artist firstName="Jérémie" lastName="Renier" actor="La Promesse"/>
+    <artist firstName="Déborah" lastName="François" actor="La Promesse"/>
+    <artist firstName="Olivier" lastName="Gourmet" actor="La Promesse|Rosetta"/>
+    <artist firstName="Émilie" lastName="Dequenne" actor="Rosetta" director=""/>
+    <artist firstName="Clint" lastName="Eastwood" actor="Million Dollar Baby|Unforgiven" director="Million Dollar Baby|Unforgiven"/>
+    <artist firstName="Gene" lastName="Hackman" actor="Unforgiven"/>
+    <artist firstName="Morgan" lastName="Freeman" actor="Unforgiven"/>
+    <artist firstName="Hilary" lastName="Swank" actor="Million Dollar Baby"/>
+
+</data>

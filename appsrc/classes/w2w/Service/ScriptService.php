@@ -20,13 +20,17 @@ use w2w\Model\Role;
 use w2w\Model\Tag;
 use w2w\Model\User;
 
+
+/** 
+ * Service créé pour le remplissage de la db dans le script 'populate.php' en cli
+ */
 class ScriptService extends BaseService
 {
     
     protected $force = false;
     
     /**
-     * UserService constructor.
+     * ScriptService constructor.
      */
     public function __construct()
     {

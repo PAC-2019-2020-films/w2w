@@ -42,7 +42,7 @@ class Session {
     /**
      * https://www.php.net/manual/fr/function.session-destroy.php
      */
-    public static function clean() 
+    public static function destroy() 
     {
         
         // Détruit toutes les variables de session
@@ -60,6 +60,7 @@ class Session {
         }
         
         // Finalement, on détruit la session.
+        session_unset();
         session_destroy();    
     }
 

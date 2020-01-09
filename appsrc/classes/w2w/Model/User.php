@@ -387,4 +387,29 @@ class User
         $this->reviews->removeElement($review);
     }
 
+
+    /**
+     * Vrai si l'utilisateur est "admin" ou "root"
+     * 
+     * Appeler cette méthode "hasAdminRole" serait peut-être plus orthodoxe, mais serait plus long à écrire dans les vues
+     */
+    public function isAdmin() {
+        if ($this->role && ($this->role->getName() === "admin" || $this->role->getName() === "root")) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Vrai si l'utilisateur est "root"
+     * 
+     * Appeler cette méthode "hasRootRole" serait peut-être plus orthodoxe, mais serait plus long à écrire dans les vues
+     */
+    public function isRoot() {
+        if ($this->role && $this->role->getName() === "root") {
+            return true;
+        }
+        return false;
+    }
+
 }

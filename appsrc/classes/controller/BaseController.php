@@ -8,7 +8,7 @@ use \Fr\Response;
 use \Fr\Session;
 use \Fr\View;
 use \w2w\Model\User;
-use \w2w\Service\PublicService;
+use \w2w\Service\ServiceFactory;
 use \Fr\Log\Loggable;
 
 /**
@@ -33,16 +33,19 @@ abstract class BaseController implements LayoutAware
     {
         if ($session = Session::getSession()) {
             if ($session->has("user")) {
-                $this->setUser($session->get("user"));
+                $userId = $session->get("user");
+                $user = $this->getPublicService()->getUserById($userId);
+                $this->setUser($user);
             }
-            $this->debug(sprintf("Session id=%s, user=%s\n", session_id(), $this->getUser()));
         }
     }
 
     public function getPublicService()
     {
         if (! $this->publicService) {
-            $this->publicService = new PublicService();
+            if ($serviceFactory = ServiceFactory::getServiceFactory()) {
+                $this->publicService = $serviceFactory->getPublicService();
+            }
         }
         return $this->publicService;
     }
@@ -109,7 +112,7 @@ abstract class BaseController implements LayoutAware
         return $this->user instanceof User;
     }
     
-    public function setUser(User $user)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
         return $this;

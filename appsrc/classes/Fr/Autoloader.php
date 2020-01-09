@@ -34,8 +34,12 @@ class Autoloader
         }
         $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
         $classPath = ($classPathBase ? $classPathBase . DIRECTORY_SEPARATOR : "") . $className . '.php';
-        $ok = include $classPath;
-        return $ok;
+        $loaded = false;
+        if (is_file($classPath)) {
+            include $classPath;
+            $loaded = true;
+        }
+        return $loaded;
     }
     
 }

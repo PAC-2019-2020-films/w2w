@@ -14,4 +14,8 @@ return [
     "db.username" => "w2w",
     "db.password" => "w2w",
     "db.database" => "w2w",
+    "login.message" => "Welcome.",
+    "logout.message" => "You are logged out.",
+    # whether to redirect on logout instead of displaying message :
+    "logout.redirect" => false,
 ];

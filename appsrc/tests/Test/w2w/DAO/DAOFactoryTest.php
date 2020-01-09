@@ -43,7 +43,7 @@ class DAOFactoryTest extends BaseTestCase
         foreach ($this->daoNames as $daoName) {
             $daoFQCN = sprintf("\\w2w\\DAO\\%sDAO", $daoName);
             $daoGetter = sprintf("get%sDAO", $daoName);
-            echo sprintf("%d/%d : getting %s instance with %s getter\n", ++$cpt, $tot, $daoFQCN, $daoGetter);
+            //echo sprintf("%d/%d : getting %s instance with %s getter\n", ++$cpt, $tot, $daoFQCN, $daoGetter);
             $dao = $daoFactory->{$daoGetter}();
             $this->assertInstanceOf($daoFQCN, $dao);
             
@@ -58,7 +58,7 @@ class DAOFactoryTest extends BaseTestCase
         foreach ($this->daoNames as $daoName) {
             $daoFQCN = sprintf("\\w2w\\DAO\\%sDAO", $daoName);
             $daoGetter = sprintf("get%sDAO", $daoName);
-            echo sprintf("%d/%d : getting %s instance with %s getter\n", ++$cpt, $tot, $daoFQCN, $daoGetter);
+            //echo sprintf("%d/%d : getting %s instance with %s getter\n", ++$cpt, $tot, $daoFQCN, $daoGetter);
             $dao = $daoFactory->{$daoGetter}();
             $this->assertInstanceOf($daoFQCN, $dao);
             
@@ -78,7 +78,7 @@ class DAOFactoryTest extends BaseTestCase
         foreach ($this->daoNames as $daoName) {
             $daoFQCN = sprintf("\\w2w\\DAO\\%sDAO", $daoName);
             $daoGetter = sprintf("get%sDAO", $daoName);
-            echo sprintf("%d/%d : getting %s instance with %s getter\n", ++$cpt, $tot, $daoFQCN, $daoGetter);
+            //echo sprintf("%d/%d : getting %s instance with %s getter\n", ++$cpt, $tot, $daoFQCN, $daoGetter);
             $dao = $daoFactory->{$daoGetter}();
             $this->assertInstanceOf($daoFQCN, $dao);
             
