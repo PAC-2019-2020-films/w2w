@@ -1,3 +1,25 @@
+<?php
+
+/**
+ * Affichage du contenu de la page d'accueil
+ * 
+ * 
+ * Les layouts (mise en page générale d'une page) sont dans FR_SRCPATH/views/layouts.
+ * Pour pouvoir y insérer le contenu particulier d'une page, ils doivent contenir une ligne
+ * de type "if (isset($content)) echo $content;"
+ * 
+ * Des templates (mise en page d'un élément répétitif d'une page à l'autre)
+ * peuvent être définis dans FR_SRCPATH/views/templates
+ * 
+ * Exemple utilisation d'un template :
+ *      - Fichier de définition du template :
+ *          views/templates/movie.thumbnail.php
+ *      - Appel du template dans une vue :
+ *          <?php echo $this->template("movie.thumbnail", ["movie" => $movie]); ?>
+ */
+
+?>
+
 
 <p>Welcome to w2w (index page).</p>
 
@@ -6,30 +28,7 @@
 <?php if (isset($movies) && is_array($movies)) : ?>
 <ol>
     <?php foreach ($movies as $movie) : ?>
-    <li>
-        <a href=""><?php echo $this->escape($movie); ?></a>
-        <img src="" alt=""/>
-        <ul>
-            <li> catégorie : 
-                 <span title="<?php echo $this->escape($movie->getCategory()->getDescription()); ?>"><?php echo $this->escape($movie->getCategory()->getName()); ?></span>
-            </li>
-            <li> tags : 
-                <?php foreach ($movie->getTags() as $item) : ?>
-                <span title="<?php echo $this->escape($item->getDescription()); ?>">[<?php echo $this->escape($item->getName()); ?>]</span>
-                <?php endforeach; ?>
-            </li>
-            <li> réalistaeurs : 
-                <?php foreach ($movie->getDirectors() as $item) : ?>
-                <span>[<?php echo $this->escape($item->getFirstName()); ?> <?php echo $this->escape($item->getLastName()); ?>]</span>
-                <?php endforeach; ?>
-            </li>
-            <li> acteurs : 
-                <?php foreach ($movie->getActors() as $item) : ?>
-                <span>[<?php echo $this->escape($item->getFirstName()); ?> <?php echo $this->escape($item->getLastName()); ?>]</span>
-                <?php endforeach; ?>
-            </li>
-        </ul>
-    </li>
+    <?php echo $this->template("movie.thumbnail", ["movie" => $movie]); ?>
     <?php endforeach; ?>
 </ol>
 <?php endif; ?>

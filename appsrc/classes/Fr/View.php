@@ -150,10 +150,9 @@ class View {
 
     /**
      * appel à un template/une 'sous-vue' 
-     * (nom méthode cfr. Zend2)
      */
-    public function partial($name, $data = array()) {
-        $templatePath = $this->getPath() . "templates/template." . $name . ".php";
+    public function template($name, $data = array()) {
+        $templatePath = $this->getPath() . "templates/" . $name . ".php";
         if (! is_file($templatePath)) {
             throw new TemplateNotFoundException($templatePath);
         }
