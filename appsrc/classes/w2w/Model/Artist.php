@@ -1,27 +1,55 @@
 <?php
 
-
 namespace w2w\Model;
 
-
+/**
+ * @Entity
+ * @Table(name="artists")
+ */
 class Artist
 {
+    const TOSTRING_FORMAT = "Artist#%d (firstName='%s', lastName='%s')";
+
+  	/**
+	 * @Id 
+	 * @Column(type="integer") 
+	 * @GeneratedValue
+     * @var int
+     */
     private $id;
+
+    /**
+     * @Column(name="first_name")
+     */
     private $firstName;
+
+    /**
+     * @Column(name="last_name")
+     */
     private $lastName;
 
     /**
      * Artist constructor.
      * @param int $id
+     * @param string $firstName
      * @param string $lastName
      */
-    public function __construct(int $id, string $lastName, string $firstName = null)
+    public function __construct(int $id = null, string $firstName = null, string $lastName = null)
     {
         $this->id = $id;
         $this->lastName = $lastName;
         $this->firstName = $firstName;
     }
-    
+
+    public function __toString()
+    {
+        return sprintf(
+            self::TOSTRING_FORMAT, 
+            $this->id, 
+            $this->firstName,
+            $this->lastName
+        );
+    }
 
     /**
      * @return int
@@ -72,12 +100,10 @@ class Artist
     }
 
     /**
-     *
-    */
+     * @todo : utile ?
+     */
     public function serialize()
     {
-
     }
-
 
 }

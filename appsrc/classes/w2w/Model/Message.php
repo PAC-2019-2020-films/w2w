@@ -1,18 +1,54 @@
 <?php
 
-
 namespace w2w\Model;
 
 use DateTime;
 
+/**
+ * @Entity
+ * @Table(name="messages")
+ */
 class Message
 {
+    const TOSTRING_FORMAT = "Message#%d (firstName='%s', lastName='%s', email='%s', content='%s', createdAt='%s', treated=%s)";
+    const DEFAULT_DATETIME_FORMAT = "Y-m-d H:i:s";
+
+	/**
+	 * @Id 
+	 * @Column(type="integer") 
+	 * @GeneratedValue
+     * @var int
+     */
     private $id;
+
+    /**
+     * @Column(name="first_name")
+     */
     private $firstName;
+
+    /**
+     * @Column(name="last_name")
+     */
     private $lastName;
+
+    /**
+     * @Column
+     */
     private $email;
+
+    /**
+     * @Column
+     */
     private $content;
+
+    /**
+     * @Column(name="created_at", type="datetime")
+     */
     private $createdAt;
+
+    /**
+     * @Column(type="boolean")
+     */
     private $treated;
 
     /**
@@ -24,9 +60,10 @@ class Message
      * @param DateTime $createdAt
      * @param bool $treated
      */
-    public function __construct(int $id, string $lastName, string $email, string $content, DateTime $createdAt, bool $treated)
+    public function __construct(int $id = null, string $firstName = null, string $lastName = null, string $email = null, string $content = null, DateTime $createdAt = null, bool $treated = null)
     {
         $this->id = $id;
+        $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
         $this->content = $content;
@@ -34,6 +71,19 @@ class Message
         $this->treated = $treated;
     }
 
+    public function __toString()
+    {
+        return sprintf(
+            self::TOSTRING_FORMAT, 
+            $this->id, 
+            $this->firstName,
+            $this->lastName,
+            $this->email,
+            $this->content,
+            $this->createdAt instanceof \DateTime ? $this->createdAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->treated
+        );
+    }
 
     /**
      * @return int

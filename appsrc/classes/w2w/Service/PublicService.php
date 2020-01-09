@@ -41,8 +41,63 @@ class PublicService extends BaseService
 
 
 
+    public function login($email, $password)
+    {
+        if ($user = $this->getUserDAO()->findByEmail($email)) {
+            if (password_verify($password, $user->getPasswordHash())) {
+                return $user;
+            }
+        }
+        return false;
+    }
 
 
 
+    /**
+     * @param int $id
+     * @return User
+     */
+    public function getUserById(int $id)
+    {
+        return $this->getUserDAO()->find($id);
+    }
+
+    /**
+     * getUserByMail
+     * @param string $mail
+     * @return User
+     */
+    public function getUserByMail(string $mail)
+    {
+        return $this->getUserDAO()->findByEmail($mail);
+    }
+
+    /**
+     * getUserByUserName
+     * @param string $userName
+     * @return User
+     */
+    public function getUserByUserName(string $userName)
+    {
+        return $this->getUserDAO()->findByUserName($userName);
+    }
+
+
+
+
+    public function getMoviesAll()
+    {
+        return $this->getMovieDAO()->findAll();
+    }
+
+    public function getCategories()
+    {
+        return $this->getCategoryDAO()->findAll();
+    }
+
+    public function getTags()
+    {
+        return $this->getTagDAO()->findAll();
+    }
 
 }

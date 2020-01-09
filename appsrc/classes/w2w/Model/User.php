@@ -1,27 +1,95 @@
 <?php
 
-
 namespace w2w\Model;
 
 use DateTime;
-
+use \Doctrine\Common\Collections\ArrayCollection;
 use \w2w\Model\Role;
 
+/**
+ * @Entity
+ * @Table(name="users")
+ */
 class User
 {
+    const TOSTRING_FORMAT = "User#%d (userName='%s', email='%s', emailVerified=%s, passwordHash='%s', 'firstName='%s', lastName='%s', createdAt='%s', updatedAt='%s', lastLoginAt='%s', banned=%s, numberReviews=%d, role=[%s])";
+    const DEFAULT_DATETIME_FORMAT = "Y-m-d H:i:s";
+
+	/**
+	 * @Id 
+	 * @Column(type="integer") 
+	 * @GeneratedValue
+     * @var int
+     */
     private $id;
+
+    /**
+     * @Column(name="user_name")
+     */
     private $userName;
+
+    /**
+     * @Column
+     */
     private $email;
+
+    /**
+     * @Column(name="email_verified", type="boolean")
+     */
     private $emailVerified;
+
+    /**
+     * @Column(name="password_hash")
+     */
     private $passwordHash;
+
+    /**
+     * @Column(name="first_name")
+     */
     private $firstName;
+
+    /**
+     * @Column(name="last_name")
+     */
     private $lastName;
+
+    /**
+     * @Column(name="created_at", type="datetime")
+     */
     private $createdAt;
+
+    /**
+     * @Column(name="updated_at", type="datetime")
+     */
     private $updatedAt;
+
+    /**
+     * @Column(name="last_login_at", type="datetime")
+     */
     private $lastLoginAt;
-    private $role;
+
+    /**
+     * @Column(type="boolean")
+     */
     private $banned;
+
+    /**
+     * @Column(name="number_reviews", type="integer")
+     */
     private $numberReviews;
+
+	/**
+	 * @ManyToOne(targetEntity=\w2w\Model\Role::class) 
+	 * @JoinColumn(name="fk_role_id", referencedColumnName="id")
+	 */
+    private $role;
+
+    /**
+     * @OneToMany(targetEntity="\w2w\Model\Review", mappedBy="user")
+     * 
+     * @Todo ajouter cette propriété au diagramme de classe
+     */
+    protected $reviews = [];
 
     /**
      * User constructor.
@@ -30,24 +98,65 @@ class User
      * @param string $email
      * @param bool $emailVerified
      * @param string $passwordHash
+     * @param string $firstName
+     * @param string $lastName
      * @param DateTime $createdAt
-     * @param Role $role
+     * @param DateTime $updatedAt
+     * @param DateTime $lastLoginAt
      * @param bool $banned
      * @param int $numberReviews
+     * @param Role $role
      */
-    public function __construct(int $id, string $userName, string $email, bool $emailVerified, string $passwordHash, DateTime $createdAt, Role $role, bool $banned, int $numberReviews)
-    {
+    public function __construct(
+        int $id = null, 
+        string $userName = null, 
+        string $email = null, 
+        bool $emailVerified = null, 
+        string $passwordHash = null, 
+        string $firstName = null, 
+        string $lastName = null, 
+        DateTime $createdAt = null, 
+        DateTime $updatedAt = null, 
+        DateTime $lastLoginAt = null, 
+        bool $banned = null, 
+        int $numberReviews = null,
+        Role $role = null
+    ) {
         $this->id = $id;
         $this->userName = $userName;
         $this->email = $email;
         $this->emailVerified = $emailVerified;
         $this->passwordHash = $passwordHash;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->createdAt = $createdAt;
-        $this->role = $role;
+        $this->updatedAt = $updatedAt;
+        $this->lastLoginAt = $lastLoginAt;
         $this->banned = $banned;
         $this->numberReviews = $numberReviews;
+        $this->role = $role;
+		$this->reviews = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return sprintf(
+            self::TOSTRING_FORMAT, 
+            $this->id, 
+            $this->userName, 
+            $this->email,
+            $this->emailVerified,
+            $this->passwordHash,
+            $this->firstName,
+            $this->lastName,
+            $this->createdAt instanceof \DateTime ? $this->createdAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->updatedAt instanceof \DateTime ? $this->updatedAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->lastLoginAt instanceof \DateTime ? $this->lastLoginAt->format(self::DEFAULT_DATETIME_FORMAT) : null,
+            $this->banned,
+            $this->numberReviews,
+            $this->role
+        );
+    }
 
     /**
      * @return int
@@ -210,22 +319,6 @@ class User
     }
 
     /**
-     * @return Role
-     */
-    public function getRole(): Role
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param Role $role
-     */
-    public function setRole(Role $role): void
-    {
-        $this->role = $role;
-    }
-
-    /**
      * @return bool
      */
     public function isBanned(): bool
@@ -257,7 +350,66 @@ class User
         $this->numberReviews = $numberReviews;
     }
 
+    /**
+     * @return Role
+     */
+    public function getRole(): Role
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param Role $role
+     */
+    public function setRole(Role $role = null): void
+    {
+        $this->role = $role;
+    }
+
+    public function getReviews()
+    {
+		return $this->reviews->toArray();
+	}
+    	
+    public function addReview(Review $review)
+    {
+        if ($this->reviews->contains($review)) {
+            return;
+        }
+        $this->reviews->add($review);
+    }
+    
+    public function removeReview(Review $review)
+    {
+        if (! $this->reviews->contains($review)) {
+            return;
+        }
+        $this->reviews->removeElement($review);
+    }
 
 
+    /**
+     * Vrai si l'utilisateur est "admin" ou "root"
+     * 
+     * Appeler cette méthode "hasAdminRole" serait peut-être plus orthodoxe, mais serait plus long à écrire dans les vues
+     */
+    public function isAdmin() {
+        if ($this->role && ($this->role->getName() === "admin" || $this->role->getName() === "root")) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Vrai si l'utilisateur est "root"
+     * 
+     * Appeler cette méthode "hasRootRole" serait peut-être plus orthodoxe, mais serait plus long à écrire dans les vues
+     */
+    public function isRoot() {
+        if ($this->role && $this->role->getName() === "root") {
+            return true;
+        }
+        return false;
+    }
 
 }

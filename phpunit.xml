@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit bootstrap="appsrc/bootstrap.php" 
+    colors="true"
+    defaultTestSuite="erf"
+    verbose="true"
+>
+    
+    <php>
+        <server name="FR_ENV" value="test"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="erf">
+            <directory>appsrc/tests/Test/w2w/Model</directory>
+        </testsuite>
+        <testsuite name="arf">
+            <directory>appsrc/tests/Test/w2w/DAO</directory>
+        </testsuite>
+    </testsuites>
+
+</phpunit>

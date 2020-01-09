@@ -66,6 +66,20 @@ $headTitle = isset($headTitle) ? $headTitle : "Welcome on wath to watch";
 
 
         <main>
+            <div style="background:#999;">
+            <?php if (isset($user) && $user instanceof \w2w\Model\User) : ?>
+                user name : <i><?php echo $this->escape($user->getUserName()); ?> &lt;<?php echo $this->escape($user->getEmail()); ?>&gt;</i>
+                <?php if ($user->isAdmin()) : ?>
+                [admin]
+                <?php endif; ?>
+                <?php if ($user->isRoot()) : ?>
+                [root]
+                <?php endif; ?>
+                <a href="/logout">logout</a>
+            <?php else: ?>
+                <a href="/login">login</a>
+            <?php endif; ?>
+            </div>
 			<?php 
             /*
              * inserting page-specific content :

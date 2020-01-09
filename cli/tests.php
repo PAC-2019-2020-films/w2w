@@ -6,101 +6,42 @@ define("FR_ENV", "development");
 require __DIR__ . "/../appsrc/bootstrap.php";
 
 
-
-
-
-################################################################################
-//40 u,80 a,81 root
-
-
-
-
-################################################################################
-
-function testSelect($pdo)
+function showEntities()
 {
-    $service = new \w2w\Service\PublicService();
-    $role = $service->getRole(1);
-    echo $role ." \n";
-    $roles = $service->getRoles();
-    foreach ($roles as $role) {
-        echo sprintf("%s\n", (string) $role);
+    $entities = ["Artist", "AuthenticationToken", "Category", "Message", "Movie", "Rating", "Report", "Review", "Role", "Tag", "User"];
+    $tot = count($entities);
+    $cpt = 0;
+    foreach ($entities as $entity) {
+        $daoClassName = "w2w\\DAO\\Doctrine\\Doctrine{$entity}DAO";
+        $dao = new $daoClassName;
+        echo sprintf("Entity %d/%d : %s\n", ++$cpt, $tot, $entity);
+        foreach ($dao->findAll() as $item) {
+            echo sprintf("\t- %s\n", (string) $item);
+        }
     }
+    echo "\n";
 }
 
 
-function testSelectAll()
+function showMovie($title)
 {
-    $service = new \w2w\Service\PublicService();
-    $users = $service->getUsers();
-    foreach ($users as $user) {
-        echo "- $user\n";
-    }
-}
-
-function testAddUser($userName = "Roger", $email = "roger@erf.net", $password = "azerty", $roleId = 1)
-{
-    $service = new \w2w\Service\PublicService();
-    $user = $service->addUser($userName, $email, $password, $roleId);
-    echo $user;
-}
-
-function testAddAdmin($userName = "Léon", $email = "leon@erf.net", $password = "azerty", $roleId = 2)
-{
-    $service = new \w2w\Service\PublicService();
-    $user = $service->addUser($userName, $email, $password, $roleId);
-    echo $user;
-}
-function testAddRoot($userName = "Robert", $email = "robert@erf.net", $password = "azerty", $roleId = 3)
-{
-    $service = new \w2w\Service\PublicService();
-    $user = $service->addUser($userName, $email, $password, $roleId);
-    echo $user;
-}
-
-function testAddUsers($offset = 1, $num = 20)
-{
-    for ($i = $offset + 1 ; $i <= $offset + $num ; $i++) {
-        testAddUser("Raoul $i", "raoul.$i@gmail.com");
-    }
-    
-}
-
-function testGetUser($id = 1)
-{
-    $service = new \w2w\Service\PublicService();
-    $user = $service->getUser($id);
-    echo sprintf("User by id $id : %s\n", $user);
-}
-
-function testLogin($email = "roger@erf.net", $password = "azerty")
-{
-    $service = new \w2w\Service\PublicService();
-    $user = $service->login($email, $password);
-    if ($user) {
-        echo sprintf("login : %s\n", $user);
+    $dao = new \w2w\DAO\Doctrine\DoctrineMovieDAO();
+    $movie = $dao->findByTitle($title);
+    if ($movie) {
+        echo "$movie\n";
+        foreach ($movie->getDirectors() as $artist) {
+            echo "\t- director : $artist\n";
+        }
+        foreach ($movie->getActors() as $artist) {
+            echo "\t- actor : $artist\n";
+        }
     } else {
-        echo "login failed\n";
+        echo "movie not found (title='$title')\n";
     }
+    echo "\n";
 }
 
-
-function testUpdate($id = 36, $firstName = "Léon", $lastName = "Duboiss")
-{
-    $service = new \w2w\Service\PublicService();
-    $affectedRows = $service->updateUser($id, $firstName, $lastName);
-    echo "updated User#$id : $affectedRows.\n";
-}
-
-
-testAddAdmin();
-testAddRoot();
-//testAddUser();
-//testAddUsers();
-
-testSelectAll();
-
-testGetUser();
-//testLogin();
-    
-testUpdate();
+showEntities();
+showMovie("Unforgiven");
+showMovie("Million Dollar Baby");
+showMovie("La Promesse");
