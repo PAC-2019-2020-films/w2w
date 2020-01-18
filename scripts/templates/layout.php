@@ -1,9 +1,9 @@
 <?php
-
 /*
  * layout général, par défaut, du site
  */
 
+global $user;
 
 $headTitle = isset($headTitle) ? $headTitle : "Welcome on wath to watch";
 
@@ -14,7 +14,7 @@ $headTitle = isset($headTitle) ? $headTitle : "Welcome on wath to watch";
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
-    <title><?php echo $this->escape($headTitle); ?></title>
+    <title><?php echo escape($headTitle); ?></title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
@@ -65,20 +65,28 @@ $headTitle = isset($headTitle) ? $headTitle : "Welcome on wath to watch";
 </section>
 
 
+
         <main>
+            <?php
+            /*
+             * barre temporaire pour faire des tests
+             */
+            ?>
             <div style="background:#999;">
-            <?php if (isset($user) && $user instanceof \w2w\Model\User) : ?>
-                user name : <i><?php echo $this->escape($user->getUserName()); ?> &lt;<?php echo $this->escape($user->getEmail()); ?>&gt;</i>
-                <?php if ($user->isAdmin()) : ?>
-                [admin]
+                <?php if (isset($user) && $user instanceof \w2w\Model\User) : ?>
+                    user name : <i><?php echo escape($user->getUserName()); ?> &lt;<?php echo escape($user->getEmail()); ?>&gt;</i>
+                    <?php if ($user->isAdmin()) : ?>
+                    [admin]
+                    <?php endif; ?>
+                    <?php if ($user->isRoot()) : ?>
+                    [root]
+                    <?php endif; ?>
+                    <a href="/logout.php">logout</a>
+                <?php else: ?>
+                    <a href="/login.php">login</a>
                 <?php endif; ?>
-                <?php if ($user->isRoot()) : ?>
-                [root]
-                <?php endif; ?>
-                <a href="/logout">logout</a>
-            <?php else: ?>
-                <a href="/login">login</a>
-            <?php endif; ?>
+                <a href="/contact.php">contact</a>
+                <a href="/tests.php">tests</a>
             </div>
 			<?php 
             /*

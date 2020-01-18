@@ -38,17 +38,17 @@ class DoctrineGenericDAO implements GenericDAO
     public function createEntityManager()
     {
         // chemin vers classes des entitées mappées :
-        $paths = array(FR_SRCPATH . "/classes/w2w/Model");
-        $isDevMode = (FR_ENV !== FR_ENV_PRODUCTION);
-        $proxyDir = null; //FR_VARPATH . DIRECTORY_SEPARATOR . "cache";
+        $paths = array(FR_CLASS_PATH . "/w2w/Model");
+        $isDevMode = FR_DEBUG;
+        $proxyDir = null;
         $cache = null;
         $useSimpleAnnotationReader = false;
         // the connection configuration
         $dbParams = array(
-            "driver"   => \Fr\Config::get("db.driver", "pdo_mysql"),
-            "user"     => \Fr\Config::get("db.username"),
-            "password" => \Fr\Config::get("db.password"),
-            "dbname"   => \Fr\Config::get("db.database"),
+            "driver"   => DB_DRIVER,
+            "user"     => DB_USERNAME,
+            "password" => DB_PASSWORD,
+            "dbname"   => DB_DATABASE,
         );
         $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode, $proxyDir, $cache);//, $useSimpleAnnotationReader);
         $em = EntityManager::create($dbParams, $config);
