@@ -29,7 +29,6 @@
 
 namespace w2w\Service;
 
-use Fr\Log\Loggable;
 use w2w\DAO\DAOFactory;
 use w2w\DAO\ArtistDAO;
 use w2w\DAO\AuthenticationTokenDAO;
@@ -47,7 +46,6 @@ use w2w\Model\Review;
 class BaseService
 {
     
-    use Loggable;
     protected $daoFactory;
 
     /**

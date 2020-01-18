@@ -8,6 +8,18 @@
 
 namespace w2w\Service;
 
+use w2w\DAO\DAOFactory;
+use w2w\DAO\ArtistDAO;
+use w2w\DAO\AuthenticationTokenDAO;
+use w2w\DAO\CategoryDAO;
+use w2w\DAO\MessageDAO;
+use w2w\DAO\MovieDAO;
+use w2w\DAO\RatingDAO;
+use w2w\DAO\ReportDAO;
+use w2w\DAO\ReviewDAO;
+use w2w\DAO\RoleDAO;
+use w2w\DAO\TagDAO;
+use w2w\DAO\UserDAO;
 use w2w\Model\Artist;
 use w2w\Model\AuthenticationToken;
 use w2w\Model\Category;
@@ -24,9 +36,10 @@ use w2w\Model\User;
 /** 
  * Service créé pour le remplissage de la db dans le script 'populate.php' en cli
  */
-class ScriptService extends BaseService
+class ScriptService
 {
     
+    protected $daoFactory;
     protected $force = false;
     
     /**
@@ -34,11 +47,82 @@ class ScriptService extends BaseService
      */
     public function __construct()
     {
-        parent::__construct();
-        /*
-        * TODO : CHECK FOR USER STATUS (ISUSER?(TRUE))
-        */
     }
+    
+
+    
+    public function info($msg)
+    {
+        echo sprintf("<INFO> %s\n", $msg);
+    }
+
+
+
+
+
+    protected function getDAOFactory(): DAOFactory
+    {
+        if (! $this->daoFactory) {
+            $this->daoFactory = DAOFactory::getDAOFactory();
+        }
+        return $this->daoFactory;
+    }
+    
+    protected function getArtistDAO(): ArtistDAO
+    {
+        return $this->getDAOFactory()->getArtistDAO();
+    }
+    
+    protected function getAuthenticationTokenDAO(): AuthenticationTokenDAO
+    {
+        return $this->getDAOFactory()->getAuthenticationTokenDAO();
+    }
+    
+    protected function getCategoryDAO(): CategoryDAO
+    {
+        return $this->getDAOFactory()->getCategoryDAO();
+    }
+    
+    protected function getMessageDAO(): MessageDAO
+    {
+        return $this->getDAOFactory()->getMessageDAO();
+    }
+    
+    protected function getMovieDAO(): MovieDAO
+    {
+        return $this->getDAOFactory()->getMovieDAO();
+    }
+    
+    protected function getRatingDAO(): RatingDAO
+    {
+        return $this->getDAOFactory()->getRatingDAO();
+    }
+    
+    protected function getReportDAO(): ReportDAO
+    {
+        return $this->getDAOFactory()->getReportDAO();
+    }
+    
+    protected function getReviewDAO(): ReviewDAO
+    {
+        return $this->getDAOFactory()->getReviewDAO();
+    }
+    
+    protected function getRoleDAO(): RoleDAO
+    {
+        return $this->getDAOFactory()->getRoleDAO();
+    }
+    
+    protected function getTagDAO(): TagDAO
+    {
+        return $this->getDAOFactory()->getTagDAO();
+    }
+    
+    protected function getUserDAO(): UserDAO
+    {
+        return $this->getDAOFactory()->getUserDAO();
+    }
+
 
 
     public function addRole($id, $name, $desc)

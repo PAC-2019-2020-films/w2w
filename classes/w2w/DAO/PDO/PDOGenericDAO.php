@@ -86,14 +86,14 @@ class PDOGenericDAO
      */
     public function createPDO()
     {
-        $hostname = \Fr\Config::get("db.hostname");
-        $username = \Fr\Config::get("db.username");
-        $password = \Fr\Config::get("db.password");
-        $database = \Fr\Config::get("db.database");
-        $scheme   = \Fr\Config::get("db.scheme", "mysql");
-        $port     = \Fr\Config::get("db.port");
-        $charset  = \Fr\Config::get("db.charset");
-        $errMode  = \Fr\Config::get("db.errmode", PDO::ERRMODE_EXCEPTION);
+        $hostname = DB_HOSTNAME;
+        $username = DB_USERNAME;
+        $password = DB_PASSWORD;
+        $database = DB_DATABASE;
+        $scheme   = DB_SCHEME;
+        $port     = null;
+        $charset  = null;
+        $errMode  = PDO::ERRMODE_EXCEPTION;
         $options  = null;
         if ($errMode) {
             $options = array(
