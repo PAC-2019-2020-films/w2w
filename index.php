@@ -86,7 +86,8 @@ if (file_exists(FR_APPPATH . "/vendor/autoload.php")) {
  * 
  * https://www.php.net/manual/fr/ref.outcontrol.php
  */
-function renderScript($scriptUri, $data = array()) {
+function renderScript($scriptUri, $data = array()) 
+{
     $scriptPath = FR_SCRIPT_PATH . $scriptUri;
     if (is_file($scriptPath)) {
         foreach ($data as $key => $value) {
@@ -99,17 +100,33 @@ function renderScript($scriptUri, $data = array()) {
         $content = ob_get_contents();
         # fin de l'écriture du flux de sortie dans un tampon :
         ob_end_clean();
+        
+        # Pour certains scripts non triviaux, 
+        # on les associe à un autre script dit "de vue",
+        # afin de séparer traitement et présentation des données,
+        # et de limiter les risques de conflits de merge.
+        #
+        # On teste si un tel script existe pour celui-ci ; 
+        # si oui on l'exécute également de la même manière :
+        $viewScriptPath = str_replace(".php", ".view.php", $scriptPath);
+        if (is_file($viewScriptPath)) {
+            ob_start();
+            include $viewScriptPath;
+            $content .= ob_get_clean();
+        }
         return $content;
     } else {
         return "script not found (name={$scriptUri}, path={$scriptPath})";
     }
+    
 }
 
 /**
  * Exécute un template et renvoie le résultat (flux de sortie) de son exécution.
  * Pour pouvoir réutiliser des templates dans différents scripts.
  */
-function template($name, $data = array()) {
+function template($name, $data = array()) 
+{
     return renderScript("/templates/{$name}", $data);
 }
 
@@ -117,7 +134,8 @@ function template($name, $data = array()) {
  * fonction d'échappement des caractères spéciaux pour l'affichage des
  * variables dans les scripts.
  */
-function escape($string, $flags = false, $encoding = "utf-8", $double_encode = true) {
+function escape($string, $flags = false, $encoding = "utf-8", $double_encode = true) 
+{
     if ($flags === false) {
             $flags = ENT_COMPAT | ENT_HTML401;
     }
@@ -148,6 +166,56 @@ function param($name, $default = null, $filter = true)
     }
     return $default;
 }
+
+
+
+
+function error401($msg = "401 Unauthorized")
+{
+    header("HTTP/1.1 401 Unauthorized");
+    echo $msg;
+    exit();
+}
+
+/**
+ * vérifie que l'utilisateur est connecté
+ */
+function checkUser() 
+{
+    global $user;
+    if ($user && $user instanceof \w2w\Model\User) {
+        return true;
+    }
+    error401();
+}
+
+/**
+ * vérifie que l'utilisateur est connecté et a les droits d'admin
+ */
+function checkAdmin() 
+{
+    global $user;
+    if ($user && $user instanceof \w2w\Model\User && $user->isAdmin()) {
+        return true;
+    }
+    error401();
+}
+
+/**
+ * vérifie que l'utilisateur est connecté et a les droits de root
+ */
+function checkRoot() 
+{
+    global $user;
+    if ($user && $user instanceof \w2w\Model\User && $user->isRoot()) {
+        return true;
+    }
+    error401();
+}
+
+
+
+
     
 /**
  * Traitement d'une requête web.
@@ -158,7 +226,8 @@ function param($name, $default = null, $filter = true)
  * la mise en page (layout) commune à tout le site
  * via un simple include du fichier de layout.
  */
-function web_run() {
+function web_run() 
+{
     # démmarage session PHP :
     session_start();
     # récupération de l'utilisateur si session ouverte
@@ -171,14 +240,28 @@ function web_run() {
     }
     # récupération de la request uri :
     $requestURI = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : "/";
+    
+    # ! il faut retirer les éventuels paramètres GET après '?' :
+    if (($pos = strpos($requestURI, "?")) !== false) {
+        $requestURI = substr($requestURI, 0, $pos);
+    }
+    
     if ($requestURI == "/" || ! $requestURI) {
+        # page d'accueil du site
         $requestURI = "/homepage.php";
+    } elseif (strlen($requestURI) > 0 && $requestURI[strlen($requestURI) - 1] == "/") {
+        # page d'index des sous-répertoires, pour les cas de type : 
+        # /admin/ => /admin/index.php
+        # /account/ => /account/index.php
+        $requestURI .= "index.php";
     }
     # exécution du script correspondant :
     $content = renderScript($requestURI);
     # insertion du résultat dans la mise en page (layout) du site :
     include FR_SCRIPT_PATH . "/templates/layout.php";
 }
+
+
 
 /*******************************************************************************
  * démarrage de l'application

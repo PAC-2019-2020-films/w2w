@@ -69,25 +69,33 @@ $headTitle = isset($headTitle) ? $headTitle : "Welcome on wath to watch";
         <main>
             <?php
             /*
-             * barre temporaire pour faire des tests
+             * barre temporaire pour faire des tests 
              */
             ?>
-            <div style="background:#999;">
+            <style>
+            nav.testnav {
+                background:#999;
+            }
+            nav.testnav a {
+                color:inherited;
+            }
+            </style>
+            <nav class="testnav">
                 <?php if (isset($user) && $user instanceof \w2w\Model\User) : ?>
                     user name : <i><?php echo escape($user->getUserName()); ?> &lt;<?php echo escape($user->getEmail()); ?>&gt;</i>
+                    <a href="/account/">[account]</a>
                     <?php if ($user->isAdmin()) : ?>
-                    [admin]
+                    <a href="/admin/">[admin]</a>
                     <?php endif; ?>
                     <?php if ($user->isRoot()) : ?>
-                    [root]
+                    <a href="/root/">[root]</a>
                     <?php endif; ?>
-                    <a href="/logout.php">logout</a>
+                    <a href="/logout.php">[logout]</a>
                 <?php else: ?>
-                    <a href="/login.php">login</a>
+                    <a href="/login.php">[login]</a>
                 <?php endif; ?>
-                <a href="/contact.php">contact</a>
-                <a href="/tests.php">tests</a>
-            </div>
+                <a href="/contact.php">[contact]</a>
+            </nav>
 			<?php 
             /*
              * inserting page-specific content :
