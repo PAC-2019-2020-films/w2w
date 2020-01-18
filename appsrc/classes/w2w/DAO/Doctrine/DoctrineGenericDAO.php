@@ -40,7 +40,7 @@ class DoctrineGenericDAO implements GenericDAO
         // chemin vers classes des entitées mappées :
         $paths = array(FR_SRCPATH . "/classes/w2w/Model");
         $isDevMode = (FR_ENV !== FR_ENV_PRODUCTION);
-        $proxyDir = FR_VARPATH . DIRECTORY_SEPARATOR . "cache";
+        $proxyDir = null; //FR_VARPATH . DIRECTORY_SEPARATOR . "cache";
         $cache = null;
         $useSimpleAnnotationReader = false;
         // the connection configuration
