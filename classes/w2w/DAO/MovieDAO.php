@@ -43,14 +43,20 @@ interface MovieDAO extends GenericDAO
     public function findBySearch(string $keyword);
     
     /**
+     * Utilisée en accueil
+     * (= "mmost recently added movies", sorted by id DESC)
+     * 
      * @return bool|array
      */
-    public function findLastFive();
+    public function findLast(int $number = 5);
     
     /**
+     * Utilisée en accueil 
+     * (= "most popular movies", rated first by value DESC then by id DESC)
+     * 
      * @return bool|Movie[]
      */
-    public function findBestFive();
+    public function findBest(int $number = 10);
     
     /**
      * @param Artist $director

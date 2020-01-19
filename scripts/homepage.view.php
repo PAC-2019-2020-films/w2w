@@ -9,9 +9,10 @@
 
 
 
-<?php if (isset($movies) && is_array($movies)) : ?>
+<h2>Last movies :</h2>
+<?php if (isset($lastMovies) && is_array($lastMovies)) : ?>
 <ol>
-    <?php foreach ($movies as $movie) : ?>
+    <?php foreach ($lastMovies as $movie) : ?>
     <?php echo template("movie.thumbnail.php", ["movie" => $movie]); ?>
     <?php endforeach; ?>
 </ol>
@@ -19,24 +20,17 @@
 
 
 
-<?php if (isset($tags) && is_array($tags)) : ?>
+<h2>Popular movies :</h2>
+<?php if (isset($popularMovies) && is_array($popularMovies)) : ?>
 <ol>
-    <?php foreach ($tags as $tag) : ?>
-    <li>
-        <a href=""><?php echo escape($tag); ?></a>
-    </li>
+    <?php foreach ($popularMovies as $movie) : ?>
+    <?php echo template("movie.thumbnail.php", ["movie" => $movie]); ?>
     <?php endforeach; ?>
 </ol>
 <?php endif; ?>
 
 
 
-<?php if (isset($categories) && is_array($categories)) : ?>
-<ol>
-    <?php foreach ($categories as $category) : ?>
-    <li>
-        <a href=""><?php echo escape($category); ?></a>
-    </li>
-    <?php endforeach; ?>
-</ol>
-<?php endif; ?>
+
+
+

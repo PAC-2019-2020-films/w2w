@@ -7,14 +7,19 @@
 use \w2w\DAO\DAOFactory;
 
 
+$lastMoviesNumber = 3;
+$popularMoviesNumber = 10;
+
 $daoFactory = DAOFactory::getDAOFactory();
 
 $movieDAO = $daoFactory->getMovieDAO();
-$movies = $movieDAO->findAll();
+$lastMovies = $movieDAO->findLast($lastMoviesNumber);
+$popularMovies = $movieDAO->findBest($popularMoviesNumber);
 
-$tagDAO = $daoFactory->getTagDAO();
-$tags = $tagDAO->findAll();
 
-$categoryDAO = $daoFactory->getCategoryDAO();
-$categories = $categoryDAO->findAll();
+//$tagDAO = $daoFactory->getTagDAO();
+//$tags = $tagDAO->findAll();
+
+//$categoryDAO = $daoFactory->getCategoryDAO();
+//$categories = $categoryDAO->findAll();
 

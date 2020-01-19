@@ -95,6 +95,7 @@ $headTitle = isset($headTitle) ? $headTitle : "Welcome on wath to watch";
                     <a href="/login.php">[login]</a>
                 <?php endif; ?>
                 <a href="/contact.php">[contact]</a>
+                <a href="/tests/">[tests]</a>
             </nav>
 			<?php 
             /*

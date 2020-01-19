@@ -82,7 +82,7 @@ class DoctrineMovieDAO extends DoctrineGenericDAO implements MovieDAO
      * @todo add a datetime of creation of the record in the movies table ? (for now, sorting on the id...)
      * @todo rename as more generalized, without the "five" restriction
      */
-    public function findLastFive($number = 5)
+    public function findLast($number = 5)
     {
 		$dql = sprintf("SELECT m FROM %s m ORDER BY m.id DESC", Movie::class);
 		$query = $this->getEntityManager()->createQuery($dql)->setMaxResults($number);
@@ -94,9 +94,9 @@ class DoctrineMovieDAO extends DoctrineGenericDAO implements MovieDAO
      * 
      * @todo rename as more generalized, without the "five" restriction
      */
-    public function findBestFive($number = 5)
+    public function findBest($number = 10)
     {
-		$dql = sprintf("SELECT m FROM %s m JOIN m.rating r ORDER BY r.value DESC, m.id DESC", Movie::class);
+		$dql = sprintf("SELECT m FROM %s m LEFT JOIN m.rating r ORDER BY r.value DESC, m.id DESC", Movie::class);
 		$query = $this->getEntityManager()->createQuery($dql);
         $query->setMaxResults($number);
 		return $query->getResult();

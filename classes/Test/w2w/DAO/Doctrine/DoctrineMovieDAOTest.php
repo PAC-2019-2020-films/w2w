@@ -79,20 +79,20 @@ class DoctrineMovieDAOTest extends BaseTestCase
         $this->assertEquals(0, count($items));
     }
 
-    public function testFindLastFive()
+    public function testFindLast()
     {
         $number = 2;
         $dao = new DoctrineMovieDAO();
-        $items = $dao->findLastFive($number);
+        $items = $dao->findLast($number);
         $this->assertNonEmptyArrayOf(Movie::class, $items);
         $this->assertEquals($number, count($items));
     }
 
-    public function testFindBestFive()
+    public function testFindBest()
     {
-        $number = 2;
+        $number = 3;
         $dao = new DoctrineMovieDAO();
-        $items = $dao->findBestFive($number);
+        $items = $dao->findBest($number);
         $this->assertNonEmptyArrayOf(Movie::class, $items);
         $this->assertEquals($number, count($items));
     }
