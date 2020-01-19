@@ -42,8 +42,8 @@ fichier "<racine du projet>/scripts/account/review-add.php" (traitement) :
 ```
 $id = param("id");
 $daoFactory = \w2w\DAO\DAOFactory::getDAOFactory();
-$movieDAO = $daofactory->getMovieDAO();
-$movie = $movieDAo->find($id);
+$movieDAO = $daoFactory->getMovieDAO();
+$movie = $movieDAO->find($id);
 # suite du traitement...
 ```
 
