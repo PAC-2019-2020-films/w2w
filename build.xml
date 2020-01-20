@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<project name="w2w" basedir="." default="help">
+
+
+    <!-- un "build.xml" est un fichier de configuration pour l'utilitaire de gestion de projet ("build tool") Phing -->
+    <!-- son usage n'est pas obligatoire mais ça peut rendre service -->
+    <!-- dans le cas de w2w, je l'inclus principalement dans l'idée d'automatiser le lancement des tests unitaires (PHPUnit) -->
+
+
+    <!-- (phpdoc templates : responsive-twig | clean | checkstyle |zend) -->
+    <property name="phpdoc.destdir" value="app-apidocs"/>
+    <property name="phpdoc.basedir" value="appsrc"/>
+    <property name="phpdoc.title" value="API-Doc-w2w"/>
+    <property name="phpdoc.template" value="responsive-twig"/>
+
+
+    <property name="phpunit.bootstrap" value="appsrc/bootstrap.php"/>
+    <property name="phpunit.pharlocation" value="vendor/bin/phpunit"/>
+
+
+    <property name="execphpunit.dir" value="."/>
+    <property name="execphpunit.bootstrap" value="index.php"/>
+    <property name="execphpunit.executable" value="vendor/bin/phpunit"/>
+    <property name="execphpunit.target.base" value="classes/Test"/>
+    <property name="execphpunit.target.current" value="${execphpunit.target.base}/w2w/DAO"/>
+
+
+
+    <!-- affichage des cibles Phing disponibles et de commandes fréquentes du projet -->
+    <target name="help">
+        <echo message="Utilisation de Phing (en ligne de commande dans le répertoire du projet) :"/>
+        <echo message="    phing &lt;nom d'une cible&gt;"/>
+        <echo message="Cibles (ou 'targets') Phing disponibles pour le projet '${phing.project.name}' :"/>
+        <echo message="    * help (default) : affiche ce message"/>
+        <echo message="    * tests-all : exécution de tous les tests unitaires (contenus dans '${execphpunit.target.base}')"/>
+        <echo message="    * tests-current : exécution des tests unitaires contenus dans '${execphpunit.target.current}'"/>
+        <echo message="    * tests : raccourci pour tests-current"/>
+        <echo message="    * db-reset : exécute le script SQL de recréation de la structure de la db (l'utilisateur MySQL 'w2w@localhost' doit avoir les droits sur la db 'w2w'...)"/>
+        <echo message="    * db-populate : exécute le script PHP de remplissage de la db"/>
+        <echo message="    * reset : exécute les cibles db-reset puis db-populate"/>
+        <echo message="Exemples de lignes de commandes utiles : "/>
+        <echo message="    * exécution des tests unitaires : "/>
+        <echo message="        ${execphpunit.executable} --bootstrap ${execphpunit.bootstrap} ${execphpunit.target.base}"/>
+        <echo message="        ${execphpunit.executable} --bootstrap ${execphpunit.bootstrap} ${execphpunit.target.current}"/>
+        <echo message="    * commandes SQL à exécuter en tant qu'administrateur pour suppression / création de la db / attribution des droits sur la db à l'utilisateur MySQL : "/>
+        <echo message="        DROP DATABASE IF EXISTS  `w2w`;"/>
+        <echo message="        CREATE DATABASE IF NOT EXISTS  `w2w`;"/>
+        <echo message="        GRANT ALL PRIVILEGES ON `w2w`.* TO `w2w`@localhost IDENTIFIED BY 'w2w';"/>
+        <echo message="    * connexion à MySQL (username = password = dbname = 'w2w') :"/>
+        <echo message="        mysql -u w2w -pw2w w2w"/>
+        <echo message=""/>
+    </target>
+
+    <!-- exécution tests PHPUnit avec la "task" Phing dédiée à cet usage -->
+    <!-- (ceci ne fonctionne pas et je me demande bien pourquoi) -->
+    <target name="tests-phpunit">
+        <phpunit bootstrap="${phpunit.bootstrap}" pharlocation="${phpunit.pharlocation}" printsummary="true">
+            <formatter type="plain" usefile="false"/>
+            <batchtest name="MyTestSuit">
+                <fileset dir="appsrc/tests/Test">
+                    <include name="**/*Test*.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+
+    <!-- exécution tests PHPUnit avec la "task" Phing ExecTask, non spécialisée -->
+    <!-- (ceci fonctionne mais c'est bien moins pratique) -->
+    <target name="tests-all">
+        <exec logoutput="true" checkreturn="true" dir="${execphpunit.dir}" executable="${execphpunit.executable}">
+            <arg value="--bootstrap"/>
+            <arg value="${execphpunit.bootstrap}"/>
+            <arg value="${execphpunit.target.base}"/>
+        </exec>
+    </target>
+
+    <!-- idem dans un sous-répertoire de tests unitaires -->
+    <target name="tests-current">
+        <exec logoutput="true" checkreturn="true" dir="${execphpunit.dir}" executable="${execphpunit.executable}">
+            <arg value="--bootstrap"/>
+            <arg value="${execphpunit.bootstrap}"/>
+            <arg value="${execphpunit.target.current}"/>
+        </exec>
+    </target>
+
+    <!-- raccourci -->
+    <target name="tests" depends="tests-current">
+    </target>
+
+    <!-- exécute le script SQL pour réinitialiser la db (recréer la db elle-même, puis ses tables, sans aucune donnée)-->
+    <!-- revient à exécuter "mysql -u w2w -pw2w w2w < sql/setup.sql" dans le répertoire courant -->
+    <target name="db-reset">
+        <exec logoutput="true" checkreturn="true" dir="." executable="mysql">
+            <arg value="-u"/>
+            <arg value="w2w"/>
+            <arg value="-pw2w"/>
+            <arg value="w2w"/>
+            <arg value="&lt;"/>
+            <arg value="scripts-cli/setup.sql"/>
+        </exec>
+    </target>
+
+    <!-- exécute le script PHP pour remplir la db avec des données contenues dans un document XML incorporé dans un "heredoc" du script PHP -->
+    <!-- revient à exécuter "php cli/populate.php" dans le répertoire courant -->
+    <target name="db-populate">
+        <exec logoutput="true" checkreturn="true" dir="." executable="php">
+            <arg value="scripts-cli/populate.php"/>
+        </exec>
+    </target>
+    
+    <!-- exécute db-reset puis db-populate, car définies comme dépendances de cette target -->
+    <target name="reset" depends="db-reset, db-populate">
+    </target>
+    
+</project>
