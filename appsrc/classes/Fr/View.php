@@ -14,7 +14,7 @@ class View {
     protected $_name = "index";
     protected $_extension = ".php";
     protected $_viewPath;
-    protected $_data = array();
+    protected $_data =[];
     protected $_filter;
     
     /*

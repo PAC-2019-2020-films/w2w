@@ -13,6 +13,7 @@ class reviewController extends BaseUserController
     public function action_index()
     {
         $this->setLayoutTitle("account/review");
+        this
         return $this->forgeView("account/review_list");
     }
     

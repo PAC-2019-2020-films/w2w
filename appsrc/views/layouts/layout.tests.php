@@ -3,12 +3,12 @@
 $headTitle = isset($headTitle) ? $headTitle : "w2w";
 $headerTitle = isset($headerTitle) ? $headerTitle : "what2watch";
 
-$links = [
-    "/",
-    "/contact",
-    "/login",
-    "/logout",
-];
+//$links = [
+//    "/",
+//    "/contact",
+//    "/login",
+//    "/logout",
+//];
 
 
 ?><!DOCTYPE html>
