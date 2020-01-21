@@ -19,9 +19,9 @@
 
 
     <property name="execphpunit.dir" value="."/>
-    <property name="execphpunit.bootstrap" value="appsrc/bootstrap.php"/>
+    <property name="execphpunit.bootstrap" value="index.php"/>
     <property name="execphpunit.executable" value="vendor/bin/phpunit"/>
-    <property name="execphpunit.target.base" value="appsrc/tests/Test"/>
+    <property name="execphpunit.target.base" value="classes/Test"/>
     <property name="execphpunit.target.current" value="${execphpunit.target.base}/w2w/DAO"/>
 
 
@@ -96,7 +96,7 @@
             <arg value="-pw2w"/>
             <arg value="w2w"/>
             <arg value="&lt;"/>
-            <arg value="sql/setup.sql"/>
+            <arg value="scripts-cli/setup.sql"/>
         </exec>
     </target>
 
@@ -104,7 +104,7 @@
     <!-- revient à exécuter "php cli/populate.php" dans le répertoire courant -->
     <target name="db-populate">
         <exec logoutput="true" checkreturn="true" dir="." executable="php">
-            <arg value="cli/populate.php"/>
+            <arg value="scripts-cli/populate.php"/>
         </exec>
     </target>
     
