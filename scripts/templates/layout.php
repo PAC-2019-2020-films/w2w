@@ -184,5 +184,6 @@ $headTitle = isset($headTitle) ? $headTitle : "Welcome on wath to watch";
 
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/loginForm.js" type="module"></script>
 </body>
 </html>
