@@ -1,9 +1,10 @@
 <?php
 
+
 global $user;
 /*
- * Logs out the user if connected and displays to login page with the authentication attached in order to validate the account
- * */
+ * Logs out the user if connected and displays to login page with the account email validation token attached in order to validate the account
+ */
 
 if ($user){
     require "logout_action.php";
