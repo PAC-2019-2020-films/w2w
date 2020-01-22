@@ -32,9 +32,7 @@
                             <li>Durée:</li>
 
                             <li>De:
-                                <?php foreach ($movie->getDirectors() as $director) : ?>
-                                <a href="#" class="primary" ><?php echo escape($director->getFirstName()) . ' ' . escape($director->getLastName()); ?> </a></li>
-                            <?php endforeach; ?>
+
                             </li>
                             <li>Genre:  </li>
                             <li>Nationalité: </li>
