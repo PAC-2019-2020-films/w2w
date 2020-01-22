@@ -1,17 +1,19 @@
 <?php
 
 
-if (isset($_SESSION['message'])) {
-    echo '<div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
-}
-unset($_SESSION['message']);
-
 
 if (isset($_SESSION['user'])) {
 //    TODO : SIgnal user he has to log out before potentialy creating a new account
     require 'logout_action.php';
     header('location: ' . 'account/index.php');
 }
+
+
+
+if (isset($_SESSION['message'])) {
+    echo '<div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
+}
+unset($_SESSION['message']);
 
 ?>
 
