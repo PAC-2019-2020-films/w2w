@@ -41,7 +41,6 @@ if ($email && $password) {
                     if ($authToken) {
 //                    Check that the token hasn't expired
                         $currDate = new DateTime("now", new DateTimeZone("Europe/Brussels"));
-                        $currDate = $currDate->format("Y-m-d H:i:s");
 
                         if ($currDate < $authToken->getExpiresAt() || $authToken->getVerifiedAt()) {
 
