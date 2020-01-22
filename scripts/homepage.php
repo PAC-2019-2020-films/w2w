@@ -29,9 +29,6 @@ $popularMovies = $movieDAO->findBest($popularMoviesNumber);
 $firstPopularMovie = $movieDAO->findBest(1);
 $w2wPopularMovie = $movieDAO->findBest($w2wPopularMoviesNumber);
 
-$tagDAO = $daoFactory->getTagDAO();
-$tags = $tagDAO->findAll();
-
 $categoryDAO = $daoFactory->getCategoryDAO();
 $categories = $categoryDAO->findAll();
 

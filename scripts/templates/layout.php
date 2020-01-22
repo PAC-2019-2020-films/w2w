@@ -23,10 +23,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W : What are you gonna watch no
     <link href="/assets/css/carousel.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,900&display=swap" rel="stylesheet">
-
-
     <script src="https://kit.fontawesome.com/5b034eec6e.js" crossorigin="anonymous"></script>
-
 
 </head>
 <body>
@@ -54,7 +51,6 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W : What are you gonna watch no
                             <a class="dropdown-item" href="#">Films les mieux notés</a>
                             <a class="dropdown-item" href="#">Films les plus populaires</a>
                             <a class="dropdown-item" href="#">Parcourir les films par genre</a>
-
                         </div>
                     </li>
                     <li class="nav-item ">
@@ -134,7 +130,6 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W : What are you gonna watch no
     </div>
 
 </footer>
-
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 

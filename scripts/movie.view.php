@@ -1,13 +1,14 @@
 <?php
 /*
  * Page d'un film - TO DO
+ *
  */
 ?>
 
 
 <?php if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
 
-    <div class="page-title " style="background :url(uploads/<?php echo $movie->getPoster(); ?>-big.jpg);">
+    <div class="page-title " style="background :url('uploads/<?php echo $movie->getPoster(); ?>-big.jpg');">
 
         <div class="container">
             <?php echo template("movie.tags.php", ["movie" => $movie]); ?>
