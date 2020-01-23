@@ -265,6 +265,14 @@ class Movie
     /**
      * @return Rating
      */
+    public function hasRating()
+    {
+        return $this->rating != null;
+    }
+
+    /**
+     * @return Rating
+     */
     public function getRating()
     {
         return $this->rating;
