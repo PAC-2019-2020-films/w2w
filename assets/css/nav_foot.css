@@ -1,0 +1,98 @@
+/* NAV BAR */
+
+nav .size_nav
+{
+    height: 65px;
+}
+
+nav .search_barre
+{
+    width: 250px;
+    height: 30px;
+    border-radius: 45px;
+    line-height: 35px;
+}
+nav a
+{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1em;
+}
+
+nav .logo
+{
+    max-width: 100%;
+    height: auto;
+}
+
+nav .account_img {
+    max-width: 80%;
+    height: auto;
+}
+
+nav .button_account
+{
+    width: 200px;
+    background-color: #ffde3c;
+    border-radius: 45px;
+    height: 42px;
+}
+
+
+
+/* FOOTER */
+
+footer .texte {
+    line-height: 250%;
+}
+
+footer .fa {
+    font-size: 2em;
+}
+
+footer a {
+    color:white;
+}
+
+footer .copyright
+{
+    color: white;
+    font-size: 0.8em;
+
+}
+
+footer p{
+    font-size: 1.5em;
+    padding: 5px 10px 0px 25px
+}
+
+footer .fa2 {
+    font-size: 1em;
+    padding-left: 25px;
+}
+
+footer .fa-twitter:hover
+{
+    color: #1DA1F2;
+}
+
+footer .fa-facebook:hover
+{
+    color:#4267b2;
+}
+
+footer .fa-coffee
+{
+    color :white;
+}
+
+footer .logo
+{
+    max-width: 100%;
+    height: auto;
+}
+
+footer .size_barre_logo
+{
+    height: 65px;
+}
