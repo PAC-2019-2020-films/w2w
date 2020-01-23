@@ -1,5 +1,6 @@
 $('document').ready(function () {
 
+    // console.log("hello");
     const BASE_URL = 'http://w2w.localhost/';
 
     const resetPasswordModTrigger = $("#resetPasswordModTrigger");
@@ -10,6 +11,7 @@ $('document').ready(function () {
     resetPasswordModTrigger.on('click', rstPwModal);
 
     function rstPwModal() {
+        console.log("rest");
         formLoginRequire.hide();
         formLoginRequire
             .after(

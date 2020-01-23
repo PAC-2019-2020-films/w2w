@@ -1,7 +1,7 @@
 <?php
 
 //Make sure we're not accessing this page from wherever
-if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.localhost/authentication/login.php') {
+//if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.localhost/authentication/login.php') {
 
 //    Get the form data
     $email = param('email');
@@ -60,6 +60,6 @@ if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.
         header('Location:login.php');
     }
 
-} else {
-    header('Location:../homepage.php');
-}
+//} else {
+//    header('Location:../homepage.php');
+//}
