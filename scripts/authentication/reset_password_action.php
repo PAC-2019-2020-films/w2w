@@ -6,7 +6,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 //    Remove the token part from the URL
     $referer = substr($_SERVER['HTTP_REFERER'], 0, strpos($_SERVER['HTTP_REFERER'], '?'));
 
-    if ($referer === 'http://w2w.localhost/reset_password.php') {
+    if ($referer === 'http://w2w.localhost/authentication/reset_password.php') {
         $password = param("password");
         $passwordConfirm = param("passwordConfirm");
         $token = param("token");

@@ -1,7 +1,7 @@
 <?php
 
 //Make sure we're not accessing this page from wherever
-if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.localhost/login.php') {
+if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.localhost/authentication/login.php') {
 
 //    Get the form data
     $email = param('email');
@@ -31,7 +31,7 @@ if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.
             $tokenDAO->save($token);
 
 //            Send the reset password email :
-            $url = "http://w2w.localhost/reset_password.php?token=" . $tokenValue;
+            $url = "http://w2w.localhost/authentication/reset_password.php?token=" . $tokenValue;
             $headers = [
                 'From' => 'donotreply@whattowatch.com',
                 'MINE-Version' => '1.0',
@@ -61,5 +61,5 @@ if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.
     }
 
 } else {
-    header('Location:homepage.php');
+    header('Location:../homepage.php');
 }

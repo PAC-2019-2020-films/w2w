@@ -4,8 +4,8 @@
 
 if (isset($_SESSION['user'])) {
 //    TODO : SIgnal user he has to log out before potentialy creating a new account
-    require 'logout_action.php';
-    header('location: ' . 'account/index.php');
+    require 'scripts/logout_action.php';
+    header('location: ../account/index.php');
 }
 
 

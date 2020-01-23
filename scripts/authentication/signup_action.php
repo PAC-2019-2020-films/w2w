@@ -10,7 +10,7 @@ if (isset($_SESSION['user'])) {
 }
 
 
-if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.localhost/signup.php') {
+if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.localhost/authentication/signup.php') {
 
 // Get the POST data
 
@@ -47,6 +47,7 @@ if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.
 
 //        Set default role to "user"
             $role = $roledDAO->findOneBy('id', '1');
+           
 
 //        Set created_at
             try {
@@ -61,16 +62,16 @@ if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.
             $createdAt->format("Y-m-d H:i:s");
 
 //    Instantiate new User with POST data
-            $user = new \w2w\Model\User(null, $userName, $email, 0, $password, $firstName, $lastName, $createdAt, null, null, null, null, $role);
+            $user = new \w2w\Model\User(null, $userName, $email, 0, $password, $firstName, $lastName, $createdAt, null, null, false, 0, $role);
 
 //    Save the user in the Database
             try {
                 $userDAO->save($user);
             } catch (\Doctrine\ORM\ORMException $e) {
-                \w2w\Utils\Utils::message(false, '', 'Error while saving user');
+                \w2w\Utils\Utils::message(false, '', 'Error while saving user' . $e);
                 header('location: ' . $_SERVER['HTTP_REFERER']);
             } catch (UniqueConstraintViolationException $uniqueConstraintViolationException) {
-                \w2w\Utils\Utils::message(false, '', 'Error while saving user');
+                \w2w\Utils\Utils::message(false, '', 'Error while saving user' . $e);
                 header('location: ' . $_SERVER['HTTP_REFERER']);
             }
 

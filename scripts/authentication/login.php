@@ -25,7 +25,7 @@ unset($_SESSION['message']);
     <article class="card-body mx-auto" style="max-width: 400px;">
         <h4 class="card-title mt-3 text-center">Log in</h4>
 
-        <form action="/login_action.php" method="post">
+        <form action="login_action.php" method="post">
 
             <div class="form-group input-group">
                 <div class="input-group-prepend">

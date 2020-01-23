@@ -22,7 +22,7 @@ if ($email && $password) {
             $_SESSION["email"] = $user->getEmail();
 
             if (!$user->isEmailVerified()) {
-                \w2w\Utils\Utils::message(false, '', 'Your account has not yet been verified. Check your mail or click <a href="http://w2w.localhost/generate_validation_mail.php">here</a> to receive a new validation email.');
+                \w2w\Utils\Utils::message(false, '', 'Your account has not yet been verified. Check your mail or click <a href="http://w2w.localhost/authentication/generate_validation_mail.php">here</a> to receive a new validation email.');
             }
 
 //              Validate the token
@@ -62,14 +62,14 @@ if ($email && $password) {
                             }
                         }
                     } else {
-                        \w2w\Utils\Utils::message(false, '', 'Link has expired, Click <a href="http://w2w.localhost/generate_validation_mail.php">here</a> to receive a new one.');
+                        \w2w\Utils\Utils::message(false, '', 'Link has expired, Click <a href="http://w2w.localhost/authentication/generate_validation_mail.php">here</a> to receive a new one.');
                     }
                 } else {
-                    \w2w\Utils\Utils::message(false, '', 'Link has expired, Click <a href="http://w2w.localhost/generate_validation_mail.php">here</a> to receive a new one.');
+                    \w2w\Utils\Utils::message(false, '', 'Link has expired, Click <a href="http://w2w.localhost/authentication/generate_validation_mail.php">here</a> to receive a new one.');
                 }
             }
 
-            header('location: account/index.php');
+            header('location: ../account/index.php');
             exit();
 
         }
