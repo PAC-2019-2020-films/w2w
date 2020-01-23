@@ -18,7 +18,7 @@ define("FR_CLI", (php_sapi_name() === "cli" or defined('STDIN')));
 define("DB_HOSTNAME", "localhost");
 define("DB_USERNAME", "w2w");
 define("DB_PASSWORD", "w2w");
-define("DB_DATABASE", "w2wBIS");
+define("DB_DATABASE", "w2w");
 define("DB_SCHEME", "mysql");
 define("DB_DRIVER", "pdo_mysql");
 

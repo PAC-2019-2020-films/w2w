@@ -29,10 +29,13 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W : What are you gonna watch no
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container-xl">
+        <div class="container">
             <div id="logo">
-                <a class="navbar-brand" href="/">
-                    <img alt="logo" src="/assets/img/logo-w2w.svg">  w2w</a>
+                
+    
+                <a class="navbar-brand" href="#">
+                    <img alt="logo" src="/assets/img/logo-w2w.svg">
+                </a>
             </div>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarW2W" aria-controls="navbarW2W" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,15 +76,34 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W : What are you gonna watch no
                     <?php if ($user->isRoot()) : ?>
                         <a href="/root/">[root]</a>
                     <?php endif; ?>
-                    <a class="btn btn-primary btn-account" href="/logout.php">Se déconnecter</a>
+                    <a class="btn btn-primary btn-account" href="../authentication/logout_action.php">Se déconnecter</a>
                 <?php else: ?>
-                    <a class="btn btn-primary btn-account" href="/login.php">Se connecter <i class="fas fa-sign-in-alt"></i></a>
+                    <button class="btn btn-primary btn-account" data-target="#modal-login" data-toggle="modal">Se connecter <i class="fas fa-sign-in-alt"></i></button>
                 <?php endif; ?>
 
 
             </div>
         </div>
     </nav>
+    
+    <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginlabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="formLoginRequire">
+                    <?php require "scripts/authentication/login.php" ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
 </header>
 
 <main role="main">
