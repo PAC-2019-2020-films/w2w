@@ -1,0 +1,9 @@
+Date: Thu, 23 Jan 2020 11:03:17 +0000
+Subject: What to Watch : Your Account Validation
+To: julien@email.com
+From: donotreply@whattowatch.com
+MINE-Version: 1.0
+Content-Type: text/html; charset-utf-8
+X-Mailer: PHP/7.3.1
+
+Thank you for registering at whattowatch.com! Click this link to validate your account (this link is only available for the next 24 hours) : <a href=http://w2w.localhost/validate_email.php?token=4371b0a53b18003babf601f6b161c3e5>Validate your account!</a>

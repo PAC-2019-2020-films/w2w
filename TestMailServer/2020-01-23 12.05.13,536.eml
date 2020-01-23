@@ -1,0 +1,9 @@
+Date: Thu, 23 Jan 2020 11:05:13 +0000
+Subject: What to Watch : Reset your password
+To: julien@email.com
+From: donotreply@whattowatch.com
+MINE-Version: 1.0
+Content-Type: text/html; charset-utf-8
+X-Mailer: PHP/7.3.1
+
+What2Watch password recovery to the rescue! Click this link to choose a new password (this link is only available for the next 24 hours) : <a href=http://w2w.localhost/reset_password.php?token=cff8e89040a1b3979102dfae03a8d8ff>Change your password</a>
