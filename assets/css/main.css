@@ -1,80 +1,318 @@
-body
-{
-    background-color: antiquewhite;
+/* FONT */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/fonts/montserrat-v14-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Montserrat Regular'), local('Montserrat-Regular'),
+    url('/assets/fonts/montserrat-v14-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/assets/fonts/montserrat-v14-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('/assets/fonts/montserrat-v14-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('/assets/fonts/montserrat-v14-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/assets/fonts/montserrat-v14-latin-regular.svg#Montserrat') format('svg'); /* Legacy iOS */
 }
 
-body .bg_gris
-{
-    background-color: #4D5051;
+/* GENERAL */
+body{
+
+    font-family: 'Montserrat', sans-serif;
+    color : #0F0826;
 }
+
+header{
+    height : 76px;
+}
+
+a{
+    color : #0F0826;
+}
+
+a.primary {
+
+    color  : #FFEE3D;
+}
+
+
+a:hover {
+    text-decoration : none;
+    color : #0056b3;
+}
+
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6, .btn-primary, .navbar,  .movie-tag {
+    font-weight: 600;
+}
+.clearfix {
+    clear: both;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:focus , .movie-tag{
+    color : #0F0826;
+    text-transform : uppercase;
+
+}
+.btn-primary, .movie-tag{
+    background-color : #FFEE3D;
+    border-color : #FFEE3D;
+}
+.btn-primary:hover, .btn-primary:focus, .movie-tag:hover{
+    background-color : #ffe76f;
+    border-color : #ffe76f;
+}
+.btn-account{
+
+    font-size : 0.8rem;
+    border-radius : 2rem;
+}
+.btn-secondary {
+    padding: 1rem 2rem;
+    background-color : #0F0826;
+    text-transform : uppercase;
+    font-size : 0.9rem;
+    font-weight : 600;
+    border-radius : 0;
+}
+.btn-secondary:hover {
+    background-color : #FFEE3D;
+    color : #0F0826;
+}
+
+.flex-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.list-inline > li {
+    float: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.view-more {
+    text-transform : uppercase;
+    font-weight : 600;
+    font-size : 0.7rem;
+}
+
+.carousel h2, .page-title h2{
+    font-weight : 900;
+    font-size : 3rem;
+
+}
+
 /* NAV BAR */
-nav
-{
-        background-color: #4D5051;
+#logo {
+    width: 150px;
+}
+.navbar {
+    font-size : 0.8rem;
+    text-transform : uppercase;
+    letter-spacing: 0.04rem;
+
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+.navbar .form-control {
+
+    padding: .375rem 10rem .375rem  1rem;
+    font-size : 0.8rem;
+    border: 1px solid #d0d8db;
+    border-radius:  2rem;
+
+}
+.navbar .form-control:focus {
+
+    border-color: #FFEE3D;
+    box-shadow: none;
+}
+.dropdown-menu a {
+    font-size : 0.8rem;
+    text-transform : none;
+    font-weight: 600;
+
 }
 
-nav a
-{
-    color: antiquewhite;
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: 1.5em;
+/* MOVIES TAGS */
+
+.btn-account , .movie-tag{
+    padding: 0.5rem 1rem;
+    font-size : 0.8rem;
+
+}
+.carousel-caption p.movies-data {
+    font-size : 0.8rem;
 }
 
-nav .logo
-{
-    max-width: 100%;
+
+p.movies-data span {
+    padding : 0 1rem;
+    border-right : 1px solid #d0d8db;
+}
+p.movies-data span:first-child {
+    padding: 0 1rem 0 0;
+}
+p.movies-data span:last-child {
+    border-right : none;
+}
+
+/* Section */
+
+section {
+    padding : 5rem 0;
+}
+section .line-title {
+    width: 60px;
+    display : block;
+}
+section .line-title hr {
+
+    margin-top : 0;
+    border-top : 4px solid #FFEE3D;
+}
+
+section .subtitle {
+
+    text-transform: uppercase;
+}
+
+/*** DARK BACKGROUND */
+.dark-bg {
+    background-color : #0F0826;
+    color : #fff;
+}
+
+section.dark-bg a {
+    color : #fff;
+}
+
+section h3 {
+    font-size : 30px;
+    text-transform : capitalize;
+    letter-spacing : 1px;
+    margin-bottom : 0rem;
+}
+/*** LIGHT BACKGROUND */
+
+.light-bg {
+    background-color : #f6f8fe;
+}
+/* MOVIE BOX */
+.image-movie{
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+.image-movie:hover .overlay {
+    opacity: 1;
+}
+
+/*MOVIE BOX*/
+
+.movie-box h4, .top-movie .movie-box h5  {
+    font-size: 1rem;
+}
+.movie-box .note i{
+    color :  #FFEE3D;
+}
+.image-movie img {
+    display: block;
+    width: 100%;
     height: auto;
 }
 
-nav .button_account
-{
-    background-color: orange;
+/*TOP MOVIES BY W2W */
+
+.top-movie img {
+    width: 100%;
+    height: 235px;
+    object-fit: cover;
+
+}
+.top-movie .movie-box {
+    margin-bottom : 15px;
+    position : relative;
 }
 
-nav .account_img
-{
-    max-width: 100%;
-    height: auto;
+.top-movie .movie-box h5 {
+    font-weight: 600;
+    text-align: center;
+    margin-top: 15px;
+}
+.top-movie .movie-box .number-box {
+    background-color: #ffee3d;
+    padding: 20px;
+    font-weight: 600;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
+.first-movie img{
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+}
+.movie-box  img:hover {
+    opacity : 1;
+}
+
+.image-movie .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: rgba(15,8,38,0.5);
+
+}
+.image-movie .text {
+    color : #fff;
+    font-size: 4rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* PAGE FILM */
+
+.page-title{
+
+    height: 200px;
+    padding : 20px 0;
+    color : #fff;
+}
+
+.rating-title {
+    text-transform: uppercase;
+    font-size: .7rem;
+    line-height: 1.2;
+    color : #4b4856;
+}
 /* FOOTER */
 
-footer .bg_gris
+
+footer
 {
-    background-color: #4D5051;
+    font-size : 0.8rem;
+    padding : 50px 0 10px 0;
+    background-color: #0f0826;
+    color : #fff;
 }
-
-
-footer .fa {
-    font-size: 1.3em;
-}
-
 footer a {
-        color:white;
+    color : #fff;
 }
-
-footer .copyright
-{
- color: antiquewhite;
+footer i {
+    font-size : 1.3rem;
 }
-
-footer p{
-    font-size: 1.5em;
-    padding: 5px 10px 0px 25px
-}
-
-footer .fa2 {
-    font-size: 3em;
-    padding-top: 25px;
-}
-
-footer .fa-twitter:hover
-{
-color: yellow;
-}
-
-footer .fa-facebook:hover
-{
-    color:darkblue;
+.copyright {
+    clear: both;
 }
