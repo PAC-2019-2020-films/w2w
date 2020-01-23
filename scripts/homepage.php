@@ -7,28 +7,29 @@
 use \w2w\DAO\DAOFactory;
 
 
-$lastMoviesNumber = 3;
+$lastMoviesSliderNumber = 3;
+$lastMoviesNumber = 6;
+
 $popularMoviesNumber = 10;
+
+$w2wPopularMoviesNumber = 5;
+
 
 $daoFactory = DAOFactory::getDAOFactory();
 
 $movieDAO = $daoFactory->getMovieDAO();
+
+// Last Movies
+
+$lastMoviesSlider = $movieDAO->findLast($lastMoviesSliderNumber);
 $lastMovies = $movieDAO->findLast($lastMoviesNumber);
+
+// Popular
 $popularMovies = $movieDAO->findBest($popularMoviesNumber);
+$firstPopularMovie = $movieDAO->findBest(1);
+$w2wPopularMovie = $movieDAO->findBest($w2wPopularMoviesNumber);
 
-$allMovies = $movieDAO->findAll();
-$camol =  array_rand($allMovies,5);
+$categoryDAO = $daoFactory->getCategoryDAO();
+$categories = $categoryDAO->findAll();
 
-$category = $movieDAO->getCategory();
-$categoryName = $category->getName();
-
-
-
-
-
-//$tagDAO = $daoFactory->getTagDAO();
-//$tags = $tagDAO->findAll();
-
-//$categoryDAO = $daoFactory->getCategoryDAO();
-//$categories = $categoryDAO->findAll();
 
