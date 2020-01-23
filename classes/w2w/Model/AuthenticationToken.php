@@ -43,7 +43,7 @@ class AuthenticationToken
     private $verifiedAt;
 
     /**
-     * @Column(name="new_password", type="boolean", nullable=true);
+     * @Column(name="new_password", type="boolean");
      */
     private $newPassword;
 

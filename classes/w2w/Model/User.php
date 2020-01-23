@@ -24,12 +24,12 @@ class User
     private $id;
 
     /**
-     * @Column(name="user_name", unique=true)
+     * @Column(name="user_name")
      */
     private $userName;
 
     /**
-     * @Column(name="email", unique=true)
+     * @Column
      */
     private $email;
 
@@ -54,27 +54,27 @@ class User
     private $lastName;
 
     /**
-     * @Column(name="created_at", type="datetime", nullable=true)
+     * @Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
-     * @Column(name="updated_at", type="datetime", nullable=true)
+     * @Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @Column(name="last_login_at", type="datetime", nullable=true)
+     * @Column(name="last_login_at", type="datetime")
      */
     private $lastLoginAt;
 
     /**
-     * @Column(type="boolean", nullable=true)
+     * @Column(type="boolean")
      */
     private $banned;
 
     /**
-     * @Column(name="number_reviews", type="integer", nullable=true)
+     * @Column(name="number_reviews", type="integer")
      */
     private $numberReviews;
 

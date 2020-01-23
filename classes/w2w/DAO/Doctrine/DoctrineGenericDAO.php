@@ -2,7 +2,6 @@
 
 namespace w2w\DAO\Doctrine;
 
-use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use w2w\DAO\GenericDAO;
@@ -52,11 +51,7 @@ class DoctrineGenericDAO implements GenericDAO
             "dbname"   => DB_DATABASE,
         );
         $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode, $proxyDir, $cache);//, $useSimpleAnnotationReader);
-        try {
-            $em = EntityManager::create($dbParams, $config);
-        } catch (ORMException $e) {
-            die($e);
-        }
+        $em = EntityManager::create($dbParams, $config);
         return $em;
     }
 
@@ -84,7 +79,6 @@ class DoctrineGenericDAO implements GenericDAO
 
     /**
      * @Override
-     * @throws ORMException
      */
     public function save($object)
     {
