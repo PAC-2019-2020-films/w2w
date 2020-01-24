@@ -30,5 +30,5 @@ if (ini_get("session.use_cookies")) {
 // Finalement, on détruit la session.
 session_unset();
 session_destroy();    
-
-echo "ok";
+//
+//echo "ok";
