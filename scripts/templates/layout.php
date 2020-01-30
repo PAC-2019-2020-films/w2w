@@ -130,6 +130,9 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W : What are you gonna watch no
                     <li> <a href="/movies.php" target="_blank">Les films</a></li>
                     <li> <a href="/contact.php" target="_blank">Nous contacter</a></li>
                     <li> <a href="/login.php" target="_blank">Se connecter</a></li>
+                    /**
+                    * TODO : SE connecter Se déconnecter if connected
+                    */
 
                 </ul>
             </div>
