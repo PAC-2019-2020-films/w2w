@@ -126,7 +126,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W : What are you gonna watch no
                 <ul class="list-inline ">
 
                     <li> <a href="/about.php" target="_blank">A propos</a></li>
-                    <li> <a href="/team.php" target="_blank">L'équipe</a></li>
+                    <li> <a href="/team.view.php" target="_blank">L'équipe</a></li>
                     <li> <a href="/movies.php" target="_blank">Les films</a></li>
                     <li> <a href="/contact.php" target="_blank">Nous contacter</a></li>
                     <li> <a href="/login.php" target="_blank">Se connecter</a></li>
