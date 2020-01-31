@@ -1,49 +1,55 @@
 <?php
-/*
- * Page d'un film - TO DO
- *
- */
+    /*
+     * Page d'un film - TO DO
+     *
+     */
+    
+    
+    if (isset($_SESSION['message'])) {
+        echo '
+    <div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
+    }
+    unset($_SESSION['message']);
 ?>
 
-
 <?php if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
-
+    
     <div class="page-title " style="background :url('uploads/<?php echo $movie->getPoster(); ?>-big.jpg');">
-
+        
         <div class="container">
             <?php echo template("movie.tags.php", ["movie" => $movie]); ?>
             <h2 class="clearfix pt-3"><?php echo $movie->getTitle(); ?></h2>
             <!-- Film info -->
             <?php echo template("movie.data.php", ["movie" => $movie]); ?>
         </div>
-
+    
     </div>
-
+    
     <div class="movie-content py-5">
-
+        
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div class="movie-box dark-bg ">
-                        <img src="/uploads/<?php echo escape($movie->getPoster()); ?>-medium.jpg" class="img-fluid" alt="" />
-
+                        <img src="/uploads/<?php echo escape($movie->getPoster()); ?>-medium.jpg" class="img-fluid" alt=""/>
+                        
                         <ul class="movie-infos list-unstyled px-4 py-4">
                             <li class="text-left">Année de sortie : <span class="text-right"> <?php echo $movie->getYear(); ?></span></li>
                             <li>Durée:</li>
-
+                            
                             <li>De:
-
+                            
                             </li>
-                            <li>Genre:  </li>
-                            <li>Nationalité: </li>
+                            <li>Genre:</li>
+                            <li>Nationalité:</li>
                         </ul>
-
+                    
                     </div>
                 </div>
                 <div class="col-md-8 info-film">
-
+                    
                     <h3>Synopsis</h3>
-
+                    
                     <p>
                         <?php echo $movie->getDescription(); ?>
                     </p>
@@ -53,35 +59,53 @@
                         </div>
                         <div class="flex-center">
                             <h4 class="rating-title">Utilisateurs</h4>
-
+                        
                         </div>
                         <div class="flex-right">
-
+                        
                         </div>
                     </div>
                     <h3>L'avis de w2w </h3>
-
+                    
                     <p class="subtitle small"></p>
                     <span class="line-title"><hr/></span>
-
+                    
                     <p>
                         /*Insert Review w2w here*/
                     </p>
                     <h3>Ce que les utilisateurs en pensent</h3>
-
+                    
                     <p>
                         /*Insert Reviews users here*/
                     </p>
                     <h4>Et vous, qu'en pensez-vous ?</h4>
-                    <form action="#" method="post" id="insert-review-user">
+                    <form action="account/review-add.php" method="post" id="insert-review-user">
+                        <select name="rating" id="">
+                            <?php
+                                foreach ($ratings as $rating) {
+                                    ?>
+                                    <option value="<?= $rating->getId() ?>"><?= $rating->getName() ?></option>
+                                    <?php
+                                }
+                            ?>
+                        </select>
                         <textarea name="comment" id="comment" cols="80" rows="10" title=""></textarea>
-                        <button type="button" class="btn btn-primary btn-lg btn-block">Envoyer</button>
+                        <input type="hidden" name="movieId" value="<?= $movie->getId() ?>">
+                        <?php if (isset($user)) { ?>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer</button>
+                        
+                        <?php } else {
+                            ?>
+                            <a href="authentication/login.php" class="btn btn-primary btn-lg btn-block">Login to submit your own review</a>
+                            <?php
+                        }
+                        ?>
+                        
+                        <!--                        TODO suggest login to post comment instead of submit when !checkuser()-->
                     </form>
                 </div>
-
-
-
-
+            
+            
             </div>
         </div>
     </div>
