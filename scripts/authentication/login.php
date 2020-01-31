@@ -56,6 +56,14 @@ unset($_SESSION['message']);
 <!--            TODO : FIX no JS action in non modal mode (in authentication/login.php)-->
         
         </div>
+        <div class="form-group">
+            <a class="btn btn-primary btn-block" href="authentication/signup.php">Signup</a>
+        
+            <!--            TODO : FIX no JS action in non modal mode (in authentication/login.php)-->
+    
+        </div>
+        
+        
 
     </article>
 </div>
