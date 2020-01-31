@@ -7,6 +7,7 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 if (isset($_SESSION['user'])) {
     header('location: ' . 'account/index.php');
+    exit();
 }
 
 
@@ -70,9 +71,11 @@ if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.
             } catch (\Doctrine\ORM\ORMException $e) {
                 \w2w\Utils\Utils::message(false, '', 'Error while saving user' . $e);
                 header('location: ' . $_SERVER['HTTP_REFERER']);
+                exit();
             } catch (UniqueConstraintViolationException $uniqueConstraintViolationException) {
                 \w2w\Utils\Utils::message(false, '', 'Error while saving user' . $e);
                 header('location: ' . $_SERVER['HTTP_REFERER']);
+                exit();
             }
 
             require 'generate_validation_mail.php';
@@ -80,15 +83,19 @@ if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] === 'http://w2w.
 //    Redirect to login page
             \w2w\Utils\Utils::message(true, 'Account successfully created, you can now log into What2Whatch! Check your mail to validate your account !', 'Your account could not be created.');
             header('location:' . 'login.php');
+            exit();
         } else {
             \w2w\Utils\Utils::message(false, 'Account successfully created! Check your mail to verify your account!', 'Your account could not be created.');
             header('location: ' . 'signup.php');
+            exit();
         }
 
     } else {
         \w2w\Utils\Utils::message(false, 'Password Match', 'The passwords do not match.');
         header('location: ' . 'signup.php');
+        exit();
     }
 } else {
     header('Location: signup.php');
+    exit();
 };

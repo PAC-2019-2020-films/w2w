@@ -45,31 +45,36 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 
                         \w2w\Utils\Utils::message(true, 'Password changed!', '');
                         header("location:login.php");
-
-
+                        exit();
                     } else {
                         \w2w\Utils\Utils::message(false, '', 'Link expired.');
                         header("location:login.php");
+                        exit();
                     }
 
                 } else {
                     \w2w\Utils\Utils::message(false, '', 'Invalid Token');
                     header("location:login.php");
+                    exit();
                 }
 
             } else {
-                \w2w\Utils\Utils::message(false, '', 'Password do not match.');
+                \w2w\Utils\Utils::message(false, '', 'Passwords do not match.');
                 header("location: reset_password.php?token=" . $token);
+                exit();
             }
         } else {
             \w2w\Utils\Utils::message(false, '', 'Password invalid.');
             header("location: reset_password.php?token=" . $token);
+            exit();
         }
 
     } else {
         header("Location:homepage.php");
+        exit();
     }
 
 } else {
     header("Location:homepage.php");
+    exit();
 }

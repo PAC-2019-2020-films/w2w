@@ -9,7 +9,6 @@ if (isset($_SESSION['user'])) {
 }
 
 
-
 if (isset($_SESSION['message'])) {
     echo '<div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
 }
