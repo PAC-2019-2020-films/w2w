@@ -12,6 +12,8 @@ define("FR_APPPATH", realpath(__DIR__));
 define("FR_SCRIPT_PATH", FR_APPPATH . "/scripts");
 # chemin complet vers les classes :
 define("FR_CLASS_PATH", FR_APPPATH . "/classes");
+# assets paths
+define('IMG_PATH_MOVIES', FR_APPPATH . '/uploads/');
 # si on est en ligne de commande et pas en mode web :
 define("FR_CLI", (php_sapi_name() === "cli" or defined('STDIN')));
 # identifiants de bdd :
@@ -30,35 +32,33 @@ define("DB_DRIVER", "pdo_mysql");
  ******************************************************************************/
 
 if (FR_DEBUG) {
-	ini_set('log_errors', 0); // -> STDERR
-	ini_set('display_errors', 1); // -> STDOUT
-	ini_set('display_startup_errors', 1);
-	error_reporting(-1);
-} else  {
-	ini_set('log_errors', 0);
-	ini_set('display_errors', 0);
-	ini_set('display_startup_errors', 0);
-	error_reporting(0);
+    ini_set('log_errors', 0); // -> STDERR
+    ini_set('display_errors', 1); // -> STDOUT
+    ini_set('display_startup_errors', 1);
+    error_reporting(-1);
+} else {
+    ini_set('log_errors', 0);
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
+    error_reporting(0);
 }
-
 
 
 /*******************************************************************************
  * autoload des classes propres à w2w
  ******************************************************************************/
 
-spl_autoload_register(function($className) {
-        $classPathBase = FR_CLASS_PATH;
-        $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
-        $classPath = ($classPathBase ? $classPathBase . DIRECTORY_SEPARATOR : "") . $className . '.php';
-        $loaded = false;
-        if (is_file($classPath)) {
-            include $classPath;
-            $loaded = true;
-        }
-        return $loaded;
+spl_autoload_register(function ($className) {
+    $classPathBase = FR_CLASS_PATH;
+    $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
+    $classPath = ($classPathBase ? $classPathBase . DIRECTORY_SEPARATOR : "") . $className . '.php';
+    $loaded = false;
+    if (is_file($classPath)) {
+        include $classPath;
+        $loaded = true;
+    }
+    return $loaded;
 });
-
 
 
 /*******************************************************************************
@@ -76,17 +76,17 @@ if (file_exists(FR_APPPATH . "/vendor/autoload.php")) {
  ******************************************************************************/
 
 /**
- * Exécute un script PHP et utilise l'output buffering 
+ * Exécute un script PHP et utilise l'output buffering
  * (écriture du flux de sortie dans un tampon) pour récupérer dans
  * une variable ce que l'excéution du script aurait affiché dans le navigateur
  * si l'output buffering n'était pas activé.
- * 
- * Le but est de pouvoir ensuite insérer le contenu généré par le script 
+ *
+ * Le but est de pouvoir ensuite insérer le contenu généré par le script
  * dans le layout de mise en page commune à tout le site.
- * 
+ *
  * https://www.php.net/manual/fr/ref.outcontrol.php
  */
-function renderScript($scriptUri, $data = array()) 
+function renderScript($scriptUri, $data = array())
 {
     $scriptPath = FR_SCRIPT_PATH . $scriptUri;
     if (is_file($scriptPath)) {
@@ -100,7 +100,7 @@ function renderScript($scriptUri, $data = array())
         $content = ob_get_contents();
         # fin de l'écriture du flux de sortie dans un tampon :
         ob_end_clean();
-        
+
         # Pour certains scripts non triviaux, 
         # on les associe à un autre script dit "de vue",
         # afin de séparer traitement et présentation des données,
@@ -118,14 +118,14 @@ function renderScript($scriptUri, $data = array())
     } else {
         return "script not found (name={$scriptUri}, path={$scriptPath})";
     }
-    
+
 }
 
 /**
  * Exécute un template et renvoie le résultat (flux de sortie) de son exécution.
  * Pour pouvoir réutiliser des templates dans différents scripts.
  */
-function template($name, $data = array()) 
+function template($name, $data = array())
 {
     return renderScript("/templates/{$name}", $data);
 }
@@ -134,10 +134,10 @@ function template($name, $data = array())
  * fonction d'échappement des caractères spéciaux pour l'affichage des
  * variables dans les scripts.
  */
-function escape($string, $flags = false, $encoding = "utf-8", $double_encode = true) 
+function escape($string, $flags = false, $encoding = "utf-8", $double_encode = true)
 {
     if ($flags === false) {
-            $flags = ENT_COMPAT | ENT_HTML401;
+        $flags = ENT_COMPAT | ENT_HTML401;
     }
     return htmlentities($string, $flags, $encoding, $double_encode);
 }
@@ -168,8 +168,6 @@ function param($name, $default = null, $filter = true)
 }
 
 
-
-
 function error401($msg = "401 Unauthorized")
 {
     header("HTTP/1.1 401 Unauthorized");
@@ -180,7 +178,7 @@ function error401($msg = "401 Unauthorized")
 /**
  * vérifie que l'utilisateur est connecté
  */
-function checkUser() 
+function checkUser()
 {
     global $user;
     if ($user && $user instanceof \w2w\Model\User) {
@@ -192,7 +190,7 @@ function checkUser()
 /**
  * vérifie que l'utilisateur est connecté et a les droits d'admin
  */
-function checkAdmin() 
+function checkAdmin()
 {
     global $user;
     if ($user && $user instanceof \w2w\Model\User && $user->isAdmin()) {
@@ -204,7 +202,7 @@ function checkAdmin()
 /**
  * vérifie que l'utilisateur est connecté et a les droits de root
  */
-function checkRoot() 
+function checkRoot()
 {
     global $user;
     if ($user && $user instanceof \w2w\Model\User && $user->isRoot()) {
@@ -214,19 +212,16 @@ function checkRoot()
 }
 
 
-
-
-    
 /**
  * Traitement d'une requête web.
- * 
+ *
  * On recupère l'URI de la requête (ex:'/movie/add.php) et on la redirige
  * vers un script correspondant via un appel à la méthode renderScript()
- * Le résultat renvoyé par l'exécution du script est inséré dans 
+ * Le résultat renvoyé par l'exécution du script est inséré dans
  * la mise en page (layout) commune à tout le site
  * via un simple include du fichier de layout.
  */
-function web_run() 
+function web_run()
 {
     # démmarage session PHP :
     session_start();
@@ -240,13 +235,13 @@ function web_run()
     }
     # récupération de la request uri :
     $requestURI = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : "/";
-    
+
     # ! il faut retirer les éventuels paramètres GET après '?' :
     if (($pos = strpos($requestURI, "?")) !== false) {
         $requestURI = substr($requestURI, 0, $pos);
     }
-    
-    if ($requestURI == "/" || ! $requestURI) {
+
+    if ($requestURI == "/" || !$requestURI) {
         # page d'accueil du site
         $requestURI = "/homepage.php";
     } elseif (strlen($requestURI) > 0 && $requestURI[strlen($requestURI) - 1] == "/") {
@@ -260,7 +255,6 @@ function web_run()
     # insertion du résultat dans la mise en page (layout) du site :
     include FR_SCRIPT_PATH . "/templates/layout.php";
 }
-
 
 
 /*******************************************************************************

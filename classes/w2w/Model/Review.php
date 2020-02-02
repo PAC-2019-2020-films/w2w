@@ -3,6 +3,7 @@
 namespace w2w\Model;
 
 use DateTime;
+use phpDocumentor\Reflection\Types\Mixed_;
 
 /**
  * @Entity
@@ -139,7 +140,7 @@ class Review
     /**
      * @return DateTime
      */
-    public function getUpdatedAt(): DateTime
+    public function getUpdatedAt()
     {
         return $this->updatedAt;
     }

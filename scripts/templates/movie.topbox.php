@@ -9,7 +9,7 @@
     </div>
     <div class="image-movie">
 
-        <img src="/uploads/<?php echo escape($movie->getPoster()); ?>-medium.jpg" class="img-fluid" alt="" />
+        <img src="<?= IMG_PATH_MOVIES . escape($movie->getPoster()); ?>-medium.jpg" class="img-fluid" alt="" />
 
         <a class="overlay" href="/movie.php?id=<?php echo escape($movie->getId()); ?>">
             <div class="text"><i class="far fa-play-circle"></i></div>
