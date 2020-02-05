@@ -24,6 +24,8 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5b034eec6e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/4.13.1/basic/ckeditor.js"></script>
+
 
 </head>
 <body>
