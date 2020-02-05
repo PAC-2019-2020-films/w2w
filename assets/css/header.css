@@ -1,0 +1,34 @@
+/* NAV BAR */
+#logo {
+    font-weight: bold;
+}
+#logo span {
+    color : #FFEE3D;
+    font-size: 26px;
+}
+.navbar {
+    font-size : 0.8rem;
+    text-transform : uppercase;
+    letter-spacing: 0.04rem;
+
+}
+
+.navbar .form-control {
+
+    padding: .375rem 10rem .375rem  1rem;
+    font-size : 0.8rem;
+    border: 1px solid #d0d8db;
+    border-radius:  2rem;
+
+}
+.navbar .form-control:focus {
+
+    border-color: #FFEE3D;
+    box-shadow: none;
+}
+.dropdown-menu a {
+    font-size : 0.8rem;
+    text-transform : none;
+    font-weight: 600;
+
+}

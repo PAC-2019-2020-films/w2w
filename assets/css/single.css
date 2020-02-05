@@ -1,0 +1,15 @@
+/* PAGE FILM */
+
+.page-title{
+
+    height: 200px;
+    padding : 20px 0;
+    color : #fff;
+}
+
+.rating-title {
+    text-transform: uppercase;
+    font-size: .7rem;
+    line-height: 1.2;
+    color : #4b4856;
+}
