@@ -3,21 +3,25 @@
 ?>
 
 
-<div class="movie-box <?php if($index == 0 ) echo "first-movie"; ?>">
+<div class="movie-box <?php if(isset($index) && $index == 0 ) echo "first-movie"; ?>">
     <div class="number-box">
-        <?php echo  intval($index) + 1; ?>
+        <?php if(isset($index)) echo  intval($index) + 1; ?>
     </div>
     <div class="image-movie">
 
-        <img src="<?= IMG_PATH_MOVIES . escape($movie->getPoster()); ?>-medium.jpg" class="img-fluid" alt="" />
+        <!-- A verifier
+        <img src="<?/*= IMG_PATH_MOVIES . escape($movie->getPoster()); */?>-medium.jpg" class="img-fluid" alt="" />-->
+        <img src="/uploads/<?php echo escape($movie->getPoster()); ?>-medium.jpg" class="img-fluid" alt="" />
 
         <a class="overlay" href="/movie.php?id=<?php echo escape($movie->getId()); ?>">
             <div class="text"><i class="far fa-play-circle"></i></div>
         </a>
     </div>
-    <h5><a class="overlay" href="/movie.php?id=<?php echo escape($movie->getId()); ?>">
+    <h5>
+        <a class="overlay" href="/movie.php?id=<?php echo escape($movie->getId()); ?>">
             <?php echo $movie->getTitle(); ?>
-        </a></h5>
+        </a>
+    </h5>
 </div>
 
 
