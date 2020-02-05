@@ -18,7 +18,9 @@ body{
     color : #0F0826;
 }
 
-
+main {
+    min-height: 500px;
+}
 a{
     color : #0F0826;
 }
@@ -41,10 +43,16 @@ a:hover {
 .clearfix {
     clear: both;
 }
+
+.btn {
+    padding: 1rem 2rem;
+    text-transform : uppercase;
+    font-size : 0.9rem;
+    font-weight : 600;
+    border-radius : 0;
+}
 .btn-primary, .btn-primary:hover, .btn-primary:focus , .movie-tag{
     color : #0F0826;
-    text-transform : uppercase;
-
 }
 .btn-primary, .movie-tag{
     background-color : #FFEE3D;
@@ -55,17 +63,13 @@ a:hover {
     border-color : #ffe76f;
 }
 .btn-account{
-
     font-size : 0.8rem;
     border-radius : 2rem;
 }
 .btn-secondary {
-    padding: 1rem 2rem;
+
     background-color : #0F0826;
-    text-transform : uppercase;
-    font-size : 0.9rem;
-    font-weight : 600;
-    border-radius : 0;
+
 }
 .btn-secondary:hover {
     background-color : #FFEE3D;

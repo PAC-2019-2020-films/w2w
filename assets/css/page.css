@@ -1,0 +1,7 @@
+.modal-content, #loginform article{
+    max-width: 400px;
+}
+
+#loginform {
+    border : none;
+}
