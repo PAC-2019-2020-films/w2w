@@ -176,6 +176,30 @@ function error401($msg = "401 Unauthorized")
 }
 
 /**
+ * Afficvhage d'un message de redirection
+ * 
+ * Si $delay vaut 0 : simple redirection instantanée via en-tête http 
+ *      (le message affiché n'aura pas le temps d'être lu...)
+ * Si $delay vaut null : le script "redirect.php" affiche juste le message et un lien vers l'url
+ *      (pas de redirection automatique vers l'url)
+ */
+function redirect($url, $msg = null, $delay = null)
+{
+    if ($delay === 0)  {
+        header("Location: {$url}");     
+        echo escape($msg);
+        exit();
+    } else {
+        echo renderScript("/templates/message.php", [
+            "url" => $url,
+            "msg" => $msg,
+            "delay" => $delay,
+        ]);
+        exit();
+    }
+}
+
+/**
  * vérifie que l'utilisateur est connecté
  */
 function checkUser()
