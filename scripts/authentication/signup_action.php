@@ -5,6 +5,8 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 // Check that the user is not already logged in
 
+
+
 if (isset($_SESSION['user'])) {
     header('location: ' . 'account/index.php');
     exit();

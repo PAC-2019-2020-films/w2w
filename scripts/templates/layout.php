@@ -5,7 +5,7 @@
 
 global $user;
 
-$headTitle = isset($headTitle) ? $headTitle : "W2W : What are you gonna watch now ?!";
+$headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch now ?!";
 ?>
 
 <!doctype html>
@@ -21,20 +21,21 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W : What are you gonna watch no
     <link rel="stylesheet" href="/assets/css/main.css">
     <!-- Custom styles for this template -->
     <link href="/assets/css/carousel.css" rel="stylesheet">
-    <!-- Bootstrap core CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,900&display=swap" rel="stylesheet">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5b034eec6e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/4.13.1/basic/ckeditor.js"></script>
+
 
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
         <div class="container">
             <div id="logo">
-                
-    
-                <a class="navbar-brand" href="#">
-                    <img alt="logo" src="/assets/img/logo-w2w.svg">
+                <a class="navbar-brand" href="/">
+                    <img alt="logo" src="/assets/img/logo-w2w.png">
+                    w<span>2</span>w
                 </a>
             </div>
 
@@ -59,9 +60,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W : What are you gonna watch no
                     <li class="nav-item ">
                         <a class="nav-link" href="#">Themes </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/tests/">TESTS </a>
-                    </li>
+
                 </ul>
                 <form class="form-inline my-2 my-md-0 mr-auto">
                     <input class="form-control" type="text" placeholder="Rechercher un film" aria-label="Search">
@@ -149,9 +148,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W : What are you gonna watch no
             </div>
         </div>
 
-
-
-        <p class="copyright text-center">&copy; 2017-2019 What To Watch - All right Reserved </p>
+        <p class="copyright text-center">&copy; 2019 - <?php echo date("Y"); ?> What To Watch - All right Reserved </p>
     </div>
 
 </footer>

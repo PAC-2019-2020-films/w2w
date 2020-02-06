@@ -11,4 +11,33 @@ if (isset($_SESSION['message'])) {
 unset($_SESSION['message']);
 
 ?>
-<h1>index partie compte utilisateur</h1>
+<main class="container">
+    <!--Galerie-->
+    <section id="galerie" class="user">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Utilisateur</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="../../assets/img/user_page/reviews.png" style="width:100px" alt="reviews">
+                <img src="../../assets/img/user_page/movies.png" style="width:100px" alt="movies">
+
+            </div>
+            <div class="column">
+                <img src="../../assets/img/user_page/profile.png" style="width:100px" alt="profile">
+                <img src="../../assets/img/user_page/categories.png" style="width:100px" alt="categories">
+
+            </div>
+            <div class="column">
+                <img src="../../assets/img/user_page/delete.png" style="width:100px" alt="delete">
+                <img src="../../assets/img/user_page/tags.png" style="width:100px" alt="tags">
+
+
+            </div>
+            <div class="col-md-12 padding"></div>
+        </div>
+    </section>
+    <!--End Galerie-->
+</main>

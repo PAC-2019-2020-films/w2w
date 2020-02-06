@@ -153,10 +153,10 @@ function param($name, $default = null, $filter = true)
             if ($filter) {
                 if ($value !== null && $value !== 0) {
                     if (is_array($value)) {
-                        array_map('strip_tags', $value);
+                        array_map('strip_tags', $value, '<strong></strong> <li></li> <em></em> <ul></ul> <ol></ol> <p></p> <a></a>');
                         array_map('trim', $value);
                     } else {
-                        $value = strip_tags($value);
+                        $value = strip_tags($value, '<strong></strong> <li></li> <em></em> <ul></ul> <ol></ol> <p></p> <a></a>');
                         $value = trim($value);
                     }
                 }
@@ -173,6 +173,30 @@ function error401($msg = "401 Unauthorized")
     header("HTTP/1.1 401 Unauthorized");
     echo $msg;
     exit();
+}
+
+/**
+ * Afficvhage d'un message de redirection
+ * 
+ * Si $delay vaut 0 : simple redirection instantanée via en-tête http 
+ *      (le message affiché n'aura pas le temps d'être lu...)
+ * Si $delay vaut null : le script "redirect.php" affiche juste le message et un lien vers l'url
+ *      (pas de redirection automatique vers l'url)
+ */
+function redirect($url, $msg = null, $delay = null)
+{
+    if ($delay === 0)  {
+        header("Location: {$url}");     
+        echo escape($msg);
+        exit();
+    } else {
+        echo renderScript("/templates/message.php", [
+            "url" => $url,
+            "msg" => $msg,
+            "delay" => $delay,
+        ]);
+        exit();
+    }
 }
 
 /**

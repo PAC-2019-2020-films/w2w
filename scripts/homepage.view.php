@@ -19,18 +19,17 @@ p<?php
                     echo 'active';
                 }
                 ?>">
-                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#041721"/>
-                        <img class="d-block w-100" src="/uploads/<?php echo escape($movie->getPoster()); ?>-big.jpg"></svg>
-                    <div class="container">
-                        <div class="carousel-caption text-left">
-                            <!-- Tags des films -->
-                            <?php echo template("movie.tags.php", ["movie" => $movie]); ?>
-                            <h2 class="clearfix pt-3"><?php echo $movie->getTitle(); ?></h2>
-                            <!-- Film info -->
-                            <?php echo template("movie.data.php", ["movie" => $movie]); ?>
-                            <p><a class="btn btn-lg btn-secondary" href="movie.php?id=<?php echo escape($movie->getId()); ?>" role="button">Lire notre critique</a></p>
-                        </div>
+                    <img src="/uploads/<?php echo escape($movie->getPoster()); ?>-big.jpg"  alt="<?php echo $movie->getTitle(); ?>">
+
+                    <div class="carousel-caption text-left">
+                        <!-- Tags des films -->
+                        <?php echo template("movie.tags.php", ["movie" => $movie]); ?>
+                        <h2 class="clearfix pt-3"><?php echo $movie->getTitle(); ?></h2>
+                        <!-- Film info -->
+                        <?php echo template("movie.data.php", ["movie" => $movie]); ?>
+                        <p><a class="btn btn-lg btn-secondary" href="movie.php?id=<?php echo escape($movie->getId()); ?>" role="button">Lire notre critique</a></p>
                     </div>
+
 
                 </div>
 
@@ -62,7 +61,7 @@ p<?php
                 <h3>What to watch  now</h3>
 
                 <p class="subtitle small">Vos films préférés ce mois-ci</p>
-                <span class="line-title"><hr/></span>
+                <div class="line-title"><hr/></div>
             </div>
             <div class="flex-right">
                 <p class="view-more">
@@ -77,7 +76,7 @@ p<?php
                     ?>
 
                     <?php foreach ($popularMovies as $movie) : ?>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-6">
                         <?php echo template("movie.thumbnail.php", ["movie" => $movie]); ?>
                     </div>
                 <?php endforeach; ?>
@@ -98,7 +97,7 @@ p<?php
                 <h3>What to watch  reviews</h3>
 
                 <p class="subtitle small">Nos dernières critiques</p>
-                <span class="line-title"><hr/></span>
+                <div class="line-title"><hr/></div>
             </div>
             <div class="flex-right">
                 <p class="view-more">
@@ -115,7 +114,7 @@ p<?php
                         ?>
 
                         <?php foreach ($lastMovies as $movie) : ?>
-                        <div class="col-lg-2">
+                        <div class="col-lg-2 col-md-4 col-sm-4 col-6">
                             <?php echo template("movie.thumbnail.php", ["movie" => $movie]); ?>
                         </div>
                     <?php endforeach; ?>
@@ -126,7 +125,7 @@ p<?php
             </div>
         </div>
     </div>
-    </div>
+
 </section>
 <!-- Top 5 par W2W ce mois-ci
                                        ================================================== -->
@@ -137,7 +136,7 @@ p<?php
                 <h3>What Top Watch Top 5</h3>
 
                 <p class="subtitle small">Nos 5 films favoris ce mois-ci</p>
-                <span class="line-title"><hr/></span>
+                <div class="line-title"><hr/></div>
             </div>
             <div class="flex-right">
                 <p class="view-more">
@@ -160,9 +159,7 @@ p<?php
                     ?>
 
                 <?php endif; ?>
-
             </div>
-
 
             <div class="col-lg-6">
                 <div class="row">

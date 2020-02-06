@@ -22,6 +22,7 @@
             $movie     = $movieDAO->findOneBy('id', $movieId);
             $createdAt = new DateTime("now", new DateTimeZone("Europe/Brussels"));
             $rating    = $ratingDAO->findOneBy('id', $ratingId);
+          
             
             if (isset($movie) && isset($rating)) {
                 if (!($reviewDAO->findByUserAndMovie($user, $movie))) {
