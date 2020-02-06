@@ -171,11 +171,20 @@ section h3 {
 /*** USER PAGE ***/
 
 .user .column {
-    flex: 25%;
-    max-width: 25%;
+    flex: 15%;
+    max-width: 15%;
     padding: 0 4px;
 }
 .user .column img {
+    position:absolute;
     margin-top: 8px;
     vertical-align: middle;
+    -webkit-transition: opacity 0.2s ease-in-out;
+    -moz-transition: opacity 0.2s ease-in-out;
+    -o-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.user .column img.top:hover {
+    opacity: 0;
 }
