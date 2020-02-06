@@ -38,16 +38,10 @@
                             <li class="text-left">Année de sortie : <span
                                         class="text-right"> <?php echo $movie->getYear(); ?></span></li>
                             <li>Durée:</li>
-<<<<<<< HEAD
 
                             <li>De: <span
                                         class="text-right"></span></li>
 
-=======
-                            
-                            <li>De:
-                            
->>>>>>> b67585ca264fb884ce9f519907057a8f1881fd77
                             </li>
                             <li>Genre:</li>
                             <li>Nationalité:</li>
