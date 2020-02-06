@@ -21,7 +21,7 @@
         </div>
         <div class="row">
             <div class="column">
-                <a href="">
+                <a href="profile.php">
                     <img src="../../assets/img/user_page/profile_on.png" style="width:100px" alt="profile" class="bottom">
                     <img src="../../assets/img/user_page/profile.png" style="width:100px" alt="profile" class="top">
                 </a>
@@ -33,21 +33,12 @@
                 </a>
             </div>
             <div class="column">
-                <img src="../../assets/img/user_page/delete_on.png" style="width:100px" alt="delete" class="bottom">
-                <img src="../../assets/img/user_page/delete.png" style="width:100px" alt="delete" class="top">
+                <a href="delete_account.php">
+                    <img src="../../assets/img/user_page/delete_on.png" style="width:100px" alt="delete" class="bottom">
+                    <img src="../../assets/img/user_page/delete.png" style="width:100px" alt="delete" class="top">
+                </a>
             </div>
-            <div class="column">
-                <img src="../../assets/img/user_page/categories_on.png" style="width:100px" alt="categories" class="bottom">
-                <img src="../../assets/img/user_page/categories.png" style="width:100px" alt="categories" class="top">
-            </div>
-            <div class="column">
-                <img src="../../assets/img/user_page/tags_on.png" style="width:100px" alt="tags" class="bottom">
-                <img src="../../assets/img/user_page/tags.png" style="width:100px" alt="tags" class="top">
-            </div>
-            <div class="column">
-                <img src="../../assets/img/user_page/movies_on.png" style="width:100px" alt="movies" class="bottom">
-                <img src="../../assets/img/user_page/movies.png" style="width:100px" alt="movies" class="top">
-            </div>
+           
             <div class="col-md-12 padding"></div>
         </div>
     </section>
