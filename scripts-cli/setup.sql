@@ -12,7 +12,7 @@ CREATE TABLE `roles` (
 CREATE TABLE `users` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `user_name` VARCHAR(40) UNIQUE NOT NULL,
-    `email` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(120) UNIQUE NOT NULL,
     `email_verified` BOOLEAN NOT NULL,
     `password_hash` VARCHAR(255) NOT NULL,
     `first_name` VARCHAR(80),

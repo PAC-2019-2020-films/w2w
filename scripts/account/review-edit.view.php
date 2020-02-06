@@ -1,9 +1,8 @@
-
 <?php
     if (isset($userReview)) {
         $ratingDAO = new \w2w\DAO\Doctrine\DoctrineRatingDAO();
-        $ratings = $ratingDAO->findAll();
-        $movieId = param('id');
+        $ratings   = $ratingDAO->findAll();
+        $movieId   = param('id');
         ?>
         
         <div class="modal fade" id="modal-edit-review" tabindex="-1" role="dialog" aria-labelledby="modal-login"
@@ -11,7 +10,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editlabel">edit</h5>
+                        <h5 class="modal-title" id="editlabel">Mettre à jour ma critique</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -33,15 +32,19 @@
                                 ?>
                                 
                             </textarea>
-    
+                            
                             <script>
-                                CKEDITOR.replace( 'updateComment' );
+                                CKEDITOR.replace('updateComment');
                             </script>
                             <input type="hidden" name="reviewId" value="<?php echo escape($userReview->getId()); ?>">
                             <input type="hidden" name="movieId" value="<?php echo escape($movieId); ?>">
-                            <input type="submit" class="btn btn-primary">
+                            <div class="d-flex justify-content-between">
+                                
+                                <input type="submit" class="btn btn-primary" value="Mettre à jour ma critique">
+                                <button class="btn btn-primary" data-dismiss="modal" aria-label="Close"> Cancel</button>
+                            
+                            </div>
                         </form>
-                        <button class="btn btn-primary" data-dismiss="modal" aria-label="Close"> Cancel</button>
                     </div>
                 </div>
             </div>
