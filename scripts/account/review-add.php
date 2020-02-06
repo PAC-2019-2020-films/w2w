@@ -2,16 +2,10 @@
     global $user;
     
     if (checkUser()) {
-    
-//        \w2w\Utils\Utils::dump($_POST['comment']);
-//        die();
         
         $movieId  = param('movieId');
         $comment  = param('comment');
         $ratingId = param("rating");
-    
-//        \w2w\Utils\Utils::dump($comment);
-//        die();
         
         $rawInput = [
             'movie'   => ["num", $movieId, false],
