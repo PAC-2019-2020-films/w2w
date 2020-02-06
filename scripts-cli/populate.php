@@ -431,7 +431,7 @@ class DBPopulator
             $year = $this->attr($element, "year");
             $poster = $this->attr($element, "poster", -1);
             if ($poster == -1) {
-				$poster = str_replace(" ", "-", strtolower($title));
+				$poster = str_replace(" ", "_", strtolower($title));
 			}
             $category = $this->attr($element, "category");
             $tags = explode(",", $this->attr($element, "tags"));
