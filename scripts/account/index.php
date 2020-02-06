@@ -13,7 +13,7 @@ unset($_SESSION['message']);
 ?>
 <main class="container">
     <!--Galerie-->
-    <section id="galerie">
+    <section id="galerie" class="user">
         <div class="row">
             <div class="col-md-12">
                 <h3>Utilisateur</h3>
@@ -21,19 +21,19 @@ unset($_SESSION['message']);
         </div>
         <div class="row">
             <div class="column">
-                <img src="../../assets/img/user_page/reviews.png" style="width:75%" alt="reviews">
-                <img src="../../assets/img/user_page/movies.png" style="width:75%" alt="movies">
-                <img src="assets/img/user_page/Galerie3.jpeg" style="width:100%" alt="galerie03">
+                <img src="../../assets/img/user_page/reviews.png" style="width:100px" alt="reviews">
+                <img src="../../assets/img/user_page/movies.png" style="width:100px" alt="movies">
+
             </div>
             <div class="column">
-                <img src="../../assets/img/user_page/profile.png" style="width:75%" alt="profile">
-                <img src="../../assets/img/user_page/categories.png" style="width:75%" alt="categories">
-                <img src="assets/img/user_page/Galerie7.jpeg" style="width:100%" alt="galerie07">
+                <img src="../../assets/img/user_page/profile.png" style="width:100px" alt="profile">
+                <img src="../../assets/img/user_page/categories.png" style="width:100px" alt="categories">
+
             </div>
             <div class="column">
-                <img src="../../assets/img/user_page/delete.png" style="width:75%" alt="delete">
-                <img src="../../assets/img/user_page/tags.png" style="width:75%" alt="tags">
-                <img src="assets/img/user_page/Galerie11.jpeg" style="width:100%" alt="galerie11">
+                <img src="../../assets/img/user_page/delete.png" style="width:100px" alt="delete">
+                <img src="../../assets/img/user_page/tags.png" style="width:100px" alt="tags">
+
 
             </div>
             <div class="col-md-12 padding"></div>
