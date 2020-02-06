@@ -39,7 +39,8 @@ unset($_SESSION['message']);
                                         class="text-right"> <?php echo $movie->getYear(); ?></span></li>
                             <li>Durée:</li>
 
-                            <li>De:
+                            <li>De: <span
+                                        class="text-right"> <?php echo $movie->getId()->; ?></span></li>
 
                             </li>
                             <li>Genre:</li>
