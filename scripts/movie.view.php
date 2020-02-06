@@ -92,8 +92,9 @@
                         if (!$hasAlreadyReviewed) {
                             ?>
                             <h4>Et vous, qu'en pensez-vous ?</h4>
-                            <form action="account/review-add.php" method="post" id="insert-review-user">
-                                <select name="rating" id="">
+                            <form action="account/review-add.php" method="post" id="insert-review-user" class="form-group">
+                                <label for="rating">C'est un : </label>
+                                <select name="rating" id="rating" class="form-control">
                                     <?php
                                         foreach ($ratings as $rating) {
                                             ?>
@@ -102,7 +103,7 @@
                                         }
                                     ?>
                                 </select>
-                                <textarea name="comment" id="comment" cols="80" rows="10" title=""></textarea>
+                                <textarea name="comment" id="comment" cols="80" rows="10" title="" class="form-control"></textarea>
                                 
                                 
                                 <script>
