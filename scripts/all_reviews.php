@@ -1,5 +1,5 @@
 <?php
 
-$reviewsDAO = new \w2w\DAO\Doctrine\DoctrineReviewDAO();
+$moviesDAO = new \w2w\DAO\Doctrine\DoctrineMovieDAO();
 
-$reviews = $reviewsDAO->findAll();
+$movies = $moviesDAO->findAll();
