@@ -38,9 +38,10 @@
                             <li class="text-left">Année de sortie : <span
                                         class="text-right"> <?php echo $movie->getYear(); ?></span></li>
                             <li>Durée:</li>
-                            
-                            <li>De:
-                            
+
+                            <li>De: <span
+                                        class="text-right"></span></li>
+
                             </li>
                             <li>Genre:</li>
                             <li>Nationalité:</li>
@@ -75,56 +76,64 @@
                     <p>
                         /*Insert Review w2w here*/
                     </p>
+                    <span class="line-title"><hr/></span>
+                    
                     <h3>Ce que les utilisateurs en pensent</h3>
-                    <?php
-                        if (!$movie->getReviews()) {
-                            /**
-                             * TODO : aucune review format
-                             */
-                            echo "aucune review utilisateur.";
-                        } else {
-                            foreach ($movie->getReviews() as $userReview) {
-                                echo template("userReview.php", ["userReview" => $userReview]);
+                    <div class="user_reviews">
+                        <?php
+                            if (!$movie->getReviews()) {
+                                /**
+                                 * TODO : aucune review format
+                                 */
+                                echo "aucune review utilisateur.";
+                            } else {
+                                foreach ($movie->getReviews() as $userReview) {
+                                    echo template("userReview.php", ["userReview" => $userReview]);
+                                }
                             }
-                        }
-                    ?>
+                        ?>
+                    </div>
                     <?php
                         if (!$hasAlreadyReviewed) {
                             ?>
-                            <h4>Et vous, qu'en pensez-vous ?</h4>
-                            <form action="account/review-add.php" method="post" id="insert-review-user">
-                                <select name="rating" id="">
-                                    <?php
-                                        foreach ($ratings as $rating) {
-                                            ?>
-                                            <option value="<?= $rating->getId() ?>"><?= $rating->getName() ?></option>
-                                            <?php
-                                        }
+                            <div class="form_user-review mt-3">
+                                <div class="line-title">
+                                    <hr>
+                                </div>
+                                <h4>Et vous, qu'en pensez-vous ?</h4>
+                                <form action="account/review-add.php" method="post" id="insert-review-user" class="form-group">
+                                    <label for="rating">C'est un : </label>
+                                    <select name="rating" id="rating" class="form-control mb-3">
+                                        <?php
+                                            foreach ($ratings as $rating) {
+                                                ?>
+                                                <option value="<?= $rating->getId() ?>"><?= $rating->getName() ?></option>
+                                                <?php
+                                            }
+                                        ?>
+                                    </select>
+                                    <textarea name="comment" id="comment" cols="80" rows="10" title="" class="form-control"></textarea>
+                                    
+                                    
+                                    <script>
+                                        CKEDITOR.replace('comment');
+                                    </script>
+                                    <input type="hidden" name="movieId" value="<?= $movie->getId() ?>">
+                                    <?php if (isset($_SESSION["user"])) {
+                                        ?>
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block mt-3">Envoyer</button>
+                                    
+                                    <?php } else {
+                                        ?>
+                                        <a href="authentication/login.php" class="btn btn-primary btn-lg btn-block">Login to submit
+                                            your own review</a>
+                                        <?php
+                                    }
                                     ?>
-                                </select>
-                                <textarea name="comment" id="comment" cols="80" rows="10" title=""></textarea>
-                                
-                                
-                                <script>
-                                    CKEDITOR.replace('comment');
-                                </script>
-                                <input type="hidden" name="movieId" value="<?= $movie->getId() ?>">
-                                <?php if (isset($_SESSION["user"])) {
-                                    ?>
-                                    <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer</button>
-                                
-                                <?php } else {
-                                    ?>
-                                    <a href="authentication/login.php" class="btn btn-primary btn-lg btn-block">Login to submit
-                                        your own review</a>
-                                    <?php
-                                }
-                                ?>
-                            </form>
+                                </form>
+                            </div>
+                </div>
                             <?php
-                        } else {
-                            echo"<h4>Vous nous pouvez publier qu'une seule critique par film</h4>";
-                            
                         }
                     
                     ?>

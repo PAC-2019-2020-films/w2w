@@ -8,7 +8,7 @@
         </div>
     </div>
 </div>
-
+<div class="dark-bg">
 <div class="container">
     <div class="row">
         <!-- début de Dominique -->
@@ -109,6 +109,4 @@
     </div>
 
 </div>
-
-</body>
-</html>
+</div>

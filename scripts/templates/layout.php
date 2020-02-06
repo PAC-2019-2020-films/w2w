@@ -51,7 +51,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown07XL" data-toggle="dropdown" aria-expanded="false">Films</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown07XL">
-                            <a class="dropdown-item" href="/reviews.php">Tous les films</a>
+                            <a class="dropdown-item" href="/all_movies.php">Tous les films</a>
                             <a class="dropdown-item" href="#">Films les mieux notés</a>
                             <a class="dropdown-item" href="#">Films les plus populaires</a>
                             <a class="dropdown-item" href="#">Parcourir les films par genre</a>
@@ -125,7 +125,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                 <ul class="list-inline ">
 
                     <li> <a href="/about.php" target="_blank">A propos</a></li>
-                    <li> <a href="/team.view.php" target="_blank">L'équipe</a></li>
+                    <li> <a href="/team.php" target="_blank">L'équipe</a></li>
                     <li> <a href="/movies.php" target="_blank">Les films</a></li>
                     <li> <a href="/contact.php" target="_blank">Nous contacter</a></li>
                     <li> <a href="/login.php" target="_blank">Se connecter</a></li>
