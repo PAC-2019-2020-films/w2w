@@ -276,6 +276,7 @@ class ScriptService
             $artist = new Artist(null, $firstName, $lastName);
             if (is_array($actorTitles)) {
                 foreach ($actorTitles as $title) {
+					$title = trim($title);
                     if ($movie = $this->getMovieDAO()->findByTitle($title)) {
                         $movie->addActor($artist);
                     }
@@ -283,6 +284,7 @@ class ScriptService
             }
             if (is_array($directorTitles)) {
                 foreach ($directorTitles as $title) {
+					$title = trim($title);
                     if ($movie = $this->getMovieDAO()->findByTitle($title)) {
                         $movie->addDirector($artist);
                     }
@@ -291,6 +293,7 @@ class ScriptService
             $this->getArtistDAO()->save($artist);
             return $artist;
         }
+        return null;
     }
  
     public function deleteAll()
@@ -426,7 +429,10 @@ class DBPopulator
             $title = $this->attr($element, "title");
             $desc = $this->attr($element, "desc");
             $year = $this->attr($element, "year");
-            $poster = $this->attr($element, "poster");
+            $poster = $this->attr($element, "poster", -1);
+            if ($poster == -1) {
+				$poster = str_replace(" ", "-", strtolower($title));
+			}
             $category = $this->attr($element, "category");
             $tags = explode(",", $this->attr($element, "tags"));
             if ($title) {

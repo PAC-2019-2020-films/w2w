@@ -16,42 +16,67 @@
     <user name="Raoul" email="raoul@gmail.com" firstName="Raoul" lastName="Gauvain"/>
     <user name="René" email="rene@gmail.com" firstName="René" lastName="Dupont" emailVerified="false"/>
     
-    <tag name="biopic" desc="biopic movies..."/>
-    <tag name="drama" desc="drama movies..."/>
-    <tag name="crime" desc="crime movies..."/>
-    <tag name="romance" desc="romance movies..."/>
-    <tag name="western" desc="bang, bang"/>
-    <tag name="sport" desc="sport movies..."/>
+    <tag name="Action" desc="Action movies..."/>
+    <tag name="Adventure" desc="Adventure movies..."/>
+    <tag name="Biopic" desc="Biopic movies..."/>
+    <tag name="Comedy" desc="Comedy movies..."/>
+    <tag name="Drama" desc="Drama movies..."/>
+    <tag name="Crime" desc="Crime movies..."/>
+    <tag name="Thriller" desc="Thriller movies..."/>
+    <tag name="Romance" desc="Romance movies..."/>
+    <tag name="Western" desc="Bang, bang"/>
+    <tag name="Sport" desc="Sport movies..."/>
     <tag name="S-F" desc="S-F movies..."/>
     <tag name="Fantastic" desc="Fantastic movies..."/>
     <tag name="RomCom" desc="RomCom movies..."/>
-    <tag name="History" desc="Histocrical movies..."/>
+    <tag name="History" desc="Historical movies..."/>
+    <tag name="War" desc="War movies..."/>
     
     <category name="En couple" desc="Films à voir à deux..."/>
     <category name="En famille" desc="Films à voir en famille..."/>
     <category name="Entre amis" desc="Films à voir entre amis..."/>
-    <category name="Nawak" desc="N'importe quoi"/>
+    <category name="Divers" desc="N'importe quoi"/>
 
-    <movie title="Bohemian Rhapsody" desc="Biopic of F.Mercury" year="2018" poster="" category="Nawak" tags="biopic,drama">
+
+
+    <movie title="1917" desc="Le soldat Ryan se dédouble et se trompe de guerre." year="2019" category="Divers" tags="History|War">
+    </movie>
+    <movie title="Joker" desc="In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society." year="2019" category="Divers" tags="Crime|Drama|Thriller">
+    </movie>
+    <movie title="Jojo Rabbit" desc="A young boy in Hitler's army finds out his mother is hiding a Jewish girl in their home." year="2019" category="Divers" tags="Comedy|Drama|War">
+    </movie>
+    <movie title="Bohemian Rhapsody" desc="Biopic of F.Mercury" year="2018" poster="bohemian_rhapsody" category="Divers" tags="biopic,drama">
         <review content="C'est génial." user="Raoul" rating="3"/>
         <review content="C'est de la merde." user="Lea" rating="-1"/>
         <review content="C'est naze, c'est plein de tarlouzes." user="René" rating="-1">
             <report message="René est un connard homophobe." user="Raoul"/>
         </review>
     </movie>
-    <movie title="La Promesse" desc="drame social belgo-belge" year="2005" poster="" category="Nawak" tags="drama,crime,romance">
+    <movie title="La Promesse" desc="drame social belgo-belge" year="2005" poster="la-promesse" category="Divers" tags="drama,crime,romance">
         <review content="C'est beau comme la Meuse sous la pluie quand le ciel bas et lourd pèse comme un couvercle de pot de sauce Banzaï." user="Lea" rating="3"/>
     </movie>
-    <movie title="Le silence de Lorna" desc="N'ouvre ta bouche que si ce que tu vas dire est plus beau que le silence." year="2008" poster="" category="Nawak" tags="drama">
+    <movie title="Le silence de Lorna" desc="N'ouvre ta bouche que si ce que tu vas dire est plus beau que le silence." year="2008" poster="le-silence-de-lorna" category="Divers" tags="drama">
     </movie>
-    <movie title="Rosetta" desc="Ce film social est triste, belge, et palmé d'or à Cannes" year="1999" poster="" category="Nawak" tags="">
+    <movie title="Rosetta" desc="Ce film social est triste, belge, et palmé d'or à Cannes" year="1999" category="Divers" tags="">
         <review content="C'est déchirant comme un coup de couteau dans un édredon en plume." user="Lea" rating="3"/>
     </movie>
-    <movie title="Million Dollar Baby" desc="Boxe, tabouret fatal, paternité problématique" year="2004" poster="" category="Nawak" tags="drama,sport">
+    <movie title="Million Dollar Baby" desc="Boxe, tabouret fatal, paternité problématique" year="2004" oster="million-dollar-baby" category="Divers" tags="drama,sport">
     </movie>
-    <movie title="Unforgiven" desc="" year="1992" poster="" category="Nawak" tags="drama,western">
+    <movie title="Unforgiven" desc="" year="1992" poster="unforgiven" category="Divers" tags="drama,western">
     </movie>
-    <movie title="" desc="" year="" poster="" category="Nawak" tags="">
+    <movie title="Uncut Gems" desc="A charismatic New York City jeweler always on the lookout for the next big score makes a series of high-stakes bets that could lead to the windfall of a lifetime." year="2019" category="Divers" tags="Crime|Drama|Thriller">
+    </movie>
+    <movie title="Dolittle" desc="A physician discovers that he can talk with animals." year="2020" category="Divers" tags="Action|Adventure|Comedy">
+    </movie>
+    <movie title="" desc="" year="" category="Divers" tags="">
+    </movie>
+    <movie title="" desc="" year="" category="Divers" tags="">
+    </movie>
+    <movie title="" desc="" year="" category="Divers" tags="">
+    </movie>
+    <movie title="" desc="" year="" category="Divers" tags="">
+    </movie>
+    <movie title="" desc="" year="" category="Divers" tags="">
     </movie>
 
     <message firstName="Jules" lastName="Smith" email="jules.smith@gmail.com" content="C'est quoi, ce site de merde ?"/>
@@ -71,5 +96,15 @@
     <artist firstName="Gene" lastName="Hackman" actor="Unforgiven"/>
     <artist firstName="Morgan" lastName="Freeman" actor="Unforgiven"/>
     <artist firstName="Hilary" lastName="Swank" actor="Million Dollar Baby"/>
+    <artist firstName="Taika" lastName="Waititi" actor="" director="Jojo Rabbit"/>
+    <artist firstName="Roman" lastName="Griffin Davis" actor="Jojo Rabbit"/>
+    <artist firstName="Scarlett" lastName="Johansson" actor="Jojo Rabbit" director=""/>
+    <artist firstName="" lastName="" actor="" director=""/>
+    <artist firstName="" lastName="" actor="" director=""/>
+    <artist firstName="" lastName="" actor="" director=""/>
+    <artist firstName="" lastName="" actor="" director=""/>
+    <artist firstName="" lastName="" actor="" director=""/>
+    <artist firstName="" lastName="" actor="" director=""/>
+    <artist firstName="" lastName="" actor="" director=""/>
 
 </data>
