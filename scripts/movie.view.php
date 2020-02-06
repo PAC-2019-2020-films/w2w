@@ -79,8 +79,8 @@
                     <?php
                         if (!$movie->getReviews()) {
                             /**
-                            * TODO : aucune review format
-                            */
+                             * TODO : aucune review format
+                             */
                             echo "aucune review utilisateur.";
                         } else {
                             foreach ($movie->getReviews() as $userReview) {
@@ -88,34 +88,46 @@
                             }
                         }
                     ?>
-                    
-                    <h4>Et vous, qu'en pensez-vous ?</h4>
-                    <form action="account/review-add.php" method="post" id="insert-review-user">
-                        <select name="rating" id="">
-                            <?php
-                                foreach ($ratings as $rating) {
+                    <?php
+                        if (!$hasAlreadyReviewed) {
+                            ?>
+                            <h4>Et vous, qu'en pensez-vous ?</h4>
+                            <form action="account/review-add.php" method="post" id="insert-review-user">
+                                <select name="rating" id="">
+                                    <?php
+                                        foreach ($ratings as $rating) {
+                                            ?>
+                                            <option value="<?= $rating->getId() ?>"><?= $rating->getName() ?></option>
+                                            <?php
+                                        }
                                     ?>
-                                    <option value="<?= $rating->getId() ?>"><?= $rating->getName() ?></option>
+                                </select>
+                                <textarea name="comment" id="comment" cols="80" rows="10" title=""></textarea>
+                                
+                                
+                                <script>
+                                    CKEDITOR.replace('comment');
+                                </script>
+                                <input type="hidden" name="movieId" value="<?= $movie->getId() ?>">
+                                <?php if (isset($_SESSION["user"])) {
+                                    ?>
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer</button>
+                                
+                                <?php } else {
+                                    ?>
+                                    <a href="authentication/login.php" class="btn btn-primary btn-lg btn-block">Login to submit
+                                        your own review</a>
                                     <?php
                                 }
-                            ?>
-                        </select>
-                        <textarea name="comment" id="comment" cols="80" rows="10" title=""></textarea>
-                        <script>
-                            CKEDITOR.replace( 'comment' );
-                        </script>
-                        <input type="hidden" name="movieId" value="<?= $movie->getId() ?>">
-                        <?php if (isset($_SESSION["user"])) { ?>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer</button>
-                        
-                        <?php } else {
-                            ?>
-                            <a href="authentication/login.php" class="btn btn-primary btn-lg btn-block">Login to submit
-                                your own review</a>
+                                ?>
+                            </form>
                             <?php
+                        } else {
+                            echo"<h4>Vous nous pouvez publier qu'une seule critique par film</h4>";
+                            
                         }
-                        ?>
-                    </form>
+                    
+                    ?>
                 </div>
             
             

@@ -153,10 +153,10 @@ function param($name, $default = null, $filter = true)
             if ($filter) {
                 if ($value !== null && $value !== 0) {
                     if (is_array($value)) {
-                        array_map('strip_tags', $value);
+                        array_map('strip_tags', $value, '<strong></strong> <li></li> <em></em> <ul></ul> <ol></ol> <p></p> <a></a>');
                         array_map('trim', $value);
                     } else {
-                        $value = strip_tags($value);
+                        $value = strip_tags($value, '<strong></strong> <li></li> <em></em> <ul></ul> <ol></ol> <p></p> <a></a>');
                         $value = trim($value);
                     }
                 }
