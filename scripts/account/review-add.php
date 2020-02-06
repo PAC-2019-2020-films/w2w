@@ -2,10 +2,16 @@
     global $user;
     
     if (checkUser()) {
+    
+//        \w2w\Utils\Utils::dump($_POST['comment']);
+//        die();
         
         $movieId  = param('movieId');
         $comment  = param('comment');
         $ratingId = param("rating");
+    
+//        \w2w\Utils\Utils::dump($comment);
+//        die();
         
         $rawInput = [
             'movie'   => ["num", $movieId, false],
@@ -22,6 +28,7 @@
             $movie     = $movieDAO->findOneBy('id', $movieId);
             $createdAt = new DateTime("now", new DateTimeZone("Europe/Brussels"));
             $rating    = $ratingDAO->findOneBy('id', $ratingId);
+          
             
             if (isset($movie) && isset($rating)) {
                 if (!($reviewDAO->findByUserAndMovie($user, $movie))) {
