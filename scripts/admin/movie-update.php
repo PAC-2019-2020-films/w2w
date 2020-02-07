@@ -1,4 +1,5 @@
 <?php
+
 use \w2w\DAO\DAOFactory;
 
 checkAdmin();
@@ -15,15 +16,13 @@ $movieDAO = $daoFactory->getMovieDAO();
 $movie = $movieDAO->find($id);
 
 
-
-
 if ($movie) {
     $movie->setTitle($title);
     $movie->setDescription($description);
     $movie->setYear($year);
     $movie->setPoster($poster);
-    
-    
+
+
     if (($category = $movie->getCategory()) && ($category->getId() == $category_id)) {
     } else {
         $categoryDAO = $daoFactory->getCategoryDAO();
@@ -32,9 +31,17 @@ if ($movie) {
             $movie->setCategory($category);
         }
     }
-    $movieDAO->update($movie);
-    redirect("/admin/movie-list.php", "Movie updated");
+    $result = $movieDAO->update($movie);
+
+    \w2w\Utils\Utils::message($result, 'Film mis à jour', 'Erreur lors de la mise à jour du film');;
+    header('Location: /admin/movie-list.php');
+    exit();
+
+//    redirect("/admin/movie-list.php", "Movie updated");
 } else {
-    redirect("/admin/movie-list.php", "Movie #{$id} not found");
+    \w2w\Utils\Utils::message(false, 'Film mis à jour', 'Erreur lors de la mise à jour du film');;
+    header('Location: /admin/movie-list.php');
+    exit();
+//    redirect("/admin/movie-list.php", "Movie #{$id} not found");
 }
 

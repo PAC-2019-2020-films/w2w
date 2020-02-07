@@ -32,14 +32,4 @@ echo template("admin/form.movie.php", [
 ]);
 
 
-?>
 
-
-<br/><br/><br/>
-
-<form action="/admin/movie-delete.php" method="get">
-    <div>
-        <input type="hidden" id="id" name="id" value="<?php echo escape($movie->getId()); ?>"/> 
-        <input type="submit" value="Supprimer"/>
-    </div>
-</form>

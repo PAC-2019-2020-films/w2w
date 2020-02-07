@@ -5,14 +5,7 @@
  */
 
 
-if (isset($_SESSION['message'])) {
-    echo '
-    <div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
-}
-unset($_SESSION['message']);
-?>
-
-<?php if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
+if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
 
     <div class="page-title " style="background :url('uploads/<?php echo $movie->getPoster(); ?>-big.jpg');">
 

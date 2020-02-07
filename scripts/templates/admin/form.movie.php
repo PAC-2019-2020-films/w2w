@@ -45,7 +45,6 @@ label {
         <div>
             <label for="category">Category :</label>
             <select id="category" name="category">
-                <option></option>
                 <?php foreach ($categories as $category) : ?>
                 <option<?php if ($category->getid() == $category_id) : ?> selected="selected"<?php endif; ?> value="<?php echo escape($category->getId()); ?>"><?php echo escape($category->getName()); ?></option>
                 <?php endforeach; ?>
