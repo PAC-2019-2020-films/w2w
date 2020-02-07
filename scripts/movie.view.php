@@ -66,16 +66,16 @@ unset($_SESSION['message']);
                                 /**
                                  * TODO : aucune review format
                                  */
-                                echo "aucune évaluation administrateur.";
+                                echo "pas d'avis";
                             }
                             ?>
                         </div>
                         <div class="flex-center">
                             <h4 class="rating-title">Utilisateurs</h4>
                             <?php
-                            if ($averageUserRating){
-                                echo  $averageUserRating->getName();
-                            }else{
+                            if ($averageUserRating) {
+                                echo $averageUserRating->getName();
+                            } else {
                                 echo "Pas encore d'évaluation utilisateur";
                             }
                             ?>
@@ -93,7 +93,7 @@ unset($_SESSION['message']);
                         /**
                          * TODO : aucune review format
                          */
-                        echo "aucune évaluation administrateur.";
+                        echo "aucune critique administrateur.";
                     }
                     ?>
 

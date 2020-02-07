@@ -27,9 +27,13 @@
             if (isset($movie) && isset($rating)) {
                 if (!($reviewDAO->findByUserAndMovie($user, $movie))) {
                     $review = new \w2w\Model\Review(1, $comment, $createdAt, null, $movie, $user, $rating);
+                    if ($user->isAdmin()){
+                        $movie->setAdminReview($review);
+//                        $movieDAO->update($movie);
+                    }
                     $reviewDAO->save($review);
-//                TODO : check unique review for user/movie association
-                    
+
+
                     \w2w\Utils\Utils::message(true, "Votre review a été postée!", "");
                     header('Location: ../movie.php?id=' . $movieId);
                 } else {

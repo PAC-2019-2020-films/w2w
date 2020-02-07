@@ -255,9 +255,9 @@ class Movie
     }
 
     /**
-     * @param Review $reviewAdmin
+     * @param Review $adminReview
      */
-    public function setAdminReview(Review $adminReview)
+    public function setAdminReview(Review $adminReview=null)
     {
         $this->adminReview = $adminReview;
     }

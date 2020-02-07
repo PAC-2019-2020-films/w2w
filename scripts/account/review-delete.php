@@ -15,6 +15,16 @@ if ($user) {
         $review = $reviewDAO->findOneBy('id', $reviewId);
 
         if ($user->getId() === $review->getUser()->getId()) {
+            if ($user->isAdmin()) {
+
+                $movieDAO = new \w2w\DAO\Doctrine\DoctrineMovieDAO();
+                $movie = $movieDAO->findOneBy('adminReview',$review);
+
+                if ($movie->getAdminReview()->getId() == $reviewId) {
+                    $movie->setAdminReview(null);
+                    $movieDAO->update($movie);
+                }
+            }
             $reviewDAO->delete($review);
             \w2w\Utils\Utils::message(true, 'Critique Supprimée', '');
             header('Location: ../movie.php?id=' . $review->getMovie()->getId());
