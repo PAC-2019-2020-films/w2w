@@ -177,16 +177,16 @@ function error401($msg = "401 Unauthorized")
 
 /**
  * Afficvhage d'un message de redirection
- * 
- * Si $delay vaut 0 : simple redirection instantanée via en-tête http 
+ *
+ * Si $delay vaut 0 : simple redirection instantanée via en-tête http
  *      (le message affiché n'aura pas le temps d'être lu...)
  * Si $delay vaut null : le script "redirect.php" affiche juste le message et un lien vers l'url
  *      (pas de redirection automatique vers l'url)
  */
 function redirect($url, $msg = null, $delay = null)
 {
-    if ($delay === 0)  {
-        header("Location: {$url}");     
+    if ($delay === 0) {
+        header("Location: {$url}");
         echo escape($msg);
         exit();
     } else {
@@ -247,9 +247,9 @@ function checkRoot()
  */
 function web_run()
 {
-    # démmarage session PHP :
+# démmarage session PHP :
     session_start();
-    # récupération de l'utilisateur si session ouverte
+# récupération de l'utilisateur si session ouverte
     if (isset($_SESSION["user"])) {
         global $user;
         $userId = $_SESSION["user"];
@@ -257,10 +257,10 @@ function web_run()
         $userDAO = $daoFactory->getUserDAO();
         $user = $userDAO->find($userId);
     }
-    # récupération de la request uri :
+# récupération de la request uri :
     $requestURI = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : "/";
 
-    # ! il faut retirer les éventuels paramètres GET après '?' :
+# ! il faut retirer les éventuels paramètres GET après '?' :
     if (($pos = strpos($requestURI, "?")) !== false) {
         $requestURI = substr($requestURI, 0, $pos);
     }
@@ -269,15 +269,23 @@ function web_run()
         # page d'accueil du site
         $requestURI = "/homepage.php";
     } elseif (strlen($requestURI) > 0 && $requestURI[strlen($requestURI) - 1] == "/") {
-        # page d'index des sous-répertoires, pour les cas de type : 
+        # page d'index des sous-répertoires, pour les cas de type :
         # /admin/ => /admin/index.php
         # /account/ => /account/index.php
         $requestURI .= "index.php";
     }
-    # exécution du script correspondant :
+# exécution du script correspondant :
     $content = renderScript($requestURI);
-    # insertion du résultat dans la mise en page (layout) du site :
-    include FR_SCRIPT_PATH . "/templates/layout.php";
+
+# insertion du résultat dans la mise en page (layout) du site :
+//    Dans le cas d'une requête ajax on renvoie le contenu sans l'insérer dans le layout
+    if (param('context') != 'ajax') {
+        include FR_SCRIPT_PATH . "/templates/layout.php";
+    } else {
+        if (isset($content))
+            echo $content;
+
+    }
 }
 
 
@@ -286,7 +294,7 @@ function web_run()
  ******************************************************************************/
 
 if (FR_CLI) {
-    # si on est en ligne de commande, on arrête ici
+# si on est en ligne de commande, on arrête ici
     return;
 }
 

@@ -8,6 +8,8 @@
 
 namespace w2w\Utils;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 class Utils
 {
     /* ****************** dump ****************** */
@@ -99,6 +101,16 @@ class Utils
         }
         return false;
     }
+
+    /* ****************** PAGINATOR ****************** */
+    public static function paginate($dql, $page = 1, $limit = 5)
+    {
+        $paginator = new Paginator($dql);
+
+        $paginator->getQuery()->setFirstResult($limit * ($page - 1))->setMaxResults($limit);
+        return $paginator;
+    }
+    /* ****************** END PAGINATOR ****************** */
 
 
 }

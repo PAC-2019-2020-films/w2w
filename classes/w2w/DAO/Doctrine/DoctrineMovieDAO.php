@@ -146,16 +146,8 @@ class DoctrineMovieDAO extends DoctrineGenericDAO implements MovieDAO
         $qb = $this->getEntityManager()->createQueryBuilder()->select('m')->from(Movie::class, 'm')->orderBy('m.title', 'ASC');
         $query = $qb->getQuery();
 
-        $paginator = $this->paginate($query, $currentPage, $limit);
+        $paginator = Utils::paginate($query, $currentPage, $limit);
 
-        return $paginator;
-    }
-
-    public function paginate($dql, $page = 1, $limit = 5)
-    {
-        $paginator = new Paginator($dql);
-
-        $paginator->getQuery()->setFirstResult($limit * ($page - 1))->setMaxResults($limit);
         return $paginator;
     }
 

@@ -1,20 +1,20 @@
-
-
-
-
-
 <?php
-    checkAdmin();
-    
-    if (isset($_SESSION['emailVerified'])) {
-        \w2w\Utils\Utils::message($_SESSION['emailVerified'], '', 'Remember to validate your email adress. Click here to receive another confirmation email.');
-    }
+checkAdmin();
+
+if (isset($_SESSION['emailVerified'])) {
+    \w2w\Utils\Utils::message($_SESSION['emailVerified'], '', 'Remember to validate your email adress. Click here to receive another confirmation email.');
+}
 
 
 ?>
+
+<script src="../../assets/js/jquery.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script src="../../assets/js/adminDashboard.js"></script>
+
 <main class="container">
     <!--Galerie-->
-    <section id="galerie" class="user">
+    <section id="actionItems" class="user">
         <div class="row">
             <div class="col-md-12">
                 <h3>Dashboard</h3>
@@ -22,43 +22,48 @@
         </div>
         <div class="row">
             <div class="column">
-                <a href="profile.php">
-                    <img src="../../assets/img/user_page/profile_on.png" style="width:100px" alt="profile" class="bottom">
+                <div>
+                    <img src="../../assets/img/user_page/profile_on.png" style="width:100px" alt="profile"
+                         class="bottom">
                     <img src="../../assets/img/user_page/profile.png" style="width:100px" alt="profile" class="top">
-                </a>
+                </div>
             </div>
             <div class="column">
-                <a href="review_list.php">
-                    <img src="../../assets/img/user_page/reviews_on.png" style="width:100px" alt="reviews" class="bottom">
+                <div>
+                    <img src="../../assets/img/user_page/reviews_on.png" style="width:100px" alt="reviews"
+                         class="bottom">
                     <img src="../../assets/img/user_page/reviews.png" style="width:100px" alt="reviews" class="top">
-                </a>
+                </div>
             </div>
             <div class="column">
-                <a href="delete_account.php">
+                <div>
                     <img src="../../assets/img/user_page/delete_on.png" style="width:100px" alt="delete" class="bottom">
                     <img src="../../assets/img/user_page/delete.png" style="width:100px" alt="delete" class="top">
-                </a>
+                </div>
             </div>
             <div class="column">
-                <a href="category-list.php">
-                    <img src="../../assets/img/user_page/categories_on.png" style="width:100px" alt="categories" class="bottom">
-                    <img src="../../assets/img/user_page/categories.png" style="width:100px" alt="categories" class="top">
-                </a>
+                <div id="categoryActions" class="actionsIcons">
+                    <img src="../../assets/img/user_page/categories_on.png" style="width:100px" alt="categories"
+                         class="bottom">
+                    <img src="../../assets/img/user_page/categories.png" style="width:100px" alt="categories"
+                         class="top">
+                </div>
             </div>
             <div class="column">
-                <a href="tag-list.php"></a>
-                <img src="../../assets/img/user_page/tags_on.png" style="width:100px" alt="tags" class="bottom">
-                <img src="../../assets/img/user_page/tags.png" style="width:100px" alt="tags" class="top">
+                <div id="tagActions" class="actionsIcons">
+                    <img src="../../assets/img/user_page/tags_on.png" style="width:100px" alt="tags" class="bottom">
+                    <img src="../../assets/img/user_page/tags.png" style="width:100px" alt="tags" class="top">
+                </div>
             </div>
             <div class="column">
-                <a href="movie-list.php">
+                <div id="movieActions" class="actionsIcons">
                     <img src="../../assets/img/user_page/movies_on.png" style="width:100px" alt="movies" class="bottom">
                     <img src="../../assets/img/user_page/movies.png" style="width:100px" alt="movies" class="top">
-                </a>
+                </div>
             </div>
-            <li><a href="/admin/user-list.php">Liste des utilisateurs</a></li>
-            <div class="col-md-12 padding"></div>
+
         </div>
     </section>
+    <div id="actions"></div>
     <!--End Galerie-->
 </main>

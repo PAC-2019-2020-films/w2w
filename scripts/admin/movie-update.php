@@ -34,13 +34,13 @@ if ($movie) {
     $result = $movieDAO->update($movie);
 
     \w2w\Utils\Utils::message($result, 'Film mis à jour', 'Erreur lors de la mise à jour du film');;
-    header('Location: /admin/movie-list.php');
+    header('Location: /admin/index.php');
     exit();
 
 //    redirect("/admin/movie-list.php", "Movie updated");
 } else {
     \w2w\Utils\Utils::message(false, 'Film mis à jour', 'Erreur lors de la mise à jour du film');;
-    header('Location: /admin/movie-list.php');
+    header('Location: /admin/index.php');
     exit();
 //    redirect("/admin/movie-list.php", "Movie #{$id} not found");
 }
