@@ -1,4 +1,4 @@
-p<?php
+<?php
 /**
  * script de vue (affichage du résultat) de la page d'accueil du site
  */

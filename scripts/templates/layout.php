@@ -11,6 +11,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
 <!doctype html>
 <html lang="fr">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -30,6 +31,18 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
 </head>
 <body>
 <header>
+    <noscript>
+        <style>
+            .noscriptext {
+                background: black;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+        <div class="noscriptext"><h1>Javascript is disabled in your browser. You might need it.</h1></div>
+    </noscript>
     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
         <div class="container">
             <div id="logo">

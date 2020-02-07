@@ -11,6 +11,8 @@
     $movie      = $movieDAO->find($id);
     $ratingDAO  = new \w2w\DAO\Doctrine\DoctrineRatingDAO();
     $ratings    = $ratingDAO->findAll();
+
+    $adminReview = $movie->getAdminReview();
     
     
     if (isset($user)) {
