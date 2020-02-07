@@ -72,7 +72,13 @@ unset($_SESSION['message']);
                         </div>
                         <div class="flex-center">
                             <h4 class="rating-title">Utilisateurs</h4>
-
+                            <?php
+                            if ($averageUserRating){
+                                echo  $averageUserRating->getName();
+                            }else{
+                                echo "Pas encore d'évaluation utilisateur";
+                            }
+                            ?>
                         </div>
                         <div class="flex-right">
 
