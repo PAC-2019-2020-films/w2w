@@ -2,6 +2,7 @@
 
 namespace w2w\DAO\Doctrine;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use w2w\DAO\MovieDAO;
 use w2w\Model\Artist;
 use w2w\Model\Category;
@@ -9,6 +10,7 @@ use w2w\Model\Movie;
 use w2w\Model\Rating;
 use w2w\Model\Tag;
 use DateTime;
+use w2w\Utils\Utils;
 
 class DoctrineMovieDAO extends DoctrineGenericDAO implements MovieDAO
 {
@@ -136,6 +138,23 @@ class DoctrineMovieDAO extends DoctrineGenericDAO implements MovieDAO
 		$query = $this->getEntityManager()->createQuery($dql);
         $query->setParameter("year", $year);
 		return $query->getResult();
+    }
+
+
+    public function getAllMovies($currentPage = 1, $limit = 5){
+        $qb =  $this->getEntityManager()->createQueryBuilder()->select('m')->from(Movie::class, 'm')->orderBy('m.title', 'ASC');
+        $query = $qb->getQuery();
+
+        $paginator = $this->paginate($query, $currentPage, $limit);
+
+        return $paginator;
+    }
+
+    public function paginate($dql, $page = 1, $limit = 5){
+        $paginator = new Paginator($dql);
+
+        $paginator->getQuery()->setFirstResult($limit * ($page -1))->setMaxResults($limit);
+        return $paginator;
     }
     
 }
