@@ -4,9 +4,7 @@
 checkAdmin();
 
 ?>
-<script src="/assets/js/jquery.js"></script>
-<script src="/assets/js/bootstrap.bundle.min.js"></script>
-<div class="container-fluid category_list">
+
     <h2>Liste des tags</h2>
 
     <table id="tag_list" class="table table-striped">
@@ -85,7 +83,6 @@ checkAdmin();
 <script>
 
     $(document).ready(function () {
-        $.noConflict();
         $('#tag_list').DataTable({
             "columns": [
                 null,

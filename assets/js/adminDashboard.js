@@ -1,5 +1,4 @@
 $('document').ready(function () {
-    $.noConflict();
     const BASE_URL = 'http://w2w.localhost';
 
     const actionsDiv = $("#actions");
@@ -9,7 +8,6 @@ $('document').ready(function () {
 
     const categoryActions = $("#categoryActions");
     categoryActions.on("click", viewCategories);
-
 
     function viewCategories() {
         $.ajax({
@@ -26,6 +24,9 @@ $('document').ready(function () {
                 let catId = button.data('catid');
                 $(this).find(".modalCatId").val(catId);
             });
+            
+            const addCategoryBtn = $("#addCategory");
+            addCategoryBtn.on("click", addCategory);
 
             const btnDelCat = $("#submitDelete");
             btnDelCat.on("click", deleteCategory);
@@ -33,6 +34,10 @@ $('document').ready(function () {
         }).fail(function () {
             console.log("view cat failed");
         })
+    }
+    
+    function addCategory() {
+        
     }
 
     function deleteCategory(e) {

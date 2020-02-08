@@ -10,9 +10,6 @@ $movies = $movieDAO->findAll();
 
 
 ?>
-<script src="/assets/js/jquery.js"></script>
-<script src="/assets/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
 <div class="container-fluid movie_list">
     <h2>Liste des films</h2>
@@ -97,10 +94,8 @@ $movies = $movieDAO->findAll();
 </div>
 <!-- ****************** END Delete movie confirm box ****************** -->
 
-
 <script>
     $(document).ready(function () {
-        $.noConflict();
         $('#movie_list').DataTable({
             "columns": [
                 null,

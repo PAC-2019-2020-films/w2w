@@ -8,9 +8,6 @@ if (isset($_SESSION['emailVerified'])) {
 
 ?>
 
-<script src="../../assets/js/jquery.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-<script src="../../assets/js/adminDashboard.js"></script>
 
 <main class="container">
     <!--Galerie-->

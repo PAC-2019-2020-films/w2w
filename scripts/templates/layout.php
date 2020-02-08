@@ -125,7 +125,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
         echo '
     <div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
     }
-            unset($_SESSION['message']);
+    unset($_SESSION['message']);
     ?>
 
 </header>
@@ -179,6 +179,17 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
 </footer>
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
+
 <script src="/assets/js/loginForm.js" type="module"></script>
+
+<?php
+if ($user) {
+    ?>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script src="../../assets/js/adminDashboard.js"></script>
+    <?php
+}
+?>
+
 </body>
 </html>

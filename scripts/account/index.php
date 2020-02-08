@@ -11,6 +11,8 @@
     unset($_SESSION['message']);
 
 ?>
+
+
 <main class="container">
     <!--Galerie-->
     <section id="galerie" class="user">
