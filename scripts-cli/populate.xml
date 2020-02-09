@@ -41,11 +41,11 @@
 
 
 
-    <movie title="1917" desc="Le soldat Ryan se dédouble et se trompe de guerre." year="2019" category="Divers" poster="1917" tags="History|War">
+    <movie title="1917" desc="Le soldat Ryan se dédouble et se trompe de guerre." year="2019" category="Divers" poster="1917" tags="History,War">
     </movie>
-    <movie title="Joker" desc="In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society." year="2019" category="Divers" tags="Crime|Drama|Thriller">
+    <movie title="Joker" desc="In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society." year="2019" category="Divers" tags="Crime,Drama,Thriller">
     </movie>
-    <movie title="Jojo Rabbit" desc="A young boy in Hitler's army finds out his mother is hiding a Jewish girl in their home." year="2019" category="Divers" poster="jojo-rabbit" tags="Comedy|Drama|War">
+    <movie title="Jojo Rabbit" desc="A young boy in Hitler's army finds out his mother is hiding a Jewish girl in their home." year="2019" category="Divers" poster="jojo-rabbit" tags="Comedy,Drama,War">
     </movie>
     <movie title="Bohemian Rhapsody" desc="Biopic of F.Mercury" year="2018" category="Divers" tags="biopic,drama">
         <review content="C'est génial." user="Raoul" rating="3"/>
@@ -66,15 +66,15 @@
     </movie>
     <movie title="Unforgiven" desc="" year="1992" poster="unforgiven" category="Divers" tags="drama,western">
     </movie>
-    <movie title="Uncut Gems" desc="A charismatic New York City jeweler always on the lookout for the next big score makes a series of high-stakes bets that could lead to the windfall of a lifetime." year="2019" category="Divers" poster="uncut-gems" tags="Crime|Drama|Thriller">
+    <movie title="Uncut Gems" desc="A charismatic New York City jeweler always on the lookout for the next big score makes a series of high-stakes bets that could lead to the windfall of a lifetime." year="2019" category="Divers" poster="uncut-gems" tags="Crime,Drama,Thriller">
     </movie>
-    <movie title="Dolittle" desc="A physician discovers that he can talk with animals." year="2020" category="Divers" tags="Action|Adventure|Comedy">
+    <movie title="Dolittle" desc="A physician discovers that he can talk with animals." year="2020" category="Divers" tags="Action,Adventure,Comedy">
     </movie>
-    <movie title="La reine des neiges 2" desc="Anna, Elsa, Kristoff, Olaf and Sven leave Arendelle to travel to an ancient, autumn-bound forest of an enchanted land." year="2019" category="Divers" tags="Animation|Adventure|Comedy">
+    <movie title="La reine des neiges 2" desc="Anna, Elsa, Kristoff, Olaf and Sven leave Arendelle to travel to an ancient, autumn-bound forest of an enchanted land." year="2019" category="Divers" tags="Animation,Adventure,Comedy">
     </movie>
     <movie title="A star is born" desc="A musician helps a young singer find fame as age and alcoholism send his own career into a downward spiral. " year="2018" category="Divers" tags="">
     </movie>
-    <movie title="Coco" desc="Aspiring musician Miguel, confronted with his family's ancestral ban on music, enters the Land of the Dead to find his great-great-grandfather, a legendary singer." year="2017" category="En famille" tags="Animation|Adventure|Family">
+    <movie title="Coco" desc="Aspiring musician Miguel, confronted with his family's ancestral ban on music, enters the Land of the Dead to find his great-great-grandfather, a legendary singer." year="2017" category="En famille" tags="Animation,Adventure,Family">
     </movie>
     <movie title="Charlie's Angels" desc="" year="2019" poster="charlies_angel" category="Divers" tags="">
     </movie>
