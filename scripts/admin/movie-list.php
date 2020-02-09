@@ -11,13 +11,6 @@ $movies = $movieDAO->findAll();
 
 ?>
 
-<div>
-    <a href="movie-add.php">Ajouter un film</a>
-</div>
-
-
-
-
     <div class="container-fluid addCategory">
 
         <button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#addCategory"
