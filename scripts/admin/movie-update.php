@@ -1,6 +1,7 @@
 <?php
 
 use \w2w\DAO\DAOFactory;
+use \w2w\Model\Movie;
 
 checkAdmin();
 
@@ -15,12 +16,42 @@ $director_ids = param("directors");
 $actor_ids = param("actors");
 
 
+$flashManager = new \w2w\Utils\FlashManager();
+
 $daoFactory = DAOFactory::getDAOFactory();
 $movieDAO = $daoFactory->getMovieDAO();
 $movie = $movieDAO->find($id);
 
 
-if ($movie) {
+
+if (! $movie instanceof Movie) {
+    redirectWarning("/admin/movie-list.php", "Film non trouvé.");
+}
+
+$failure = false;
+
+if (! $title) {
+    $failure = true;
+    $flashManager->error("Veuillez fournir un titre.");
+} elseif ($title != $movie->getTitle()) {
+    $other = $movieDAO->findByTitle($title);
+    if ($other instanceof Movie && $other->getId() != $movie->getId()) {
+        $failure = true;
+        $flashManager->error("Ce titre est indiponible. Veuillez en fournir un autre.");
+    }
+}
+
+
+
+
+
+if (! preg_match("#^[0-9]{4}$#", $year)) {
+    $failure = true;
+    $flashManager->error("Veuillez fournir une date correcte (YYYY).");
+}
+
+if (! $failure) {
+
     $movie->setTitle($title);
     $movie->setDescription($description);
     $movie->setYear($year);
@@ -29,7 +60,9 @@ if ($movie) {
     # category :
     
     if (($category = $movie->getCategory()) && ($category->getId() == $category_id)) {
+        # si la catégorie actuelle correspond à l'id de category du formulaire, rien n'a changé
     } else {
+        # sinon, on recharge une autre category
         $categoryDAO = $daoFactory->getCategoryDAO();
         $category = $categoryDAO->find($category_id);
         if ($category) {
@@ -93,12 +126,79 @@ if ($movie) {
         }
     }
     
-    $result = $movieDAO->update($movie);
-
-    redirect($result, 'Film mis à jour', 'Erreur lors de la mise à jour du film', '/admin/');
-    //redirect("/admin/movie-list.php", "Movie updated");
-} else {
-    redirectWarning('/admin/', 'Erreur lors de la mise à jour du film');
-    //redirect("/admin/movie-list.php", "Movie #{$id} not found");
 }
 
+
+
+    # uplaod du poster si fichier envoyé :
+    # (annulation de l'opération en cas d'échec)
+    $notification = new \w2w\Utils\Notification();
+    $posterUploader = new \w2w\Utils\PosterUploader();
+    if ($posterUploader->hasUpload()) {
+        try {
+            $validateOnly = $failure;
+            $uploaded = $posterUploader->upload($movie, $notification, $validateOnly);
+            if ($notification->hasErrors()) {
+                foreach ($notification->getErrors() as $error) {
+                    $failure = true;
+                    $flashManager->error($error);
+                }
+            } elseif (! $uploaded) {
+                $failure = true;
+                $flashManager->warning("L'affiche n'a pas été uploadée.");
+            }
+        } catch (\Exception $e) {
+            $failure = true;
+            $flashManager->warning("Erreur lors de l'upload de l'image (dbg:{$e->getMessage()}).");
+        }
+    }
+
+
+    
+if (! $failure) {
+    try {
+        $result = $movieDAO->update($movie);
+    } catch (\Exception $e) {
+        $failure = true;
+        $flashManager->warning("Erreur lors de la mise à jour du film.({$e->getMessage()}).");
+    }
+    
+}
+
+
+    
+
+
+if (! $failure) {
+    # succès de l'opération :
+    redirectSuccess('/admin/', 'Film mis à jour');
+} else {
+    # échec de l'opération :
+    # réaffichage du formulaire avec les valeurs entrées par l'utilisateur
+    
+    $categoryDAO = $daoFactory->getCategoryDAO();
+    $categories = $categoryDAO->findAll();
+    $tagDAO = $daoFactory->getTagDAO();
+    $tags = $tagDAO->findAll();
+    $artistDAO = $daoFactory->getArtistDAO();
+    $artists = $artistDAO->findAll();
+    
+    echo template("admin/form.movie.php", [
+        "action" =>"/admin/movie-update.php",
+        "id" => $id,
+        "categories" => $categories,
+        "tags" => $tags,
+        "artists" => $artists,
+        "title" => $title,
+        "description" => $description,
+        "year" => $year,
+        "poster" => $poster,
+        "categories" => $categories,
+        "category_id" => $category_id,
+        "tags" => $tags,
+        "tags_selected_ids" => $tag_ids,
+        "artists" => $artists,
+        "directors_selected_ids" => $director_ids,
+        "actors_selected_ids" => $actor_ids,
+    ]);
+}

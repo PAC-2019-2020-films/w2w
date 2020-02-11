@@ -16,7 +16,7 @@ $movie = $movieDAO->find($id);
 
 
 if (! $movie) {
-    redirect("/admin/movie-list.php", "Movie #{$id} not found");
+    redirectWarning("/admin/movie-list.php", "Film non trouvé.");
 }
 
 if ($category = $movie->getCategory()) {
