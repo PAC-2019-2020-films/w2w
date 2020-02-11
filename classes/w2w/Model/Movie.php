@@ -122,12 +122,12 @@ class Movie
      */
     public function __construct(int $id = null, string $title = null, string $description = null, int $year = null, string $poster = null, Category $category = null)
     {
-        $this->id = $id;
-        $this->title = $title;
-        $this->description = $description;
-        $this->year = $year;
-        $this->poster = $poster;
-        $this->category = $category;
+        $this->setId($id);
+        $this->setTitle($title);
+        $this->setDescription($description);
+        $this->setYear($year);
+        $this->setPoster($poster);
+        $this->setCategory($category);
 		$this->reviews = new ArrayCollection();
 		$this->tags = new ArrayCollection();
 		$this->directors = new ArrayCollection();
@@ -159,7 +159,7 @@ class Movie
     /**
      * @param int $id
      */
-    public function setId(int $id)
+    public function setId(int $id = null)
     {
         $this->id = $id;
     }
@@ -175,10 +175,9 @@ class Movie
     /**
      * @param string $title
      */
-    public function setTitle(string $title): void
+    public function setTitle(string $title = null): void
     {
-
-
+        if (empty($title)) $title = null;
         $this->title = $title;
     }
 
@@ -193,8 +192,9 @@ class Movie
     /**
      * @param string $description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description = null)
     {
+        if (empty($description)) $description = null;
         $this->description = $description;
     }
 
@@ -209,7 +209,7 @@ class Movie
     /**
      * @param DateTime $year
      */
-    public function setYear(int $year)
+    public function setYear(int $year = null)
     {
         $this->year = $year;
     }
@@ -225,8 +225,9 @@ class Movie
     /**
      * @param string $poster
      */
-    public function setPoster(string $poster)
+    public function setPoster(string $poster = null)
     {
+        if (empty($poster)) $poster = null;
         $this->poster = $poster;
     }
 
@@ -241,7 +242,7 @@ class Movie
     /**
      * @param Category $category
      */
-    public function setCategory(Category $category)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
     }
@@ -257,7 +258,7 @@ class Movie
     /**
      * @param Review $adminReview
      */
-    public function setAdminReview(Review $adminReview=null)
+    public function setAdminReview(Review $adminReview = null)
     {
         $this->adminReview = $adminReview;
     }

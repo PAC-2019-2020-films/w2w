@@ -40,8 +40,12 @@ if ($category_id) {
     $flashManager->error("Veuillez choisir une catégorie.");
 }
 
-
-    $movie = new Movie(null, $title, $description, (int) $year, $poster, $category);
+    if ($year != null) {
+        $year = (int) $year;
+    } else {
+        $year = null;
+    }
+    $movie = new Movie(null, $title, $description, $year, $poster, $category);
 
     # tags :
     

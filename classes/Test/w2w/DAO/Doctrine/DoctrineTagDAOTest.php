@@ -34,7 +34,7 @@ class DoctrineTagDAOTest extends BaseTestCase
 
     public function testFindByName()
     {
-        $existingName = "drama";
+        $existingName = "Drama";
         $dao = new DoctrineTagDAO();
         $item = $dao->findByName($existingName);
         $this->assertInstanceOf(Tag::class, $item);

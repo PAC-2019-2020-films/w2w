@@ -28,7 +28,7 @@ class DoctrineMovieDAOTest extends BaseTestCase
 
     public function testFindByCategory()
     {
-        $name = "Nawak";
+        $name = "Divers";
         $category = (DAOFactory::getDAOFactory()->getCategoryDAO())->findByName($name);
         $dao = new DoctrineMovieDAO();
         $items = $dao->findByCategory($category);
