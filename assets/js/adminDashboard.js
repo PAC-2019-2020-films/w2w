@@ -24,8 +24,8 @@ $('document').ready(function () {
                 let catId = button.data('catid');
                 $(this).find(".modalCatId").val(catId);
             });
-            
-            const addCategoryBtn = $("#addCategory");
+
+            const addCategoryBtn = $("#btnAddCat");
             addCategoryBtn.on("click", addCategory);
 
             const btnDelCat = $("#submitDelete");
@@ -35,9 +35,26 @@ $('document').ready(function () {
             console.log("view cat failed");
         })
     }
-    
-    function addCategory() {
-        
+
+    function addCategory(e) {
+        e.preventDefault();
+
+        let formCat = new FormData($("#addCatForm")[0]);
+
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + '/admin/category/category-add.php?context=ajax',
+            data: formCat,
+            processData: false,
+            contentType: false,
+            async: false
+        }).done(function (result) {
+            viewCategories();
+        }).fail(function () {
+            console.log("merde");
+        });
+
+
     }
 
     function deleteCategory(e) {

@@ -23,7 +23,7 @@ checkAdmin();
                 <div class="bg-light rounded p-2">
                     <h3 class="m-auto"> Ajouter une nouvelle catégorie </h3>
                     <hr>
-                    <form class="form" action="" id="addCatForm" method="post"
+                    <form class="form" action="../category/category-add.php" id="addCatForm" method="post"
                           enctype="multipart/form-data">
 
                         <div class="form-row">
@@ -31,7 +31,7 @@ checkAdmin();
                         </div>
 
                         <div class="form-row">
-                            <input type="file" id="image" name="image" class="form-control mb-4 h-auto">
+                            <input placeholder="Description" type="text" id="description" name="description" class="form-control mb-4 h-auto">
                         </div>
 
                         <div class="form-group m-auto">
