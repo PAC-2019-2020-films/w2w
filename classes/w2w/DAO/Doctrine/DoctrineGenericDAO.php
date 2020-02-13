@@ -85,7 +85,9 @@ class DoctrineGenericDAO implements GenericDAO
         if ($em = $this->getEntityManager()) {
             $em->persist($object);
             $em->flush();
+            return true;
         }
+        return false;
     }
 
     /**
@@ -96,7 +98,9 @@ class DoctrineGenericDAO implements GenericDAO
         if ($em = $this->getEntityManager()) {
             $em->persist($object);
             $em->flush();
+            return true;
         }
+        return false;
     }
 
     /**
@@ -111,8 +115,10 @@ class DoctrineGenericDAO implements GenericDAO
             if (is_object($object)) {
                 $em->remove($object);
                 $em->flush();
+                return true;
             }
         }
+        return false;
     }
 
     public function findOneBy($keyName, $keyValue)

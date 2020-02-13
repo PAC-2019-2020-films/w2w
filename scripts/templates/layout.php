@@ -11,6 +11,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
 <!doctype html>
 <html lang="fr">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -19,10 +20,13 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/multi.min.css">
     <!-- Custom styles for this template -->
     <link href="/assets/css/carousel.css" rel="stylesheet">
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
     <script src="https://kit.fontawesome.com/5b034eec6e.js" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/4.13.1/basic/ckeditor.js"></script>
 
@@ -30,6 +34,18 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
 </head>
 <body>
 <header>
+    <noscript>
+        <style>
+            .noscriptext {
+                background: black;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+        <div class="noscriptext"><h1>Javascript is disabled in your browser. You might need it.</h1></div>
+    </noscript>
     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
         <div class="container">
             <div id="logo">
@@ -39,7 +55,8 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                 </a>
             </div>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarW2W" aria-controls="navbarW2W" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarW2W"
+                    aria-controls="navbarW2W" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -49,7 +66,8 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                         <a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown07XL" data-toggle="dropdown" aria-expanded="false">Films</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown07XL" data-toggle="dropdown"
+                           aria-expanded="false">Films</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown07XL">
                             <a class="dropdown-item" href="/all_movies.php">Tous les films</a>
                             <a class="dropdown-item" href="#">Films les mieux notés</a>
@@ -77,14 +95,16 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                     <?php endif; ?>
                     <a class="btn btn-primary btn-account" href="../authentication/logout_action.php">Se déconnecter</a>
                 <?php else: ?>
-                    <button class="btn btn-primary btn-account" data-target="#modal-login" data-toggle="modal">Se connecter <i class="fas fa-sign-in-alt"></i></button>
+                    <button class="btn btn-primary btn-account" data-target="#modal-login" data-toggle="modal">Se
+                        connecter <i class="fas fa-sign-in-alt"></i></button>
                 <?php endif; ?>
 
 
             </div>
         </div>
+
     </nav>
-    
+
     <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -101,8 +121,14 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
             </div>
         </div>
     </div>
-    
-    
+    <?php
+    if (isset($_SESSION['message'])) {
+        echo '
+    <div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
+    }
+    unset($_SESSION['message']);
+    ?>
+    <?php $flashManager = new \w2w\Utils\FlashManager(); $flashManager->display(); ?>
 </header>
 
 <main role="main">
@@ -116,7 +142,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
     ?>
     <!-- FOOTER -->
 </main>
-<footer >
+<footer>
 
     <div class="container ">
         <div class="flex-wrap mb-4">
@@ -124,11 +150,11 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                 <h5>W2W <span class="small">| What to watch</span></h5>
                 <ul class="list-inline ">
 
-                    <li> <a href="/about.php" target="_blank">A propos</a></li>
-                    <li> <a href="/team.php" target="_blank">L'équipe</a></li>
-                    <li> <a href="/movies.php" target="_blank">Les films</a></li>
-                    <li> <a href="/contact.php" target="_blank">Nous contacter</a></li>
-                    <li> <a href="/login.php" target="_blank">Se connecter</a></li>
+                    <li><a href="/about.php" target="_blank">A propos</a></li>
+                    <li><a href="/team.php" target="_blank">L'équipe</a></li>
+                    <li><a href="/movies.php" target="_blank">Les films</a></li>
+                    <li><a href="/contact.php" target="_blank">Nous contacter</a></li>
+                    <li><a href="/login.php" target="_blank">Se connecter</a></li>
                     /**
                     * TODO : SE connecter Se déconnecter if connected
                     */
@@ -139,10 +165,10 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                 <h5>Suivez-nous</h5>
                 <ul class="list-inline social-links">
 
-                    <li> <a href="#" target="_blank"> 	<i class="fab fa-facebook-square"></i>  </a></li>
-                    <li> <a href="#" target="_blank">  <i class="fab fa-twitter"></i> </a></li>
-                    <li> <a href="#" target="_blank">  <i class="fab fa-youtube"></i> </a></li>
-                    <li> <a href="#" target="_blank">  <i class="fas fa-film"></i> </a></li>
+                    <li><a href="#" target="_blank"> <i class="fab fa-facebook-square"></i> </a></li>
+                    <li><a href="#" target="_blank"> <i class="fab fa-twitter"></i> </a></li>
+                    <li><a href="#" target="_blank"> <i class="fab fa-youtube"></i> </a></li>
+                    <li><a href="#" target="_blank"> <i class="fas fa-film"></i> </a></li>
 
                 </ul>
             </div>
@@ -154,6 +180,18 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
 </footer>
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
+
 <script src="/assets/js/loginForm.js" type="module"></script>
+<?php
+if ($user) {
+    ?>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script src="../../assets/js/adminDashboard.js"></script>
+    <script src="../../assets/js/w2w.admin.movie.js"></script>
+    <script src="../../assets/js/multi.min.js"></script>
+    <?php
+}
+?>
+
 </body>
 </html>

@@ -30,7 +30,6 @@ a.primary {
     color  : #FFEE3D;
 }
 
-
 a:hover {
     text-decoration : none;
     color : #0056b3;
@@ -174,10 +173,10 @@ section h3 {
     flex: 15%;
     max-width: 15%;
     padding: 0 4px;
+    margin-bottom: 8px;
 }
 .user .column img {
     position:absolute;
-    margin-top: 8px;
     vertical-align: middle;
     -webkit-transition: opacity 0.2s ease-in-out;
     -moz-transition: opacity 0.2s ease-in-out;
@@ -187,4 +186,13 @@ section h3 {
 
 .user .column img.top:hover {
     opacity: 0;
+}
+
+.user .actionsIcons{
+   width: 100px;
+  height: 100px;
+}
+
+.category_list, .movie_list {
+    margin-bottom: 60px;
 }
