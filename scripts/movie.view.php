@@ -74,7 +74,7 @@
                     <span class="line-title"><hr/></span>
                     
                     <p>
-                        /*Insert Review w2w here*/
+                        Bordel de merde
                     </p>
                     <span class="line-title"><hr/></span>
                     
