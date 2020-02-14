@@ -2,6 +2,7 @@ $('document').ready(function () {
     const BASE_URL = 'http://w2w.localhost';
 
     const actionsDiv = $("#actions");
+    let showCatUpdate = false;
 
     /* ****************** GESTIONS CATEGORIES ****************** */
 
@@ -60,16 +61,32 @@ $('document').ready(function () {
     }
 
     function updateCategory() {
+        if (showCatUpdate) {
+            hideCatUpdate();
+        }
+
         let row = $(this).closest("tr");
+        let catName = row.find(".cat_name>p").html();
+        let catDesc = row.find(".cat_description>p").html();
+
         console.log(row);
-        row.after("<tr>" +
-            "<form>" +
-                "<td>x</td>" +
-                "<td><input value='nom'/></td>" +
-                "<td><input value='Description'/></td>" +
-                "<td><input type='submit' value='Mettre à jour'></td>" +
-                "<td><input type='button' value='Annuler'></td>" +
+        showCatUpdate = true;
+
+        row.after("<tr class='showUpdateForm'>" +
+            "<form action='#' method='post'>" +
+            "<td>x</td>" +
+            "<td><input name='categoryName' placeholder='" + catName + "'/></td>" +
+            "<td><input name='categoryDescription' placeholder='" + catDesc + "'/></td>" +
+            "<td class='text-center'><input type='submit' value='Mettre à jour'></td>" +
+            "<td class='text-center cancelUpdate'><input type='button' value='Annuler' ></td>" +
             "</form></tr>");
+
+        $(".cancelUpdate").on("click", hideCatUpdate);
+
+    }
+
+    function hideCatUpdate() {
+        $(".showUpdateForm").remove();
     }
 
     function deleteCategory(e) {

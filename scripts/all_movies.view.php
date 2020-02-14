@@ -24,7 +24,7 @@
                                 <h4><a href="/admin/movie-edit.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getTitle()); ?></a></h4>
                             </div>
                             <div class="col-md-3 laura" >
-                                <h5><a href="/admin/movie-edit.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getRating()->getName()); ?></a></h5>
+<!--                                <h5><a href="/admin/movie-edit.php?id=--><?php //echo escape($movie->getId()); ?><!--">--><?php //echo escape($movie->getRating()->getName()); ?><!--</a></h5>-->
                             </div>
                         </div>
                     <?php endforeach; ?>

@@ -63,14 +63,14 @@ checkAdmin();
             if (isset($categories) && count($categories) > 0) : ?>
                 <?php foreach ($categories as $category) : ?>
                     <tr>
-                        <th scope="row">
+                        <th scope="row" class="cat_id">
                             <p><?php echo escape($category->getId()); ?></p>
                         </th>
-                        <td>
+                        <td class="cat_name">
                             <p><?php echo escape($category->getName()); ?></p>
                         </td>
-                        <td>
-                            <?php echo escape($category->getDescription()); ?>
+                        <td class="cat_description">
+                            <p><?php echo escape($category->getDescription()); ?></p>
                         </td>
                         <td class="text-center">
                                 <i class="fas fa-edit"></i>
