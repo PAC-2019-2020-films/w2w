@@ -50,6 +50,7 @@ $('document').ready(function () {
             contentType: false,
             async: false
         }).done(function (result) {
+            console.log(result);
             viewCategories();
         }).fail(function () {
             console.log("merde");
