@@ -1,7 +1,7 @@
 <?php
 checkAdmin();
 
-if (isset($_SESSION['emailVerified'])) {
+if (isset($_SESSION['emailVerified'])  && !$_SESSION['emailVerified']) {
     \w2w\Utils\Utils::message($_SESSION['emailVerified'], '', 'Remember to validate your email adress. Click here to receive another confirmation email.');
 }
 

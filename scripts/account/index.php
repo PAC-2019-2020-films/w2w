@@ -2,7 +2,6 @@
     checkUser();
     
     if (isset($_SESSION['emailVerified']) && !$_SESSION['emailVerified']) {
-        echo $_SESSION['emailVerified'];
         \w2w\Utils\Utils::message($_SESSION['emailVerified'], '', 'Remember to validate your email adress. Click <a href="http://w2w.localhost/authentication/generate_validation_mail.php">here</a> to receive another confirmation email.');
     }
     

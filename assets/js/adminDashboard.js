@@ -3,7 +3,6 @@ $('document').ready(function () {
 
     const actionsDiv = $("#actions");
 
-
     /* ****************** GESTIONS CATEGORIES ****************** */
 
     const categoryActions = $("#categoryActions");
@@ -32,6 +31,9 @@ $('document').ready(function () {
             const btnDelCat = $("#submitDelete");
             btnDelCat.on("click", deleteCategory);
 
+            $(".fa-edit").on("click", updateCategory);
+
+
         }).fail(function () {
             console.log("view cat failed");
         })
@@ -55,8 +57,19 @@ $('document').ready(function () {
         }).fail(function () {
             console.log("merde");
         });
+    }
 
-
+    function updateCategory() {
+        let row = $(this).closest("tr");
+        console.log(row);
+        row.after("<tr>" +
+            "<form>" +
+                "<td>x</td>" +
+                "<td><input value='nom'/></td>" +
+                "<td><input value='Description'/></td>" +
+                "<td><input type='submit' value='Mettre à jour'></td>" +
+                "<td><input type='button' value='Annuler'></td>" +
+            "</form></tr>");
     }
 
     function deleteCategory(e) {
@@ -123,11 +136,11 @@ $('document').ready(function () {
 
         let formCat = new FormData($("#deleteCatDependencyForm")[0]);
 
-        if ($(e.target).attr('id') === 'submitHorsCat'){
+        if ($(e.target).attr('id') === 'submitHorsCat') {
             formCat.append('submitHorsCat', 'submitHorsCat')
         }
 
-        if ($(e.target).attr('id') === 'submitDeleteAllMov'){
+        if ($(e.target).attr('id') === 'submitDeleteAllMov') {
             formCat.append('submitDeleteAllMov', 'submitDeleteAllMov')
         }
 
