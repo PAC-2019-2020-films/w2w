@@ -1,0 +1,13 @@
+
+div.dominique .row:nth-of-type(odd){
+    background-color: white;
+}
+
+.laura {
+    margin : auto;
+}
+
+.xavier {
+    text-align: center;
+    margin: auto;
+}

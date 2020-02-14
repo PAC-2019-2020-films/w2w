@@ -153,7 +153,10 @@ function param($name, $default = null, $filter = true)
             if ($filter) {
                 if ($value !== null && $value !== 0) {
                     if (is_array($value)) {
-                        array_map('strip_tags', $value, '<strong></strong> <li></li> <em></em> <ul></ul> <ol></ol> <p></p> <a></a>');
+                        // "Warning: array_map(): Expected parameter 3 to be an array, string given"
+                        // see https://www.php.net/manual/fr/function.array-map.php
+                        // array_map('strip_tags', $value, '<strong></strong> <li></li> <em></em> <ul></ul> <ol></ol> <p></p> <a></a>');
+                        array_map('strip_tags', $value);
                         array_map('trim', $value);
                     } else {
                         $value = strip_tags($value, '<strong></strong> <li></li> <em></em> <ul></ul> <ol></ol> <p></p> <a></a>');
@@ -183,7 +186,7 @@ function error401($msg = "401 Unauthorized")
  * Si $delay vaut null : le script "redirect.php" affiche juste le message et un lien vers l'url
  *      (pas de redirection automatique vers l'url)
  */
-function redirect($url, $msg = null, $delay = null)
+function redirect_deprecated($url, $msg = null, $delay = null)
 {
     if ($delay === 0) {
         header("Location: {$url}");
@@ -198,6 +201,24 @@ function redirect($url, $msg = null, $delay = null)
         exit();
     }
 }
+
+function redirect($result, $ok, $not, $url)
+{
+    \w2w\Utils\Utils::message($result, $ok, $not);
+    header('Location: ' . $url);
+    exit();
+}
+
+function redirectSuccess($url, $msg)
+{
+    redirect(true, $msg, null, $url);
+}
+
+function redirectWarning($url, $msg)
+{
+    redirect(false, null, $msg, $url);
+}
+
 
 /**
  * vérifie que l'utilisateur est connecté

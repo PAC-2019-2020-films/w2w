@@ -20,6 +20,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/multi.min.css">
     <!-- Custom styles for this template -->
     <link href="/assets/css/carousel.css" rel="stylesheet">
     <!-- Font -->
@@ -127,7 +128,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
     }
     unset($_SESSION['message']);
     ?>
-
+    <?php $flashManager = new \w2w\Utils\FlashManager(); $flashManager->display(); ?>
 </header>
 
 <main role="main">
@@ -153,10 +154,18 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                     <li><a href="/team.php" target="_blank">L'équipe</a></li>
                     <li><a href="/movies.php" target="_blank">Les films</a></li>
                     <li><a href="/contact.php" target="_blank">Nous contacter</a></li>
-                    <li><a href="/login.php" target="_blank">Se connecter</a></li>
-                    /**
-                    * TODO : SE connecter Se déconnecter if connected
-                    */
+                    <?php
+                        if ($user){
+                            ?>
+                            <li><a href="../account/index.php">Mon Compte</a></li>
+                            <?php
+                        }else{
+                            ?>
+                            <li><a href="../authentication/login.php">Se connecter</a></li>
+                            <?php
+                        }
+                    ?>
+                  
 
                 </ul>
             </div>
@@ -181,12 +190,13 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="/assets/js/loginForm.js" type="module"></script>
-
 <?php
 if ($user) {
     ?>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script src="../../assets/js/adminDashboard.js"></script>
+    <script src="../../assets/js/w2w.admin.movie.js"></script>
+    <script src="../../assets/js/multi.min.js"></script>
     <?php
 }
 ?>
