@@ -34,6 +34,14 @@ class Utils
             $_SESSION['message']['msg'] = $not;
         }
     }
+
+    public static function echoMessage(){
+        if (isset($_SESSION['message'])) {
+            echo '<div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
+        }
+        unset($_SESSION['message']);
+    }
+
     /* ****************** END message ****************** */
 
 

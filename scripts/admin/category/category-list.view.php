@@ -4,6 +4,12 @@ checkAdmin();
 
 ?>
 
+    <div class="flashBag">
+        <?php
+        \w2w\Utils\Utils::echoMessage();
+        ?>
+    </div>
+
     <div class="container-fluid addCategory">
         <div class="collapse" id="collapseExample">
             <div class="card card-body">
@@ -91,7 +97,7 @@ checkAdmin();
     </div>
 
 
-    <!-- ****************** Delete movie confirm box ****************** -->
+    <!-- ****************** Delete category confirm box ****************** -->
     <div class="modal fade" id="modal-delete-category" tabindex="-1" role="dialog"
          aria-labelledby="modal-delete-category"
          aria-hidden="true">
@@ -121,7 +127,18 @@ checkAdmin();
             </div>
         </div>
     </div>
-    <!-- ****************** END Delete movie confirm box ****************** -->
+    <!-- ****************** END Delete category confirm box ****************** -->
+
+<!-- ****************** Delete dependencies confirm box ****************** -->
+<div id="warning-modal">
+
+
+</div>
+
+
+<!-- ****************** END Delete dependencies confirm box ****************** -->
+
+
 
 <?php
 

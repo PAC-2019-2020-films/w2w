@@ -11,6 +11,12 @@ $movies = $movieDAO->findAll();
 
 ?>
 
+<div class="flashBag">
+    <?php
+    \w2w\Utils\Utils::echoMessage();
+    ?>
+</div>
+
     <div class="container-fluid addCategory">
 
         <button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#addCategory"
