@@ -68,30 +68,62 @@ $('document').ready(function () {
         let row = $(this).closest("tr");
         let catName = row.find(".cat_name>p").html();
         let catDesc = row.find(".cat_description>p").html();
+        let catId = row.find(".cat_id>p").html();
+        row.find('.fa-edit').css('color', 'grey');
 
-        console.log(row);
         showCatUpdate = true;
 
-        row.after("<tr class='showUpdateForm'>" +
-            "<form action='#' method='post'>" +
-            "<td>x</td>" +
-            "<td><input name='categoryName' placeholder='" + catName + "'/></td>" +
-            "<td><input name='categoryDescription' placeholder='" + catDesc + "'/></td>" +
-            "<td class='text-center'><input type='submit' value='Mettre à jour'></td>" +
-            "<td class='text-center cancelUpdate'><input type='button' value='Annuler' ></td>" +
-            "</form></tr>");
+        row.after(
+            "<tr class='showUpdateForm'><td colspan='5'>" +
+            "<form action='#' method='post' id='updateCategoryForm' class='d-flex justify-content-between form-inline'>" +
+
+            "<input type='text' value='" + catId + "' disabled class='form-control' style='width: 50px'>" +
+            "<input name='categoryName' value=\"" + catName + "\" class='form-control'/>" +
+
+            "<input name='categoryDescription' value=\"" + catDesc + "\" class='form-control'/>" +
+            "<input type='hidden' value='" + catId + "' name='catId' class='form-control'>" +
+
+            "<input type='submit' value='Mettre à jour' id='submitCatUpdate' class='btn btn-primary'/>" +
+
+            "<input type='button' value='Annuler' class='form-control cancelUpdate'>" +
+
+            "</form>" +
+            "</td></tr>"
+        );
 
         $(".cancelUpdate").on("click", hideCatUpdate);
+        $("#submitCatUpdate").on("click", handleCatUpdate);
 
     }
 
     function hideCatUpdate() {
+        $(".fa-edit").removeAttr("style");
         $(".showUpdateForm").remove();
+    }
+
+    function handleCatUpdate(e) {
+        e.preventDefault();
+
+        let form = new FormData($("#updateCategoryForm")[0]);
+
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + "/admin/category/category-edit.php?context=ajax",
+            data: form,
+            processData: false,
+            contentType: false,
+            async: false
+        }).done(function (result) {
+            console.log(result);
+            viewCategories();
+        }).fail(function (result) {
+            console.log(failed);
+
+        })
     }
 
     function deleteCategory(e) {
         e.preventDefault();
-        console.log("delete");
 
         let form = new FormData($("#deleteCategoryForm")[0]);
         $.ajax({
