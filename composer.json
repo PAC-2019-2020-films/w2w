@@ -5,6 +5,7 @@
         "doctrine/orm": "*"
     },
   "require": {
-    "ext-openssl": "*"
+    "ext-openssl": "*",
+    "ext-json": "*"
   }
 }

@@ -9,7 +9,14 @@ $movieDAO = $daoFactory->getMovieDAO();
 $movies = $movieDAO->findAll();
 
 
+
 ?>
+
+<div class="flashBag">
+    <?php
+    \w2w\Utils\Utils::echoMessage();
+    ?>
+</div>
 
 <div class="container-fluid movie_list">
     <h2>Liste des films</h2>
