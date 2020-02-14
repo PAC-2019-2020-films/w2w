@@ -4,6 +4,70 @@ $('document').ready(function () {
     const actionsDiv = $("#actions");
     let showCatUpdate = false;
 
+
+    /* ****************** GESTION PROFILE ****************** */
+
+    $("#profileActions").on("click", viewProfile);
+
+    function viewProfile() {
+        closeModal();
+        console.log("view porefi");
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "/account/profile.php?context=ajax",
+            dataType: "text",
+            async: false
+        }).done(function (html) {
+            actionsDiv.html(html);
+        });
+    }
+
+    /* ****************** END GESTION PROFILE ****************** */
+
+
+    /* ****************** GESTION REVIEWS ****************** */
+
+    $("#reviewActions").on("click", viewReviews);
+
+    function viewReviews() {
+        closeModal();
+
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "/account/review-list.php?context=ajax",
+            dataType: "text",
+            async: false
+        }).done(function (html) {
+            actionsDiv.html(html);
+
+            $('#modal-delete-review').on("show.bs.modal", function (event) {
+                let button = $(event.relatedTarget);
+                let revId = button.data('revid');
+                let link = $(this).find(".modalRevId");
+
+                link.on("click", function (e) {
+                    e.preventDefault();
+
+                    $.ajax({
+                        type: "POST",
+                        url: BASE_URL + "/account/review-delete.php?id=" + revId + "&context=ajax",
+                        data: {},
+                        dataType: "text",
+                        async: false
+                    }).done(function (res) {
+                        viewReviews();
+                    }).fail(function () {
+                        console.log("shit");
+                    })
+                });
+            });
+        });
+    }
+
+
+    /* ****************** END GESTION REVIEWS ****************** */
+
+
     /* ****************** GESTIONS CATEGORIES ****************** */
 
     const categoryActions = $("#categoryActions");

@@ -71,6 +71,13 @@ if ($email && $password) {
                     \w2w\Utils\Utils::message(false, '', 'Link has expired, Click <a href="http://w2w.localhost/authentication/generate_validation_mail.php">here</a> to receive a new one.');
                 }
             }
+            if ($user->isAdmin()) {
+                header('location: ../admin/index.php');
+                exit();
+            } elseif ($user->isRoot()) {
+                header('location: ../root/index.php');
+                exit();
+            }
             header('location: ../account/index.php');
             exit();
         }

@@ -1,6 +1,4 @@
 
-
-
 <div class="container">
     <div class="flashBag">
         <?php
