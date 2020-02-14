@@ -47,18 +47,18 @@
 
     </form>
 
-    <form action="">
+    <form action="password-update.php" method="post">
 
 
         <div class="form-group">
-            <input type="password" placeholder="nouveau mot de pass" class="form-control"/>
+            <input type="password" placeholder="nouveau mot de passe" class="form-control" name="newPassword"/>
         </div>
         <div class="form-group">
-            <input type="password" placeholder="confirmer nouveau mot de passe" class="form-control"/>
+            <input type="password" placeholder="confirmer nouveau mot de passe" class="form-control" name="newPasswordConfirm"/>
         </div>
 
         <div class="form-group">
-            <input type="password" placeholder="Entrez votre mot de passe actuel" class="form-control"/>
+            <input type="password" placeholder="Entrez votre mot de passe actuel" class="form-control" name="password"/>
         </div>
 
         <div class="form-group">

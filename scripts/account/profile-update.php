@@ -43,6 +43,6 @@ if (\w2w\Utils\Utils::inputValidation($rawInput)) {
 
 } else {
     w2w\Utils\Utils::message(false, '', 'Champ invalide.');
-    header("location: profile.php");
+    header("Location: /account/profile.php");
     exit();
 }
