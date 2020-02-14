@@ -23,11 +23,16 @@ if ($user) {
                 if ($movie->getAdminReview()->getId() == $reviewId) {
                     $movie->setAdminReview(null);
                     $movieDAO->update($movie);
+
+                    $userDAO = new \w2w\DAO\Doctrine\DoctrineUserDAO();
+                    $user->setNumberReviews($user->getNumberReviews()-1);
+                    $userDAO->update($user);
                 }
             }
             $reviewDAO->delete($review);
             \w2w\Utils\Utils::message(true, 'Critique Supprimée', '');
             header('Location: ../movie.php?id=' . $review->getMovie()->getId());
+            exit();
         }
     }
 }

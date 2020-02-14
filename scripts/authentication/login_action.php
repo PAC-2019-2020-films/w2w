@@ -21,6 +21,7 @@ if ($email && $password) {
             $_SESSION["user"] = $user->getId();
             $_SESSION["email"] = $user->getEmail();
             $_SESSION["uid"] = $user->getId();
+            $_SESSION['emailVerified'] = $user->isEmailVerified();
 
             if (!$user->isEmailVerified()) {
                 \w2w\Utils\Utils::message(false, '', 'Your account has not yet been verified. Check your mail or click <a href="http://w2w.localhost/authentication/generate_validation_mail.php">here</a> to receive a new validation email.');
@@ -60,6 +61,7 @@ if ($email && $password) {
                                 $userDAO->update($user);
 
                                 \w2w\Utils\Utils::message(true, 'Account successfuly Verified', '');
+                                $_SESSION['emailVerified'] = $user->isEmailVerified();
                             }
                         }
                     } else {
@@ -69,10 +71,8 @@ if ($email && $password) {
                     \w2w\Utils\Utils::message(false, '', 'Link has expired, Click <a href="http://w2w.localhost/authentication/generate_validation_mail.php">here</a> to receive a new one.');
                 }
             }
-
             header('location: ../account/index.php');
             exit();
-
         }
     }
 }
