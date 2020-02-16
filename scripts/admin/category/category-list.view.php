@@ -4,13 +4,13 @@ checkAdmin();
 
 ?>
 
+    <div class="flashBag">
+        <?php
+        \w2w\Utils\Utils::echoMessage();
+        ?>
+    </div>
+
     <div class="container-fluid addCategory">
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
-                anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-            </div>
-        </div>
 
         <button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#addCategory"
                 aria-expanded="false" aria-controls="collapse" id="toggleAddCatForm">
@@ -60,22 +60,20 @@ checkAdmin();
             </thead>
             <tbody>
             <?php
-            //                \w2w\Utils\Utils::dump($categories);
             if (isset($categories) && count($categories) > 0) : ?>
                 <?php foreach ($categories as $category) : ?>
                     <tr>
-                        <th scope="row">
-                            <a href="/admin/category/category-edit.php?id=<?php echo escape($category->getId()); ?>&context=ajax"><?php echo escape($category->getId()); ?></a>
+                        <th scope="row" class="cat_id">
+                            <p><?php echo escape($category->getId()); ?></p>
                         </th>
-                        <td>
-                            <a href="/admin/category/category-edit.php?id=<?php echo escape($category->getId()); ?>&context=ajax"><?php echo escape($category->getName()); ?></a>
+                        <td class="cat_name">
+                            <p><?php echo escape($category->getName()); ?></p>
                         </td>
-                        <td>
-                            <?php echo escape($category->getDescription()); ?>
+                        <td class="cat_description">
+                            <p><?php echo escape($category->getDescription()); ?></p>
                         </td>
                         <td class="text-center">
-                            <a href="/admin/category/category-edit.php?id=<?php echo escape($category->getId()); ?>&context=ajax">
-                                <i class="fas fa-edit"></i></a>
+                                <i class="fas fa-edit"></i>
                         </td>
                         <td class="text-center">
                             <i class="fa fa-trash" data-target="#modal-delete-category" data-toggle="modal"
@@ -91,7 +89,7 @@ checkAdmin();
     </div>
 
 
-    <!-- ****************** Delete movie confirm box ****************** -->
+    <!-- ****************** Delete category confirm box ****************** -->
     <div class="modal fade" id="modal-delete-category" tabindex="-1" role="dialog"
          aria-labelledby="modal-delete-category"
          aria-hidden="true">
@@ -121,7 +119,18 @@ checkAdmin();
             </div>
         </div>
     </div>
-    <!-- ****************** END Delete movie confirm box ****************** -->
+    <!-- ****************** END Delete category confirm box ****************** -->
+
+<!-- ****************** Delete dependencies confirm box ****************** -->
+<div id="warning-modal">
+
+
+</div>
+
+
+<!-- ****************** END Delete dependencies confirm box ****************** -->
+
+
 
 <?php
 

@@ -34,6 +34,15 @@ class Utils
             $_SESSION['message']['msg'] = $not;
         }
     }
+
+    public static function echoMessage()
+    {
+        if (isset($_SESSION['message'])) {
+            echo '<div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
+        }
+        unset($_SESSION['message']);
+    }
+
     /* ****************** END message ****************** */
 
 
@@ -52,7 +61,7 @@ class Utils
             if (!empty($value[1])) {
                 switch ($value[0]) {
                     case 'num':
-                        if (ctype_digit($value[1])){
+                        if (ctype_digit($value[1])) {
                             $input[$key][2] = true;
                         }
                         break;
@@ -66,8 +75,12 @@ class Utils
                             $input[$key][2] = true;
                         }
                         break;
+                    case 'alphanumsoft':
+                        if (ctype_alnum(str_replace(["'", "\"", "&quot;", " "], '', $value[1]))) {
+                            $input[$key][2] = true;
+                        }
+                        break;
                     case 'password':
-
                         if (filter_var($value[1], FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => $pwReg]])) {
                             $input[$key][2] = true;
                         }
@@ -90,10 +103,12 @@ class Utils
         } else
             return true;
     }
+
     // ****************** END inputValidation ******************
 
 
-    public static function in_array_r($needle, $haystack, $strict = false) {
+    public static function in_array_r($needle, $haystack, $strict = false)
+    {
         foreach ($haystack as $item) {
             if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && self::in_array_r($needle, $item, $strict))) {
                 return true;

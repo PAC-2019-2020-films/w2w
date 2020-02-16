@@ -22,10 +22,17 @@
                                      style="max-width: 100px">
                             </div>
                             <div class="col-md-7 laura">
+<<<<<<< HEAD
                                 <h4><a href="/scripts/movie.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getTitle()); ?></a></h4>
                             </div>
                             <div class="col-md-3 laura" >
                                 <h5><a href="/scripts/movie.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getRating()->getName()); ?></a></h5>
+=======
+                                <h4><a href="/script/movie.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getTitle()); ?></a></h4>
+                            </div>
+                            <div class="col-md-3 laura" >
+                                <h5><a href="/script/movie.php?id=<?php echo escape($movie->getId()); ?><!--">--><?php echo escape($movie->getRating()->getName()); ?></a></h5>
+>>>>>>> 0e883e89811d1d22f338208c8e7fa522376206a1
                             </div>
                         </div>
                     <?php endforeach; ?>

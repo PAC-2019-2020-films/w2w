@@ -12,10 +12,11 @@ $movie = $movieDAO->findOneBy('id', $id);
 
 
 if (!$movie) {
+    \w2w\Utils\Utils::message(false, '', 'Film non trouvé');
+
     if ($context == 'ajax') {
         return json_encode("movie not found");
     } else {
-        \w2w\Utils\Utils::message(false, '', 'Film non trouvé');
         header('Location: /admin/movie-list.php');
         exit();
     }
@@ -24,10 +25,11 @@ if (!$movie) {
 if ($confirm == "confirm") {
 
     $result = $movieDAO->delete($movie);
+    \w2w\Utils\Utils::message($result, 'Film supprimé', 'Erreur lors de la suppression du film');
+
     if ($context == 'ajax') {
         return json_encode($result);
     } else {
-        \w2w\Utils\Utils::message($result, 'Film supprimé', 'Erreur lors de la suppression du film');
         header('Location: /admin/movie-list.php');
         exit();
     }

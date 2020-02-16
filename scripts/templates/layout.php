@@ -12,7 +12,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
 <html lang="fr">
 <head>
 
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title><?php echo escape($headTitle); ?></title>
@@ -86,12 +86,14 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
 
                 <?php if (isset($user) && $user instanceof \w2w\Model\User) : ?>
                     <i><?php echo escape($user->getUserName()); ?> &lt;<?php echo escape($user->getEmail()); ?>&gt;</i>
-                    <a href="/account/">Mon compte</a>
                     <?php if ($user->isAdmin()) : ?>
                         <a href="/admin/">Dashboard</a>
-                    <?php endif; ?>
-                    <?php if ($user->isRoot()) : ?>
-                        <a href="/root/">[root]</a>
+                    <?php else: ?>
+                        <?php if ($user->isRoot()) : ?>
+                            <a href="/root/">[root]</a>
+                        <?php else: ?>
+                            <a href="/account/">Mon compte</a>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <a class="btn btn-primary btn-account" href="../authentication/logout_action.php">Se déconnecter</a>
                 <?php else: ?>
@@ -128,7 +130,8 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
     }
     unset($_SESSION['message']);
     ?>
-    <?php $flashManager = new \w2w\Utils\FlashManager(); $flashManager->display(); ?>
+    <?php $flashManager = new \w2w\Utils\FlashManager();
+    $flashManager->display(); ?>
 </header>
 
 <main role="main">
@@ -154,18 +157,17 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                     <li><a href="/team.php" target="_blank">L'équipe</a></li>
                     <li><a href="/movies.php" target="_blank">Les films</a></li>
                     <li><a href="/contact.php" target="_blank">Nous contacter</a></li>
-                    <?php
-                        if ($user){
-                            ?>
-                            <li><a href="../account/index.php">Mon Compte</a></li>
-                            <?php
-                        }else{
-                            ?>
-                            <li><a href="../authentication/login.php">Se connecter</a></li>
-                            <?php
-                        }
-                    ?>
-                  
+
+                    <?php if ($user->isAdmin()) : ?>
+                        <a href="/admin/">Mon Compte</a>
+                    <?php else: ?>
+                        <?php if ($user->isRoot()) : ?>
+                            <a href="/root/">Mon Compte</a>
+                        <?php else: ?>
+                            <a href="/account/">Mon Compte</a>
+                        <?php endif; ?>
+                    <?php endif; ?>
+
 
                 </ul>
             </div>

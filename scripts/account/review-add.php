@@ -33,20 +33,26 @@
                     }
                     $reviewDAO->save($review);
 
+                    $userDAO = new \w2w\DAO\Doctrine\DoctrineUserDAO();
+                    $user->setNumberReviews($user->getNumberReviews()+1);
+                    $userDAO->update($user);
 
                     \w2w\Utils\Utils::message(true, "Votre review a été postée!", "");
                     header('Location: ../movie.php?id=' . $movieId);
+                    exit();
                 } else {
                     \w2w\Utils\Utils::message(false, '', 'Vous avez déjà publié une review sur ce film.');
                     header('Location: ../movie.php?id=' . $movieId);
+                    exit();
                 }
             }
         } else {
             \w2w\Utils\Utils::message(false, '', 'Error while saving review.');
             header('Location: ../movie.php?id=' . $movieId);
+            exit();
         }
-        
-        
+
     } else {
         header("Location: homepage.php");
+        exit();
     }
