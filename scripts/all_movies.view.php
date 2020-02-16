@@ -1,3 +1,4 @@
+
 <!-- start of image de siege de cinema -->
 <div class="page-title " style="background :url('/uploads/salle_cinema.jpg');">
 
