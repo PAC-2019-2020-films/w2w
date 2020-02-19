@@ -87,12 +87,12 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                 <?php if (isset($user) && $user instanceof \w2w\Model\User) : ?>
                     <i><?php echo escape($user->getUserName()); ?> &lt;<?php echo escape($user->getEmail()); ?>&gt;</i>
                     <?php if ($user->isAdmin()) : ?>
-                        <a href="/scripts/admin/">Dashboard</a>
+                        <a href="/admin/">Dashboard</a>
                     <?php else: ?>
                         <?php if ($user->isRoot()) : ?>
-                            <a href="/scripts/root/">[root]</a>
+                            <a href="/root/">[root]</a>
                         <?php else: ?>
-                            <a href="/scripts/account/">Mon compte</a>
+                            <a href="/account/">Mon compte</a>
                         <?php endif; ?>
                     <?php endif; ?>
                     <a class="btn btn-primary btn-account" href="../authentication/logout_action.php">Se déconnecter</a>
@@ -158,14 +158,14 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                     <li><a href="/movies.php" target="_blank">Les films</a></li>
                     <li><a href="/contact.php" target="_blank">Nous contacter</a></li>
 
-                    <?php if ($user->isAdmin()) : ?>
-                        <a href="/scripts/admin/">Mon Compte</a>
-                    <?php else: ?>
-                        <?php if ($user->isRoot()) : ?>
-                            <a href="/scripts/root/">Mon Compte</a>
-                        <?php else: ?>
-                            <a href="/scripts/account/">Mon Compte</a>
+                    <?php if (isset($user) && $user instanceof \w2w\Model\User) : ?>
+                        <?php if ($user->isAdmin()) : ?>
+                            <a href="/admin/">Mon Compte</a>
+                        <?php elseif ($user->isRoot()) : ?>
+                            <a href="/root/">Mon Compte</a>
                         <?php endif; ?>
+                    <?php else : ?>
+                        <a href="/account/">Mon Compte</a>
                     <?php endif; ?>
 
 
