@@ -57,7 +57,7 @@ unset($_SESSION['message']);
 
         </form>
 
-            <a class="btn btn-secondary btn-block" href="/authentication/signup.php">S'inscrire</a>
+            <a class="btn btn-secondary btn-block" href="/signup.php">S'inscrire</a>
 
             <!--            TODO : FIX no JS action in non modal mode (in authentication/login.php)-->
 
