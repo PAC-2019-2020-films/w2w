@@ -25,7 +25,14 @@
                                 <h4><a href="/movie.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getTitle()); ?></a></h4>
                             </div>
                             <div class="col-md-3 laura" >
-                                <h5><a href="/movie.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getRating()->getName()); ?></a></h5>
+                                <h5><a href="/movie.php?id=<?php echo escape($movie->getId()); ?>">
+                                        <?php
+                                        $camol = $movie->getRating();
+                                        if (isset($camol)) {
+                                            echo escape($movie->getRating()->getName());
+                                        } ?>
+
+                                    </a></h5>
 
 
                             </div>
