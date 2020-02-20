@@ -1,10 +1,15 @@
 /* PAGE FILM */
 
 .page-title{
-
+    position: relative;
     height: 200px;
     padding : 20px 0;
     color : #fff;
+}
+
+.page-title h2{
+    color: white;
+    z-index: 10;
 }
 
 .rating-title {
@@ -13,3 +18,17 @@
     line-height: 1.2;
     color : #4b4856;
 }
+
+/*
+.page-title:after
+{
+    content:"";
+    display:block;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background:rgba(4,23,33,0.5);
+}
+*/

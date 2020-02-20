@@ -13,9 +13,9 @@
     
     if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
         
-        <div class="page-title " style="background :url('uploads/<?php echo $movie->getPoster(); ?>-big.jpg');">
-            
-            <div class="container">
+        <div class="page-title" style="background :url('uploads/<?php echo $movie->getPoster(); ?>-big.jpg');">
+            <!-- TODO   -->
+            <div class="container ">
                 <?php echo template("movie.tags.php", ["movie" => $movie]); ?>
                 <h2 class="clearfix pt-3"><?php echo $movie->getTitle(); ?></h2>
                 <!-- Film info -->
@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="movie-box dark-bg ">
-                            <img src="/uploads/<?php echo escape($movie->getPoster()); ?>-medium.jpg" class="img-fluid"
+                            <img src="/uploads/<?php echo escape($movie->getPoster()); ?>-medium.jpg" class=" img-fluid"
                                  alt=""/>
                             
                             <ul class="movie-infos list-unstyled px-4 py-4">

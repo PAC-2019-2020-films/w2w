@@ -11,3 +11,33 @@ div.dominique .row:nth-of-type(odd){
     text-align: center;
     margin: auto;
 }
+
+.pagination {
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+.page-link, .page-item.disabled .page-link {
+    border: none;
+    background-color: transparent;
+}
+
+.page-item.disabled .page-link {
+    background-color: lightgrey;
+}
+
+.page-item .page-link {
+    background-color: #0F0826;
+    color: #F6F8FE;
+}
+
+.pagination li{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.checklist_sorting
+{
+    background-color: white;
+    border: none;
+    padding: 10px;
+}
