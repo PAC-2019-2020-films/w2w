@@ -23,7 +23,6 @@ $movieDAO = $daoFactory->getMovieDAO();
 $movie = $movieDAO->find($id);
 
 
-
 if (! $movie instanceof Movie) {
     redirectWarning("/admin/movie-list.php", "Film non trouvé.");
 }
@@ -59,15 +58,25 @@ if (! $failure) {
 
     # category :
     
-    if (($category = $movie->getCategory()) && ($category->getId() == $category_id)) {
-        # si la catégorie actuelle correspond à l'id de category du formulaire, rien n'a changé
-    } else {
-        # sinon, on recharge une autre category
-        $categoryDAO = $daoFactory->getCategoryDAO();
-        $category = $categoryDAO->find($category_id);
-        if ($category) {
-            $movie->setCategory($category);
+    if ($category_id) {
+        if (($category = $movie->getCategory()) && ($category->getId() == $category_id)) {
+            # si la catégorie actuelle correspond à l'id de category du formulaire, rien n'a changé
+        } else {
+            # sinon, on recharge une autre category
+            $categoryDAO = $daoFactory->getCategoryDAO();
+            $category = $categoryDAO->find($category_id);
+            if ($category) {
+                $movie->setCategory($category);
+            } else {
+                $category = null;
+                $failure = true;
+                $flashManager->error("Catégorie non trouvée.");
+            }
         }
+    } else {
+        $category = null;
+        $failure = true;
+        $flashManager->error("Veuillez choisir une catégorie.");
     }
 
     # tags :
@@ -182,10 +191,10 @@ if (! $failure) {
     $tags = $tagDAO->findAll();
     $artistDAO = $daoFactory->getArtistDAO();
     $artists = $artistDAO->findAll();
-    
+
     echo template("admin/form.movie.php", [
         "action" =>"/admin/movie-update.php",
-        "id" => $id,
+        "id" => $movie->getId(),
         "categories" => $categories,
         "tags" => $tags,
         "artists" => $artists,
