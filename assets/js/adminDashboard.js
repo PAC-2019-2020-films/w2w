@@ -357,6 +357,31 @@ $('document').ready(function () {
 
     /* ****************** END GESTION FILMS ****************** */
 
+
+    /* *************** GESTION USERS *************** */
+
+    $("#userActions").on("click", viewUsers);
+        
+    function viewUsers() {
+        closeModal();
+
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "/admin/user/user-list.php?context=ajax",
+            dataType: "text",
+            async: false
+        }).done(function (html) {
+            actionsDiv.html(html);
+        }).fail(function () {
+            console.log("view user failed");
+        })
+
+    }
+
+
+    /* *************** END GESTION USERS *************** */
+
+
     /* ****************** MODAL ****************** */
     function closeModal() {
         $(".modal-open").removeClass("modal-open");

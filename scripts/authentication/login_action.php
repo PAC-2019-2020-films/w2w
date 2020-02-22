@@ -21,6 +21,7 @@ if ($email && $password) {
             $_SESSION["user"] = $user->getId();
             $_SESSION["email"] = $user->getEmail();
             $_SESSION["uid"] = $user->getId();
+            $_SESSION["role"] = $user->getRole()->getId();
             $_SESSION['emailVerified'] = $user->isEmailVerified();
 
             if (!$user->isEmailVerified()) {
