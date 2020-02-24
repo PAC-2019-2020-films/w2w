@@ -4,7 +4,7 @@
 
     <div class="container">
 
-        <h2 class="clearfix pt-5">Liste des films</h2>
+        <h2 class="clearfix pt-5 placement_info_film">Liste des films</h2>
         <!-- Film info -->
     </div>
 
@@ -37,19 +37,18 @@
 <!-- end of image de siege de cinema -->
     <div>
         <div class="container">
-            <div class="dominique">
+            <div class="affichage_1_2">
 
                     <?php foreach ($movies as $movie) : ?>
                         <div class="row p-4">
-                            <!-- TODO : aligner en responsive -->
                             <div class="col-md-2 text-center">
                                 <img class="img-responsive" src="/uploads/<?php echo escape($movie->getPoster()); ?>-medium.jpg" alt=""
                                      style="max-width: 100px">
                             </div>
-                            <div class="col-md-7 laura">
+                            <div class="col-md-7 placement_info_film">
                                 <h4><a href="/movie.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getTitle()); ?></a></h4>
                             </div>
-                            <div class="col-md-3 laura" >
+                            <div class="col-md-3 placement_info_film" >
                                 <h5><a href="/movie.php?id=<?php echo escape($movie->getId()); ?>">
                                         <?php
 
