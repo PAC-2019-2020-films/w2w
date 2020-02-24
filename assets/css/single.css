@@ -1,16 +1,12 @@
 /* PAGE FILM */
 
 .page-title{
-    position: relative;
+
     height: 200px;
     padding : 20px 0;
     color : #fff;
 }
 
-.page-title h2{
-    color: white;
-    z-index: 10;
-}
 
 .rating-title {
     text-transform: uppercase;
@@ -19,16 +15,19 @@
     color : #4b4856;
 }
 
-/*
-.page-title:after
-{
-    content:"";
-    display:block;
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    background:rgba(4,23,33,0.5);
+.test_aera {
+    height: 200px;
+    padding: 20px 0;
+    color: white;
 }
-*/
+
+.movie_affiche
+{
+    background: rgba(0, 0, 0, 1);
+}
+
+#carousel_movie_view .carousel-caption {
+    bottom: 8rem;
+    z-index: 10;
+}
+
