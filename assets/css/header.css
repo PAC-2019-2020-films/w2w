@@ -1,19 +1,37 @@
 /* NAV BAR */
-#logo {
-    font-weight: bold;
+
+.site-header {
+    min-height: 82px;
 }
+
+.navbar-brand {
+    margin-right: 5rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
 #logo span {
     color : #FFEE3D;
-    font-size: 26px;
+    font-size: 2rem;
 }
-.navbar {
-    font-size : 0.8rem;
-    text-transform : uppercase;
-    letter-spacing: 0.04rem;
-
+.navbar .navbar-nav .nav-link{
+    font-size : 0.95rem;
+    color : #121a21;
+    padding: 0 15px;
 }
 
-.navbar .form-control {
+.dropdown-toggle::after {
+    border: none!important;
+    font-family: FontAwesome, sans-serif;
+    content: "\f0d7"!important;
+    vertical-align: 0;
+    font-size: 0.75rem;
+}
+
+.site-header .search-form {
+    padding : 0 20px;
+}
+.site-header .form-control {
 
     padding: .375rem 10rem .375rem  1rem;
     font-size : 0.8rem;
@@ -21,14 +39,64 @@
     border-radius:  2rem;
 
 }
-.navbar .form-control:focus {
+.search-form .search-submit {
+    border-width: 0;
+    margin-left: -52px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 0 16px;
+    background: 0 0;
+}
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px,1px,1px,1px);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    width: 1px;
+    word-wrap: normal !important;
+}
+.site-header .form-control:focus {
 
     border-color: #FFEE3D;
     box-shadow: none;
 }
+
+
 .dropdown-menu a {
     font-size : 0.8rem;
-    text-transform : none;
-    font-weight: 600;
 
+}
+
+.site-header .dropdown-menu  {
+    border-radius: 0;
+    border-width: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    margin-top: 10px;
+
+}
+
+.nav-link i {
+    vertical-align: middle;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 600px) {
+    .site-header .form-inline{
+        display: none;
+    }
+    .site-header .dropdown-menu  {
+
+        box-shadow: none;
+        margin-top: 1px;
+
+    }
+    .navbar {
+        justify-content: left;
+    }
 }

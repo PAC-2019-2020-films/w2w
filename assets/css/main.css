@@ -13,39 +13,45 @@
 
 /* GENERAL */
 body{
-
     font-family: 'Montserrat', sans-serif;
-    color : #0F0826;
-    background-color: #F6F8FE;
+    color : #041721;
 }
-
 main {
+    background-color: #EFF3FF;
     min-height: 500px;
 }
+.container-fluid {
+    padding-left : 40px;
+    padding-right: 40px;
+}
 a{
-    color : #0F0826;
+    color : #121a21;
+}
+
+a:hover,
+.dark-bg a:hover {
+    color : #24baef;
+    text-decoration : none;
 }
 
 a.primary {
 
-    color  : #FFEE3D;
+    color  : #ffde3c;
 }
 
-a:hover {
-    text-decoration : none;
-    color : #0056b3;
+.dark-bg a {
+    color : #fff;
 }
 
-
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6, .btn-primary, .navbar,  .movie-tag {
-    font-weight: 600;
+.h1, .h2, .h3, .h4, h1, h2, h3, h4{
+    font-weight: 800;
 }
 .clearfix {
     clear: both;
 }
 
 .btn {
-    padding: 1rem 2rem;
+    padding: 0.75rem 1rem;
     text-transform : uppercase;
     font-size : 0.9rem;
     font-weight : 600;
@@ -55,26 +61,28 @@ a:hover {
     color : #0F0826;
 }
 .btn-primary, .movie-tag{
-    background-color : #FFEE3D;
-    border-color : #FFEE3D;
+    background-color : #ffde3c;
+    border-color : #ffde3c;
 }
-.btn-primary:hover, .btn-primary:focus, .movie-tag:hover{
+.btn-primary:hover, .btn-primary:focus{
     background-color : #ffe76f;
     border-color : #ffe76f;
 }
 .btn-account{
     font-size : 0.8rem;
     border-radius : 2rem;
+    padding: 0.6rem 2.5rem;
 }
 .btn-secondary {
+    border:none;
+    background-color : #041721;
 
-    background-color : #0F0826;
 
 }
 .btn-secondary:hover {
-    background-color : #FFEE3D;
-    color : #0F0826;
+    background-color : #24baef;
 }
+
 
 .flex-wrap {
     display: flex;
@@ -103,22 +111,30 @@ a:hover {
     max-width: 100%; !important;
 }
 
-/* MOVIES TAGS */
 
-.btn-account , .movie-tag{
-    padding: 0.5rem 1rem;
-    font-size : 0.8rem;
 
-}
 .carousel-caption p.movies-data {
     font-size : 0.8rem;
 }
 
 
+/* MOVIES INFO */
+
+.movie-info {
+    font-size : 0.7rem;
+    color : #6a7ba5;
+
+}
+
+.carousel-caption p.movies-data, .movies-data {
+    font-size : 0.8rem;
+}
+
 p.movies-data span {
     padding : 0 1rem;
     border-right : 1px solid #d0d8db;
 }
+
 p.movies-data span:first-child {
     padding: 0 1rem 0 0;
 }
@@ -126,19 +142,61 @@ p.movies-data span:last-child {
     border-right : none;
 }
 
+
+/*  MOVIES TAGS */
+
+.movie-tag{
+    padding: 0.5rem 1rem;
+    font-size : 0.6rem;
+    font-weight: 600;
+
+}
+.movie-tag:hover {
+    color : #0f0826;
+}
+.movie-tag {
+    text-transform: uppercase;
+}
+.movie-tags.list-inline > li {
+    padding : 0;
+}
+.list-inline-item:not(:last-child) {
+    margin-right: 1rem;
+}
+
+/* MOVIE BOX */
+
+.image-movie{
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+.image-movie:hover .overlay {
+    opacity: 1;
+}
+
+.movie-box h4, .top-movie .movie-box h5  {
+    font-size: 0.9rem;
+}
+
+.image-movie img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 /* Section */
 
 section {
     padding : 5rem 0;
 }
-section .line-title {
+.line-title {
     width: 60px;
     display : block;
 }
-section .line-title hr {
+.line-title hr {
 
     margin-top : 0;
-    border-top : 4px solid #FFEE3D;
+    border-top : 4px solid #ffde3c;
 }
 
 section .subtitle {
@@ -148,19 +206,14 @@ section .subtitle {
 
 /*** DARK BACKGROUND */
 .dark-bg {
-    background-color : #0F0826;
-    color : #fff;
-}
-
-section.dark-bg a {
+    background-color : #020d18;
     color : #fff;
 }
 
 section h3 {
     font-size : 30px;
     text-transform : capitalize;
-    letter-spacing : 1px;
-    margin-bottom : 0rem;
+
 }
 /*** LIGHT BACKGROUND */
 
