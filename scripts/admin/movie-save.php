@@ -26,6 +26,27 @@ $flashManager = new \w2w\Utils\FlashManager();
 
 $savingFailed = false;
 
+
+
+if (! $title) {
+    $savingFailed = true;
+    $flashManager->error("Veuillez fournir un titre.");
+} else {
+    $other = $movieDAO->findByTitle($title);
+    if ($other instanceof Movie) {
+        $savingFailed = true;
+        $flashManager->error("Ce titre est indiponible. Veuillez en fournir un autre.");
+    }
+}
+
+
+if (! preg_match("#^[0-9]{4}$#", $year)) {
+    $savingFailed = true;
+    $flashManager->error("Veuillez fournir une date correcte (YYYY).");
+}
+
+
+
 # récupération de la catégorie :
 # (annulation de l'opération en cas d'échec)
 if ($category_id) {
@@ -40,72 +61,72 @@ if ($category_id) {
     $flashManager->error("Veuillez choisir une catégorie.");
 }
 
-    if ($year != null) {
-        $year = (int) $year;
-    } else {
-        $year = null;
-    }
-    $movie = new Movie(null, $title, $description, $year, $poster, $category);
+if ($year != null) {
+    $year = (int) $year;
+} else {
+    $year = null;
+}
+$movie = new Movie(null, $title, $description, $year, $poster, $category);
 
-    # tags :
-    
-    if (! is_array($tag_ids)) {
-        $tag_ids = [];
+# tags :
+
+if (! is_array($tag_ids)) {
+    $tag_ids = [];
+}
+$tagDAO = $daoFactory->getTagDAO();
+foreach ($tag_ids as $id) {
+    if ($tag = $tagDAO->find($id)) {
+        $movie->addTag($tag);
     }
-    $tagDAO = $daoFactory->getTagDAO();
-    foreach ($tag_ids as $id) {
-        if ($tag = $tagDAO->find($id)) {
-            $movie->addTag($tag);
-        }
+}
+
+# directors :
+
+if (! is_array($director_ids)) {
+    $director_ids = [];
+}
+$artistDAO = $daoFactory->getArtistDAO();
+foreach ($director_ids as $id) {
+    if ($artist = $artistDAO->find($id)) {
+        $movie->addDirector($artist);
     }
-    
-    # directors :
-    
-    if (! is_array($director_ids)) {
-        $director_ids = [];
+}
+
+# actors :
+
+if (! is_array($actor_ids)) {
+    $actor_ids = [];
+}
+foreach ($actor_ids as $id) {
+    if ($artist = $artistDAO->find($id)) {
+        $movie->addActor($artist);
     }
-    $artistDAO = $daoFactory->getArtistDAO();
-    foreach ($director_ids as $id) {
-        if ($artist = $artistDAO->find($id)) {
-            $movie->addDirector($artist);
-        }
-    }
-    
-    # actors :
-    
-    if (! is_array($actor_ids)) {
-        $actor_ids = [];
-    }
-    foreach ($actor_ids as $id) {
-        if ($artist = $artistDAO->find($id)) {
-            $movie->addActor($artist);
-        }
-    }
+}
 
 
 
-    # uplaod du poster si fichier envoyé :
-    # (annulation de l'opération en cas d'échec)
-    $notification = new \w2w\Utils\Notification();
-    $posterUploader = new \w2w\Utils\PosterUploader();
-    if ($posterUploader->hasUpload()) {
-        try {
-            $validateOnly = $savingFailed;
-            $uploaded = $posterUploader->upload($movie, $notification, $validateOnly);
-            if ($notification->hasErrors()) {
-                foreach ($notification->getErrors() as $error) {
-                    $savingFailed = true;
-                    $flashManager->error($error);
-                }
-            } elseif (! $uploaded) {
+# uplaod du poster si fichier envoyé :
+# (annulation de l'opération en cas d'échec)
+$notification = new \w2w\Utils\Notification();
+$posterUploader = new \w2w\Utils\PosterUploader();
+if ($posterUploader->hasUpload()) {
+    try {
+        $validateOnly = $savingFailed;
+        $uploaded = $posterUploader->upload($movie, $notification, $validateOnly);
+        if ($notification->hasErrors()) {
+            foreach ($notification->getErrors() as $error) {
                 $savingFailed = true;
-                $flashManager->warning("L'affiche n'a pas été uploadée.");
+                $flashManager->error($error);
             }
-        } catch (\Exception $e) {
+        } elseif (! $uploaded) {
             $savingFailed = true;
-            $flashManager->warning("Erreur lors de l'upload de l'image (dbg:{$e->getMessage()}).");
+            $flashManager->warning("L'affiche n'a pas été uploadée.");
         }
+    } catch (\Exception $e) {
+        $savingFailed = true;
+        $flashManager->warning("Erreur lors de l'upload de l'image (dbg:{$e->getMessage()}).");
     }
+}
 
  
 if (! $savingFailed) {

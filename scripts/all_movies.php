@@ -15,9 +15,10 @@ $limit = 5;
 
 //Obtenir les films de la page demandée
 $movies = $movieDAO->getAllMovies($page, $limit);
-
-$maxPages = ceil($movies->count() / $limit);
+$nombreFilm = $movies->count();
+$maxPages = ceil($nombreFilm / $limit);
 $prevPage = $page-1;
 $nextPage = $page+1;
+
 
 

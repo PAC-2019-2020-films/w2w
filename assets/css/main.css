@@ -16,6 +16,7 @@ body{
 
     font-family: 'Montserrat', sans-serif;
     color : #0F0826;
+    background-color: #F6F8FE;
 }
 
 main {
@@ -193,6 +194,5 @@ section h3 {
   height: 100px;
 }
 
-.category_list, .movie_list {
-    margin-bottom: 60px;
-}
+
+

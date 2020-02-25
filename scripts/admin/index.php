@@ -58,6 +58,12 @@ if (isset($_SESSION['emailVerified']) && !$_SESSION['emailVerified']) {
                     <img src="../../assets/img/user_page/movies.png" style="width:100px" alt="movies" class="top">
                 </div>
             </div>
+            <div class="column">
+                <div id="userActions" class="actionsIcons">
+                    <img src="../../assets/img/user_page/movies_on.png" style="width:100px" alt="movies" class="bottom">
+                    <img src="../../assets/img/user_page/movies.png" style="width:100px" alt="movies" class="top">
+                </div>
+            </div>
 
         </div>
     </section>

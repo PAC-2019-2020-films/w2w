@@ -11,7 +11,6 @@ $('document').ready(function () {
 
     function viewProfile() {
         closeModal();
-        console.log("view porefi");
         $.ajax({
             type: "GET",
             url: BASE_URL + "/account/profile.php?context=ajax",
@@ -117,7 +116,6 @@ $('document').ready(function () {
             contentType: false,
             async: false
         }).done(function (result) {
-            console.log(result);
             viewCategories();
         }).fail(function () {
             console.log("merde");
@@ -178,7 +176,6 @@ $('document').ready(function () {
             contentType: false,
             async: false
         }).done(function (result) {
-            console.log(result);
             viewCategories();
         }).fail(function (result) {
             console.log(failed);
@@ -199,7 +196,6 @@ $('document').ready(function () {
             contentType: false,
             async: false
         }).done(function (result) {
-            console.log(result);
             $(".modal-backdrop").remove();
             if ($.isNumeric(result)) {
                 let warningModal =
@@ -238,13 +234,11 @@ $('document').ready(function () {
             }
 
         }).fail(function (res) {
-            console.log(res);
             console.log("delete failed");
         })
     }
 
     function deleteCategoryDependency(e) {
-        console.log($(e.target).attr('id'));
         e.preventDefault();
 
         let formCat = new FormData($("#deleteCatDependencyForm")[0]);
@@ -267,7 +261,6 @@ $('document').ready(function () {
             contentType: false,
             async: false
         }).done(function (result) {
-            console.log(result);
             viewCategories();
         }).fail(function () {
             console.log("delete failed");
@@ -356,6 +349,54 @@ $('document').ready(function () {
     }
 
     /* ****************** END GESTION FILMS ****************** */
+
+
+    /* *************** GESTION USERS *************** */
+
+    $("#userActions").on("click", viewUsers);
+
+    function viewUsers() {
+        closeModal();
+
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "/admin/user/user-list.php?context=ajax",
+            dataType: "text",
+            async: false
+        }).done(function (html) {
+            actionsDiv.html(html);
+            $("#submitBan").on("click", banUser);
+
+        }).fail(function () {
+            console.log("view user failed");
+        })
+
+    }
+
+    function banUser(e) {
+        e.preventDefault();
+
+        let formUserBan = new FormData($("#banUserForm")[0]);
+
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + "/admin/user/user-ban.php?context=ajax",
+            data: formUserBan,
+            processData: false,
+            contentType: false,
+            async: false
+        }).done(function (result) {
+            console.log(result);
+            viewUsers()
+        }).fail(function () {
+            console.log("ban failed");
+        })
+
+    }
+
+
+    /* *************** END GESTION USERS *************** */
+
 
     /* ****************** MODAL ****************** */
     function closeModal() {
