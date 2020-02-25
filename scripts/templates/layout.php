@@ -158,10 +158,10 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                     <li><a href="/movies.php" target="_blank">Les films</a></li>
                     <li><a href="/contact.php" target="_blank">Nous contacter</a></li>
 
-                    <?php if ($user->isAdmin()) : ?>
+                    <?php if ($user && $user->isAdmin()) : ?>
                         <a href="/admin/">Mon Compte</a>
                     <?php else: ?>
-                        <?php if ($user->isRoot()) : ?>
+                        <?php if ($user && $user->isRoot()) : ?>
                             <a href="/root/">Mon Compte</a>
                         <?php else: ?>
                             <a href="/account/">Mon Compte</a>
