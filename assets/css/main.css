@@ -249,6 +249,8 @@ section .subtitle {
     background-color : #020d18;
     color : #fff;
 }
+/*** WHITE BACKGROUND */
+
 
 section h3 {
     font-size : 30px;
@@ -258,7 +260,7 @@ section h3 {
 /*** LIGHT BACKGROUND */
 
 .light-bg {
-    background-color : #f6f8fe;
+    background-color : #ffffff;
 }
 
 /*** USER PAGE ***/

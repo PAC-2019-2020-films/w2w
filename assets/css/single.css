@@ -1,13 +1,39 @@
 /* PAGE FILM */
 
-.page-title{
-
-    height: 200px;
-    padding : 20px 0;
-    color : #fff;
+.header{
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
 }
+.header-bg > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.header-bg::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(4,23,33,0.75);
+}
+.header-caption {
+    position: absolute;
+    right: 15%;
+    bottom: 20px;
+    left: 15%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
 
-
+}
+.header-caption h2{
+    font-size: 3.5rem;
+}
 .rating-title {
     text-transform: uppercase;
     font-size: .7rem;
@@ -15,19 +41,21 @@
     color : #4b4856;
 }
 
-.test_aera {
-    height: 200px;
-    padding: 20px 0;
-    color: white;
-}
 
 .movie_affiche
 {
     background: rgba(0, 0, 0, 1);
 }
 
-#carousel_movie_view .carousel-caption {
+.header-bg .header-caption {
     bottom: 8rem;
     z-index: 10;
 }
 
+/* User Review*/
+
+.userReviewInfo {
+    font-size: 0.9rem;
+    padding: 10px 0;
+    border-bottom: 1px solid #dadada;
+}
