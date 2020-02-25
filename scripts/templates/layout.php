@@ -27,11 +27,9 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
-    <script src="https://kit.fontawesome.com/5b034eec6e.js" crossorigin="anonymous"></script>
-<!--    FA local fallback-->
+    <script src="https://kit.fontawesome.com/ea5ad52db7.js" crossorigin="anonymous"></script>
+    <!--    FA local fallback-->
     <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-
-
     <script src="https://cdn.ckeditor.com/4.13.1/basic/ckeditor.js"></script>
 
 
@@ -50,66 +48,95 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
         </style>
         <div class="noscriptext"><h1>Javascript is disabled in your browser. You might need it.</h1></div>
     </noscript>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-        <div class="container">
+    <!-- Menu -->
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg site-header">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarW2W"
+                    aria-controls="navbarW2W" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
             <div id="logo">
                 <a class="navbar-brand" href="/">
-                    <img alt="logo" src="/assets/img/logo-w2w.png">
+                    <img alt="logo" src="/assets/img/logo-w2w.svg">
                     w<span>2</span>w
                 </a>
             </div>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarW2W"
-                    aria-controls="navbarW2W" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
             <div class="collapse navbar-collapse" id="navbarW2W">
-                <ul class="navbar-nav mr-auto">
+                <ul class="nav navbar-nav ">
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a>
                     </li>
+
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown07XL" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMovies" data-toggle="dropdown"
                            aria-expanded="false">Films</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown07XL">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMovies">
                             <a class="dropdown-item" href="/all_movies.php">Tous les films</a>
                             <a class="dropdown-item" href="#">Films les mieux notés</a>
                             <a class="dropdown-item" href="#">Films les plus populaires</a>
-                            <a class="dropdown-item" href="#">Parcourir les films par genre</a>
                         </div>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">Themes </a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownCategories" data-toggle="dropdown"
+                           aria-expanded="false">Par catégorie</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownCategories">
+                            <a class="dropdown-item" href="/all_movies.php">Tous les films</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownTags" data-toggle="dropdown"
+                           aria-expanded="false">Par genre</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownTags">
+                            <a class="dropdown-item" href="/all_movies.php">Tous les films</a>
+                        </div>
                     </li>
 
                 </ul>
-                <form class="form-inline my-2 my-md-0 mr-auto">
-                    <input class="form-control" type="text" placeholder="Rechercher un film" aria-label="Search">
-                </form>
-
-                <?php if (isset($user) && $user instanceof \w2w\Model\User) : ?>
-                    <i><?php echo escape($user->getUserName()); ?> &lt;<?php echo escape($user->getEmail()); ?>&gt;</i>
-                    <?php if ($user->isAdmin()) : ?>
-                        <a href="/admin/">Dashboard</a>
-                    <?php else: ?>
-                        <?php if ($user->isRoot()) : ?>
-                            <a href="/root/">[root]</a>
-                        <?php else: ?>
-                            <a href="/account/">Mon compte</a>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                    <a class="btn btn-primary btn-account" href="../authentication/logout_action.php">Se déconnecter</a>
-                <?php else: ?>
-                    <button class="btn btn-primary btn-account" data-target="#modal-login" data-toggle="modal">Se
-                        connecter <i class="fas fa-sign-in-alt"></i></button>
-                <?php endif; ?>
-
-
             </div>
-        </div>
 
-    </nav>
+            <form class="search-form form-inline">
+                <input class="form-control" type="text" placeholder="Rechercher un film..." aria-label="Search">
+                <button type="submit" class="search-submit">
+                    <i class="fas fa-search"></i> <span class="screen-reader-text">Search</span></button>
+            </form>
+
+            <?php if (isset($user) && $user instanceof \w2w\Model\User) : ?>
+                <div class="collapse navbar-collapse" id="navbarW2W">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                               aria-expanded="false"><i class="fas fa-user-circle fa-2x"></i> <span
+                                        class="user-account_name"> <?php echo escape($user->getUserName()); ?></span></a>
+                            <div class="dropdown-menu">
+
+                                <?php if ($user->isAdmin()) : ?>
+                                    <a class="dropdown-item" href="/admin/">Dashboard</a>
+                                <?php else: ?>
+                                    <?php if ($user->isRoot()) : ?>
+                                        <a class="dropdown-item" href="/root/">[root]</a>
+                                    <?php else: ?>
+                                        <a class="dropdown-item" href="/account/">Mon compte</a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+
+                                <a class="dropdown-item" href="../authentication/logout_action.php">Se
+                                    déconnecter</a>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            <?php else: ?>
+                <button class="btn btn-primary btn-account" data-target="#modal-login" data-toggle="modal">Se
+                    connecter <i class="fas fa-sign-in-alt"></i></button>
+            <?php endif; ?>
+
+        </nav>
+    </div>
 
     <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login"
          aria-hidden="true">
