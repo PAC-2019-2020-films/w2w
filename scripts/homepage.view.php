@@ -4,6 +4,12 @@
  */
 ?>
 
+<div class="flashBag">
+    <?php
+    \w2w\Utils\Utils::echoMessage();
+    ?>
+</div>
+
 <!-- Carousel 4 Latest Reviews
 ================================================== -->
 <div id="reviewsCarousel" class="carousel slide carousel-fade" data-ride="carousel">

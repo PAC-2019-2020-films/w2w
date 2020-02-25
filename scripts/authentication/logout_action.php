@@ -32,3 +32,5 @@ session_unset();
 session_destroy();    
 //
 //echo "ok";
+header('location:../homepage.php');
+exit();

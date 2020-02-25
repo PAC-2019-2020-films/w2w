@@ -28,6 +28,10 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
     <script src="https://kit.fontawesome.com/5b034eec6e.js" crossorigin="anonymous"></script>
+<!--    FA local fallback-->
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
+
+
     <script src="https://cdn.ckeditor.com/4.13.1/basic/ckeditor.js"></script>
 
 

@@ -220,13 +220,24 @@ function redirectWarning($url, $msg)
 }
 
 
+function checkBanned(){
+    global $user;
+
+    if ($user && $user instanceof \w2w\Model\User && $user->isBanned()){
+        require 'scripts/authentication/logout_action.php';
+        \w2w\Utils\Utils::message(false, '', 'Votre compte a été suspendu.');
+        exit();
+    }
+}
+
+
 /**
  * vérifie que l'utilisateur est connecté
  */
 function checkUser()
 {
     global $user;
-    if ($user && $user instanceof \w2w\Model\User) {
+    if ($user && $user instanceof \w2w\Model\User && !$user->isBanned()) {
         return true;
     }
     error401();
@@ -238,7 +249,7 @@ function checkUser()
 function checkAdmin()
 {
     global $user;
-    if ($user && $user instanceof \w2w\Model\User && $user->isAdmin()) {
+    if ($user && $user instanceof \w2w\Model\User && $user->isAdmin() && !$user->isBanned()) {
         return true;
     }
     error401();
@@ -250,7 +261,7 @@ function checkAdmin()
 function checkRoot()
 {
     global $user;
-    if ($user && $user instanceof \w2w\Model\User && $user->isRoot()) {
+    if ($user && $user instanceof \w2w\Model\User && $user->isRoot() && !$user->isBanned()) {
         return true;
     }
     error401();

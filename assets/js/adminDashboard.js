@@ -365,7 +365,8 @@ $('document').ready(function () {
             async: false
         }).done(function (html) {
             actionsDiv.html(html);
-            $("#submitBan").on("click", banUser);
+
+            $("#modal-ban-user").on('show.bs.modal', banUser);
 
         }).fail(function () {
             console.log("view user failed");
@@ -374,23 +375,41 @@ $('document').ready(function () {
     }
 
     function banUser(e) {
-        e.preventDefault();
+        let button = $(e.relatedTarget);
+        let userId = button.data('userid');
+        let userIsBanned = button.data('userisbanned');
+
+        if (userIsBanned === 1) {
+            $(".submitBan").val('Restaurer?');
+            $(".submitBanLabel").html('Etes-vous sur de vouloir restaurer cet utilisateur?');
+        } else {
+            $(".submitBan").val('Bannir?');
+            $(".submitBanLabel").html('Etes-vous sur de vouloir bannir cet utilisateur?');
+        }
 
         let formUserBan = new FormData($("#banUserForm")[0]);
+        formUserBan.append('userIsBanned', userIsBanned);
+        formUserBan.append('userId', userId);
 
-        $.ajax({
-            type: "POST",
-            url: BASE_URL + "/admin/user/user-ban.php?context=ajax",
-            data: formUserBan,
-            processData: false,
-            contentType: false,
-            async: false
-        }).done(function (result) {
-            console.log(result);
-            viewUsers()
-        }).fail(function () {
-            console.log("ban failed");
-        })
+        $("#submitBan").on("click", (e) => {
+
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: BASE_URL + "/admin/user/user-ban.php?context=ajax",
+                data: formUserBan,
+                processData: false,
+                contentType: false,
+                async: false
+            }).done(function (result) {
+                viewUsers()
+                console.log(result);
+            }).fail(function () {
+                console.log("ban failed");
+            })
+        });
+
 
     }
 

@@ -94,7 +94,7 @@
                                             data-target="#modal-ban-user"
                                             data-toggle="modal"
                                             data-userid="<?php echo escape($user->getId()); ?>"
-                                            data-userIsBanned="0"
+                                            data-userisbanned="0"
                                             <?php
                                         } ?>
                                 >
@@ -108,7 +108,7 @@
                                                 data-target="#modal-ban-user"
                                                 data-toggle="modal"
                                                 data-userid="<?php echo escape($user->getId()); ?>"
-                                                data-userIsBanned="1"
+                                                data-userisbanned="1"
                                                 <?php
                                             } ?>
                                     >
@@ -141,10 +141,9 @@
                     <form action="user-ban.php" method="post" id="banUserForm"
                           enctype="multipart/form-data">
                         <div>
-                            <input type="hidden" class="modalUserId" name="id"/>
                             <input type="hidden" id="confirm" name="confirm" value="confirm"/>
-                            <label for="submitBan">Etes-vous sur de vouloir Bannir cet utilisateur?</label>
-                            <input id="submitBan" type="submit" class="btn btn-primary" value="Bannir ?"
+                            <label for="submitBan" class="submitBanLabel">Etes-vous sur de vouloir bannir cet utilisateur?</label>
+                            <input id="submitBan" type="submit" class="btn btn-primary submitBan" value="Bannir ?"
                                    data-dismiss="modal"/>
                             <button class="btn btn-primary" data-dismiss="modal" aria-label="Close"> Annuler</button>
                         </div>

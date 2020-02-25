@@ -15,18 +15,19 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
 
     <!-- start of carousel -->
 
-        <div id="carousel_movie_view" class="carousel slide carousel-fade" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active" style="height: 400px">
-                    <img src="/uploads/<?php echo $movie->getPoster(); ?>-big.jpg" class="d-block w-100 movie_affiche" alt="...">
-                        <div class="carousel-caption text-left test">
-                            <h2><?php echo $movie->getTitle(); ?></h2>
-                            <!-- Film info -->
-                            <?php echo template("movie.data.php", ["movie" => $movie]); ?>
-                        </div>
+    <div id="carousel_movie_view" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="height: 400px">
+                <img src="/uploads/<?php echo $movie->getPoster(); ?>-big.jpg" class="d-block w-100 movie_affiche"
+                     alt="...">
+                <div class="carousel-caption text-left test">
+                    <h2><?php echo $movie->getTitle(); ?></h2>
+                    <!-- Film info -->
+                    <?php echo template("movie.data.php", ["movie" => $movie]); ?>
                 </div>
             </div>
         </div>
+    </div>
 
     <!-- end CAROUSEL -->
 
