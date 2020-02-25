@@ -57,7 +57,7 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Date Inscription</th>
                 <th scope="col">Role</th>
-                <th scope="col" class="text-center">Bannir</th>
+                <th scope="col" class="text-center">Ban/Unban</th>
             </tr>
             </thead>
             <tbody>
@@ -84,6 +84,7 @@
                                 <p><?php echo escape($user->getRole()->getName()); ?></p>
                             </td>
                             <td class="text-center">
+                                <?php if (!$user->isBanned()) { ?>
                                 <i class="fa fa-ban"
                                     <?php
                                         if ($_SESSION['role'] <= $user->getRole()->getId()) {
@@ -93,9 +94,26 @@
                                             data-target="#modal-ban-user"
                                             data-toggle="modal"
                                             data-userid="<?php echo escape($user->getId()); ?>"
-                                        <?php } ?>
+                                            data-userIsBanned="0"
+                                            <?php
+                                        } ?>
                                 >
-                                </i>
+                                    <?php } else { ?>
+                                    <i class="far fa-circle"
+                                        <?php
+                                            if ($_SESSION['role'] <= $user->getRole()->getId()) {
+                                                echo 'style="color : grey"';
+                                            } else {
+                                                ?>
+                                                data-target="#modal-ban-user"
+                                                data-toggle="modal"
+                                                data-userid="<?php echo escape($user->getId()); ?>"
+                                                data-userIsBanned="1"
+                                                <?php
+                                            } ?>
+                                    >
+                                        <?php } ?>
+                                    </i>
                             </td>
                         
                         </tr>
@@ -107,28 +125,26 @@
     </div>
     
     
-    <!-- ****************** Delete category confirm box ****************** -->
+    <!-- ****************** Ban User confirm box ****************** -->
     <div class="modal fade" id="modal-ban-user" tabindex="-1" role="dialog"
          aria-labelledby="modal-ban-user"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deletetitle">Supprimer</h5>
+                    <h5 class="modal-title" id="deletetitle">Ban/Unban</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" id="">
-                    <form action="category-delete.php" method="post" id="deleteCategoryForm"
+                    <form action="user-ban.php" method="post" id="banUserForm"
                           enctype="multipart/form-data">
                         <div>
-                            <input type="hidden" class="modalCatId" name="id"/>
+                            <input type="hidden" class="modalUserId" name="id"/>
                             <input type="hidden" id="confirm" name="confirm" value="confirm"/>
-                            <label for="submitDelete">Etes-vous sur de vouloir supprimer cette catégorie? cette action
-                                est
-                                irréversible!</label>
-                            <input id="submitDelete" type="submit" class="btn btn-primary" value="Supprimer ?"
+                            <label for="submitBan">Etes-vous sur de vouloir Bannir cet utilisateur?</label>
+                            <input id="submitBan" type="submit" class="btn btn-primary" value="Bannir ?"
                                    data-dismiss="modal"/>
                             <button class="btn btn-primary" data-dismiss="modal" aria-label="Close"> Annuler</button>
                         </div>
