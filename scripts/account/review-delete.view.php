@@ -1,6 +1,4 @@
-<?php
-//if (isset($userReview)) {
-//    ?>
+
 
     <div class="modal fade" id="modal-delete-review" tabindex="-1" role="dialog" aria-labelledby="modal-delete-review"
          aria-hidden="true">
@@ -24,4 +22,4 @@
         </div>
     </div>
 
-<?php //}
+<?php

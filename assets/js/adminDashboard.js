@@ -54,6 +54,7 @@ $('document').ready(function () {
                         dataType: "text",
                         async: false
                     }).done(function (res) {
+                        console.log(res);
                         viewReviews();
                     }).fail(function () {
                         console.log("shit");
