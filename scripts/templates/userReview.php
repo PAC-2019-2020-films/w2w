@@ -24,7 +24,7 @@ global $user;
         ?>
 
         <?php
-        if (isset($_SESSION['uid']) && $userReview->getUser()->getId() === $_SESSION['uid'] || $user->getRole()->getId() > $userReview->getUser()->getRole()->getId()) {
+        if ((isset($_SESSION['uid']) && $userReview->getUser()->getId() === $_SESSION['uid']) || ($user instanceof \W2w\Model\User && $user->getRole()->getId() > $userReview->getUser()->getRole()->getId())) {
             ?>
 
             <a href="" class="ml-2" data-target="#modal-edit-review" data-toggle="modal"><i class="fas fa-edit"></i> Editer ma
