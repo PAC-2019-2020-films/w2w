@@ -37,6 +37,7 @@ $('document').ready(function () {
             dataType: "text",
             async: false
         }).done(function (html) {
+            console.log(html);
             actionsDiv.html(html);
 
             $('#modal-delete-review').on("show.bs.modal", function (event) {

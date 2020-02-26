@@ -119,7 +119,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                                     <?php if ($user->isRoot()) : ?>
                                         <a class="dropdown-item" href="/root/">[root]</a>
                                     <?php else: ?>
-                                        <a class="dropdown-item" href="/account/">Mon compte</a>
+                                        <a class="dropdown-item" href="/account/index.php">Mon compte</a>
                                     <?php endif; ?>
                                 <?php endif; ?>
 

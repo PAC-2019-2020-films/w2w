@@ -1,4 +1,5 @@
 <?php
+    global $user;
 checkUser();
 
 if (isset($_SESSION['emailVerified']) && !$_SESSION['emailVerified']) {
@@ -38,7 +39,7 @@ unset($_SESSION['message']);
                 </div>
             </div>
             <div class="column">
-                <a href="delete_account.php">
+                <a href="#" data-target="#modal-delete-account" data-toggle="modal">
                     <img src="../../assets/img/user_page/delete_on.png" style="width:100px" alt="delete" class="bottom">
                     <img src="../../assets/img/user_page/delete.png" style="width:100px" alt="delete" class="top">
                 </a>
@@ -50,4 +51,26 @@ unset($_SESSION['message']);
 
     <!--End Galerie-->
     <div id="actions"></div>
+    
+    <div class="modal fade" id="modal-delete-account" tabindex="-1" role="dialog" aria-labelledby="modal-delete-account"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginlabel">Supprimer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="">
+                    <p>Etes-vous sur de vouloir supprimer votre critique? Cette action est irréversible!</p>
+                    <a class="btn btn-primary modalRevId" href="delete_account.php?id=<?php echo escape($user->getId())?>">
+                        oui </a>
+                    <button class="btn btn-primary" data-dismiss="modal" aria-label="Close"> nah</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </main>

@@ -47,8 +47,10 @@
 
 //                Delete the review and update the user's review count
                 $reviewDAO->delete($review);
-                $reviewUser->setNumberReviews($reviewUser->getNumberReviews() - 1);
-                $userDAO->update($reviewUser);
+                if ($reviewUser->getNumberReviews > 0) {
+                    $reviewUser->setNumberReviews($reviewUser->getNumberReviews() - 1);
+                    $userDAO->update($reviewUser);
+                }
                 
                 \w2w\Utils\Utils::message(true, 'Critique Supprimée', '');
                 

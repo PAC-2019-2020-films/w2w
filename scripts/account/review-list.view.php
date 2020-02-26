@@ -26,26 +26,26 @@
             <tbody>
             <?php
                 if (isset($reviews) && count($reviews) > 0) : ?>
-                    <?php foreach ($reviews as $review) : ?>
+                    <?php foreach ($reviews as $userReview) : ?>
                         <tr>
                             <td class="review_movieName">
-                                <p><?php echo escape($review->getMovie()->getTitle()); ?></p>
+                                <p><?php echo escape($userReview->getMovie()->getTitle()); ?></p>
                             </td>
                             <td class="review_content">
-                                <p><?php echo escape($review->getContent()); ?></p>
+                                <p><?php echo escape($userReview->getContent()); ?></p>
                             </td>
                             <td class="review_ratingName">
-                                <p><?php echo escape($review->getRating()->getName()); ?></p>
+                                <p><?php echo escape($userReview->getRating()->getName()); ?></p>
                             </td>
                             <td class="review_date">
-                                <p><?php echo escape($review->getCreatedAt()->format('Y-m-d')); ?></p>
+                                <p><?php echo escape($userReview->getCreatedAt()->format('Y-m-d')); ?></p>
                             </td>
                             <td class="text-center">
-                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-edit" data-target="#modal-edit-review" data-toggle="modal"></i>
                             </td>
                             <td class="text-center">
                                 <i class="fa fa-trash" data-target="#modal-delete-review" data-toggle="modal"
-                                   data-revid="<?php echo escape($review->getId()); ?>"></i>
+                                   data-revid="<?php echo escape($userReview->getId()); ?>"></i>
                             </td>
                         
                         </tr>
@@ -57,7 +57,7 @@
     </div>
 
 <?php
-    if (isset($allReviews) && checkAdmin()) {
+    if (isset($allReviews) && checkAdmin()) :
         ?>
         <div class="container-fluid category_list">
             <h2>Critiques des Utilisateurs</h2>
@@ -75,26 +75,26 @@
                 <tbody>
                 <?php
                     if (isset($allReviews) && count($allReviews) > 0) : ?>
-                        <?php foreach ($allReviews as $review) : ?>
+                        <?php foreach ($allReviews as $userReview) : ?>
                             <tr>
                                 <td class="review_movieName">
-                                    <p><?php echo escape($review->getMovie()->getTitle()); ?></p>
+                                    <p><?php echo escape($userReview->getMovie()->getTitle()); ?></p>
                                 </td>
                                 <td class="review_content">
-                                    <p><?php echo escape($review->getContent()); ?></p>
+                                    <p><?php echo escape($userReview->getContent()); ?></p>
                                 </td>
                                 <td class="review_ratingName">
-                                    <p><?php echo escape($review->getRating()->getName()); ?></p>
+                                    <p><?php echo escape($userReview->getRating()->getName()); ?></p>
                                 </td>
                                 <td class="review_date">
-                                    <p><?php echo escape($review->getCreatedAt()->format('Y-m-d')); ?></p>
+                                    <p><?php echo escape($userReview->getCreatedAt()->format('Y-m-d')); ?></p>
                                 </td>
                                 <td class="text-center">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-edit" data-target="#modal-edit-review" data-toggle="modal"></i>
                                 </td>
                                 <td class="text-center">
                                     <i class="fa fa-trash" data-target="#modal-delete-review" data-toggle="modal"
-                                       data-revid="<?php echo escape($review->getId()); ?>"></i>
+                                       data-revid="<?php echo escape($userReview->getId()); ?>"></i>
                                 </td>
                             
                             </tr>
@@ -105,15 +105,11 @@
         
         </div>
         
-        <?php
-    }
-    
+        <?php endif;
     
     require 'review-delete.view.php';
-    
-    
+    require 'review-edit.view.php';
 ?>
-    <div>
         <script>
             $(document).ready(function () {
                 $('#review_list').DataTable({
@@ -139,9 +135,8 @@
                     ],
                     "order": [[3, "asc"]]
                 });
-                
+
             });
         </script>
-    </div>
 <?php
 
