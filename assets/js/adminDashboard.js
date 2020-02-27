@@ -526,6 +526,28 @@ $('document').ready(function () {
     /* *************** END GESTION USERS *************** */
 
 
+    /* *************** GESTION MESSAGES *************** */
+
+    $("#messageActions").on("click", viewMessages);
+
+    function viewMessages() {
+        closeModal();
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "/admin/message/?context=ajax",
+            dataType: "text",
+            async: false
+        }).done(function (html) {
+            actionsDiv.html(html);
+        }).fail(function () {
+            console.log("view message failed");
+        })
+    }
+
+    /* *************** END GESTION MESSAGES *************** */
+
+
+
     /* ****************** MODAL ****************** */
     function closeModal() {
         $(".modal-open").removeAttr("style");
