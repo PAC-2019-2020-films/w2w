@@ -14,6 +14,14 @@ checkAdmin();
     
 
 
+
+
+    <style>
+    table {
+        margin-bottom:50px;
+    }
+    </style>
+
     <div class="container-fluid user_list">
         <h2>Liste des messages non traités</h2>
         <table id="untreated_message_list" class="table table-striped">
@@ -109,26 +117,15 @@ checkAdmin();
     
     /* ****************** DATATABLES ****************** */
 ?>
-    <!-- 
     <script>
         $(document).ready(function () {
-            $('#message_list').DataTable({
-                /*"columns": [
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    {"orderable": false}
-                ],
-                "order": [[1, "asc"]]
-                */
+            $('#untreated_message_list').DataTable({
+            });
+            $('#treated_message_list').DataTable({
             });
         });
     
     </script>
-    -->
 <?php
 /* ****************** END DATATABLES ****************** */
 
