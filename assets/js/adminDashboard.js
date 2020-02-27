@@ -3,6 +3,7 @@ $('document').ready(function () {
 
     const actionsDiv = $("#actions");
     let showCatUpdate = false;
+    let showTagUpdate = false;
 
 
     /* ****************** GESTION PROFILE ****************** */
@@ -287,15 +288,124 @@ $('document').ready(function () {
             async: false
         }).done(function (html) {
             actionsDiv.html(html);
+
             $('#modal-delete-tag').on("show.bs.modal", function (event) {
                 let button = $(event.relatedTarget);
                 let tagId = button.data('tagid');
                 $(this).find(".modalTagId").val(tagId);
             });
 
+            const addTagBtn = $("#btnAddTag");
+            addTagBtn.on('click', addTag);
+
+            const btnDelCat = $("#submitDelete");
+            btnDelCat.on("click", deleteTag);
+
+            $(".fa-edit").on("click", updateTag);
+
         }).fail(function () {
             console.log("view cat failed");
         })
+    }
+
+
+    function addTag(e) {
+        e.preventDefault();
+
+        let formTag = new FormData($("#addTagForm")[0]);
+
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + "/admin/tag/tag-add.php?context=ajax",
+            data: formTag,
+            processData: false,
+            contentType: false,
+            async: false
+        }).done(function (result) {
+            viewTags();
+        });
+    }
+
+    function updateTag() {
+        if (showTagUpdate) {
+            hideTagUpdate();
+        }
+
+        let row = $(this).closest("tr");
+        let tagName = row.find(".tag_name>p").html();
+        let tagDesc = row.find(".tag_description>p").html();
+        let tagId = row.find(".tag_id>p").html();
+        row.find('.fa-edit').css('color', 'grey');
+
+        showTagUpdate = true;
+
+        row.after(
+            "<tr class='showUpdateForm'><td colspan='5'>" +
+            "<form action='#' method='post' id='updateTagForm' class='d-flex justify-content-between form-inline'>" +
+
+            "<input type='text' value='" + tagId + "' disabled class='form-control' style='width: 50px'>" +
+            "<input name='tagName' value=\"" + tagName + "\" class='form-control'/>" +
+
+            "<input name='tagDescription' value=\"" + tagDesc + "\" class='form-control'/>" +
+            "<input type='hidden' value='" + tagId + "' name='tagId' class='form-control'>" +
+
+            "<input type='submit' value='Mettre à jour' id='submitTagUpdate' class='btn btn-primary'/>" +
+
+            "<input type='button' value='Annuler' class='form-control cancelUpdate'>" +
+
+            "</form>" +
+            "</td></tr>"
+        );
+
+        $(".cancelUpdate").on("click", hideTagUpdate);
+        $("#submitTagUpdate").on("click", handleTagUpdate);
+
+    }
+
+    function hideTagUpdate() {
+        $(".fa-edit").removeAttr("style");
+        $(".showUpdateForm").remove();
+    }
+
+    function handleTagUpdate(e) {
+        e.preventDefault();
+
+        let form = new FormData($("#updateTagForm")[0]);
+
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + "/admin/tag/tag-edit.php?context=ajax",
+            data: form,
+            processData: false,
+            contentType: false,
+            async: false
+        }).done(function (result) {
+            console.log(result);
+            viewTags();
+        }).fail(function (result) {
+            console.log(failed);
+
+        })
+    }
+
+
+    function deleteTag(e) {
+        e.preventDefault();
+
+        let form = new FormData($("#deleteTagForm")[0]);
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + "/admin/tag/tag-delete.php?context=ajax",
+            dataType: 'text',
+            data: form,
+            processData: false,
+            contentType: false,
+            async: false
+        }).done(function (result) {
+            console.log(result);
+            viewTags();
+        });
+
     }
 
 
@@ -373,7 +483,6 @@ $('document').ready(function () {
         }).fail(function () {
             console.log("view user failed");
         })
-
     }
 
     function banUser(e) {
@@ -405,14 +514,12 @@ $('document').ready(function () {
                 contentType: false,
                 async: false
             }).done(function (result) {
-                viewUsers()
+                viewUsers();
                 console.log(result);
             }).fail(function () {
                 console.log("ban failed");
             })
         });
-
-
     }
 
 
@@ -421,7 +528,8 @@ $('document').ready(function () {
 
     /* ****************** MODAL ****************** */
     function closeModal() {
-        $(".modal-open").removeClass("modal-open");
+        $(".modal-open").removeAttr("style");
+        $(".modal-open").removeAttr("class");
         $(".modal-backdrop").remove();
     }
 
