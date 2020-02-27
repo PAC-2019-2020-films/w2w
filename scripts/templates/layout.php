@@ -189,21 +189,16 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                 <h5>W2W <span class="small">| What to watch</span></h5>
                 <ul class="list-inline ">
 
-                    <li><a href="/about.php" target="_blank">A propos</a></li>
-                    <li><a href="/team.php" target="_blank">L'équipe</a></li>
-                    <li><a href="/movies.php" target="_blank">Les films</a></li>
-                    <li><a href="/contact.php" target="_blank">Nous contacter</a></li>
+                    <li><a href="/about.php">A propos</a></li>
+                    <li><a href="/team.php">L'équipe</a></li>
+                    <li><a href="/movies.php">Les films</a></li>
+                    <li><a href="/contact.php">Nous contacter</a></li>
 
                     <?php if ($user && $user->isAdmin()) : ?>
                         <a href="/admin/">Mon Compte</a>
-                    <?php else: ?>
-                        <?php if ($user && $user->isRoot()) : ?>
-                            <a href="/root/">Mon Compte</a>
-                        <?php else: ?>
-                            <a href="/account/">Mon Compte</a>
-                        <?php endif; ?>
+                    <?php elseif ($user) : ?>
+                        <a href="/account/">Mon Compte</a>
                     <?php endif; ?>
-
 
                 </ul>
             </div>
