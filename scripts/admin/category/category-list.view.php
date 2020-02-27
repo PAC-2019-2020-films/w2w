@@ -1,23 +1,25 @@
 <?php
-
-checkAdmin();
+    
+    checkAdmin();
 
 ?>
-
+    <!-- *************** FLASHBAG *************** -->
     <div class="flashBag">
         <?php
-        \w2w\Utils\Utils::echoMessage();
+            \w2w\Utils\Utils::echoMessage();
         ?>
     </div>
-
+    <!-- *************** END FLASHBAG *************** -->
+    
+    <!-- *************** ADD CATEGORY *************** -->
     <div class="container-fluid addCategory">
-
+        
         <button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#addCategory"
                 aria-expanded="false" aria-controls="collapse" id="toggleAddCatForm">
             <i class="fas fa-plus"></i>
             Ajouter une catégorie
         </button>
-
+        
         <div class="collapse" id="addCategory">
             <div>
                 <div class="bg-light rounded p-2">
@@ -25,15 +27,15 @@ checkAdmin();
                     <hr>
                     <form class="form" action="../category/category-add.php" id="addCatForm" method="post"
                           enctype="multipart/form-data">
-
+                        
                         <div class="form-row">
                             <input type="text" class="form-control mb-4" placeholder="Name" name="nameCat">
                         </div>
-
+                        
                         <div class="form-row">
                             <input placeholder="Description" type="text" id="description" name="description" class="form-control mb-4 h-auto">
                         </div>
-
+                        
                         <div class="form-group m-auto">
                             <div class="col-xs-12">
                                 <input type="submit" class="btn btn-primary btn-sm" value="Add category" id="btnAddCat">
@@ -45,7 +47,9 @@ checkAdmin();
             <hr>
         </div>
     </div>
-
+    <!-- *************** END ADD CATEGORY *************** -->
+    
+    <!-- *************** LIST CATEGORIES *************** -->
     <div class="container-fluid category_list">
         <h2>Liste des catégories</h2>
         <table id="category_list" class="table table-striped">
@@ -60,35 +64,36 @@ checkAdmin();
             </thead>
             <tbody>
             <?php
-            if (isset($categories) && count($categories) > 0) : ?>
-                <?php foreach ($categories as $category) : ?>
-                    <tr>
-                        <th scope="row" class="cat_id">
-                            <p><?php echo escape($category->getId()); ?></p>
-                        </th>
-                        <td class="cat_name">
-                            <p><?php echo escape($category->getName()); ?></p>
-                        </td>
-                        <td class="cat_description">
-                            <p><?php echo escape($category->getDescription()); ?></p>
-                        </td>
-                        <td class="text-center">
+                if (isset($categories) && count($categories) > 0) : ?>
+                    <?php foreach ($categories as $category) : ?>
+                        <tr>
+                            <th scope="row" class="cat_id">
+                                <p><?php echo escape($category->getId()); ?></p>
+                            </th>
+                            <td class="cat_name">
+                                <p><?php echo escape($category->getName()); ?></p>
+                            </td>
+                            <td class="cat_description">
+                                <p><?php echo escape($category->getDescription()); ?></p>
+                            </td>
+                            <td class="text-center">
                                 <i class="fas fa-edit"></i>
-                        </td>
-                        <td class="text-center">
-                            <i class="fa fa-trash" data-target="#modal-delete-category" data-toggle="modal"
-                               data-catid="<?php echo escape($category->getId()); ?>"></i>
-                        </td>
-
-                    </tr>
-                <?php endforeach; ?>
-            <?php endif; ?>
+                            </td>
+                            <td class="text-center">
+                                <i class="fa fa-trash" data-target="#modal-delete-category" data-toggle="modal"
+                                   data-catid="<?php echo escape($category->getId()); ?>"></i>
+                            </td>
+                        
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
-
+    
     </div>
-
-
+    <!-- *************** END LIST CATEGORIES *************** -->
+    
+    
     <!-- ****************** Delete category confirm box ****************** -->
     <div class="modal fade" id="modal-delete-category" tabindex="-1" role="dialog"
          aria-labelledby="modal-delete-category"
@@ -120,21 +125,18 @@ checkAdmin();
         </div>
     </div>
     <!-- ****************** END Delete category confirm box ****************** -->
-
-<!-- ****************** Delete dependencies confirm box ****************** -->
-<div id="warning-modal">
-
-
-</div>
-
-
-<!-- ****************** END Delete dependencies confirm box ****************** -->
-
+    
+    <!-- ****************** Delete dependencies confirm box ****************** -->
+    <div id="warning-modal">
+    
+    
+    </div>
+    <!-- ****************** END Delete dependencies confirm box ****************** -->
 
 
 <?php
-
-/* ****************** DATATABLES ****************** */
+    
+    /* ****************** DATATABLES ****************** */
 ?>
     <script>
         $(document).ready(function () {
@@ -149,7 +151,7 @@ checkAdmin();
                 "order": [[1, "asc"]]
             });
         });
-
+    
     </script>
 <?php
 /* ****************** END DATATABLES ****************** */

@@ -12,18 +12,11 @@ if (isset($_SESSION['message'])) {
 }
 unset($_SESSION['message']);
 
-
 ?>
-<!--<form method="post" action="/login_action.php">-->
-<!--    <input type="text" name="email" placeholder="email"/>-->
-<!--    <input type="password" name="password" placeholder="password"/>-->
-<!--   -->
-<!--    <input type="submit" value="login"/>-->
-<!--</form>-->
 <div class="card bg-ligh" id="loginform">
     <article class="card-body mx-auto" >
         <h4 class="card-title text-center">Se connecter</h4>
-        <form action="../authentication/login_action.php" method="post"  >
+        <form action="../authentication/login_action.php" method="post">
 
             <div class="form-group input-group">
                 <div class="input-group-prepend">
@@ -41,7 +34,7 @@ unset($_SESSION['message']);
                 <input name="password" class="form-control" placeholder="Mot de passe" type="password">
             </div>
 
-            <div class= """>
+            <div class="">
               <p class="small text-right" id="resetPasswordModTrigger"><a href="#">Mot de passe oublié ?</a></p>
 
             <!--            TODO : FIX no JS action in non modal mode (in authentication/login.php)-->
@@ -56,10 +49,7 @@ unset($_SESSION['message']);
 
 
         </form>
-
             <a class="btn btn-secondary btn-block" href="../authentication/signup.php">S'inscrire</a>
-
-            <!--            TODO : FIX no JS action in non modal mode (in authentication/login.php)-->
-
+        
     </article>
 </div>
