@@ -297,6 +297,9 @@ $('document').ready(function () {
             const addTagBtn = $("#btnAddTag");
             addTagBtn.on('click', addTag);
 
+            const btnDelCat = $("#submitDelete");
+            btnDelCat.on("click", deleteTag);
+
         }).fail(function () {
             console.log("view cat failed");
         })
@@ -310,14 +313,34 @@ $('document').ready(function () {
 
         $.ajax({
             type: "POST",
-            url : BASE_URL +"/admin/tag/tag-add.php?context=ajax",
+            url: BASE_URL + "/admin/tag/tag-add.php?context=ajax",
             data: formTag,
             processData: false,
             contentType: false,
             async: false
-        }).done(function(result){
+        }).done(function (result) {
             viewTags();
         });
+    }
+
+
+    function deleteTag(e) {
+        e.preventDefault();
+
+        let form = new FormData($("#deleteTagForm")[0]);
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + "/admin/tag/tag-delete.php?context=ajax",
+            dataType: 'text',
+            data: form,
+            processData: false,
+            contentType: false,
+            async: false
+        }).done(function (result) {
+            console.log(result);
+            viewTags();
+        });
+
     }
 
 
@@ -427,7 +450,7 @@ $('document').ready(function () {
                 contentType: false,
                 async: false
             }).done(function (result) {
-                viewUsers()
+                viewUsers();
                 console.log(result);
             }).fail(function () {
                 console.log("ban failed");
@@ -443,7 +466,8 @@ $('document').ready(function () {
 
     /* ****************** MODAL ****************** */
     function closeModal() {
-        $(".modal-open").removeClass("modal-open");
+        $(".modal-open").removeAttr("style");
+        $(".modal-open").removeAttr("class");
         $(".modal-backdrop").remove();
     }
 
