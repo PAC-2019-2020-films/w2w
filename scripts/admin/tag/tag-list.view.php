@@ -10,6 +10,44 @@
         ?>
     </div>
     <!-- *************** END FLASHBAG *************** -->
+
+    <!-- *************** ADD TAG *************** -->
+    <div class="container-fluid addCategory">
+
+        <button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#addTag"
+                aria-expanded="false" aria-controls="collapse" id="toggleAddTagForm">
+            <i class="fas fa-plus"></i>
+            Ajouter un Tag
+        </button>
+
+        <div class="collapse" id="addTag">
+            <div>
+                <div class="bg-light rounded p-2">
+                    <h3 class="m-auto"> Ajouter un Tag </h3>
+                    <hr>
+                    <form class="form" action="../category/category-add.php" id="addTagForm" method="post"
+                          enctype="multipart/form-data">
+
+                        <div class="form-row">
+                            <input type="text" class="form-control mb-4" placeholder="Name" name="nameTag">
+                        </div>
+
+                        <div class="form-row">
+                            <input placeholder="Description" type="text" id="description" name="description" class="form-control mb-4 h-auto">
+                        </div>
+
+                        <div class="form-group m-auto">
+                            <div class="col-xs-12">
+                                <input type="submit" class="btn btn-primary btn-sm" value="Add Tag" id="btnAddTag">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <!-- *************** END ADD TAG *************** -->
     
     <!-- *************** TAGS LIST *************** -->
     <div class="container">

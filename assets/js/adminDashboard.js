@@ -287,15 +287,37 @@ $('document').ready(function () {
             async: false
         }).done(function (html) {
             actionsDiv.html(html);
+
             $('#modal-delete-tag').on("show.bs.modal", function (event) {
                 let button = $(event.relatedTarget);
                 let tagId = button.data('tagid');
                 $(this).find(".modalTagId").val(tagId);
             });
 
+            const addTagBtn = $("#btnAddTag");
+            addTagBtn.on('click', addTag);
+
         }).fail(function () {
             console.log("view cat failed");
         })
+    }
+
+
+    function addTag(e) {
+        e.preventDefault();
+
+        let formTag = new FormData($("#addTagForm")[0]);
+
+        $.ajax({
+            type: "POST",
+            url : BASE_URL +"/admin/tag/tag-add.php?context=ajax",
+            data: formTag,
+            processData: false,
+            contentType: false,
+            async: false
+        }).done(function(result){
+            viewTags();
+        });
     }
 
 

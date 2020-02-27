@@ -46,7 +46,7 @@
 //            Check if any movie is linked to the category
             $movies = $movieDAO->findByCategory($category);
 
-//            If some movies are linked to the category AND the user has not chosen to either delete to movies or keep the movies as uncategorized
+//            If some movies are linked to the category AND the user has not chosen to either delete the movies or keep the movies as uncategorized
 //            We return the category Id which can be captured in the AJAX response to prompt the user to choose between keeping or deleting the movies
 //            See adminDashboard.js > Handle Category > deleteCategory(), deleteCategoryDependency()
             if (sizeof($movies) > 0 && is_null($deleteMovies) && is_null($keepMovies)) {
