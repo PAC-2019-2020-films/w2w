@@ -68,18 +68,17 @@
                 if (isset($tags) && count($tags) > 0) : ?>
                     <?php foreach ($tags as $tag) : ?>
                         <tr>
-                            <th scope="row">
-                                <a href="/admin/tag/category-edit.php?id=<?php echo escape($tag->getId()); ?>"><?php echo escape($tag->getId()); ?></a>
+                            <th scope="row" class="tag_id">
+                                <p><?php echo escape($tag->getId()); ?></p>
                             </th>
-                            <td>
-                                <a href="/admin/tag/category-edit.php?id=<?php echo escape($tag->getId()); ?>"><?php echo escape($tag->getName()); ?></a>
+                            <td class="tag_name">
+                                <p><?php echo escape($tag->getName()); ?></p>
                             </td>
-                            <td>
-                                <?php echo escape($tag->getDescription()); ?>
+                            <td class="tag_description">
+                                <p><?php echo escape($tag->getDescription()); ?></p>
                             </td>
                             <td class="text-center">
-                                <a href="/admin/tag/category-edit.php?id=<?php echo escape($tag->getId()); ?>">
-                                    <i class="fas fa-edit"></i></a>
+                                    <i class="fas fa-edit"></i>
                             </td>
                             <td class="text-center">
                                 <i class="fa fa-trash" data-target="#modal-delete-tag" data-toggle="modal"
