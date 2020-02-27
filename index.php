@@ -279,20 +279,24 @@ function checkRoot()
  */
 function web_run()
 {
-# démmarage session PHP :
+    # démmarage session PHP :
     session_start();
-# récupération de l'utilisateur si session ouverte
+    # récupération de l'utilisateur si session ouverte
     if (isset($_SESSION["user"])) {
         global $user;
+        # déclaration d'une seconde variable globale pour accéder au même objet User
+        # même à l'intérieur de boucles de type "foreach ($users as $user)..."
+        # (les variables globales, c'est facile mais c'est dangereux : "effets de bord") :
+        global $sessionUser;
         $userId = $_SESSION["user"];
         $daoFactory = \w2w\DAO\DAOFactory::getDAOFactory();
         $userDAO = $daoFactory->getUserDAO();
-        $user = $userDAO->find($userId);
+        $sessionUser = $user = $userDAO->find($userId);
     }
-# récupération de la request uri :
+    # récupération de la request uri :
     $requestURI = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : "/";
 
-# ! il faut retirer les éventuels paramètres GET après '?' :
+    # ! il faut retirer les éventuels paramètres GET après '?' :
     if (($pos = strpos($requestURI, "?")) !== false) {
         $requestURI = substr($requestURI, 0, $pos);
     }
@@ -306,11 +310,11 @@ function web_run()
         # /account/ => /account/index.php
         $requestURI .= "index.php";
     }
-# exécution du script correspondant :
+    # exécution du script correspondant :
     $content = renderScript($requestURI);
 
-# insertion du résultat dans la mise en page (layout) du site :
-//    Dans le cas d'une requête ajax on renvoie le contenu sans l'insérer dans le layout
+    # insertion du résultat dans la mise en page (layout) du site :
+    # (dans le cas d'une requête ajax on renvoie le contenu sans l'insérer dans le layout)
     if (param('context') != 'ajax') {
         include FR_SCRIPT_PATH . "/templates/layout.php";
     } else {
