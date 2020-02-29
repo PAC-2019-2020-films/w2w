@@ -159,7 +159,7 @@
                             <?php
                             for ($i = 1; $i <= $maxPages; $i++) {
                                 ?>
-                                <li><a href="movies.php?page=<?= $i ?>" class="page-link <?php if (isset($pageActive) && $pageActive == $i) { ?>  current <?php } ?>"><?= $i ?></a></li>
+                                <li><a href="movies.php?page=<?= $i ?>" class="page-link <?php if (isset($pageActive) && $pageActive == $i || !isset($pageActive) && $i == 1) { ?>  current <?php } ?>"><?= $i ?></a></li>
                                 <?php
                             }
                             ?>
