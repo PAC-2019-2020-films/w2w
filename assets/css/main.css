@@ -247,6 +247,9 @@ section .subtitle {
 /*** DARK BACKGROUND */
 .dark-bg {
     background-color : #020d18;
+
+}
+.dark-bg {
     color : #fff;
 }
 /*** WHITE BACKGROUND */
