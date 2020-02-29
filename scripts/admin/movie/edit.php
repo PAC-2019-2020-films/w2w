@@ -14,9 +14,8 @@ $artists = $artistDAO->findAll();
 $movieDAO = $daoFactory->getMovieDAO();
 $movie = $movieDAO->find($id);
 
-
 if (! $movie) {
-    redirectWarning("/admin/movie-list.php", "Film non trouvé.");
+    redirectWarning("/admin/movie/", "Film non trouvé.");
 }
 
 if ($category = $movie->getCategory()) {
@@ -43,10 +42,8 @@ foreach ($movie->getActors() as $actor) {
     $actors_selected_ids[] = $actor->getId();
 }
 
-
-
 echo template("admin/form.movie.php", [
-    "action" =>"/admin/movie-update.php",
+    "action" =>"/admin/movie/update.php",
     "id" => $movie->getId(),
     "title" => $movie->getTitle(),
     "description" => $movie->getDescription(),
@@ -60,6 +57,3 @@ echo template("admin/form.movie.php", [
     "directors_selected_ids" => $directors_selected_ids,
     "actors_selected_ids" => $actors_selected_ids,
 ]);
-
-
-

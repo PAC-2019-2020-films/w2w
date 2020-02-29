@@ -76,4 +76,9 @@ interface MovieDAO extends GenericDAO
      */
     public function findByYear(int $year);
     
+    /**
+     * @return bool|array
+     */
+    public function findWithNoPoster();
+    
 }

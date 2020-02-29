@@ -22,7 +22,7 @@ $movies = $movieDAO->findAll();
         <button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#addCategory"
                 aria-expanded="false" aria-controls="collapse" id="toggleAddCatForm">
             <i class="fas fa-plus"></i>
-            <a href="/admin/movie-add.php">Ajouter un film</a>
+            <a href="/admin/movie/add.php">Ajouter un film</a>
         </button>
 
     </div>
@@ -52,10 +52,10 @@ $movies = $movieDAO->findAll();
             <?php foreach ($movies as $movie) : ?>
                 <tr>
                     <th scope="row">
-                        <a href="/admin/movie-edit.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getId()); ?></a>
+                        <a href="/admin/movie/show.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getId()); ?></a>
                     </th>
                     <td>
-                        <a href="/admin/movie-edit.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getTitle()); ?></a>
+                        <a href="/admin/movie/show.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getTitle()); ?></a>
                     </td>
                     <td>
                         <?php echo escape($movie->getDescription()); ?>
@@ -71,7 +71,7 @@ $movies = $movieDAO->findAll();
                         <?php if ($category = $movie->getCategory()) echo escape($category->getName()); ?>
                     </td>
                     <td class="text-center">
-                        <a href="movie-edit.php?id=<?php echo escape($movie->getId()); ?>"><i
+                        <a href="/admin/movie/edit.php?id=<?php echo escape($movie->getId()); ?>"><i
                                     class="fas fa-edit"></i></a>
                     </td>
                     <td class="text-center">
@@ -98,7 +98,7 @@ $movies = $movieDAO->findAll();
                 </button>
             </div>
             <div class="modal-body" id="">
-                <form action="movie-delete.php" method="post" id="deleteMovieForm" enctype="multipart/form-data">
+                <form action="movie/delete.php" method="post" id="deleteMovieForm" enctype="multipart/form-data">
                     <div>
                         <input type="hidden" class="modalMovieId" name="id"/>
                         <input type="hidden" id="confirm" name="confirm" value="confirm"/>

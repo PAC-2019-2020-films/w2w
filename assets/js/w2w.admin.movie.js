@@ -21,12 +21,15 @@ if (typeof jQuery != "undefined") {
                 }
             }
             
-            $("#poster-file").change(function() {
+            /**
+             * deprecated
+             */
+            /*$("#poster-file").change(function() {
                 let filePath = $(this).val();
                 let fileName = basename(filePath);
                 let posterValue = stripExtension(fileName);
                 $("#poster").val(posterValue);
-            });
+            });*/
             
             
             if ($.fn.multi) {
@@ -35,8 +38,8 @@ if (typeof jQuery != "undefined") {
                     selected_header: "Selected Tags"
                 });*/
                 $("select.multi").multi({
-                    non_selected_header: "Available",
-                    selected_header: "Selected"
+                    non_selected_header: "Disponibles",
+                    selected_header: "Sélectionnés"
                 });
             }
             

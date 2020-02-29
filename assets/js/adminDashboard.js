@@ -421,7 +421,7 @@ $('document').ready(function () {
         closeModal();
         $.ajax({
             type: "GET",
-            url: "/admin/movie-list.php?context=ajax",
+            url: "/admin/movie/?context=ajax",
             dataType: "text",
             async: false
         }).done(function (html) {
@@ -448,7 +448,7 @@ $('document').ready(function () {
         let formMovieDel = new FormData($("#deleteMovieForm")[0]);
         $.ajax({
             type: "POST",
-            url: BASE_URL + "/admin/movie-delete.php?context=ajax",
+            url: BASE_URL + "/admin/movie/delete.php?context=ajax",
             data: formMovieDel,
             processData: false,
             contentType: false,
