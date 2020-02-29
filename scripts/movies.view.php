@@ -8,7 +8,7 @@
 
 
 <!-- start of image de siege de cinema -->
-<div class="page-title " style="background :url('/uploads/salle_cinema.jpg');">
+<div class="page-title " style="background :url('/uploads/salle_cinema.jpg'); height: 200px;">
 
     <div class="container">
 

@@ -5,9 +5,17 @@ div.affichage_1_2 .row:nth-of-type(odd){
 
 .placement_info_film {
     margin : auto;
+    color: white;
 }
 
     @media only screen and (max-width:980px) {
+    .placement_info_film
+    {text-align: center;
+
+    }
+}
+
+@media only screen and (max-width:980px) {
     .placement_info_film
     {text-align: center;
 
