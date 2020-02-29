@@ -41,6 +41,14 @@ if (FR_DEBUG) array_push($categories, new \w2w\Model\Category(7897978, "Bidon"))
 
 ?>
 
+
+<style>
+/* effet de bord avec règle pour ".header" dans "single.css" : */
+.multi-wrapper .header {
+    height:auto;
+}
+</style>
+
 <div class="container">
     <form action="<?php echo escape($action); ?>" method="<?php echo escape($method); ?>" enctype="multipart/form-data">
         <div>
