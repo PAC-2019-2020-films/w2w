@@ -11,42 +11,6 @@
 }
 
 
-.sorting-bar{
-
-    display: flex;
-    padding: 7px 0;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #dadada;
-    margin-bottom: 20px;
-}
-
-
-/* Custom select*/
-.custom-select {
-    position: relative;
-    font-size: 0.8rem;
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-}
-
-
-/* Liste de films */
-
-.list-movie{
-    display: flex;
-    padding: 7px 0;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #dadada;
-    margin-bottom: 20px;
-}
-
 
 .modal-content, #loginform article{
     max-width: 400px;
