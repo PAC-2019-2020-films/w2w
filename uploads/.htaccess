@@ -1,0 +1,2 @@
+RewriteEngine Off
+ErrorDocument 404 /assets/img/poster-default.jpg

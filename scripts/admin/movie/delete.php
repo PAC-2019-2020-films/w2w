@@ -17,7 +17,7 @@ if (!$movie) {
     if ($context == 'ajax') {
         return json_encode("movie not found");
     } else {
-        header('Location: /admin/movie-list.php');
+        header('Location: /admin/movie/');
         exit();
     }
 }
@@ -30,7 +30,7 @@ if ($confirm == "confirm") {
     if ($context == 'ajax') {
         return json_encode($result);
     } else {
-        header('Location: /admin/movie-list.php');
+        header('Location: /admin/movie/');
         exit();
     }
 }

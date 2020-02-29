@@ -2,6 +2,9 @@
 use \w2w\DAO\DAOFactory;
 use \w2w\Model\Category;
 use \w2w\Model\Movie;
+use \w2w\Utils\FlashManager;
+use \w2w\Utils\Notification;
+use \w2w\Utils\PosterManager;
 
 checkAdmin();
 
@@ -20,14 +23,12 @@ $daoFactory = DAOFactory::getDAOFactory();
 $movieDAO = $daoFactory->getMovieDAO();
 $categoryDAO = $daoFactory->getCategoryDAO();
 
-
-$flashManager = new \w2w\Utils\FlashManager();
-
+$flashManager = new FlashManager();
 
 $savingFailed = false;
 
 
-
+# vérifications sur le titre :
 if (! $title) {
     $savingFailed = true;
     $flashManager->error("Veuillez fournir un titre.");
@@ -39,12 +40,11 @@ if (! $title) {
     }
 }
 
-
-if (! preg_match("#^[0-9]{4}$#", $year)) {
+# vérifications sur l'année :
+if (($year != null) && (! preg_match("#^[0-9]{4}$#", $year))) {
     $savingFailed = true;
     $flashManager->error("Veuillez fournir une date correcte (YYYY).");
 }
-
 
 
 # récupération de la catégorie :
@@ -61,6 +61,7 @@ if ($category_id) {
     $flashManager->error("Veuillez choisir une catégorie.");
 }
 
+# instanciation nouvel objet Movie :
 if ($year != null) {
     $year = (int) $year;
 } else {
@@ -103,60 +104,55 @@ foreach ($actor_ids as $id) {
     }
 }
 
-
-
-# uplaod du poster si fichier envoyé :
-# (annulation de l'opération en cas d'échec)
-$notification = new \w2w\Utils\Notification();
-$posterUploader = new \w2w\Utils\PosterUploader();
-if ($posterUploader->hasUpload()) {
-    try {
-        $validateOnly = $savingFailed;
-        $uploaded = $posterUploader->upload($movie, $notification, $validateOnly);
-        if ($notification->hasErrors()) {
-            foreach ($notification->getErrors() as $error) {
-                $savingFailed = true;
-                $flashManager->error($error);
-            }
-        } elseif (! $uploaded) {
-            $savingFailed = true;
-            $flashManager->warning("L'affiche n'a pas été uploadée.");
-        }
-    } catch (\Exception $e) {
-        $savingFailed = true;
-        $flashManager->warning("Erreur lors de l'upload de l'image (dbg:{$e->getMessage()}).");
-    }
-}
-
+# saving movie :
  
 if (! $savingFailed) {
-    # saving movie :
-
-    if (! $savingFailed) {
-        try {
-            $movieDAO->save($movie);
-            if (! $movie->getId() > 0) {
-                $savingFailed = true;
-                $flashManager->warning("Échec lors de l'ajout du film.");
-            }
-        } catch (\Exception $e) {
+    try {
+        $movieDAO->save($movie);
+        if (! $movie->getId() > 0) {
             $savingFailed = true;
-            if (FR_DEBUG) {
-                throw $e;
-            } else {
-                $flashManager->warning("Erreur lors de l'ajout du film.({$e->getMessage()}).");
-            }
+            $flashManager->warning("Échec lors de l'ajout du film.");
+        }
+    } catch (\Exception $e) {
+        if (FR_DEBUG) {
+            throw $e;
+        } else {
+            $savingFailed = true;
+            $flashManager->warning("Échec lors de l'ajout du film.");
         }
     }
-
 }    
+
+
+# upload des affiches  :
+
+if (! $savingFailed) {
+    $notification = new Notification();
+    $posterManager = new PosterManager();
+    try {
+        $uploaded = $posterManager->upload($movie, $notification);
+        foreach ($notification->getWarnings() as $warning) {
+            $flashManager->warning($warning);
+        }
+        foreach ($notification->getErrors() as $error) {
+            $flashManager->error($error);
+        }
+    } catch (\Exception $e) {
+        if (FR_DEBUG) {
+            throw $e;
+        } else {
+            $flashManager->warning("Erreur lors de l'upload.");
+        }
+    }
+}
+    
     
     
 
 
 if (! $savingFailed) {
     # succès de l'opération :
-    redirectSuccess("/admin/", "Film ajouté.");
+    redirectSuccess("/admin/movie/show.php?id=" . $movie->getId(), "Film ajouté.");
 } else {
     # échec de l'opération :
     # réaffichage du formulaire avec les valeurs entrées par l'utilisateur
@@ -168,7 +164,7 @@ if (! $savingFailed) {
     $artists = $artistDAO->findAll();
 
     echo template("admin/form.movie.php", [
-        "action" =>"/admin/movie-save.php",
+        "action" =>"/admin/movie/save.php",
         "categories" => $categories,
         "tags" => $tags,
         "artists" => $artists,

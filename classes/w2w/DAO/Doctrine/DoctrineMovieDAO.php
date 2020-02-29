@@ -182,4 +182,10 @@ class DoctrineMovieDAO extends DoctrineGenericDAO implements MovieDAO
         return $paginator;
     }
 
+    public function findWithNoPoster()
+    {
+        $dql = sprintf("SELECT m FROM %s m WHERE m.poster IS NULL OR m.poster=''", Movie::class);
+        $query = $this->getEntityManager()->createQuery($dql);
+        return $query->getResult();
+    }
 }
