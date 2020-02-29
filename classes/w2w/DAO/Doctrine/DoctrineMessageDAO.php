@@ -52,6 +52,13 @@ class DoctrineMessageDAO extends DoctrineGenericDAO implements MessageDAO
      */
     public function findByTreated(bool $treated)
     {
+        if ($treated) {
+            $dql = sprintf("SELECT m FROM %s m WHERE m.treated=TRUE ORDER BY m.createdAt DESC", Message::class);
+        } else {
+            $dql = sprintf("SELECT m FROM %s m WHERE m.treated=FALSE ORDER BY m.createdAt DESC", Message::class);
+        }
+        $query = $this->getEntityManager()->createQuery($dql);
+        return $query->getResult();
     }
     
 }

@@ -150,5 +150,42 @@ class DoctrineMovieDAO extends DoctrineGenericDAO implements MovieDAO
 
         return $paginator;
     }
+    
+    public function search($keywords, $categoryId, $tagId, $ratingId, $year, $page = 1, $limit = 5)
+    {
+        if ($keywords) {
+            $dql = sprintf("SELECT m FROM %s m WHERE m.title LIKE :keyword OR m.description LIKE :keyword ORDER BY m.title ASC", Movie::class);
+            $query = $this->getEntityManager()->createQuery($dql);
+            $query->setParameter('keyword', "%" . $keywords . "%");
+        } elseif ($categoryId) {
+            $dql = sprintf("SELECT m FROM %s m JOIN m.category c WHERE c.id=:id ORDER BY m.title ASC", Movie::class);
+            $query = $this->getEntityManager()->createQuery($dql);
+            $query->setParameter('id', $categoryId);
+        } elseif ($tagId) {
+            $dql = sprintf("SELECT m FROM %s m JOIN m.tags t WHERE t.id=:id ORDER BY m.title ASC", Movie::class);
+            $query = $this->getEntityManager()->createQuery($dql);
+            $query->setParameter('id', $tagId);
+        } elseif ($ratingId) {
+            $dql = sprintf("SELECT m FROM %s m JOIN m.rating r WHERE r.id=:id ORDER BY m.title ASC", Movie::class);
+            $query = $this->getEntityManager()->createQuery($dql);
+            $query->setParameter("id", $ratingId);
+        } elseif ($year) {
+            $dql = sprintf("SELECT m FROM %s m WHERE m.year = :year", Movie::class);
+            $query = $this->getEntityManager()->createQuery($dql);
+            $query->setParameter("year", $year);
+        } else {
+            $qb = $this->getEntityManager()->createQueryBuilder()->select('m')->from(Movie::class, 'm')->orderBy('m.title', 'ASC');
+            $query = $qb->getQuery();
+        }
+        $paginator = new Paginator($query);
+        $paginator->getQuery()->setFirstResult($limit * ($page - 1))->setMaxResults($limit);
+        return $paginator;
+    }
 
+    public function findWithNoPoster()
+    {
+        $dql = sprintf("SELECT m FROM %s m WHERE m.poster IS NULL OR m.poster=''", Movie::class);
+        $query = $this->getEntityManager()->createQuery($dql);
+        return $query->getResult();
+    }
 }

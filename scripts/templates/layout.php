@@ -75,31 +75,36 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownMovies" data-toggle="dropdown"
                            aria-expanded="false">Films</a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMovies">
-                            <a class="dropdown-item" href="/all_movies.php">Tous les films</a>
-                            <a class="dropdown-item" href="#">Films les mieux notés</a>
-                            <a class="dropdown-item" href="#">Films les plus populaires</a>
+                            <a class="dropdown-item" href="/movies.php">Tous les films</a>
+                            <a class="dropdown-item" href="/categories.php">Par catégories</a>
+                            <a class="dropdown-item" href="/tags.php">Par tags</a>
+                            <a class="dropdown-item" href="/ratings.php">Par note</a>
+                            <a class="dropdown-item" href="/movies.php">(Films les mieux notés)</a>
+                            <a class="dropdown-item" href="/movies.php">(Films les plus populaires)</a>
                         </div>
                     </li>
+                    <?php if (false) : ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownCategories" data-toggle="dropdown"
                            aria-expanded="false">Par catégorie</a>
                         <div class="dropdown-menu" aria-labelledby="dropdownCategories">
-                            <a class="dropdown-item" href="/all_movies.php">Tous les films</a>
+                            <a class="dropdown-item" href="/movies.php">Tous les films</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownTags" data-toggle="dropdown"
                            aria-expanded="false">Par genre</a>
                         <div class="dropdown-menu" aria-labelledby="dropdownTags">
-                            <a class="dropdown-item" href="/all_movies.php">Tous les films</a>
+                            <a class="dropdown-item" href="/movies.php">Tous les films</a>
                         </div>
                     </li>
+                    <?php endif; ?>
 
                 </ul>
             </div>
 
-            <form class="search-form form-inline">
-                <input class="form-control" type="text" placeholder="Rechercher un film..." aria-label="Search">
+            <form class="search-form form-inline" action="/movies.php" method="get">
+                <input name="keywords" class="form-control" type="text" placeholder="Rechercher un film..." aria-label="Search">
                 <button type="submit" class="search-submit">
                     <i class="fas fa-search"></i> <span class="screen-reader-text">Search</span></button>
             </form>
@@ -119,7 +124,7 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                                     <?php if ($user->isRoot()) : ?>
                                         <a class="dropdown-item" href="/root/">[root]</a>
                                     <?php else: ?>
-                                        <a class="dropdown-item" href="/account/">Mon compte</a>
+                                        <a class="dropdown-item" href="/account/index.php">Mon compte</a>
                                     <?php endif; ?>
                                 <?php endif; ?>
 
@@ -184,21 +189,16 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                 <h5>W2W <span class="small">| What to watch</span></h5>
                 <ul class="list-inline ">
 
-                    <li><a href="/about.php" target="_blank">A propos</a></li>
-                    <li><a href="/team.php" target="_blank">L'équipe</a></li>
-                    <li><a href="/movies.php" target="_blank">Les films</a></li>
-                    <li><a href="/contact.php" target="_blank">Nous contacter</a></li>
+                    <li><a href="/about.php">A propos</a></li>
+                    <li><a href="/team.php">L'équipe</a></li>
+                    <li><a href="/movies.php">Les films</a></li>
+                    <li><a href="/contact.php">Nous contacter</a></li>
 
                     <?php if ($user && $user->isAdmin()) : ?>
                         <a href="/admin/">Mon Compte</a>
-                    <?php else: ?>
-                        <?php if ($user && $user->isRoot()) : ?>
-                            <a href="/root/">Mon Compte</a>
-                        <?php else: ?>
-                            <a href="/account/">Mon Compte</a>
-                        <?php endif; ?>
+                    <?php elseif ($user) : ?>
+                        <a href="/account/">Mon Compte</a>
                     <?php endif; ?>
-
 
                 </ul>
             </div>

@@ -1,51 +1,18 @@
 <?php
     
     checkAdmin();
+    global $sessionUser;
 
 ?>
-    
+    <!-- *************** FLASHBAG *************** -->
     <div class="flashBag">
         <?php
             \w2w\Utils\Utils::echoMessage();
         ?>
     </div>
+    <!-- *************** END FLASHBAG *************** -->
     
-    <!--    <div class="container-fluid addCategory">-->
-    <!--        -->
-    <!--        <button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#addCategory"-->
-    <!--                aria-expanded="false" aria-controls="collapse" id="toggleAddCatForm">-->
-    <!--            <i class="fas fa-plus"></i>-->
-    <!--            Ajouter une catégorie-->
-    <!--        </button>-->
-    <!--        -->
-    <!--        <div class="collapse" id="addCategory">-->
-    <!--            <div>-->
-    <!--                <div class="bg-light rounded p-2">-->
-    <!--                    <h3 class="m-auto"> Ajouter une nouvelle catégorie </h3>-->
-    <!--                    <hr>-->
-    <!--                    <form class="form" action="../category/category-add.php" id="addCatForm" method="post"-->
-    <!--                          enctype="multipart/form-data">-->
-    <!--                        -->
-    <!--                        <div class="form-row">-->
-    <!--                            <input type="text" class="form-control mb-4" placeholder="Name" name="nameCat">-->
-    <!--                        </div>-->
-    <!--                        -->
-    <!--                        <div class="form-row">-->
-    <!--                            <input placeholder="Description" type="text" id="description" name="description" class="form-control mb-4 h-auto">-->
-    <!--                        </div>-->
-    <!--                        -->
-    <!--                        <div class="form-group m-auto">-->
-    <!--                            <div class="col-xs-12">-->
-    <!--                                <input type="submit" class="btn btn-primary btn-sm" value="Add category" id="btnAddCat">-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                    </form>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <hr>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    
+    <!-- *************** USERS LIST *************** -->
     <div class="container-fluid user_list">
         <h2>Liste des utilisateurs</h2>
         <table id="user_list" class="table table-striped">
@@ -58,6 +25,9 @@
                 <th scope="col">Date Inscription</th>
                 <th scope="col">Role</th>
                 <th scope="col" class="text-center">Ban/Unban</th>
+                <?php if ($sessionUser && $sessionUser->isRoot()) : ?>
+                <th scope="col" class="text-center">Root</th>
+                <?php endif; ?>
             </tr>
             </thead>
             <tbody>
@@ -115,6 +85,11 @@
                                         <?php } ?>
                                     </i>
                             </td>
+                            <?php if ($sessionUser && $sessionUser->isRoot()) : ?>
+                            <td>
+                                <a href="/root/user/edit.php?id=<?php echo escape($user->getId()); ?>"><i class="fas fa-edit"></i></a>
+                            </td>
+                            <?php endif; ?>
                         
                         </tr>
                     <?php endforeach; ?>
@@ -123,6 +98,7 @@
         </table>
     
     </div>
+    <!-- *************** END USERS LIST *************** -->
     
     
     <!-- ****************** Ban User confirm box ****************** -->
@@ -153,16 +129,6 @@
         </div>
     </div>
     <!-- ****************** END Delete category confirm box ****************** -->
-    
-    <!-- ****************** Delete dependencies confirm box ****************** -->
-    <div id="warning-modal">
-    
-    
-    </div>
-    
-    
-    <!-- ****************** END Delete dependencies confirm box ****************** -->
-
 
 <?php
     
