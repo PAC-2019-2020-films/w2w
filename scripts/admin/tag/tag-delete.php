@@ -28,6 +28,7 @@ if (checkAdmin()) {
             }
         } else {
             $tagDAO->delete($tag);
+            \w2w\Utils\Utils::message(true, 'Tag supprimé', '');
         }
 
     } else {

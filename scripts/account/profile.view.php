@@ -8,7 +8,7 @@
     <!-- *************** END FLASHBAG *************** -->
     
     <!-- *************** UPDATE PROFILE FORM *************** -->
-    <form action="profile-update.php" method="post" id="profileForm">
+    <form action=" profile-update.php" method="post" id="profileForm">
         <div class="form-group input-group">
             <label for="username" class=""> Mon nom d'utilisateur : </label>
             <input name="username" class="form-control" placeholder="Username" type="text" id="username"
