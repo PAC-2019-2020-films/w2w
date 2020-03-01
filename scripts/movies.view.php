@@ -153,18 +153,18 @@
 
                         <ul class="pagination mt-3">
                             <li class="page-item<?php if ($page == 1) { ?>  disabled <?php } ?>">
-                                <a href="movies.php?page=<?= $prevPage < 1 ? 1 : $prevPage ?>" class="page-link"> &leftarrow;
+                                <a href="<?= $baseUrl?>&amp;page=<?= $prevPage < 1 ? 1 : $prevPage ?>" class="page-link"> &leftarrow;
                                     Précédente </a>
                             </li>
                             <?php
                             for ($i = 1; $i <= $maxPages; $i++) {
                                 ?>
-                                <li><a href="movies.php?page=<?= $i ?>" class="page-link <?php if (isset($pageActive) && $pageActive == $i || !isset($pageActive) && $i == 1) { ?>  current <?php } ?>"><?= $i ?></a></li>
+                                <li><a href="<?= $baseUrl?>&amp;page=<?= $i ?>" class="page-link <?php if (isset($pageActive) && $pageActive == $i || !isset($pageActive) && $i == 1) { ?>  current <?php } ?>"><?= $i ?></a></li>
                                 <?php
                             }
                             ?>
                             <li class="page-item<?php if ($page == $maxPages) { ?>  disabled <?php } ?>">
-                                <a href="movies.php?page=<?= $nextPage > $maxPages ? $maxPages : $nextPage ?>"
+                                <a href="<?= $baseUrl?>&amp;page=<?= $nextPage > $maxPages ? $maxPages : $nextPage ?>"
                                    class="page-link">
                                     Suivante &rightarrow;
                                 </a></li>
