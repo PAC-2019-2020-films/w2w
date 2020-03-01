@@ -1,8 +1,12 @@
-
 <?php if (is_array($tags)) : ?>
-<ul>
-    <?php foreach ($tags as $tag) : ?>
-    <li><a href="/movies.php?tag=<?php echo escape($tag->getId()); ?>"><?php echo escape($tag->getName()); ?> : <p><?php echo escape($tag->getDescription()); ?></p></a></li>
-    <?php endforeach; ?>
-</ul>
+    <div class="container-fluid row">
+        <?php foreach ($tags as $tag) : ?>
+            <div class="col-md-3 mb-5 pt-5 text-center" style="height: 75px;">
+                <a href="/movies.php?rating=<?php echo escape($tag->getId()); ?>"> <!-- lien -->
+                    <button type="button" class="btn btn-warning" style="border-radius: 25px"><?php echo escape($tag->getName()); ?></button>
+            </div>
+        <?php endforeach; ?>
+    </div>
 <?php endif; ?>
+
+

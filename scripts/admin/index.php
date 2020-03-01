@@ -47,6 +47,11 @@ if (isset($_SESSION['emailVerified']) && !$_SESSION['emailVerified']) {
                         </a>
                     </li>
                     <li class="py-3">
+                        <a href="#"  id="artistActions">
+                            <i class="fas fa-user-tag"></i> Artistes
+                        </a>
+                    </li>
+                    <li class="py-3">
                         <a href="#"  id="userActions">
                             <i class="fas fa-users-cog"></i> Utilisateurs
                         </a>
