@@ -14,6 +14,11 @@ class PosterManager
     protected $basePath = "uploads/";
     protected $overwrite = true;
     protected $ignoreExifNotAvailable = true; // not safe for prod
+
+    protected $nameFormatThumbnail = "%s.jpg";
+    protected $nameFormatMedium    = "%s-medium.jpg";
+    protected $nameFormatBig       = "%s-big.jpg";
+    
     
     protected $uploads = [];
     
@@ -332,6 +337,28 @@ class PosterManager
         if ($path = $this->getBigPath($movie)) {
             if (is_file($path)) {
                 unlink($path);
+            }
+        }
+    }
+
+    public function renameMoviePosters(Movie $movie, $oldPoster)
+    {
+        if ($path = sprintf("%s%s.jpg", $this->basePath, $oldPoster)) {
+            if (is_file($path)) {
+                $newPath = $this->getThumbnailPath($movie);
+                rename($path, $newPath);
+            }
+        }
+        if ($path = sprintf("%s%s-medium.jpg", $this->basePath, $oldPoster)) {
+            if (is_file($path)) {
+                $newPath = $this->getMediumPath($movie);
+                rename($path, $newPath);
+            }
+        }
+        if ($path = sprintf("%s%s-big.jpg", $this->basePath, $oldPoster)) {
+            if (is_file($path)) {
+                $newPath = $this->getBigPath($movie);
+                rename($path, $newPath);
             }
         }
     }
