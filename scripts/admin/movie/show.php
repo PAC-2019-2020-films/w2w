@@ -40,7 +40,6 @@ a.vignette > div {
     position:absolute;left:0;bottom:0;width:100%;height:33%;background:#08060e;color:#fff;opacity:0.85;
 }
 a.vignette:hover > div { display:none; }
-    
 </style>
 
 <div class="container">
@@ -82,6 +81,8 @@ a.vignette:hover > div { display:none; }
                 </li>
             </ul>
             <a href="/admin/movie/edit.php?id=<?php echo escape($movie->getId()); ?>" class="btn btn-primary">Editer</a>
+            <br/><br/>
+            <a href="/admin/?active-actions=film" class="btn btn-primary">Liste des films</a>
         </div>
         <div class="col-md-4">
                 <a class="vignette" href="/uploads/<?php echo escape($movie->getPoster()); ?>.jpg">
