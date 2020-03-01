@@ -1,97 +1,106 @@
-
-<!-- start of image de siege de cinema -->
-<div class="page-title " style="background :url('/uploads/salle_cinema.jpg');">
-
+<div class="header-page">
     <div class="container">
-
-        <h2 class="clearfix pt-5 placement_info_film">Liste des films</h2>
-        <!-- Film info -->
+        <h2 class="header-page-tile">Liste des films</h2>
     </div>
-
-
-
 </div>
-<!-- start of ligne bleue supérieure -->
-        <div class=" mt-3 container">
-            <div class=" row background_corps result_order ">
+<div class="dark-bg pb-4">
+    <div class="container">
+        <div class="light-bg p-4">
+            <div class="row ">
+                <div class="col-lg-4">
+                    <h3 class="h5">Catégories</h3>
+                    <!-- TODO : filter by category  -->
+                    <span class="line-title"><hr/></span>
+                    <h3 class="h5">Genre</h3>
+                    <!-- TODO : filter by tags  -->
+                    <span class="line-title"><hr/></span>
+                    <h3 class="h5">Par Note</h3>
+                    <!-- TODO : filter by year  -->
+                    <span class="line-title"><hr/></span>
+                    <h3 class="h5">Par années</h3>
+                    <!-- TODO : filter by year  -->
+                    <span class="line-title"><hr/></span>
+                </div>
                 <div class="col-md-8 ">
-                <p class="py-2"><b><?php echo $nombreFilm;  ?> </b>films trouvés  au total</p>
-                </div>
-                <div class="col-md-4 text-right ">
-                <span class="sorting"> Trier par :</span>
+                    <div class="sorting-bar">
+                        <p class="small"><?php echo $nombreFilm; ?> résultats trouvés </p>
 
-                    <!-- TODO : requete de tri -->
+                        <!-- TODO : requete de tri -->
+                        <form method="get">
+                            <select class="custom-select" id="">
+                                <option>De A à Z</option>
+                                <option>De Z à A</option>
+                                <option>Date d'ajout</option>
+                                <option>Plus populaires</option>
+                                <option>Meilleure note</option>
+                            </select>
 
-                <select class="checklist_sorting" id="exampleFormControlSelect1">
-                    <option>Popularity Descending</option>
-                    <option>Popularity Ascending</option>
-                    <option>categorie</option>
-                    <option>year</option>
-                    <option>rating</option>
-                </select>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- end of ligne bleue supérieure -->
-<!-- end of image de siege de cinema -->
-    <div>
-        <div class="container">
-            <div class="affichage_1_2">
+                        </form>
+
+                    </div>
 
                     <?php foreach ($movies as $movie) : ?>
-                        <div class="row p-4">
-                            <div class="col-md-2 text-center">
-                                <img class="img-responsive" src="/uploads/<?php echo escape($movie->getPoster()); ?>-medium.jpg" alt=""
-                                     style="max-width: 100px">
-                            </div>
-                            <div class="col-md-7 placement_info_film">
-                                <h4><a href="/movie.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getTitle()); ?></a></h4>
-                            </div>
-                            <div class="col-md-3 placement_info_film" >
-                                <h5><a href="/movie.php?id=<?php echo escape($movie->getId()); ?>">
-                                        <?php
-
-                                        if ($movie->hasRating()) {
-                                            echo escape($movie->getRating()->getName());
-                                        }
-                                        else{
-                                            echo "pas encore noté";
-                                        }?>
-
-                                    </a></h5>
-
+                        <div class="list-movie">
+                            <div class="list-movie-img">
+                                <img class="img-responsive"
+                                     src="/uploads/<?php echo escape($movie->getPoster()); ?>.jpg" alt=""
+                                >
 
                             </div>
+                            <div class="list-movie-desc">
+                                <h4 class="h5">
+                                    <a href="/movie.php?id=<?php echo escape($movie->getId()); ?>"><?php echo escape($movie->getTitle()); ?></a>
+                                </h4>
+
+                            </div>
+                            <div class="list-movie-rating">
+                                <p class="small">
+                                    <?php
+
+                                    if ($movie->hasRating()) {
+                                        echo escape($movie->getRating()->getName());
+                                    } else {
+                                        echo "pas encore noté";
+                                    } ?>
+
+                                </p>
+                            </div>
+
+
                         </div>
                     <?php endforeach; ?>
+
+                    <?php
+
+                    if ($maxPages > 1) {
+                        ?>
+
+
+                        <ul class="pagination  ">
+                            <li class="page-item<?php if ($page == 1) { ?>  disabled <?php } ?>">
+                                <a href="all_movies.php?page=<?= $prevPage < 1 ? 1 : $prevPage ?>" class="page-link"> <<
+                                    PRÉCÉDENTE </a>
+                            </li>
+                            <?php
+                            for ($i = 1; $i <= $maxPages; $i++) {
+                                ?>
+                                <li><a href="all_movies.php?page=<?= $i ?>" class="page-link"><?= $i ?></a></li>
+                                <?php
+                            }
+                            ?>
+                            <li class="page-item<?php if ($page == $maxPages) { ?>  disabled <?php } ?>">
+                                <a href="all_movies.php?page=<?= $nextPage > $maxPages ? $maxPages : $nextPage ?>"
+                                   class="page-link">
+                                    SUIVANTE >>
+                                </a></li>
+                        </ul>
+                        <?php
+
+                    } ?>
+                </div>
+
             </div>
-
-
-
-    <?php
-
-if ($maxPages > 1) {
-    ?>
-        <ul class="pagination pb-3 justify-content-center">
-        <li class="page-item<?php if ($page == 1) { ?>  disabled <?php } ?>">
-            <a href="all_movies.php?page=<?= $prevPage < 1 ? 1 : $prevPage ?>" class="page-link"  > << PRÉCÉDENTE </a></li>
-        <?php
-        for ($i = 1; $i <= $maxPages; $i++) {
-            ?>
-            <li><a href="all_movies.php?page=<?= $i ?>" class="page-link"><?= $i ?></a></li>
-            <?php
-        }
-        ?>
-        <li class="page-item<?php if ($page == $maxPages) { ?>  disabled <?php } ?>">
-            <a href="all_movies.php?page=<?= $nextPage > $maxPages ? $maxPages : $nextPage ?>" class="page-link">
-                 SUIVANTE >>
-            </a></li>
-    </ul>
-    <?php
-
-} ?>
 
         </div>
     </div>
-
+</div>

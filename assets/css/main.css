@@ -43,8 +43,8 @@ a.primary {
     color : #fff;
 }
 
-.h1, .h2, .h3, .h4, h1, h2, h3, h4{
-    font-weight: 800;
+.h1, .h2, .h3, .h4, .h6, h1, h2, h3, h4{
+    font-weight: 600;
 }
 .clearfix {
     clear: both;
@@ -255,6 +255,9 @@ section .subtitle {
 /*** DARK BACKGROUND */
 .dark-bg {
     background-color : #020d18;
+
+}
+.dark-bg, .movie-box.dark-bg{
     color : #fff;
 }
 /*** WHITE BACKGROUND */

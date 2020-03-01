@@ -1,3 +1,17 @@
+.header-page{
+
+    background: #0f0826 center center url("../../uploads/salle_cinema.jpg") no-repeat;
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color : #fff;
+    height: 200px;
+
+}
+
+
+
 .modal-content, #loginform article{
     max-width: 400px;
 }

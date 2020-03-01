@@ -36,6 +36,10 @@ if ($limit > $limitMax) {
     $limit = $limitMax;
 }
 
+//recupere la page active
+if(isset($_GET['page'])) {
+    $pageActive = htmlentities($_GET['page']);
+}
 
 $baseUrl = "/movies.php?";
 $firstParameter = true;
@@ -57,4 +61,14 @@ $maxPages = ceil($nombreFilm / $limit);
 $prevPage = $page-1;
 $nextPage = $page+1;
 
+//Obtenir la liste des catégories
+$categoryDAO = new \w2w\DAO\Doctrine\DoctrineCategoryDAO();
+$categories  = $categoryDAO->findAll();
 
+//Obtenir la liste des tags
+$tagDAO = new \w2w\DAO\Doctrine\DoctrineTagDAO();
+$tags  = $tagDAO->findAll();
+
+//Obtenir la liste des Notes
+$ratingsDAO = new \w2w\DAO\Doctrine\DoctrineRatingDAO();
+$ratings  = $ratingsDAO->findAll();
