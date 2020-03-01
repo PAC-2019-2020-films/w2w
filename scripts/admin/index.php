@@ -7,6 +7,7 @@
     }
 
 
+    $activeActions = param("active-actions");
 ?>
 
 
@@ -54,24 +55,29 @@
                 </div>
             </div>
             <div class="column">
-                <div id="movieActions" class="actionsIcons">
+                <div id="movieActions" class="actionsIcons<?php if ("film" == $activeActions) : ?> active-actions<?php endif; ?>" title="Liste des films.">
                     <img src="../../assets/img/user_page/movies_on.png" style="width:100px" alt="movies" class="bottom">
                     <img src="../../assets/img/user_page/movies.png" style="width:100px" alt="movies" class="top">
                 </div>
             </div>
             <div class="column">
-                <div id="userActions" class="actionsIcons">
+                <div id="userActions" class="actionsIcons" title="Liste des utilisateurs.">
                     <img src="../../assets/img/user_page/movies_on.png" style="width:100px" alt="movies" class="bottom">
                     <img src="../../assets/img/user_page/movies.png" style="width:100px" alt="movies" class="top">
                 </div>
             </div>
             <div class="column">
-                <div id="messageActions" class="actionsIcons">
+                <div id="messageActions" class="actionsIcons" title="Message aux administrateurs.">
                     <img src="../../assets/img/user_page/movies_on.png" style="width:100px" alt="movies" class="bottom">
                     <img src="../../assets/img/user_page/movies.png" style="width:100px" alt="movies" class="top">
                 </div>
             </div>
-        
+            <div class="column">
+                <div id="artistActions" class="actionsIcons<?php if ("artist" == $activeActions) : ?> active-actions<?php endif; ?>" title="Liste des artistes (réalisateurs et acteurs).">
+                    <img src="../../assets/img/user_page/movies_on.png" style="width:100px" alt="movies" class="bottom">
+                    <img src="../../assets/img/user_page/movies.png" style="width:100px" alt="movies" class="top">
+                </div>
+            </div>
         </div>
     </section>
     

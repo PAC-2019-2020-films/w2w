@@ -548,6 +548,28 @@ $('document').ready(function () {
 
 
 
+    /* *************** GESTION ARTISTS *************** */
+
+    $("#artistActions").on("click", viewArtists);
+
+    function viewArtists() {
+        closeModal();
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "/admin/artist/?context=ajax",
+            dataType: "text",
+            async: false
+        }).done(function (html) {
+            actionsDiv.html(html);
+        }).fail(function () {
+            console.log("view message failed");
+        })
+    }
+
+    /* *************** END GESTION ARTISTS *************** */
+
+
+
     /* ****************** MODAL ****************** */
     function closeModal() {
         $(".modal-open").removeAttr("style");
@@ -557,5 +579,8 @@ $('document').ready(function () {
 
     /* ****************** END MODAL ****************** */
 
+
+
+    $(".active-actions").click();
 
 });
