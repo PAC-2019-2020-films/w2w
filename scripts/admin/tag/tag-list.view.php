@@ -1,99 +1,97 @@
 <?php
-    
-    checkAdmin();
+
+checkAdmin();
 
 ?>
-    <!-- *************** FLASHBAG *************** -->
-    <div class="flashBag">
-        <?php
-            \w2w\Utils\Utils::echoMessage();
-        ?>
-    </div>
-    <!-- *************** END FLASHBAG *************** -->
-
-    <!-- *************** ADD TAG *************** -->
-    <div class="container-fluid addCategory">
-
-        <button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#addTag"
-                aria-expanded="false" aria-controls="collapse" id="toggleAddTagForm">
-            <i class="fas fa-plus"></i>
-            Ajouter un Tag
-        </button>
-
-        <div class="collapse" id="addTag">
-            <div>
-                <div class="bg-light rounded p-2">
-                    <h3 class="m-auto"> Ajouter un Tag </h3>
-                    <hr>
-                    <form class="form" action="../category/category-add.php" id="addTagForm" method="post"
-                          enctype="multipart/form-data">
-
-                        <div class="form-row">
-                            <input type="text" class="form-control mb-4" placeholder="Name" name="nameTag">
-                        </div>
-
-                        <div class="form-row">
-                            <input placeholder="Description" type="text" id="description" name="description" class="form-control mb-4 h-auto">
-                        </div>
-
-                        <div class="form-group m-auto">
-                            <div class="col-xs-12">
-                                <input type="submit" class="btn btn-primary btn-sm" value="Add Tag" id="btnAddTag">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <hr>
+    <div class="header-dasboard ">
+        <div>
+            <h1 class="small text-uppercase">Dashboard</h1>
+            <h2 class="h4 font-weight-normal">Liste des tags</h2>
         </div>
+
     </div>
-    <!-- *************** END ADD TAG *************** -->
-    
-    <!-- *************** TAGS LIST *************** -->
-    <div class="container">
-        <h2>Liste des tags</h2>
-        
-        <table id="tag_list" class="table table-striped">
+
+
+    <div class="bg-white movie_list p-4">
+
+        <!-- *************** TAGS LIST *************** -->
+
+
+        <table id="tag_list" class="table table-striped text-center">
             <thead>
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Description</th>
-                <th scope="col" class="text-center">Editer</th>
-                <th scope="col" class="text-center">Supprimer</th>
+                <th scope="col">Editer</th>
+                <th scope="col">Supprimer</th>
             </tr>
             </thead>
             <tbody>
             <?php
-                if (isset($tags) && count($tags) > 0) : ?>
-                    <?php foreach ($tags as $tag) : ?>
-                        <tr>
-                            <th scope="row" class="tag_id">
-                                <p><?php echo escape($tag->getId()); ?></p>
-                            </th>
-                            <td class="tag_name">
-                                <p><?php echo escape($tag->getName()); ?></p>
-                            </td>
-                            <td class="tag_description">
-                                <p><?php echo escape($tag->getDescription()); ?></p>
-                            </td>
-                            <td class="text-center">
-                                    <i class="fas fa-edit"></i>
-                            </td>
-                            <td class="text-center">
-                                <i class="fa fa-trash" data-target="#modal-delete-tag" data-toggle="modal"
-                                   data-tagid="<?php echo escape($tag->getId()); ?>"></i>
-                            </td>
-                        
-                        </tr>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+            if (isset($tags) && count($tags) > 0) : ?>
+                <?php foreach ($tags as $tag) : ?>
+                    <tr>
+                        <th scope="row" class="tag_id">
+                            <p><?php echo escape($tag->getId()); ?></p>
+                        </th>
+                        <td class="tag_name">
+                            <p><?php echo escape($tag->getName()); ?></p>
+                        </td>
+                        <td class="tag_description">
+                            <p><?php echo escape($tag->getDescription()); ?></p>
+                        </td>
+                        <td class="text-center">
+                            <i class="fas fa-edit"></i>
+                        </td>
+                        <td class="text-center">
+                            <i class="fa fa-trash" data-target="#modal-delete-tag" data-toggle="modal"
+                               data-tagid="<?php echo escape($tag->getId()); ?>"></i>
+                        </td>
+
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
             </tbody>
         </table>
+
+        <!-- *************** END TAGS LIST *************** -->
+
+
+        <!-- *************** ADD TAG *************** -->
+
+        <h3 class="h6 font-weight-normal my-4">Ajouter un Tag </h3>
+        <hr/>
+                <!-- *************** FLASHBAG *************** -->
+        <div class=" flashBag">
+        <?php
+        \w2w\Utils\Utils::echoMessage();
+        ?>
     </div>
-    <!-- *************** END TAGS LIST *************** -->
-    
-    
+    <!-- *************** END FLASHBAG *************** -->
+    <form class="form" action="../category/category-add.php" id="addTagForm" method="post"
+          enctype="multipart/form-data">
+
+        <div class="form-row">
+            <input type="text" class="form-control mb-4" placeholder="Name" name="nameTag">
+        </div>
+
+        <div class="form-row">
+            <input placeholder="Description" type="text" id="description" name="description"
+                   class="form-control mb-4 h-auto">
+        </div>
+
+        <div class="form-group m-auto">
+            <div class="col-xs-12">
+                <input type="submit" class="btn btn-primary btn-sm" value="&plus; Ajouter un tag" id="btnAddTag">
+            </div>
+        </div>
+    </form>
+
+    <!-- *************** END ADD TAG *************** -->
+
+    </div>
+
     <!-- ****************** Delete tag confirm box ****************** -->
     <div class="modal fade" id="modal-delete-tag" tabindex="-1" role="dialog" aria-labelledby="modal-delete-tag"
          aria-hidden="true">
@@ -123,8 +121,8 @@
     <!-- ****************** END Delete tag confirm box ****************** -->
 
 <?php
-    
-    /* ****************** DATATABLES ****************** */
+
+/* ****************** DATATABLES ****************** */
 ?>
     <script>
 
@@ -140,7 +138,7 @@
                 "order": [[1, "asc"]]
             });
         });
-    
+
     </script>
 <?php
 /* ****************** END DATATABLES ****************** */
