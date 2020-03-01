@@ -397,7 +397,7 @@ $('document').ready(function () {
         closeModal();
         $.ajax({
             type: "GET",
-            url: "/admin/movie-list.php?context=ajax",
+            url: "/admin/movie/?context=ajax",
             dataType: "text",
             async: false
         }).done(function (html) {
@@ -422,7 +422,7 @@ $('document').ready(function () {
         let formMovieDel = new FormData($("#deleteMovieForm")[0]);
         $.ajax({
             type: "POST",
-            url: BASE_URL + "/admin/movie-delete.php?context=ajax",
+            url: BASE_URL + "/admin/movie/delete.php?context=ajax",
             data: formMovieDel,
             processData: false,
             contentType: false,
@@ -493,6 +493,50 @@ $('document').ready(function () {
     /* *************** END GESTION USERS *************** */
 
 
+    /* *************** GESTION MESSAGES *************** */
+
+    $("#messageActions").on("click", viewMessages);
+
+    function viewMessages() {
+        closeModal();
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "/admin/message/?context=ajax",
+            dataType: "text",
+            async: false
+        }).done(function (html) {
+            actionsDiv.html(html);
+        }).fail(function () {
+            console.log("view message failed");
+        })
+    }
+
+    /* *************** END GESTION MESSAGES *************** */
+
+
+
+    /* *************** GESTION ARTISTS *************** */
+
+    $("#artistActions").on("click", viewArtists);
+
+    function viewArtists() {
+        closeModal();
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "/admin/artist/?context=ajax",
+            dataType: "text",
+            async: false
+        }).done(function (html) {
+            actionsDiv.html(html);
+        }).fail(function () {
+            console.log("view message failed");
+        })
+    }
+
+    /* *************** END GESTION ARTISTS *************** */
+
+
+
     /* ****************** MODAL ****************** */
     function closeModal() {
         const classModalOpen = $(".modal-open");
@@ -503,5 +547,8 @@ $('document').ready(function () {
 
     /* ****************** END MODAL ****************** */
 
+
+
+    $(".active-actions").click();
 
 });

@@ -6,6 +6,7 @@ class Notification
 {
     
     protected $errors = [];
+    protected $warnings = [];
     
     public function hasErrors()
     {
@@ -20,6 +21,21 @@ class Notification
     public function addError(string $message)
     {
         $this->errors[] = $message;
+    }
+    
+    public function hasWarnings()
+    {
+        return count($this->warnings) > 0;
+    }
+    
+    public function getWarnings()
+    {
+        return $this->warnings;
+    }
+    
+    public function addWarning(string $message)
+    {
+        $this->warnings[] = $message;
     }
     
 }

@@ -48,6 +48,8 @@
         <echo message="        GRANT ALL PRIVILEGES ON `w2w`.* TO `w2w`@localhost IDENTIFIED BY 'w2w';"/>
         <echo message="    * connexion à MySQL (username = password = dbname = 'w2w') :"/>
         <echo message="        mysql -u w2w -pw2w w2w"/>
+        <echo message="    * unix-like, droits sur /uploads/ (root) :"/>
+        <echo message="        cd /media/data/www/w2w; chgrp -R www-data uploads; chmod -R g+w uploads;"/>
         <echo message=""/>
     </target>
 

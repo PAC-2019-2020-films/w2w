@@ -1,6 +1,7 @@
 <?php
     
     checkAdmin();
+    global $sessionUser;
 
 ?>
     <!-- *************** FLASHBAG *************** -->
@@ -24,6 +25,9 @@
                 <th scope="col">Date Inscription</th>
                 <th scope="col">Role</th>
                 <th scope="col" class="text-center">Ban/Unban</th>
+                <?php if ($sessionUser && $sessionUser->isRoot()) : ?>
+                <th scope="col" class="text-center">Root</th>
+                <?php endif; ?>
             </tr>
             </thead>
             <tbody>
@@ -81,6 +85,11 @@
                                         <?php } ?>
                                     </i>
                             </td>
+                            <?php if ($sessionUser && $sessionUser->isRoot()) : ?>
+                            <td>
+                                <a href="/root/user/edit.php?id=<?php echo escape($user->getId()); ?>"><i class="fas fa-edit"></i></a>
+                            </td>
+                            <?php endif; ?>
                         
                         </tr>
                     <?php endforeach; ?>

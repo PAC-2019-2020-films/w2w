@@ -1,1 +1,5 @@
-<h1>Page de contact.</h1>
+<h1>Nous contacter...</h1>
+
+<h2>Laisser un message aux administrateurs :</h2>
+
+<?php echo template("form.message.php"); ?>
