@@ -63,3 +63,19 @@
 {
     position: relative;
 }
+
+.team_photo {
+    height: 200px;
+    width: auto;
+}
+
+.team_center
+{
+}
+
+@media only screen and (max-width:800px) {
+    #team .team_center{
+        text-align: center;
+        padding: 0;
+    }
+}
