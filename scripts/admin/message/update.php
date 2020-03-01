@@ -10,10 +10,10 @@ $messageDAO = $daoFactory->getMessageDAO();
 $message = $messageDAO->find($id);
 
 if (! $message) {
-    redirectWarning("/admin/", "Message non trouv (#$id)");
+    redirectWarning("/admin/?active-actions=message", "Message non trouvé (#$id)");
 }
 
 $message->setTreated(true);
 $messageDAO->update($message);
 
-redirectSuccess("/admin/", "Modifié.");
+redirectSuccess("/admin/?active-actions=message", "Modifié.");

@@ -6,6 +6,7 @@ if (isset($_SESSION['emailVerified']) && !$_SESSION['emailVerified']) {
     \w2w\Utils\Utils::message($_SESSION['emailVerified'], '', 'Remember to validate your email adress. Click here to receive another confirmation email.');
 }
 
+$activeActions = param("active-actions");
 
 ?>
 
@@ -27,7 +28,7 @@ if (isset($_SESSION['emailVerified']) && !$_SESSION['emailVerified']) {
                         </a>
                     </li>
                     <li class="py-3">
-                        <a href="#"  id="movieActions">
+                        <a href="#"  id="movieActions" <?php if ($activeActions == "movie") : ?>class="active-actions"<?php endif; ?>>
                             <i class="fas fa-film"></i> Films
                         </a>
                     </li>
@@ -47,7 +48,7 @@ if (isset($_SESSION['emailVerified']) && !$_SESSION['emailVerified']) {
                         </a>
                     </li>
                     <li class="py-3">
-                        <a href="#"  id="artistActions">
+                        <a href="#"  id="artistActions" <?php if ($activeActions == "artist") : ?>class="active-actions"<?php endif; ?>>
                             <i class="fas fa-user-tag"></i> Artistes
                         </a>
                     </li>
@@ -58,7 +59,7 @@ if (isset($_SESSION['emailVerified']) && !$_SESSION['emailVerified']) {
                     </li>
 
                     <li class="py-3">
-                        <a href="#"  id="messageActions">
+                        <a href="#"  id="messageActions" <?php if ($activeActions == "message") : ?>class="active-actions"<?php endif; ?>>
                             <i class="fas fa-envelope"></i> Messages
                         </a>
                     </li>
