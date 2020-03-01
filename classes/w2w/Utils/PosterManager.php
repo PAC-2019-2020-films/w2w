@@ -314,5 +314,26 @@ class PosterManager
         }
         return null;
     }
+    
+    
+    
+    public function deleteMoviePosters(Movie $movie)
+    {
+        if ($path = $this->getThumbnailPath($movie)) {
+            if (is_file($path)) {
+                unlink($path);
+            }
+        }
+        if ($path = $this->getMediumPath($movie)) {
+            if (is_file($path)) {
+                unlink($path);
+            }
+        }
+        if ($path = $this->getBigPath($movie)) {
+            if (is_file($path)) {
+                unlink($path);
+            }
+        }
+    }
 
 }

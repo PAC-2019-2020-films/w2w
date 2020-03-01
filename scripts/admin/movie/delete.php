@@ -1,4 +1,5 @@
 <?php
+use \w2w\Utils\PosterManager;
 
 checkAdmin();
 
@@ -25,6 +26,10 @@ if (!$movie) {
 if ($confirm == "confirm") {
 
     $result = $movieDAO->delete($movie);
+    
+    $posterManager = new PosterManager();
+    $posterManager->deleteMoviePosters($movie);
+    
     \w2w\Utils\Utils::message($result, 'Film supprimé', 'Erreur lors de la suppression du film');
 
     if ($context == 'ajax') {
