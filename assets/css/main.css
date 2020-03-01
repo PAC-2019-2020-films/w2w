@@ -14,10 +14,10 @@
 /* GENERAL */
 body{
     font-family: 'Montserrat', sans-serif;
-    color : #041721;
+    color : #151942;
 }
 main {
-    background-color: #EFF3FF;
+    background-color: #eef1fb;
     min-height: 500px;
 }
 .container-fluid {
@@ -28,12 +28,13 @@ a{
     color : #121a21;
 }
 
-a:hover,
-.dark-bg a:hover {
-    color : #24baef;
+a:hover{
+    color : #020C75;
     text-decoration : none;
 }
-
+.dark-bg a:hover {
+    color : #ffde3c;
+}
 a.primary {
 
     color  : #ffde3c;
@@ -254,7 +255,7 @@ section .subtitle {
 
 /*** DARK BACKGROUND */
 .dark-bg {
-    background-color : #020d18;
+    background-color : #010428;
 
 }
 .dark-bg, .movie-box.dark-bg{
