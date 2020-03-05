@@ -38,9 +38,7 @@ $('document').ready(function () {
             dataType: "text",
             async: false
         }).done(function (html) {
-            console.log(html);
             actionsDiv.html(html);
-
             $('#modal-delete-review').on("show.bs.modal", function (event) {
                 let button = $(event.relatedTarget);
                 let revId = button.data('revid');
@@ -59,10 +57,10 @@ $('document').ready(function () {
                         console.log(res);
                         viewReviews();
                     }).fail(function () {
-                        console.log("shit");
                     })
                 });
             });
+        }).fail(function(res){
         });
     }
 
@@ -380,7 +378,6 @@ $('document').ready(function () {
             contentType: false,
             async: false
         }).done(function (result) {
-            console.log(result);
             viewTags();
         }).fail(function (result) {
             console.log(failed);
@@ -402,7 +399,6 @@ $('document').ready(function () {
             contentType: false,
             async: false
         }).done(function (result) {
-            console.log(result);
             viewTags();
         });
 
@@ -515,7 +511,6 @@ $('document').ready(function () {
                 async: false
             }).done(function (result) {
                 viewUsers();
-                console.log(result);
             }).fail(function () {
                 console.log("ban failed");
             })

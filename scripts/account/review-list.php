@@ -7,9 +7,11 @@
 //        Get all the reviews of the user
         $reviewDAO = new \w2w\DAO\Doctrine\DoctrineReviewDAO();
         $reviews   = $reviewDAO->findBy('user', $user);
+        
+        
     
 //        If the user is admin we fetch every reviews
-        if (checkAdmin()) {
+        if ($user->isAdmin()) {
             $allReviews = $reviewDAO->findAll();
         }
     }

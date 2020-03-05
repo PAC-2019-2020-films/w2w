@@ -10,11 +10,11 @@
 //        Input validation
         $rawInput = [
             'reviewId' => ['num', $reviewId, false],
-            'context'  => ['alpha', $context, false]
+//            'context'  => ['alpha', $context, false]
         ];
         
-        
         if (\w2w\Utils\Utils::inputValidation($rawInput)) {
+          
             
             $reviewDAO = new \w2w\DAO\Doctrine\DoctrineReviewDAO();
             $userDAO   = new \w2w\DAO\Doctrine\DoctrineUserDAO();
