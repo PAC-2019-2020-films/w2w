@@ -139,8 +139,8 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
                         <p class="d-inline-block mb-0 font-weight-bold mr-2">Et vous, qu'en pensez-vous ?</p>
                         <?php if (!isset($_SESSION["user"])) {
                             ?>
-                            <a href="authentication/login.php" class="btn-sm btn-primary  d-inline-block">Rédigez votre
-                                critique</a>
+<!--                            <a href="authentication/login.php" class="btn-sm btn-primary  d-inline-block">Rédigez votre critique</a>-->
+                            <a class="btn-sm btn-primary  d-inline-block" data-target="#modal-login" data-toggle="modal">Rédigez votre critique</a>
                         <?php } else {
                             ?>
                             <form action="account/review-add.php" method="post" id="insert-review-user"
