@@ -1,9 +1,4 @@
 <?php
-<<<<<<< HEAD
-/*
- * Page d'un film - TO DO
- *
- */
 
 
 if (isset($_SESSION['message'])) {
@@ -21,33 +16,11 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
             <div class="header-caption">
                 <div class="movie-tags ">
                     <?php echo template("movie.tags.php", ["movie" => $movie]); ?>
-=======
-    /*
-     * Page d'un film - TO DO
-     *
-     */
-    
-    
-    if (isset($_SESSION['message'])) {
-        echo '<div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
-    }
-    unset($_SESSION['message']);
-    
-    
-    if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
-        
-        <div class="header">
-            <div class="header-bg" style="height: 400px">
-                <img src="/uploads/<?php echo $movie->getPoster(); ?>-big.jpg" class="d-block w-100 movie_affiche"
-                     alt="...">
-                <div class="header-caption">
-                    <div class="movie-tags ">
                         <?php echo template("movie.tags.php", ["movie" => $movie]); ?>
                     </div>
                     <h2 class="clearfix pt-3"><?php echo $movie->getTitle(); ?></h2>
                     <!-- Film info -->
                     <?php echo template("movie.data.php", ["movie" => $movie]); ?>
->>>>>>> 2893a83c7ef0743482bb943f6b9f1ae96e2d4083
                 </div>
             </div>
         </div>
