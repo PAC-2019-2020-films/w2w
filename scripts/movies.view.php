@@ -81,17 +81,6 @@
                 <div class="col-md-9">
                     <div class="sorting-bar">
                         <p class="small"><?php echo $nombreFilm; ?> résultats trouvés </p>
-
-                        <!-- TODO : requete de tri -->
-                        <form method="get">
-                            <select class="custom-select" id="">
-                                <option>De A à Z</option>
-                                <option>De Z à A</option>
-                                <option>Date d'ajout</option>
-                            </select>
-
-                        </form>
-
                     </div>
 
                     <?php foreach ($movies as $movie) : ?>

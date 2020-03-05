@@ -12,6 +12,8 @@
     <span class="rating">
         <?php if ($movie->hasRating()) : ?>
         <a style="color:white;" href="/movies.php?rating=<?php echo escape($movie->getRating()->getId()); ?>"><?php echo escape($movie->getRating()->getName()); ?></a>
+        <?php else : ?>
+            Sans avis
         <?php endif; ?>
     </span>
 

@@ -13,7 +13,7 @@ unset($_SESSION['message']);
 
 if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
 
-    <div class="header">
+    <div class="header" id="carousel_movie">
         <div class="header-bg" style="height: 400px">
             <img src="/uploads/<?php echo $movie->getPoster(); ?>-big.jpg" class="d-block w-100 movie_affiche"
                  alt="...">

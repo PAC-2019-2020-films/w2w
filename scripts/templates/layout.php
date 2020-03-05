@@ -5,6 +5,18 @@
 
 global $user;
 
+//Obtenir la liste des catégories
+$categoryDAO = new \w2w\DAO\Doctrine\DoctrineCategoryDAO();
+$categories  = $categoryDAO->findAll();
+
+//Obtenir la liste des tags
+$tagDAO = new \w2w\DAO\Doctrine\DoctrineTagDAO();
+$tags  = $tagDAO->findAll();
+
+//Obtenir la liste des Notes
+$ratingsDAO = new \w2w\DAO\Doctrine\DoctrineRatingDAO();
+$ratings  = $ratingsDAO->findAll();
+
 $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch now ?!";
 ?>
 
@@ -71,18 +83,55 @@ $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch no
                         <a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="/movies.php">Films</a>
+                    </li>
+
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMovies" data-toggle="dropdown"
-                           aria-expanded="false">Films</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMovies">
-                            <a class="dropdown-item" href="/movies.php">Tous les films</a>
-                            <a class="dropdown-item" href="/categories.php">Par catégories</a>
-                            <a class="dropdown-item" href="/tags.php">Par tags</a>
-                            <a class="dropdown-item" href="/ratings.php">Par note</a>
-                            <a class="dropdown-item" href="/movies.php">(Films les mieux notés)</a>
-                            <a class="dropdown-item" href="/movies.php">(Films les plus populaires)</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownCategories" data-toggle="dropdown"
+                           aria-expanded="false">Catégories</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownCategories">
+                            <?php
+                                foreach ($categories as $category){?>
+                                <a class="dropdown-item" href="/movies.php?category=<?php echo escape($category->getId()); ?>">
+                                <?php echo $category->getName(); ?>
+                                </a>
+                            <?php
+                            }
+                            ?>
+                           </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownTag" data-toggle="dropdown"
+                           aria-expanded="false">Genres</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownTag">
+                        <?php
+                            foreach ($tags as $tag){?>
+                            <a class="dropdown-item" href="/movies.php?tag=<?php echo escape($tag->getId()); ?>">
+                                <?php echo $tag->getName(); ?>
+                            </a>
+                        <?php
+                        }
+                        ?>
                         </div>
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownNote" data-toggle="dropdown"
+                           aria-expanded="false">Notes</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownNote">
+                            <?php
+                                foreach ($ratings as $rating){?>
+                                <a class="dropdown-item" href="/movies.php?rating=<?php echo escape($rating->getId()); ?>">
+                                    <?php echo $rating->getName(); ?>
+                                </a>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </li>
+
                     <?php if (false) : ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownCategories" data-toggle="dropdown"
