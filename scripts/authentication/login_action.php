@@ -29,6 +29,8 @@
                     $_SESSION["uid"]           = $user->getId();
                     $_SESSION["role"]          = $user->getRole()->getId();
                     $_SESSION['emailVerified'] = $user->isEmailVerified();
+                    $user->setLastLoginAt(new DateTime("now", new DateTimeZone("Europe/Brussels")));
+                    $userDAO->update($user);
                     
                     if (!$user->isEmailVerified()) {
                         \w2w\Utils\Utils::message(false, '', 'Your account has not yet been verified. Check your mail or click <a href="http://w2w.localhost/authentication/generate_validation_mail.php">here</a> to receive a new validation email.');
