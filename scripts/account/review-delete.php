@@ -9,12 +9,18 @@
 
 //        Input validation
         $rawInput = [
-            'reviewId' => ['num', $reviewId, false],
-//            'context'  => ['alpha', $context, false]
+            'reviewId' => ['num', $reviewId, false]
         ];
         
+        if ($context) {
+            $rawInput = [
+                'reviewId' => ['num', $reviewId, false],
+                'context'  => ['alpha', $context, false]
+            ];
+        }
+        
+        
         if (\w2w\Utils\Utils::inputValidation($rawInput)) {
-          
             
             $reviewDAO = new \w2w\DAO\Doctrine\DoctrineReviewDAO();
             $userDAO   = new \w2w\DAO\Doctrine\DoctrineUserDAO();
@@ -25,13 +31,13 @@
 
 //                  If the user is the one who posted the review OR if the user has higher role than the one who posted the review
                 if ($user->getId() === $review->getUser()->getId() || $review->getUser()->getRole()->getId() < $user->getRole()->getId()) {
-                
+
 //                      If the user is admin or root : check if the review is an admin review
                     if ($user->isAdmin() || $user->isRoot()) {
                         
                         $movieDAO = new \w2w\DAO\Doctrine\DoctrineMovieDAO();
                         $movie    = $movieDAO->findOneBy('adminReview', $review);
-                        
+
 //                        Set the movie AdminReview to null if it macthes the target review
                         if ($movie && $movie->getAdminReview()->getId() == $reviewId) {
                             $movie->setAdminReview(null);
