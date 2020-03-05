@@ -42,7 +42,7 @@ global $user;
         } else {
             ?>
 
-            <a href="#" class="ml-2" data-target="#modal-report-review" data-toggle="modal"><i
+            <a href="#" class="ml-2" data-target="#modal-report-review<?php echo escape($userReview->getId())?>" data-toggle="modal"><i
                         class="fas fa-exclamation-circle"></i> Signaler </a>
             <?php
         }
@@ -53,7 +53,7 @@ global $user;
 </div>
 
 <!-- *************** REPORT REVIEW MODAL *************** -->
-<div class="modal fade" id="modal-report-review" tabindex="-1" role="dialog"
+<div class="modal fade" id="modal-report-review<?php echo escape($userReview->getId())?>" tabindex="-1" role="dialog"
      aria-labelledby="modal-report-review"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
