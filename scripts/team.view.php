@@ -25,7 +25,7 @@
                              alt="Dominique">
                     </div>
                     <div class="p-2">
-                        <h3 class="h4 font-weight-bold text-uppercase">Dominique ANCEAU</h3>
+                        <h3 class="h5 font-weight-bold text-uppercase">Dominique ANCEAU</h3>
                         <p class="h6">Scrum master</p>
                         <span class="line-title"><hr/></span>
                         <p class="mb-0">
@@ -44,7 +44,7 @@
                         <img class="img-responsive rounded-circle" src="/assets/img/team/laura_roost.jpg" alt="laura">
                     </div>
                     <div class="p-2">
-                        <h3 class="h4 font-weight-bold text-uppercase">Laura ROOST</h3>
+                        <h3 class="h5 font-weight-bold text-uppercase">Laura ROOST</h3>
                         <p class="h6">Designer</p>
                         <span class="line-title"><hr/></span>
                         <p class="mb-0">
@@ -65,7 +65,7 @@
                              alt="xavier">
                     </div>
                     <div class="p-2">
-                        <h3 class="h4 font-weight-bold text-uppercase">Xavier RONVEAU</h3>
+                        <h3 class="h5 font-weight-bold text-uppercase">Xavier RONVEAU</h3>
                         <p class="h6">Product owner</p>
                         <span class="line-title"><hr/></span>
 
@@ -85,7 +85,7 @@
                              alt="julien">
                     </div>
                     <div class="p-2">
-                        <h3 class="h4 font-weight-bold text-uppercase">Julien FASTRÉ</h3>
+                        <h3 class="h5 font-weight-bold text-uppercase">Julien FASTRÉ</h3>
                         <p class="h6">Symfony guy</p>
                         <span class="line-title"><hr/></span>
                         <p class="mb-0">Spécialiste en :</p>
@@ -105,7 +105,7 @@
                         <img class="img-responsive rounded-circle" src="/assets/img/team/mickael.jpg" alt="julien">
                     </div>
                     <div class="p-2">
-                        <h3 class="h4 font-weight-bold text-uppercase">Mikael LE ROUX</h3>
+                        <h3 class="h5 font-weight-bold text-uppercase">Mikael LE ROUX</h3>
                         <p class="h6">DB guy </p>
                         <span class="line-title"><hr/></span>
                         <p class="mb-0">
@@ -127,7 +127,7 @@
                              alt="julien">
                     </div>
                     <div class="p-2">
-                        <h3 class="h4 font-weight-bold text-uppercase">Olivier CAMUS</h3>
+                        <h3 class="h5 font-weight-bold text-uppercase">Olivier CAMUS</h3>
                         <p class="h6">Guy </p>
                         <span class="line-title"><hr/></span>
 
