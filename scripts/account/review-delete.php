@@ -38,9 +38,17 @@
                         $movieDAO = new \w2w\DAO\Doctrine\DoctrineMovieDAO();
                         $movie    = $movieDAO->findOneBy('adminReview', $review);
 
-//                        Set the movie AdminReview to null if it macthes the target review
+//                        Update the AdminReview if the target review is an AdminReview
                         if ($movie && $movie->getAdminReview()->getId() == $reviewId) {
+//                            Set it to null by default
                             $movie->setAdminReview(null);
+//                            Find if another admin has posted a review and set it as AdminReview
+                            foreach ($movie->getReviews() as $movieReview) {
+                                if ($movieReview->getUser()->getId() != $user->getId() && $movieReview->getUser()->isAdmin()) {
+                                    $movie->setAdminReview($movieReview);
+                                }
+                            }
+                            
                             $movieDAO->update($movie);
                         }
                     }

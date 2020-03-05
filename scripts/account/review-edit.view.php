@@ -5,7 +5,7 @@
         $movieId   = param('id');
         ?>
         
-        <div class="modal fade" id="modal-edit-review" tabindex="-1" role="dialog" aria-labelledby="modal-login"
+        <div class="modal fade" id="modal-edit-review<?php echo escape($userReview->getId())?>" tabindex="-1" role="dialog" aria-labelledby="modal-login"
              aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -16,7 +16,7 @@
                         </button>
                     </div>
                     <div class="modal-body" id="">
-                        <form action="account/review-edit.php" method="post" id="update-review-user">
+                        <form action="account/review-edit.php" method="post" id="update-review-user<?php echo escape($userReview->getId())?>">
                             <select name="rating" id="">
                                 <?php
                                     foreach ($ratings as $rating) {
