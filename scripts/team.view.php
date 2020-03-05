@@ -27,6 +27,7 @@
                     <div class="p-2">
                         <h3 class="h4 font-weight-bold text-uppercase">Dominique ANCEAU</h3>
                         <p class="h6">Scrum master</p>
+                        <span class="line-title"><hr/></span>
                         <p class="mb-0">
                             Spécialiste en : </p>
                         <p class="small">
@@ -45,6 +46,7 @@
                     <div class="p-2">
                         <h3 class="h4 font-weight-bold text-uppercase">Laura ROOST</h3>
                         <p class="h6">Designer</p>
+                        <span class="line-title"><hr/></span>
                         <p class="mb-0">
                             Spécialiste en : </p>
                         <p class="small">
@@ -64,8 +66,10 @@
                     </div>
                     <div class="p-2">
                         <h3 class="h4 font-weight-bold text-uppercase">Xavier RONVEAU</h3>
-                        <p class="h6">product owner</p>
-                        <p class="mb-0">spécialiste en :</p>
+                        <p class="h6">Product owner</p>
+                        <span class="line-title"><hr/></span>
+
+                        <p class="mb-0">Spécialiste en :</p>
                         <p class="small">
                             HTML - CSS - PHP - PYTHON - IA - JAVA
                         </p>
@@ -83,7 +87,8 @@
                     <div class="p-2">
                         <h3 class="h4 font-weight-bold text-uppercase">Julien FASTRÉ</h3>
                         <p class="h6">Symfony guy</p>
-                        <p class="mb-0">spécialiste en :</p>
+                        <span class="line-title"><hr/></span>
+                        <p class="mb-0">Spécialiste en :</p>
                         <p class="small">
                             HTML - CSS - PHP - JAVA - SQL - Symfony - JavaScript
                         </p>
@@ -102,6 +107,7 @@
                     <div class="p-2">
                         <h3 class="h4 font-weight-bold text-uppercase">Mikael LE ROUX</h3>
                         <p class="h6">DB guy </p>
+                        <span class="line-title"><hr/></span>
                         <p class="mb-0">
                             Spécialiste en :</p>
                         <p class="small">
@@ -117,12 +123,15 @@
 
                 <div class="d-flex p-3 flex-row justify-content-start align-items-center">
                     <div class="p-2">
-                        <img class="img-responsive rounded-circle" src="/assets/img/team/olivier_camus.jpg" alt="julien">
+                        <img class="img-responsive rounded-circle" src="/assets/img/team/olivier_camus.jpg"
+                             alt="julien">
                     </div>
                     <div class="p-2">
                         <h3 class="h4 font-weight-bold text-uppercase">Olivier CAMUS</h3>
-                        <p class="h6">guy </p>
-                        <p class="mb-0">spécialiste en :
+                        <p class="h6">Guy </p>
+                        <span class="line-title"><hr/></span>
+
+                        <p class="mb-0">Spécialiste en :
                         </p>
                         <p class="small">
                             HTML - CSS
