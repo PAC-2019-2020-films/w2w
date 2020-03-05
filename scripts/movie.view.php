@@ -125,10 +125,9 @@
                             } else {
                                 foreach ($movie->getReviews() as $userReview) {
 //                                    Afficher la review sauf si c'est la review admin
-                                    if (!$movie->getAdminReview() || $movie->getAdminReview()->getId() != $userReview->getId() )
+                                    if (!$movie->getAdminReview() || $movie->getAdminReview()->getId() != $userReview->getId())
                                         echo template("userReview.php", ["userReview" => $userReview]);
-                                    }
-                                
+                                }
                             }
                         ?>
                         

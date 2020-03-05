@@ -27,9 +27,9 @@ global $user;
         if ((isset($_SESSION['uid']) && $userReview->getUser()->getId() === $_SESSION['uid']) || ($user instanceof \W2w\Model\User && $user->getRole()->getId() > $userReview->getUser()->getRole()->getId())) {
             ?>
 
-            <a href="" class="ml-2" data-target="#modal-edit-review" data-toggle="modal"><i class="fas fa-edit"></i> Editer ma
+            <a href="" class="ml-2" data-target="#modal-edit-review<?php echo escape($userReview->getId())?>" data-toggle="modal"><i class="fas fa-edit"></i> Editer ma
                 critique</a>
-            <a href="" class="ml-2" data-target="#modal-delete-review" data-toggle="modal"> <i class="fas fa-trash"></i> Supprimer ma
+            <a href="" class="ml-2" data-target="#modal-delete-review<?php echo escape($userReview->getId())?>" data-toggle="modal"> <i class="fas fa-trash"></i> Supprimer ma
                 critique</a>
 
 
