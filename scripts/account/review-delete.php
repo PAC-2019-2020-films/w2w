@@ -70,7 +70,7 @@
 
 //                Delete the review and update the user's review count
                     $reviewDAO->delete($review);
-                    if ($reviewUser->getNumberReviews > 0) {
+                    if ($reviewUser->getNumberReviews() > 0) {
                         $reviewUser->setNumberReviews($reviewUser->getNumberReviews() - 1);
                         $userDAO->update($reviewUser);
                     }
