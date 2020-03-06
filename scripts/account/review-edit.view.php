@@ -1,11 +1,10 @@
 <?php
-    if (isset($userReview)) {
         $ratingDAO = new \w2w\DAO\Doctrine\DoctrineRatingDAO();
         $ratings   = $ratingDAO->findAll();
         $movieId   = param('id');
         ?>
         
-        <div class="modal fade" id="modal-edit-review<?php echo escape($userReview->getId())?>" tabindex="-1" role="dialog" aria-labelledby="modal-login"
+        <div class="modal fade" id="modal-edit-review<?php if ($userReview){ echo escape($userReview->getId());} ?>" tabindex="-1" role="dialog" aria-labelledby="modal-login"
              aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -16,8 +15,8 @@
                         </button>
                     </div>
                     <div class="modal-body" id="">
-                        <form action="account/review-edit.php" method="post" id="update-review-user<?php echo escape($userReview->getId())?>">
-                            <select name="rating" id="">
+                        <form action="account/review-edit.php" method="post" id="update-review-user<?php if ($userReview){ echo escape($userReview->getId());}?>">
+                            <select name="rating" id="rating-select">
                                 <?php
                                     foreach ($ratings as $rating) {
                                         ?>
@@ -28,7 +27,7 @@
                             </select>
                             <textarea name="comment" id="updateComment" cols="80" rows="10" title="">
                                 <?php
-                                    echo escape($userReview->getContent());
+                                if ($userReview){ echo escape($userReview->getContent());}
                                 ?>
                                 
                             </textarea>
@@ -36,8 +35,8 @@
                             <script>
                                 CKEDITOR.replace('updateComment');
                             </script>
-                            <input type="hidden" name="reviewId" value="<?php echo escape($userReview->getId()); ?>">
-                            <input type="hidden" name="movieId" value="<?php echo escape($movieId); ?>">
+                            <input type="hidden" name="reviewId" value="<?php if ($userReview){ echo escape($userReview->getId());} ?>">
+                            <input type="hidden" name="movieId" value="<?php if ($movieId){ echo escape($movieId);} ?>">
                             <div class="d-flex justify-content-between">
                                 
                                 <input type="submit" class="btn btn-primary" value="Mettre à jour ma critique">
@@ -50,4 +49,4 @@
             </div>
         </div>
     
-    <?php }
+    <?php

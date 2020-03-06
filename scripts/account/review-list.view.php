@@ -49,7 +49,7 @@ checkUser();
                             <p><?php echo escape($userReview->getCreatedAt()->format('Y-m-d')); ?></p>
                         </td>
                         <td class="text-center">
-                            <i class="fas fa-edit" data-target="#modal-edit-review" data-toggle="modal"></i>
+                            <i class="fas fa-edit" data-target="#modal-edit-review" data-toggle="modal" data-revid="<?php echo escape($userReview->getId()); ?>"  data-revcontent="<?php echo escape($userReview->getContent()); ?>"  data-revrating="<?php echo escape($userReview->getRating()->getId()); ?>" data-revmovie="<?php echo escape($userReview->getMovie()->getId()); ?>"></i>
                         </td>
                         <td class="text-center">
                             <i class="fa fa-trash" data-target="#modal-delete-review" data-toggle="modal"
@@ -97,7 +97,7 @@ checkUser();
                                 <p><?php echo escape($userReview->getCreatedAt()->format('Y-m-d')); ?></p>
                             </td>
                             <td class="text-center">
-                                <i class="fas fa-edit" data-target="#modal-edit-review" data-toggle="modal"></i>
+                                <i class="fas fa-edit" data-target="#modal-edit-review" data-toggle="modal"  data-revid="<?php echo escape($userReview->getId()); ?>"  data-revcontent="<?php echo escape($userReview->getContent()); ?>"  data-revrating="<?php echo escape($userReview->getRating()->getId()); ?>" data-revmovie="<?php echo escape($userReview->getMovie()->getId()); ?>" ></i>
                             </td>
                             <td class="text-center">
                                 <i class="fa fa-trash" data-target="#modal-delete-review" data-toggle="modal"
@@ -112,7 +112,7 @@ checkUser();
 
 
         <?php endif;
-
+        $userReview = null;
         require 'review-delete.view.php';
         require 'review-edit.view.php';
         ?>

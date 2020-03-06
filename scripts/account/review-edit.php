@@ -16,8 +16,10 @@
             'comment'  => ['ckedit', $content, false],
             'rating'   => ['num', $ratingId, false]
         ];
-        
+
+
         if (\w2w\Utils\Utils::inputValidation($rawInput)) {
+
             $reviewDAO = new \w2w\DAO\Doctrine\DoctrineReviewDAO();
             $ratingDAO = new \w2w\DAO\Doctrine\DoctrineRatingDAO();
             

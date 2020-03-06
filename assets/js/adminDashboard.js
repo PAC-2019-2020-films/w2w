@@ -59,7 +59,47 @@ $('document').ready(function () {
                     })
                 });
             });
-        }).fail(function(res){
+
+            $("#modal-edit-review").on("show.bs.modal", function (event) {
+                let button  = $(event.relatedTarget);
+                let revId = button.data('revid');
+                let revContent = button.data('revcontent');
+                let revRating = button.data('revrating');
+                let revMovie = button.data('revmovie');
+
+                $("#rating-select > option").each(function() {
+                    if ($(this).val() == revRating){
+                       $(this).prop("selected", true);
+                    }
+                });
+
+                CKEDITOR.instances['updateComment'].setData(revContent);
+
+                $('input[name="reviewId"]').val(revId);
+                $('input[name="movieId"]').val(revMovie);
+
+                $(":submit").on("click", function(event){
+                    event.preventDefault();
+
+                    let form = new FormData($("#update-review-user")[0]);
+                    form.append('comment', CKEDITOR.instances['updateComment'].getData());
+
+                    $.ajax({
+                        type: "POST",
+                        url: BASE_URL + "/account/review-edit.php",
+                        data: form,
+                        processData: false,
+                        contentType: false,
+                        async: false
+                    }).done(function () {
+                        viewReviews();
+                    }).fail(function () {
+                    })
+                })
+
+            });
+
+        }).fail(function (res) {
         });
     }
 
@@ -541,7 +581,6 @@ $('document').ready(function () {
     /* *************** END GESTION MESSAGES *************** */
 
 
-
     /* *************** GESTION ARTISTS *************** */
 
     $("#artistActions").on("click", viewArtists);
@@ -563,7 +602,6 @@ $('document').ready(function () {
     /* *************** END GESTION ARTISTS *************** */
 
 
-
     /* ****************** MODAL ****************** */
     function closeModal() {
         const classModalOpen = $(".modal-open");
@@ -573,7 +611,6 @@ $('document').ready(function () {
     }
 
     /* ****************** END MODAL ****************** */
-
 
 
     $(".active-actions").click();
