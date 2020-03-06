@@ -4,6 +4,16 @@
     global $sessionUser;
 
 ?>
+    <div class="header-dasboard ">
+        <div>
+            <h1 class="small text-uppercase">Dashboard</h1>
+            <h2 class="h4 font-weight-normal">Liste des utilisateurs</h2>
+        </div>
+
+    </div>
+
+
+    <div class="bg-white movie_list p-4">
     <!-- *************** FLASHBAG *************** -->
     <div class="flashBag">
         <?php
@@ -13,9 +23,8 @@
     <!-- *************** END FLASHBAG *************** -->
     
     <!-- *************** USERS LIST *************** -->
-    <div class="container-fluid user_list">
-        <h2>Liste des utilisateurs</h2>
-        <table id="user_list" class="table table-striped">
+
+        <table id="user_list" class="table table-striped text-center">
             <thead>
             <tr>
                 <th scope="col">Id</th>
@@ -24,9 +33,9 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Date Inscription</th>
                 <th scope="col">Role</th>
-                <th scope="col" class="text-center">Ban/Unban</th>
+                <th scope="col" >Ban/Unban</th>
                 <?php if ($sessionUser && $sessionUser->isRoot()) : ?>
-                <th scope="col" class="text-center">Root</th>
+                <th scope="col">Root</th>
                 <?php endif; ?>
             </tr>
             </thead>
@@ -97,9 +106,9 @@
             </tbody>
         </table>
     
-    </div>
+
     <!-- *************** END USERS LIST *************** -->
-    
+    </div>
     
     <!-- ****************** Ban User confirm box ****************** -->
     <div class="modal fade" id="modal-ban-user" tabindex="-1" role="dialog"

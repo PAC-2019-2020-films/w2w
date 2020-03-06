@@ -6,7 +6,7 @@ $('document').ready(function () {
     let showTagUpdate = false;
 
 
-    /* ****************** GESTION  LE ****************** */
+    /* ****************** GESTION PROFILE ****************** */
 
     $("#profileActions").on("click", viewProfile);
 
@@ -39,7 +39,6 @@ $('document').ready(function () {
             async: false
         }).done(function (html) {
             actionsDiv.html(html);
-
             $('#modal-delete-review').on("show.bs.modal", function (event) {
                 let button = $(event.relatedTarget);
                 let revId = button.data('revid');
@@ -56,9 +55,11 @@ $('document').ready(function () {
                         async: false
                     }).done(function (res) {
                         viewReviews();
-                    });
+                    }).fail(function () {
+                    })
                 });
             });
+        }).fail(function(res){
         });
     }
 
@@ -96,7 +97,10 @@ $('document').ready(function () {
 
             $(".fa-edit").on("click", updateCategory);
 
-        });
+
+        }).fail(function () {
+            console.log("view cat failed");
+        })
     }
 
     function addCategory(e) {
@@ -113,6 +117,8 @@ $('document').ready(function () {
             async: false
         }).done(function (result) {
             viewCategories();
+        }).fail(function () {
+            console.log("merde");
         });
     }
 
@@ -171,7 +177,10 @@ $('document').ready(function () {
             async: false
         }).done(function (result) {
             viewCategories();
-        });
+        }).fail(function (result) {
+            console.log(failed);
+
+        })
     }
 
     function deleteCategory(e) {
@@ -223,7 +232,10 @@ $('document').ready(function () {
             } else {
                 viewCategories();
             }
-        });
+
+        }).fail(function (res) {
+            console.log("delete failed");
+        })
     }
 
     function deleteCategoryDependency(e) {
@@ -250,7 +262,9 @@ $('document').ready(function () {
             async: false
         }).done(function (result) {
             viewCategories();
-        });
+        }).fail(function () {
+            console.log("delete failed");
+        })
     }
 
     /* ****************** END GESTIONS CATEGORIES ****************** */
@@ -286,7 +300,9 @@ $('document').ready(function () {
 
             $(".fa-edit").on("click", updateTag);
 
-        });
+        }).fail(function () {
+            console.log("view cat failed");
+        })
     }
 
 
@@ -362,7 +378,10 @@ $('document').ready(function () {
             async: false
         }).done(function (result) {
             viewTags();
-        });
+        }).fail(function (result) {
+            console.log(failed);
+
+        })
     }
 
 
@@ -413,7 +432,9 @@ $('document').ready(function () {
             const btnDelMovie = $("#submitDeleteMovie");
             btnDelMovie.on("click", deleteMovie);
 
-        });
+        }).fail(function () {
+            console.log("view cat failed");
+        })
     }
 
     function deleteMovie(e) {
@@ -429,7 +450,9 @@ $('document').ready(function () {
             async: false
         }).done(function (result) {
             viewMovies();
-        });
+        }).fail(function () {
+            console.log("delete failed");
+        })
     }
 
     /* ****************** END GESTION FILMS ****************** */
@@ -452,7 +475,9 @@ $('document').ready(function () {
 
             $("#modal-ban-user").on('show.bs.modal', banUser);
 
-        });
+        }).fail(function () {
+            console.log("view user failed");
+        })
     }
 
     function banUser(e) {
@@ -485,7 +510,9 @@ $('document').ready(function () {
                 async: false
             }).done(function (result) {
                 viewUsers();
-            });
+            }).fail(function () {
+                console.log("ban failed");
+            })
         });
     }
 

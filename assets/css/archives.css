@@ -74,8 +74,13 @@
 }
 
 @media only screen and (max-width:800px) {
-    #team .team_center{
+    #team .team_center {
         text-align: center;
         padding: 0;
     }
+}
+
+@media only screen and (max-width:800px) {
+    #carousel_movie{
+    display: none;}
 }

@@ -1,6 +1,6 @@
 
 <!-- *************** MODAL DELETE REVIEW *************** -->
-<div class="modal fade" id="modal-delete-review" tabindex="-1" role="dialog" aria-labelledby="modal-delete-review"
+<div class="modal fade" id="modal-delete-review<?php echo escape($userReview->getId())?>" tabindex="-1" role="dialog" aria-labelledby="modal-delete-review"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -1,69 +1,37 @@
 <?php
-    
-    checkAdmin();
+
+checkAdmin();
 
 ?>
-    <!-- *************** FLASHBAG *************** -->
-    <div class="flashBag">
-        <?php
-            \w2w\Utils\Utils::echoMessage();
-        ?>
-    </div>
-    <!-- *************** END FLASHBAG *************** -->
-    
+
     <!-- *************** ADD CATEGORY *************** -->
-    <div class="container-fluid addCategory">
-        
-        <button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#addCategory"
-                aria-expanded="false" aria-controls="collapse" id="toggleAddCatForm">
-            <i class="fas fa-plus"></i>
-            Ajouter une catégorie
-        </button>
-        
-        <div class="collapse" id="addCategory">
-            <div>
-                <div class="bg-light rounded p-2">
-                    <h3 class="m-auto"> Ajouter une nouvelle catégorie </h3>
-                    <hr>
-                    <form class="form" action="../category/category-add.php" id="addCatForm" method="post"
-                          enctype="multipart/form-data">
-                        
-                        <div class="form-row">
-                            <input type="text" class="form-control mb-4" placeholder="Name" name="nameCat">
-                        </div>
-                        
-                        <div class="form-row">
-                            <input placeholder="Description" type="text" id="description" name="description" class="form-control mb-4 h-auto">
-                        </div>
-                        
-                        <div class="form-group m-auto">
-                            <div class="col-xs-12">
-                                <input type="submit" class="btn btn-primary btn-sm" value="Add category" id="btnAddCat">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <hr>
+
+    <div class="header-dasboard ">
+        <div>
+            <h1 class="small text-uppercase">Dashboard</h1>
+            <h2 class="h4 font-weight-normal">Liste des catégories</h2>
         </div>
+
     </div>
-    <!-- *************** END ADD CATEGORY *************** -->
-    
-    <!-- *************** LIST CATEGORIES *************** -->
-    <div class="container-fluid category_list">
-        <h2>Liste des catégories</h2>
-        <table id="category_list" class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Description</th>
-                <th scope="col" class="text-center">Editer</th>
-                <th scope="col" class="text-center">Supprimer</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
+
+
+    <div class="bg-white movie_list p-4">
+
+
+        <!-- *************** LIST CATEGORIES *************** -->
+        <div class="category_list mb-2">
+            <table id="category_list" class="table table-striped text-center">
+                <thead >
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Editer</th>
+                    <th scope="col">Supprimer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
                 if (isset($categories) && count($categories) > 0) : ?>
                     <?php foreach ($categories as $category) : ?>
                         <tr>
@@ -83,17 +51,50 @@
                                 <i class="fa fa-trash" data-target="#modal-delete-category" data-toggle="modal"
                                    data-catid="<?php echo escape($category->getId()); ?>"></i>
                             </td>
-                        
+
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
-            </tbody>
-        </table>
-    
+                </tbody>
+            </table>
+
+        </div>
+        <!-- *************** END LIST CATEGORIES *************** -->
+
+        <h3 class="h6 font-weight-normal my-4"> Ajouter une nouvelle catégorie </h3>
+        <hr>
+        <!-- *************** FLASHBAG *************** -->
+        <div class="flashBag">
+            <?php
+            \w2w\Utils\Utils::echoMessage();
+            ?>
+        </div>
+        <!-- *************** END FLASHBAG *************** -->
+
+        <form class="form" action="../category/category-add.php" id="addCatForm" method="post"
+              enctype="multipart/form-data">
+
+            <div class="form-row">
+                <input type="text" class="form-control mb-4" placeholder="Name" name="nameCat">
+            </div>
+
+            <div class="form-row">
+                <input placeholder="Description" type="text" id="description" name="description"
+                       class="form-control mb-4 h-auto">
+            </div>
+
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <input type="submit" class="btn btn-primary btn-sm" value="&plus; Ajouter une categorie" id="btnAddCat">
+                </div>
+            </div>
+        </form>
+
+        <!-- *************** END ADD CATEGORY *************** -->
+
     </div>
-    <!-- *************** END LIST CATEGORIES *************** -->
-    
-    
+
+
     <!-- ****************** Delete category confirm box ****************** -->
     <div class="modal fade" id="modal-delete-category" tabindex="-1" role="dialog"
          aria-labelledby="modal-delete-category"
@@ -125,18 +126,18 @@
         </div>
     </div>
     <!-- ****************** END Delete category confirm box ****************** -->
-    
+
     <!-- ****************** Delete dependencies confirm box ****************** -->
     <div id="warning-modal">
-    
-    
+
+
     </div>
     <!-- ****************** END Delete dependencies confirm box ****************** -->
 
 
 <?php
-    
-    /* ****************** DATATABLES ****************** */
+
+/* ****************** DATATABLES ****************** */
 ?>
     <script>
         $(document).ready(function () {
@@ -151,7 +152,7 @@
                 "order": [[1, "asc"]]
             });
         });
-    
+
     </script>
 <?php
 /* ****************** END DATATABLES ****************** */

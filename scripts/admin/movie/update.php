@@ -27,6 +27,7 @@ if (! $movie instanceof Movie) {
     redirectWarning("/admin/movie/", "Film non trouvé.");
 }
 
+$oldPoster = $movie->getPoster();
 $failure = false;
 
 # vérifications sur le titre :
@@ -45,6 +46,13 @@ if (! $title) {
 if (($year != null) && ! preg_match("#^[0-9]{4}$#", $year)) {
     $failure = true;
     $flashManager->error("Veuillez fournir une date correcte (YYYY).");
+}
+
+# vérification qu'on ne met pas "poster" à null alors qu'il ne l'était pas :
+
+if ($oldPoster && ! $poster) {
+    $failure = true;
+    $flashManager->error("Veuillez fournir un nom de base pour les affiches ('poster').");
 }
 
 # modification de l'objet Movie :
@@ -154,10 +162,18 @@ if (! $failure) {
             $flashManager->warning("Erreur lors de la mise à jour du film.({$e->getMessage()}).");
         }
     }
-    
 }
 
-# upload des affiches :
+# renommage éventuel des affiches si "poster" a été changé :
+
+if (! $failure) {
+    if ($oldPoster && $oldPoster != $movie->getPoster()) {
+        $posterManager = new PosterManager();
+        $posterManager->renameMoviePosters($movie, $oldPoster);
+    }
+}
+
+# upload des éventuelles nouvelles affiches :
 
 if (! $failure) {
     $notification = new Notification();

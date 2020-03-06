@@ -1,8 +1,4 @@
 <?php
-/*
- * Page d'un film - TO DO
- *
- */
 
 
 if (isset($_SESSION['message'])) {
@@ -13,7 +9,7 @@ unset($_SESSION['message']);
 
 if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
 
-    <div class="header">
+    <div class="header" id="carousel_movie">
         <div class="header-bg" style="height: 400px">
             <img src="/uploads/<?php echo $movie->getPoster(); ?>-big.jpg" class="d-block w-100 movie_affiche"
                  alt="...">
@@ -62,10 +58,10 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
 
                 <div class="col-md-8 info-film px-5 py-4 light-bg">
                     <h3 class="mb-4">Synopsis</h3>
-                        <span class="line-title"><hr/></span>
-                        <p>
-                            <?php echo $movie->getDescription(); ?>
-                        </p>
+                    <span class="line-title"><hr/></span>
+                    <p>
+                        <?php echo $movie->getDescription(); ?>
+                    </p>
                     <div class="flex-wrap mb-4">
                         <div class="flex-left">
                             <h4 class="rating-title">W2W</h4>
@@ -98,8 +94,8 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
                     <hr/>
 
                     <h3 class="h4 mt-4">L'avis de w2w </h3>
-                        <span class="line-title"><hr/></span>
-                        <p>
+                    <span class="line-title"><hr/></span>
+                    <p>
                         <?php
                         if ($adminReview) {
                             echo template("userReview.php", ["userReview" => $adminReview]);
@@ -124,9 +120,9 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
                         echo "aucune review utilisateur.";
                     } else {
                         foreach ($movie->getReviews() as $userReview) {
-                            if (!$userReview->getUser()->isAdmin()) {
+//                                    Afficher la review sauf si c'est la review admin
+                            if (!$movie->getAdminReview() || $movie->getAdminReview()->getId() != $userReview->getId())
                                 echo template("userReview.php", ["userReview" => $userReview]);
-                            }
                         }
                     }
                     ?>
@@ -139,8 +135,8 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
                         <p class="d-inline-block mb-0 font-weight-bold mr-2">Et vous, qu'en pensez-vous ?</p>
                         <?php if (!isset($_SESSION["user"])) {
                             ?>
-                            <a href="authentication/login.php" class="btn-sm btn-primary  d-inline-block">Rédigez votre
-                                critique</a>
+                            <!--                            <a href="authentication/login.php" class="btn-sm btn-primary  d-inline-block">Rédigez votre critique</a>-->
+                            <a class="btn-sm btn-primary  d-inline-block" data-target="#modal-login" data-toggle="modal">Rédigez votre critique</a>
                         <?php } else {
                             ?>
                             <form action="account/review-add.php" method="post" id="insert-review-user"
@@ -191,4 +187,3 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
 <?php
 
 endif;
-

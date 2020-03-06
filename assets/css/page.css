@@ -10,12 +10,62 @@
 
 }
 
-
-
 .modal-content, #loginform article{
     max-width: 400px;
 }
 
 #loginform {
     border : none;
+}
+
+/*DASHBOARD */
+#dashboard .card{
+    background-color: #fff;
+    border-radius: 0;
+    border:none;
+}
+#dashboard .card-header {
+    background-color: #FFEE3D;
+    border-radius: 0;
+}
+
+#dashboard ul li {
+    font-size: 0.8rem;
+}
+
+#dashboard h1, #dashboard h2{
+    color : #51586a;
+}
+#dashboard #actionItems a{
+    color : #cfd2da;
+}
+#dashboard a:hover{
+    color : #9fcdff;
+}
+#dashboard, #dashboard .form-control {
+    font-size: 0.8rem;
+}
+#dashboard .btn-primary{
+
+    text-transform: none;
+    font-size: 0.8rem;
+    border: none;
+    font-weight: normal;
+}
+
+#dashboard form label{
+    font-weight: 500;
+}
+
+#dashboard .table-striped tbody tr:nth-of-type(2n+1) {
+    background-color: #f4f7ff;
+}
+#dashboard table .thead-light th {
+    background-color: #010428;
+    color : #fff;
+
+}
+#dashboard table.dataTable thead th{
+border-bottom: 2px solid #dee2e6;
+
 }

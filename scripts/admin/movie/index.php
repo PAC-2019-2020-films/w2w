@@ -16,35 +16,35 @@ $movies = $movieDAO->findAll();
     \w2w\Utils\Utils::echoMessage();
     ?>
 </div>
-
-    <div class="container-fluid addCategory">
-
-        <button class="btn btn-primary float-right" type="button" data-toggle="collapse" data-target="#addCategory"
-                aria-expanded="false" aria-controls="collapse" id="toggleAddCatForm">
-            <i class="fas fa-plus"></i>
-            <a href="/admin/movie/add.php">Ajouter un film</a>
-        </button>
-
+<div class="header-dasboard d-flex flex-row">
+    <div>
+        <h1 class="small text-uppercase">Dashboard</h1>
+        <h2 class="h4 font-weight-normal">Liste des films</h2>
     </div>
+    <div class="ml-auto ">
+
+        <p class="text-right">
+
+            <a href="/admin/movie/add.php" class="btn btn-primary">  <i class="fas fa-plus"></i> Ajouter un film</a>
+
+        </p>
+    </div>
+</div>
 
 
+<div class="bg-white movie_list p-4">
 
-
-
-<div class="container-fluid movie_list">
-    <h2>Liste des films</h2>
-
-    <table id="movie_list" class="table table-striped">
+    <table id="movie_list" class="table table-striped text-center table-responsive">
         <thead>
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Titre</th>
             <th scope="col">Description</th>
             <th scope="col">Année</th>
-            <th scope="col" class="text-center">Poster</th>
+            <th scope="col">Poster</th>
             <th scope="col">Category</th>
-            <th scope="col" class="text-center">Editer</th>
-            <th scope="col" class="text-center">Supprimer</th>
+            <th scope="col">Editer</th>
+            <th scope="col">Supprimer</th>
         </tr>
         </thead>
         <tbody>
@@ -64,7 +64,7 @@ $movies = $movieDAO->findAll();
                         <?php echo escape($movie->getYear()); ?>
                     </td>
                     <td class="text-center">
-                        <img src="/uploads/<?php echo escape($movie->getPoster()); ?>-medium.jpg" alt=""
+                        <img src="/uploads/<?php echo escape($movie->getPoster()); ?>.jpg" alt=""
                              style="max-width: 50px">
                     </td>
                     <td>

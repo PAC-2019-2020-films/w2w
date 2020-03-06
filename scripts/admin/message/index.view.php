@@ -3,7 +3,16 @@
 checkAdmin();
 
 ?>
+    <div class="header-dasboard ">
+        <div>
+            <h1 class="small text-uppercase">Dashboard</h1>
+            <h2 class="h4 font-weight-normal">Liste des messages</h2>
+        </div>
 
+    </div>
+    <div class="bg-white movie_list p-4">
+    <h3 class="h6 font-weight-normal">Liste des messages non traités</h3>
+        <hr/>
     <!-- *************** FLASHBAG *************** -->
     <div class="flashBag">
         <?php
@@ -11,20 +20,8 @@ checkAdmin();
         ?>
     </div>
     <!-- *************** END FLASHBAG *************** -->
-    
 
-
-
-
-    <style>
-    table {
-        margin-bottom:50px;
-    }
-    </style>
-
-    <div class="container-fluid user_list">
-        <h2>Liste des messages non traités</h2>
-        <table id="untreated_message_list" class="table table-striped">
+        <table id="untreated_message_list" class="table table-striped mb-3">
             <thead>
             <tr>
                 <th scope="col">Id</th>
@@ -62,12 +59,9 @@ checkAdmin();
                 <?php endif; ?>
             </tbody>
         </table>
-    
-    </div>
 
-
-    <div class="container-fluid user_list">
-        <h2>Liste des messages traités</h2>
+        <h3 class="h6 font-weight-normal my-4">Liste des messages traités</h3>
+        <hr/>
         <table id="treated_message_list" class="table table-striped">
             <thead>
             <tr>
@@ -107,8 +101,8 @@ checkAdmin();
             </tbody>
         </table>
     
-    </div>
 
+</div>
 
 
 

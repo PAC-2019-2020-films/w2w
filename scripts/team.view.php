@@ -1,95 +1,146 @@
-<!--
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="/assets/img/teamwork.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-caption our_team">
-            OUR TEAM
-        </div>
+<div class="header-page">
+    <div class="container">
+        <h3 class="header-page-tile text-center">L'équipe de W2W</h3>
+        <p class="text-center">
+            Une superbe équipe au service du cinéma !
+        </p>
+        <p class="small ">
+            <span class="">
+                <a href="/" class=" text-white">Accueil</a> &raquo;
+            </span>
+            <span class="">
+                <a href="/team.php" class=" text-white">L'equipe</a>
+            </span>
+        </p>
     </div>
 </div>
--->
-<div id="team" class="dark-bg">
-    <div class="container">
-        <div class="row pt-5 team_center">
+<div class="container">
+    <div id="team" class="light-bg p-4">
 
-            <!-- début de Dominique -->
-                <div class="col-md-3 pb-5">
-                    <img class="team_photo" src="/assets/img/team/dominique_anceau.jpg" alt="Dominique">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="d-flex p-3 flex-row justify-content-start align-items-center">
+                    <div class="p-2">
+                        <img class="img-responsive rounded-circle" src="/assets/img/team/dominique_anceau.jpg"
+                             alt="Dominique">
+                    </div>
+                    <div class="p-2">
+                        <h3 class="h5 font-weight-bold text-uppercase">Dominique ANCEAU</h3>
+                        <p class="h6">Scrum master</p>
+                        <span class="line-title"><hr/></span>
+                        <p class="mb-0">
+                            Spécialiste en : </p>
+                        <p class="small">
+                            HTML - CSS
+                        </p>
+                    </div>
                 </div>
-                <div class="col-md-9 pb-5 py-4">
-                    <h2><b>Dominique ANCEAU</b></h2>
-                    <h4>scrum master<br>
-                    <u>spécialiste en :</u> <br>
-                    HTML - CSS</h4>
+
+            </div>
+            <div class="col-lg-6">
+                <!-- début de Laura -->
+                <div class="d-flex p-3 flex-row justify-content-start align-items-center">
+                    <div class="p-2">
+                        <img class="img-responsive rounded-circle" src="/assets/img/team/laura_roost.jpg" alt="laura">
+                    </div>
+                    <div class="p-2">
+                        <h3 class="h5 font-weight-bold text-uppercase">Laura ROOST</h3>
+                        <p class="h6">Designer</p>
+                        <span class="line-title"><hr/></span>
+                        <p class="mb-0">
+                            Spécialiste en : </p>
+                        <p class="small">
+                            HTML - CSS - PHP - JavaScript
+                        </p>
+                    </div>
                 </div>
-            <!-- fin de dominique -->
+                <!-- fin de laura -->
+            </div>
+            <div class="col-lg-6">
 
-            <!-- début de Laura -->
-                <div class="col-md-3 pb-5">
-                    <img class="team_photo" src="/assets/img/team/laura_roost.jpg" alt="laura">
+                <!-- début de Xavier -->
+                <div class="d-flex p-3 flex-row justify-content-start align-items-center">
+                    <div class="p-2">
+                        <img class="img-responsive rounded-circle" src="/assets/img/team/xavier_ronveau.jpg"
+                             alt="xavier">
+                    </div>
+                    <div class="p-2">
+                        <h3 class="h5 font-weight-bold text-uppercase">Xavier RONVEAU</h3>
+                        <p class="h6">Product owner</p>
+                        <span class="line-title"><hr/></span>
+
+                        <p class="mb-0">Spécialiste en :</p>
+                        <p class="small">
+                            HTML - CSS - PHP - PYTHON - IA - JAVA
+                        </p>
+                    </div>
+                    <!-- fin de xavier -->
                 </div>
-                <div class="col-md-9 pb-5 py-4">
-                    <h2><b>Laura ROOST</b></h2>
-                    <h4>Designer<br>
-                    <u>spécialiste en :</u><br>
-                    HTML - CSS - PHP - JavaScript
-                    </h4>
+            </div>
+            <div class="col-lg-6">
+                <div class="d-flex p-3 flex-row justify-content-start align-items-center">
+                    <div class="p-2">
+                        <!-- début de Julien  -->
+                        <img class="img-responsive rounded-circle" src="/assets/img/team/julien_fastre.jpg"
+                             alt="julien">
+                    </div>
+                    <div class="p-2">
+                        <h3 class="h5 font-weight-bold text-uppercase">Julien FASTRÉ</h3>
+                        <p class="h6">Symfony guy</p>
+                        <span class="line-title"><hr/></span>
+                        <p class="mb-0">Spécialiste en :</p>
+                        <p class="small">
+                            HTML - CSS - PHP - JAVA - SQL - Symfony - JavaScript
+                        </p>
+                    </div>
+                    <!-- fin de Julien -->
                 </div>
-            <!-- fin de laura -->
+            </div>
 
-            <!-- début de Xavier -->
-            <div class="col-md-3 pb-5">
-                <img class="team_photo" src="/assets/img/team/xavier_ronveau.jpg" alt="xavier">
-            </div>
-            <div class="col-md-9 pb-5 py-4">
-                <h2><b>Xavier RONVEAU</b></h2>
-                <h4>product owner<br>
-                <u>spécialiste en :</u><br>
-                HTML - CSS - PHP - PYTHON - IA - JAVA
-                </h4>
-            </div>
-            <!-- fin de xavier -->
+            <div class="col-lg-6">
 
-            <!-- début de Julien  -->
-            <div class="col-md-3 pb-5">
-                <img class="team_photo" src="/assets/img/team/julien_fastre.jpg" alt="julien">
+                <div class="d-flex p-3 flex-row justify-content-start align-items-center">
+                    <div class="p-2">
+                        <!-- début de Mikael  -->
+                        <img class="img-responsive rounded-circle" src="/assets/img/team/mickael.jpg" alt="julien">
+                    </div>
+                    <div class="p-2">
+                        <h3 class="h5 font-weight-bold text-uppercase">Mikael LE ROUX</h3>
+                        <p class="h6">DB guy </p>
+                        <span class="line-title"><hr/></span>
+                        <p class="mb-0">
+                            Spécialiste en :</p>
+                        <p class="small">
+                            HTML - CSS - PHP - JAVA - SQL - Symfony
+                        </p>
+                    </div>
+                    <!-- fin de mikael -->
+                </div>
             </div>
-            <div class="col-md-9 pb-5 py-4">
-                <h2><b>Julien FASTRÉ</b></h2>
-                <h4>Symfony guy <br>
-                <u>spécialiste en :</u><br>
-                HTML - CSS - PHP - JAVA - SQL - Symfony - JavaScript
-                </h4>
-            </div>
-            <!-- fin de Julien -->
+            <div class="col-lg-6">
 
-            <!-- début de Mikael  -->
-            <div class="col-md-3 pb-5">
-                <img class="team_photo" src="/assets/img/team/mickael.jpg" alt="julien">
-            </div>
-            <div class="col-md-9 pb-5 py-4">
-                <h2><b>Mikael LE ROUX</b></h2>
-                <h4>DB guy <br>
-                <u>spécialiste en :</u><br>
-                HTML - CSS - PHP - JAVA - SQL - Symfony
-                </h4>
-            </div>
-            <!-- fin de mikael -->
+                <!-- début de camol -->
 
-            <!-- début de camol -->
-            <div class="col-md-3 pb-5">
-                <img class="team_photo" src="/assets/img/team/olivier_camus.jpg" alt="julien">
+                <div class="d-flex p-3 flex-row justify-content-start align-items-center">
+                    <div class="p-2">
+                        <img class="img-responsive rounded-circle" src="/assets/img/team/olivier_camus.jpg"
+                             alt="julien">
+                    </div>
+                    <div class="p-2">
+                        <h3 class="h5 font-weight-bold text-uppercase">Olivier CAMUS</h3>
+                        <p class="h6">Guy </p>
+                        <span class="line-title"><hr/></span>
+
+                        <p class="mb-0">Spécialiste en :
+                        </p>
+                        <p class="small">
+                            HTML - CSS
+                        </p>
+                    </div>
+                </div>
+                <!-- fin de camol -->
             </div>
-            <div class="col-md-9 pb-5 py-4">
-                <h2><b>Olivier CAMUS</b></h2>
-                <h4>guy <br>
-                <u>spécialiste en :</u><br>
-                HTML - CSS
-                </h4>
-            </div>
-            <!-- fin de camol -->
+
         </div>
 
     </div>
