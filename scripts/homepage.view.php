@@ -25,7 +25,7 @@
                     echo 'active';
                 }
                 ?>">
-                    <img src="/uploads/<?php echo escape($movie->getPoster()); ?>-big.jpg"
+                    <img  src="/uploads/<?php echo escape($movie->getPoster()); ?>-big.jpg" class="d-block movie_affiche"
                          alt="<?php echo $movie->getTitle(); ?>">
 
                     <div class="carousel-caption text-left">
