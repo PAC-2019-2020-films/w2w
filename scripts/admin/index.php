@@ -1,4 +1,6 @@
 <?php
+use \w2w\DAO\DAOFactory;
+
 global $user;
 checkAdmin();
 
@@ -7,6 +9,10 @@ if (isset($_SESSION['emailVerified']) && !$_SESSION['emailVerified']) {
 }
 
 $activeActions = param("active-actions");
+
+$daoFactory = DAOFactory::getDAOFactory();
+$messageDAO = $daoFactory->getMessageDAO();
+$countUntreated = $messageDAO->countUntreated();
 
 ?>
 
@@ -102,7 +108,14 @@ $activeActions = param("active-actions");
                 </div>
             </div>
             <div class="mt-4">
-                <h class="h5 font-weight-normal">Derniers films ajoutés</h>
+                <h4 class="h5 font-weight-normal">Messages d'utilisateurs à traiter</h4>
+                <div>
+                    <a href="/admin/?active-actions=message"><?php echo escape($countUntreated); ?> messages.</a>
+                </div>
+                <hr/>
+            </div>
+            <div class="mt-4">
+                <h4 class="h5 font-weight-normal">Derniers films ajoutés</h4>
                 <hr/>
             </div>
 

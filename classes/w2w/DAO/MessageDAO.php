@@ -37,4 +37,6 @@ interface MessageDAO extends GenericDAO
      */
     public function findByTreated(bool $treated);
     
+    public function countUntreated();
+
 }
