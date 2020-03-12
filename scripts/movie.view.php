@@ -30,7 +30,7 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
             <div class="row">
                 <div class="col-md-4">
                     <div class="movie-box dark-bg ">
-                        <img src="/uploads/<?php echo escape($movie->getPoster()); ?>-medium.jpg" class=" img-fluid"
+                        <img src="/uploads/<?php echo escape($movie->getPoster()); ?>-medium.jpg" class=" w-100 img-fluid"
                              alt=""/>
 
                         <ul class="movie-infos list-unstyled px-4 py-4 movies-data">
