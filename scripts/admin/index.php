@@ -38,6 +38,11 @@ $activeActions = param("active-actions");
                         </a>
                     </li>
                     <li class="py-3">
+                        <a href="#"  id="reportActions">
+                            <i class="fas fa-exclamation-triangle"></i> Plaintes
+                        </a>
+                    </li>
+                    <li class="py-3">
                         <a href="#"  id="categoryActions">
                             <i class="fas fa-list"></i> Catégories
                         </a>

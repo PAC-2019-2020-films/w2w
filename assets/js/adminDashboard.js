@@ -105,6 +105,25 @@ $('document').ready(function () {
 
 
     /* ****************** END GESTION REVIEWS ****************** */
+    
+    /* ****************** GESTION PLAINTES ****************** */
+    const reportActions = $("#reportActions");
+    reportActions.on("click", viewReports);
+    
+    function viewReports() {
+        closeModal();
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "/admin/report/report-list.php?context=ajax",
+            dataType: "text",
+            async: false
+        }).done(function (html) {
+           actionsDiv.html(html);
+        });
+    }
+    
+    
+    /* ****************** END GESTION PLAINTES ****************** */
 
 
     /* ****************** GESTIONS CATEGORIES ****************** */
