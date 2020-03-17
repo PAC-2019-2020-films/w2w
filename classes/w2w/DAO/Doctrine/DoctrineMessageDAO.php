@@ -61,4 +61,10 @@ class DoctrineMessageDAO extends DoctrineGenericDAO implements MessageDAO
         return $query->getResult();
     }
     
+    public function countUntreated()
+    {
+		$dql = sprintf("SELECT count(m) FROM %s m WHERE m.treated=FALSE", Message::class);
+		return $this->getEntityManager()->createQuery($dql)->getSingleScalarResult();
+    }
+    
 }

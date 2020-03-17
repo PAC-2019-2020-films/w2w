@@ -5,17 +5,15 @@
 
 global $user;
 
-//Obtenir la liste des catégories
-$categoryDAO = new \w2w\DAO\Doctrine\DoctrineCategoryDAO();
-$categories  = $categoryDAO->findAll();
-
-//Obtenir la liste des tags
-$tagDAO = new \w2w\DAO\Doctrine\DoctrineTagDAO();
-$tags  = $tagDAO->findAll();
-
-//Obtenir la liste des Notes
-$ratingsDAO = new \w2w\DAO\Doctrine\DoctrineRatingDAO();
-$ratings  = $ratingsDAO->findAll();
+if (! isset($categories) || ! is_array($categories)) {
+    $categories = [];
+}
+if (! isset($tags) || ! is_array($tags)) {
+    $tags = [];
+}
+if (! isset($ratings) || ! is_array($ratings)) {
+    $ratings = [];
+}
 
 $headTitle = isset($headTitle) ? $headTitle : "W2W - What are you gonna watch now ?!";
 ?>

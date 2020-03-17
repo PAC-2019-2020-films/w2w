@@ -316,6 +316,19 @@ function web_run()
     # insertion du résultat dans la mise en page (layout) du site :
     # (dans le cas d'une requête ajax on renvoie le contenu sans l'insérer dans le layout)
     if (param('context') != 'ajax') {
+        
+        # préparations des données nécessaires au layout :
+        $daoFactory = \w2w\DAO\DAOFactory::getDAOFactory();
+        # Obtenir la liste des catégories :
+        $categoryDAO = $daoFactory->getCategoryDAO();
+        $categories  = $categoryDAO->findAll();
+        # Obtenir la liste des tags :
+        $tagDAO = $daoFactory->getTagDAO();
+        $tags  = $tagDAO->findAll();
+        # Obtenir la liste des notes :
+        $ratingsDAO = $daoFactory->getRatingDAO();
+        $ratings  = $ratingsDAO->findAll();
+    
         include FR_SCRIPT_PATH . "/templates/layout.php";
     } else {
         if (isset($content))
