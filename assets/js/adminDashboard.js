@@ -61,15 +61,15 @@ $('document').ready(function () {
             });
 
             $("#modal-edit-review").on("show.bs.modal", function (event) {
-                let button  = $(event.relatedTarget);
+                let button = $(event.relatedTarget);
                 let revId = button.data('revid');
                 let revContent = button.data('revcontent');
                 let revRating = button.data('revrating');
                 let revMovie = button.data('revmovie');
 
-                $("#rating-select > option").each(function() {
-                    if ($(this).val() == revRating){
-                       $(this).prop("selected", true);
+                $("#rating-select > option").each(function () {
+                    if ($(this).val() == revRating) {
+                        $(this).prop("selected", true);
                     }
                 });
 
@@ -78,7 +78,7 @@ $('document').ready(function () {
                 $('input[name="reviewId"]').val(revId);
                 $('input[name="movieId"]').val(revMovie);
 
-                $(":submit").on("click", function(event){
+                $(":submit").on("click", function (event) {
                     event.preventDefault();
 
                     let form = new FormData($("#update-review-user")[0]);
@@ -105,11 +105,11 @@ $('document').ready(function () {
 
 
     /* ****************** END GESTION REVIEWS ****************** */
-    
+
     /* ****************** GESTION PLAINTES ****************** */
     const reportActions = $("#reportActions");
     reportActions.on("click", viewReports);
-    
+
     function viewReports() {
         closeModal();
         $.ajax({
@@ -118,11 +118,46 @@ $('document').ready(function () {
             dataType: "text",
             async: false
         }).done(function (html) {
-           actionsDiv.html(html);
+            actionsDiv.html(html);
+
+            $("#modal-treat-report").on('show.bs.modal', treatReport);
+
         });
     }
-    
-    
+
+    function treatReport(e) {
+        let button = $(e.relatedTarget);
+        let reportId = button.data('reportid');
+        let reportIsTreated = button.data('reportistreated');
+
+        if (reportIsTreated === 1) {
+            $(".submitTreatedLabel").html("Marquer ce rapport comme non traité?");
+        } else {
+            $(".submitTreatedLabel").html("Marquer ce rapport comme traité?");
+        }
+
+        let fromReportTreated = new FormData($("#treatReportForm")[0]);
+        fromReportTreated.append('reportIsTreated', reportIsTreated);
+        fromReportTreated.append('reportId', reportId);
+
+        $(".submitReportTreated").on("click", (e) => {
+           e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: BASE_URL + "/admin/report/report-edit.php?context=ajax",
+                data: fromReportTreated,
+                processData: false,
+                contentType: false,
+                async: false
+            }).done(function (res) {
+                console.log(res);
+                viewReports();
+            });
+        });
+
+    }
+
     /* ****************** END GESTION PLAINTES ****************** */
 
 
@@ -556,10 +591,10 @@ $('document').ready(function () {
         formUserBan.append('userIsBanned', userIsBanned);
         formUserBan.append('userId', userId);
 
-        $("#submitBan").on("click", (e) => {
+        $(".submitBan").on("click", (e) => {
 
             e.preventDefault();
-
+            console.log("submit");
             $.ajax({
                 type: "POST",
                 url: BASE_URL + "/admin/user/user-ban.php?context=ajax",

@@ -137,7 +137,7 @@
             </div>
         </div>
     </div>
-    <!-- ****************** END Delete category confirm box ****************** -->
+    <!-- ****************** END Ban User confirm box ****************** -->
 
 <?php
     

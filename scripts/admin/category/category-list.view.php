@@ -12,6 +12,15 @@ checkAdmin();
             <h2 class="h4 font-weight-normal">Liste des catégories</h2>
         </div>
 
+        <!-- *************** FLASHBAG *************** -->
+        <div class="flashBag">
+            <?php
+            \w2w\Utils\Utils::echoMessage();
+            ?>
+        </div>
+        <!-- *************** END FLASHBAG *************** -->
+
+
     </div>
 
 
@@ -63,13 +72,6 @@ checkAdmin();
 
         <h3 class="h6 font-weight-normal my-4"> Ajouter une nouvelle catégorie </h3>
         <hr>
-        <!-- *************** FLASHBAG *************** -->
-        <div class="flashBag">
-            <?php
-            \w2w\Utils\Utils::echoMessage();
-            ?>
-        </div>
-        <!-- *************** END FLASHBAG *************** -->
 
         <form class="form" action="../category/category-add.php" id="addCatForm" method="post"
               enctype="multipart/form-data">

@@ -18,52 +18,111 @@ checkAdmin();
             \w2w\Utils\Utils::echoMessage();
             ?>
         </div>
-            <table id="report_list" class="table table-striped text-center">
-                <thead>
-                <tr>
-                    <th scope="col">User</th>
-                    <th scope="col">Critique</th>
-                    <th scope="col">Message</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Traité</th>
-                    <th scope="col">Editer</th>
-                    <th scope="col">Supprimer</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if (isset($reports) && count($reports) > 0) : ?>
-                    <?php foreach ($reports as $report) : ?>
-                        <tr>
-                            <td class="report_userName">
-                                <p><?php echo escape($report->getUser()->getUserName()); ?></p>
-                            </td>
-                            <td class="report_reviewId">
-                                <p><?php echo escape($report->getReview()->getId()); ?></p>
-                            </td>
-                            <td class="report_message">
-                                <p><?php echo escape($report->getMessage()); ?></p>
-                            </td>
-                            <td class="report_date">
-                                <p><?php echo escape($report->getCreatedAt()->format('Y-m-d')); ?></p>
-                            </td>
-                            <td class="report_treated">
-                                <p><?php echo escape($report->isTreated()); ?></p>
-                            </td>
-                            <td class="text-center">
-                                <i class="fas fa-edit" data-target="#modal-edit-review" data-toggle="modal"></i>
-                            </td>
-                            <td class="text-center">
-                                <i class="fa fa-trash" data-target="#modal-delete-review" data-toggle="modal"
-                                   data-revid="<?php echo escape($report->getId()); ?>"></i>
-                            </td>
+        <table id="report_list" class="table table-striped text-center">
+            <thead>
+            <tr>
+                <th scope="col">User</th>
+                <th scope="col">Critique</th>
+                <th scope="col">Film</th>
+                <th scope="col">Message</th>
+                <th scope="col">Date</th>
+                <th scope="col">Traité</th>
+                <th scope="col">Editer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            if (isset($reports) && count($reports) > 0) : ?>
+                <?php foreach ($reports as $report) : ?>
+                    <tr>
+                        <td class="report_userName">
+                            <p><?php echo escape($report->getUser()->getUserName()); ?></p>
+                        </td>
+                        <td class="report_reviewId">
+                            <p>
+                                <a href="http://w2w.localhost/movie.php?id=<?php echo escape($report->getReview()->getMovie()->getId()); ?>#<?php echo escape($report->getReview()->getId()); ?>"><?php echo escape($report->getReview()->getId()); ?></a>
+                            </p>
+                        </td>
+                        <td class="report_movieId">
+                            <p>
+                                <a href="http://w2w.localhost/movie.php?id=<?php echo escape($report->getReview()->getMovie()->getId()); ?>"><?php echo escape($report->getReview()->getMovie()->getTitle()); ?>
+                            </p>
+                        </td>
+                        <td class="report_message">
+                            <p><?php echo escape($report->getMessage()); ?></p>
+                        </td>
+                        <td class="report_date">
+                            <p><?php echo escape($report->getCreatedAt()->format('Y-m-d')); ?></p>
+                        </td>
+                        <td class="report_treated">
+                            <?php if (!$report->isTreated()) {
+                                echo "<p><i class='fa fa-times'></i></p>";
+                            } else {
+                                echo "<p><i class='fa fa-check'></i></p>";
+                            } ?>
+                        </td>
+                        <td class="report_treated">
+                            <?php if (!$report->isTreated()) {
+                                ?>
+                                <p class='setTreated'
+                                   data-target="#modal-treat-report"
+                                   data-toggle="modal"
+                                   data-reportid="<?php echo escape($report->getId()); ?>"
+                                   data-reportistreated="0">
+                                    Marquer comme traité.
+                                </p>
+                                <?php
+                            } else {
+                                ?>
+                                <p class='setTreated'
+                                   data-target="#modal-treat-report"
+                                   data-toggle="modal"
+                                   data-reportid="<?php echo escape($report->getId()); ?>"
+                                   data-reportistreated="1">
+                                    Marquer comme non traité.
+                                </p>
+                                <?php
+                            } ?>
 
-                        </tr>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-                </tbody>
-            </table>
+                        </td>
+
+
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            </tbody>
+        </table>
     </div>
+
+    <!-- ****************** Treat Report confirm box ****************** -->
+    <div class="modal fade" id="modal-treat-report" tabindex="-1" role="dialog"
+         aria-labelledby="modal-treat-report"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="treatReporttitle">Rapport traité/non traité</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="">
+                    <form action="report-edit.php" method="post" id="treatReportForm"
+                          enctype="multipart/form-data">
+                        <div>
+                            <input type="hidden" id="confirm" name="confirm" value="confirm"/>
+                            <label for="treatReportSubmit" class="submitTreatedLabel">Marquer ce rapport comme traité?</label>
+                            <input id="treatReportSubmit" type="submit" class="btn btn-primary submitReportTreated" value="Confirmer ?"
+                                   data-dismiss="modal"/>
+                            <button class="btn btn-primary" data-dismiss="modal" aria-label="Close"> Annuler</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ****************** END Treat Report confirm box ****************** -->
+
     <script>
         $(document).ready(function () {
             $('#report_list').DataTable({
@@ -73,7 +132,7 @@ checkAdmin();
                     null,
                     null,
                     null,
-                    {"orderable": false},
+                    null,
                     {"orderable": false},
                 ],
                 "order": [[3, "asc"]]

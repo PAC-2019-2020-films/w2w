@@ -3,7 +3,7 @@ global $user;
 ?>
 
 
-<div class="userReviewInfo mb-3">
+<div class="userReviewInfo mb-3" id="<?php echo escape($userReview->getId())?>">
 
     <p class="userReviewRating">
         <?= $userReview->getRating()->getName() ?>

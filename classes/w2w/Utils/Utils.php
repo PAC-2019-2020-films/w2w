@@ -58,7 +58,7 @@ class Utils
         $pwReg = ";^(?=\P{Ll}*\p{Ll})(?=\P{Lu}*\p{Lu})(?=\P{N}*\p{N})(?=[\p{L}\p{N}]*[^\p{L}\p{N}])[\s\S]{8,}$;";
 
         foreach ($input as $key => $value) {
-            if (!empty($value[1])) {
+            if (isset($value[1])) {
                 switch ($value[0]) {
                     case 'num':
                         if (ctype_digit($value[1])) {
@@ -98,7 +98,7 @@ class Utils
         }
 
 
-        if (self::in_array_r(false, $input)) {
+        if (self::in_array_r(false, $input, true)) {
             return false;
         } else
             return true;
