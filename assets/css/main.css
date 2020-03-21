@@ -13,12 +13,17 @@
 
 /* GENERAL */
 body{
+    background-color: #eef1fb;
     font-family: 'Montserrat', sans-serif;
     color : #151942;
+    font-size: 0.9rem;
 }
 main {
-    background-color: #eef1fb;
+
     min-height: 500px;
+}
+header{
+    background: #fff;
 }
 .container-fluid {
     padding-left : 40px;
@@ -32,8 +37,9 @@ a:hover{
     color : #020C75;
     text-decoration : none;
 }
-.dark-bg a:hover {
-    color : #ffde3c;
+
+.dark-bg a:hover, a.text-white:hover {
+    color : #ffde3c !important;
 }
 a.primary {
 
@@ -54,7 +60,7 @@ a.primary {
 .btn {
     padding: 0.75rem 1rem;
     text-transform : uppercase;
-    font-size : 0.9rem;
+    font-size : 0.8rem;
     font-weight : 600;
     border-radius : 0;
 }
@@ -76,12 +82,13 @@ a.primary {
 }
 .btn-secondary {
     border:none;
-    background-color : #041721;
+    background-color : #010428;
 
 
 }
 .btn-secondary:hover {
-    background-color : #24baef;
+    background-color: #ffde3c;
+    color: #010428;
 }
 
 
@@ -102,7 +109,7 @@ a.primary {
     font-size : 0.7rem;
 }
 
-.carousel h2, .page-title h2{
+.carousel h2, .page-title h2, .header-movie h2{
     font-weight : 900;
     font-size : 3rem;
 
@@ -169,7 +176,7 @@ p.movies-data span:last-child {
 }
 
 .list-inline-item:not(:last-child) {
-    margin-right: 1rem;
+    margin-right: 0.3rem;
 }
 
 /* MOVIE BOX */

@@ -71,6 +71,9 @@
     font-size : 0.8rem;
 
 }
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #010428;
+}
 
 .site-header .dropdown-menu  {
     border-radius: 0;
