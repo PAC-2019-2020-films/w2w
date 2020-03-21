@@ -15,38 +15,39 @@ if (isset($_SESSION['message'])) {
 unset($_SESSION['message']);
 
 ?>
-
-<div class="card bg-light">
-    <article class="card-body mx-auto" style="max-width: 400px;">
-        <h4 class="card-title mt-3 text-center">Join What2Whatch !</h4>
-
+<div class="container">
+    <div class="mx-auto my-4 bg-light p-4" style="max-width: 400px;">
+        <h4 class="">Rejoignez What2Whatch !</h4>
+        <p>
+            Créez-vous un compte gratuit et accédez à toutes les fonctionnalités de w2w !
+        </p>
         <form action="signup_action.php" method="post">
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-                <input name="userName" class="form-control" placeholder="Username" type="text">
+                <input name="userName" class="form-control" placeholder="Identifiant" type="text">
             </div>
             <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-                <input name="firstName" class="form-control" placeholder="First name" type="text">
+                <input name="firstName" class="form-control" placeholder="Prénom" type="text">
             </div>
             <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-                <input name="lastName" class="form-control" placeholder="Last name" type="text">
+                <input name="lastName" class="form-control" placeholder="Nom" type="text">
             </div>
             <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
-                <input name="email" class="form-control" placeholder="Email address" type="email">
+                <input name="email" class="form-control" placeholder="Email" type="email">
             </div>
             <!-- form-group// -->
 
@@ -54,23 +55,23 @@ unset($_SESSION['message']);
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input name="password" class="form-control" placeholder="Create password" type="password">
+                <input name="password" class="form-control" placeholder="Mot de passe" type="password">
             </div>
             <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input name="passwordConfirm" class="form-control" placeholder="Repeat password" type="password">
+                <input name="passwordConfirm" class="form-control" placeholder="Répéter le mot de passe" type="password">
             </div>
             <!-- form-group// -->
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Create Account</button>
+                <button type="submit" class="btn btn-primary btn-block"> Créer votre compte</button>
             </div>
             <!-- form-group// -->
-            <p class="text-center">Have an account? <a href="login.php">Log In</a></p>
+            <p class="small text-right">Déjà un compte? <a class="text-secondary" href="login.php">Connectez-vous</a></p>
         </form>
-    </article>
+    </div>
 </div>
 <!-- card.// -->
 

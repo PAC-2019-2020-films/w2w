@@ -13,8 +13,9 @@ if (isset($_SESSION['message'])) {
 unset($_SESSION['message']);
 
 ?>
-<div class="card bg-ligh" id="loginform">
-    <article class="card-body mx-auto" >
+<div class="container">
+<div class="mx-auto my-4 bg-light p-4 " style="max-width: 400px;" id="loginform">
+
         <h4 class="card-title text-center">Se connecter</h4>
         <form action="../authentication/login_action.php" method="post">
 
@@ -49,7 +50,9 @@ unset($_SESSION['message']);
 
 
         </form>
-            <a class="btn btn-secondary btn-block" href="../authentication/signup.php">S'inscrire</a>
+        <p class="text-right small"> Pas de compte ? <a class="text-secondary" href="../authentication/signup.php">Inscrivez-vous</a></p>
+
         
-    </article>
+
+</div>
 </div>
