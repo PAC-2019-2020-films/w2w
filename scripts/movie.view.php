@@ -1,23 +1,18 @@
 <?php
 
 
-if (isset($_SESSION['message'])) {
-    echo '<div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
-}
-unset($_SESSION['message']);
-
 
 if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
 
-    <div class="header" id="carousel_movie">
-        <div class="header-bg" style="height: 400px">
+    <div class="header header-movie" >
+        <div class="header-bg">
             <img src="/uploads/<?php echo $movie->getPoster(); ?>-big.jpg" class="d-block w-100 movie_affiche"
                  alt="...">
             <div class="header-caption">
                 <div class="movie-tags ">
                     <?php echo template("movie.tags.php", ["movie" => $movie]); ?>
                 </div>
-                <h2 class="clearfix pt-3"><?php echo $movie->getTitle(); ?></h2>
+                <h2 class="clearfix pt-1"><?php echo $movie->getTitle(); ?></h2>
                 <!-- Film info -->
                 <?php echo template("movie.data.php", ["movie" => $movie]); ?>
             </div>
@@ -34,19 +29,26 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
                              alt=""/>
 
                         <ul class="movie-infos list-unstyled px-4 py-4 movies-data">
-                            <li class="text-left">Année de sortie : <?php echo $movie->getYear(); ?> </li>
+                            <li class="text-left"><span class="text-secondary">Année de sortie : </span><?php echo $movie->getYear(); ?> </li>
 
-                            <li>De :
+                            <li><span class="text-secondary">De :</span>
                                 <?php foreach ($movie->getDirectors() as $director) : ?>
                                     <?php echo escape($director->getFirstName()); ?>
                                     <?php echo escape($director->getLastName()); ?>
                                 <?php endforeach; ?>
                             </li>
 
-                            <li>Avec :
-                                <?php foreach ($movie->getActors() as $actor) : ?>
+                            <li><span class="text-secondary">Avec :</span>
+                                <?php
+                                $arrActors = $movie->getActors();
+                                foreach ($movie->getActors() as $actor) : ?>
                                     <?php echo escape($actor->getFirstName()); ?>
-                                    <?php echo escape($actor->getLastName()); ?>
+                                    <?php echo escape($actor->getLastName());
+                                     if($actor !== end($arrActors)) {
+                                         echo ',';
+                                     }
+                                    ?>
+
                                 <?php endforeach; ?>
                             </li>
 
@@ -57,7 +59,16 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
                 </div>
 
                 <div class="col-md-8 info-film px-5 py-4 light-bg">
-                    <h3 class="mb-4">Synopsis</h3>
+                    <?php
+
+
+                    if (isset($_SESSION['message'])) {
+                        echo '<div class="alert alert-' . $_SESSION['message']['type'] . '" role="alert">' . $_SESSION['message']['msg'] . '</div>';
+                    }
+                    unset($_SESSION['message']);
+
+                    ?>
+                    <h3 class="mb-2 h4">Synopsis</h3>
                     <span class="line-title"><hr/></span>
                     <p>
                         <?php echo $movie->getDescription(); ?>
@@ -72,7 +83,7 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
                                 /**
                                  * TODO : aucune review format
                                  */
-                                echo "pas d'avis";
+                                echo "Pas encore d'évaluation de w2w";
                             }
                             ?>
                         </div>
@@ -93,7 +104,7 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
 
                     <hr/>
 
-                    <h3 class="h4 mt-4">L'avis de w2w </h3>
+                    <h3 class="h6 mt-4">L'avis de w2w </h3>
                     <span class="line-title"><hr/></span>
                     <p>
                         <?php
@@ -103,21 +114,73 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
                             /**
                              * TODO : aucune review format
                              */
-                            echo "aucune critique administrateur.";
+                            echo "Aucune review de w2w.";
                         }
                         ?>
                     </p>
 
-                    <h4 class="mt-3">L'avis des utilisateurs</h4>
+                    <h5 class="mt-3 h6">L'avis des utilisateurs</h5>
 
                     <span class="line-title"><hr/></span>
+
+                    <?php
+
+                    if (!$hasAlreadyReviewed) {
+                        ?>
+                        <div class="form_user-review light-bg mb-3">
+
+                            <?php if (!isset($_SESSION["user"])) {
+                                ?>
+                                <!--                            <a href="authentication/login.php" class="btn-sm btn-primary  d-inline-block">Rédigez votre critique</a>-->
+                                <a class="btn-sm btn-primary py-2 " data-target="#modal-login" data-toggle="modal"> <i class="fas fa-pencil-alt"></i> Rédigez votre critique</a>
+
+                            <?php } else {
+                                ?>
+                                <form action="account/review-add.php" method="post" id="insert-review-user"
+                                      class="form-group">
+
+                                    <label for="rating">C'est un : </label>
+                                    <select name="rating" id="rating" class="form-control mb-3">
+                                        <?php
+                                        foreach ($ratings as $rating) {
+                                            ?>
+                                            <option value="<?= $rating->getId() ?>"><?= $rating->getName() ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <textarea name="comment" id="comment" cols="80" rows="10" title="" class="form-control"
+                                              placeholder=""></textarea>
+
+
+                                    <script>
+                                        CKEDITOR.replace('comment');
+                                    </script>
+                                    <input type="hidden" name="movieId" value="<?= $movie->getId() ?>">
+
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block mt-3">Envoyer</button>
+
+                                </form>
+                                <hr/>
+
+                                <?php
+                            }
+                            ?>
+
+                        </div>
+
+                        <?php
+                    }
+
+                    ?>
 
                     <?php
                     if (!$movie->getReviews()) {
                         /**
                          * TODO : aucune review format
                          */
-                        echo "aucune review utilisateur.";
+                        echo "Aucune review utilisateur.";
                     } else {
                         foreach ($movie->getReviews() as $userReview) {
 //                                    Afficher la review sauf si c'est la review admin
@@ -127,56 +190,7 @@ if (isset($movie) && $movie instanceof \w2w\Model\Movie) : ?>
                     }
                     ?>
 
-                    <?php
-                    if (!$hasAlreadyReviewed) {
-                    ?>
-                    <div class="form_user-review light-bg p-3 text-center">
-
-                        <p class="d-inline-block mb-0 font-weight-bold mr-2">Et vous, qu'en pensez-vous ?</p>
-                        <?php if (!isset($_SESSION["user"])) {
-                            ?>
-                            <!--                            <a href="authentication/login.php" class="btn-sm btn-primary  d-inline-block">Rédigez votre critique</a>-->
-                            <a class="btn-sm btn-primary  d-inline-block" data-target="#modal-login" data-toggle="modal">Rédigez votre critique</a>
-                        <?php } else {
-                            ?>
-                            <form action="account/review-add.php" method="post" id="insert-review-user"
-                                  class="form-group">
-
-                                <label for="rating">C'est un : </label>
-                                <select name="rating" id="rating" class="form-control mb-3">
-                                    <?php
-                                    foreach ($ratings as $rating) {
-                                        ?>
-                                        <option value="<?= $rating->getId() ?>"><?= $rating->getName() ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-
-                                <textarea name="comment" id="comment" cols="80" rows="10" title="" class="form-control"
-                                          placeholder=""></textarea>
-
-
-                                <script>
-                                    CKEDITOR.replace('comment');
-                                </script>
-                                <input type="hidden" name="movieId" value="<?= $movie->getId() ?>">
-
-                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-3">Envoyer</button>
-
-                            </form>
-
-
-                            <?php
-                        }
-                        ?>
-
-                    </div>
                 </div>
-                <?php
-                }
-
-                ?>
             </div>
 
 
