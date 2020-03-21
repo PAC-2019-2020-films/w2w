@@ -3,17 +3,8 @@
 checkUser();
 
 ?>
-    <div class="header-dasboard ">
-        <div>
-            <h1 class="small text-uppercase">Dashboard</h1>
-            <h2 class="h4 font-weight-normal">Liste des critiques</h2>
-        </div>
+    <h3 class="h6 my-4">Mes reviews</h3>
 
-    </div>
-
-
-    <div class="bg-white movie_list p-4">
-        <h3 class="h6 font-weight-normal my-4">Mes critiques </h3>
         <div class="flashBag">
             <?php
             \w2w\Utils\Utils::echoMessage();
@@ -116,7 +107,7 @@ checkUser();
         require 'review-delete.view.php';
         require 'review-edit.view.php';
         ?>
-    </div>
+
     <script>
         $(document).ready(function () {
             $('#review_list').DataTable({

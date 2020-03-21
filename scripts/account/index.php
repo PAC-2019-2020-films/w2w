@@ -21,39 +21,50 @@
     <!-- DASHBOARD -->
     <section id="galerie" class="user">
         <div class="row">
-            <div class="col-md-12">
-                <h3>Dashboard</h3>
+            <div class="col-lg-4 dark-bg">
+                <ul class="list-unstyled mt-4">
+                    <li class="py-3">
+                        <a href="#"  id="profileActions">
+                            <i class="fas fa-user"></i> Mon profil
+                        </a>
+                    </li>
+                    <li class="py-3">
+                        <a href="#"  id="reviewActions">
+                            <i class="fas fa-pen-square"></i> Mes reviews
+                        </a>
+                    </li>
+                    <li class="py-3">
+                        <a href="#"  data-target="#modal-delete-account" data-toggle="modal">
+                            <i class="fas fa-times-circle"></i> Supprimer mon compte
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-8 light-bg py-4 px-5">
+                <h2 class="h4">Mon compte</h2>
+                <span class="line-title"><hr/></span>
+
+                <!--    DASHBOARD CONTENT -->
+                <div id="actions">
+
+                    <ul class="list-unstyled">
+                        <li>
+                            Compte créé le : <?= $user->getCreatedAt()->format("Y-m-d") ?>
+                        </li>
+                        <li>
+                            Nombre de critiques publiées : <?= $user->getNumberReviews() ?>
+                        </li>
+                    </ul>
+
+
+                </div>
+                <!--    END DASHBOARD CONTENT -->
             </div>
         </div>
-        <div class="row">
-            <div class="column">
-                <div id="profileActions" class="actionIcons">
-                    <img src="../../assets/img/user_page/profile_on.png" style="width:100px" alt="profile"
-                         class="bottom">
-                    <img src="../../assets/img/user_page/profile.png" style="width:100px" alt="profile" class="top">
-                </div>
-            </div>
-            <div class="column">
-                <div id="reviewActions" class="actionIcons">
-                    <img src="../../assets/img/user_page/reviews_on.png" style="width:100px" alt="reviews"
-                         class="bottom">
-                    <img src="../../assets/img/user_page/reviews.png" style="width:100px" alt="reviews" class="top">
-                </div>
-            </div>
-            <div class="column">
-                <a href="#" data-target="#modal-delete-account" data-toggle="modal">
-                    <img src="../../assets/img/user_page/delete_on.png" style="width:100px" alt="delete" class="bottom">
-                    <img src="../../assets/img/user_page/delete.png" style="width:100px" alt="delete" class="top">
-                </a>
-            </div>
-            
-            <div class="col-md-12 padding"></div>
-        </div>
+
     </section>
     <!-- END DASHBOARD -->
-    <!--    DASHBOARD CONTENT -->
-    <div id="actions"></div>
-    <!--    END DASHBOARD CONTENT -->
+
     
     <!-- *************** MODAL DELETE ACCOUNT *************** -->
     <div class="modal fade" id="modal-delete-account" tabindex="-1" role="dialog" aria-labelledby="modal-delete-account"

@@ -1,6 +1,4 @@
-<h1 class="small text-uppercase">Dashboard</h1>
-<h2 class="h4 font-weight-normal">Modifier mon profil</h2>
-<div class="bg-white p-4">
+<h3 class="h6 my-4">Modifier mon profil</h3>
 
 
     <!-- *************** FLASHBAG *************** -->
@@ -54,15 +52,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-
-            <label> Compte créé le : <?= $user->getCreatedAt()->format("Y-m-d") ?> </label>
-        </div>
-
-        <div class="form-group">
-            <label> Nombre de critiques publiées : <?= $user->getNumberReviews() ?>  </label>
-        </div>
-
 
         <div class="form-group text-right">
             <input type="submit" class="btn btn-primary" value="Mettre à jour mes informations"/>
@@ -91,6 +80,3 @@
         </div>
     </form>
     <!-- *************** END UPDATE PASSWORD FORM *************** -->
-
-
-</div>
