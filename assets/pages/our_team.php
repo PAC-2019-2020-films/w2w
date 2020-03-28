@@ -99,7 +99,7 @@
             <img class="team_photo" src="/assets/img/team/mickael.jpg" alt="julien">
         </div>
         <div class="col-md-9 team_font team_col">
-            <h1>Mikael LE ROUX</h1>
+            <h1>Mikaël</h1>
             <h3>
                 DB guy <br>
                 <p>

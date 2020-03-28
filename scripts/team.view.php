@@ -105,7 +105,7 @@
                         <img class="img-responsive rounded-circle" src="/assets/img/team/mickael.jpg" alt="julien">
                     </div>
                     <div class="p-2">
-                        <h3 class="h5 font-weight-bold text-uppercase">Mikael LE ROUX</h3>
+                        <h3 class="h5 font-weight-bold text-uppercase">Mikaël</h3>
                         <p class="h6">DB guy </p>
                         <span class="line-title"><hr/></span>
                         <p class="mb-0">
