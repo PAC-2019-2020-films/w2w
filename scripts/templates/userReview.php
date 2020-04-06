@@ -71,14 +71,14 @@ global $user;
             <div class="modal-body" id="">
                 <form action="../account/send-report.php" method="post" id="reportReviewForm"
                       enctype="multipart/form-data">
-                    <div>
+
                         <input type="hidden" class="reviewReportId" name="id" value="<?= $userReview->getId() ?>"/>
                         <input type="hidden" name="movieId" value="<?= $userReview->getMovie()->getId() ?>">
-                        <textarea name="reportContent" id="reportContent" cols="30" rows="10"
+                        <textarea name="reportContent" id="reportContent" cols="40" rows="4"
                                   placeholder="Explication du probleme"></textarea>
                         <input id="submitReport" type="submit" class="btn btn-primary" value="Envoyer"/>
                         <button class="btn btn-primary" data-dismiss="modal" aria-label="Close"> Annuler</button>
-                    </div>
+
                 </form>
             </div>
         </div>
