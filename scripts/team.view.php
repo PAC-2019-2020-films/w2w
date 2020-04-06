@@ -65,7 +65,7 @@
                              alt="xavier">
                     </div>
                     <div class="p-2">
-                        <h3 class="h5 font-weight-bold text-uppercase">Xavier RONVEAU</h3>
+                        <h3 class="h5 font-weight-bold text-uppercase">Xavier RONVEAUX</h3>
                         <p class="h6">Product owner</p>
                         <span class="line-title"><hr/></span>
 
