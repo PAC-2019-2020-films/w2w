@@ -72,7 +72,7 @@
                 </div>
 
                 <p class="view-more">
-                    <a href="#">En voir plus <i class="fas fa-angle-right"></i></a>
+                    <a href="/movies.php">En voir plus <i class="fas fa-angle-right"></i></a>
                 </p>
             </div>
 
